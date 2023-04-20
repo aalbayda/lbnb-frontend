@@ -5,10 +5,14 @@ import {NavBar} from '../../organisms';
 import {CardListing} from "../../organisms";
 
 const Listing = () => {
-  return <div>
+  return <div class="list-page-main-div">
     <NavBar />
-    <CardListing />
 
+    <div className="cardlist-flex">
+      <CardListing />
+      <CardListing />
+      <CardListing />
+    </div>
 
   </div>
 }

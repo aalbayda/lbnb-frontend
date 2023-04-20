@@ -19,22 +19,28 @@ const CardListing = () => {
   return (
     <Row className="card-listing">
 
-        <div class="img-div">
+        <div className="img-div">
           <img className="accommodation-img" src={image} alt="accommodation-img"></img>
         </div>
 
         <Col>
-          <div className="middle-section">
-            <h1>{name}</h1>
-            <p>{location}</p>
-            <p className="accommodation-desc">{description}</p>
+          <div className="middle-section add-padding">
+            <div className="name-loc-section">
+              <h1>{name}</h1>
+              <p>{location}</p>
+            </div>
+          <p>{description}</p>
           </div>
         </Col>
         
         <Col>
-          <h2>{price}</h2>
-          <p>{stars} {reviews}</p>
-          <Button />
+          <div className="right-section add-padding">
+            <div className="price-section">
+              <h2>{price}</h2>
+              <p className="reviews">{stars} {reviews}</p>
+            </div>
+            <Button />
+          </div>
         </Col>
     </Row>
   );
