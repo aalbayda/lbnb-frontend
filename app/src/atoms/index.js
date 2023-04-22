@@ -1,1 +1,1 @@
-export { default as Button } from './button/Button';
+export { default as StarRating } from './starrating/StarRating';

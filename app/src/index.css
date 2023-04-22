@@ -84,6 +84,14 @@ background-color {
 .italic{
   font-style: italic;
 }
+
+.title {
+  font-weight: bold;
+  color: var(--color-heading-dark);
+  width: 80%;
+  text-align: center;
+}
+
 :root {
   --font-family-headers: "Raleway", sans-serif;
   --font-family-text: 'Poppins', sans-serif;
