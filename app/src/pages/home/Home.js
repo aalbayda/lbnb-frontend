@@ -1,12 +1,13 @@
 import React from "react";
 import './home.css';
-import {NavBar, Banner} from '../../organisms';
+import {NavBar, Banner, Footer} from '../../organisms';
 
 const Home = () => {
     return (
-        <div>
+        <div className="home-container">
             <NavBar/>
             <Banner/>
+            <Footer/>
         </div>
     );
 }

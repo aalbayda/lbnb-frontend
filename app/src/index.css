@@ -74,6 +74,13 @@ background-color {
   color: var(--color-primary-black);
 }
 
+.tiny-bold {
+  font-family: var(--font-family-text);
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--color-primary-black);
+}
+
 .italic{
   font-style: italic;
 }
