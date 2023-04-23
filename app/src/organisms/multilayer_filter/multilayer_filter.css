@@ -1,0 +1,133 @@
+.mlf-container {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 5px;
+
+  align-items: center;
+  justify-content: center;
+  margin-top: -25px;
+  width: 100%;
+}
+
+.mlf-upper {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.mlf-lower {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.divTable {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--color-background);
+    width: 100%;
+    height: 75px;
+
+    text-align: center;
+
+    border-collapse: collapse;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: none;
+  }
+  
+.divTableCell {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  height: 75px;
+
+  justify-content: center;
+  align-items: center;
+
+  /* border: 0.0001em solid black; */
+
+  box-shadow: 0 3px 2px rgba(.1,.1,.1,.1);
+}
+
+.divTableCell.search {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.divTableCell.price {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.icon {
+  width:35px;
+  height: 35px;
+  margin-right: 10px;
+  color: var(--color-secondary-black);
+}
+
+.mlf_search{
+  max-width: 150px;
+  border-bottom: none;
+}
+
+.mlf_price{
+  max-width: 150px;
+  border-bottom: none;
+}
+
+div.mb-3{
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.InElbi {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.InElbi-right {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.capacity {
+  padding: 10px;
+}
+
+.filter-dropdown{
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-background);
+  background-color: var(--color-light-accent-green);
+  border: none;
+  width: 150px;
+}

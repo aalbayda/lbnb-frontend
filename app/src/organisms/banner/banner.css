@@ -14,9 +14,9 @@
 }
 
 img {
-    /* object-fit: cover !important; */
+    object-fit: cover !important;
     width: 1000px;
-    height: 500px;
+    height: 600px;
 }
 
 Carousel {
@@ -29,7 +29,7 @@ Carousel.Item{
     z-index: -1;
 
     width: 1000px;
-    height: 500px;
+    height: 600px;
     float: left;
     margin: 3px;
     padding: 3px;
