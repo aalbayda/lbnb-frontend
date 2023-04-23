@@ -26,7 +26,6 @@ body {
     color: var(--color-secondary-black);
 }
 
-
 .add-padding {
     padding: 20px;
 }
@@ -37,6 +36,8 @@ body {
     margin: 0;
     padding: 0;
     width: 299px;
+
+    position: relative;
 }
 
 .middle-section {
