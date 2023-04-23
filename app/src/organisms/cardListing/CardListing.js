@@ -1,8 +1,9 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cardListing.css';
-import {Row, Col} from 'react-bootstrap';
-import {Button} from '../../atoms'
+import '../../index.css';
+import {Col} from 'react-bootstrap';
+import {ViewMoreButton} from '../../atoms'
 
 const CardListing = () => {
 
@@ -17,32 +18,38 @@ const CardListing = () => {
 
 
   return (
-    <Row className="card-listing">
+    <div className="card-listing">
 
-        <div className="img-div">
-          <img className="accommodation-img" src={image} alt="accommodation-img"></img>
-        </div>
+        {/* fixed variable width column */}
+        <Col md="auto">
+          <div className="img-div">
+            <img className="accommodation-img" src={image} alt="accommodation-img"></img>
+          </div>
+        </Col>
 
-        <Col>
+        <Col xs={6}>
           <div className="middle-section add-padding">
             <div className="name-loc-section">
-              <h1>{name}</h1>
-              <p>{location}</p>
+              <h1 className="large-bold accom-name">{name}</h1>
+              <p className="small">{location}</p>
             </div>
-          <p>{description}</p>
+          <p className="small accom-desc">{description}</p>
           </div>
         </Col>
         
         <Col>
           <div className="right-section add-padding">
             <div className="price-section">
-              <h2>{price}</h2>
-              <p className="reviews">{stars} {reviews}</p>
+              <h2 className="large-bold price-range">{price}</h2>
+              <div>
+                <p className="small review-stars">{stars}</p>
+                <p className="small review-num">{reviews}</p>
+              </div>
             </div>
-            <Button />
+            <ViewMoreButton />
           </div>
         </Col>
-    </Row>
+    </div>
   );
 }
 
