@@ -1,0 +1,21 @@
+.dorm-carousel-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle {
+    width:80%;
+    text-align: center;
+}
+
+.dorm-item {
+    display: flex;
+    flex-direction: row;
+
+    max-width: 80%;
+    /* column-gap: 10px; */
+}

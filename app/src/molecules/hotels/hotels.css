@@ -1,0 +1,42 @@
+.hotels-carousel-container {
+    display: flex;
+    width: 100%;
+
+    padding: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.hotels-carousel {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-content: center;
+}
+
+.hotels-carousel-left{
+    display: flex;
+    width: 35%;
+    padding: 20px;
+
+}
+
+.hotels-carousel-left img {
+    width: 300px; 
+    height: 350px;
+    object-fit: cover;
+}
+
+.hotels-carousel-right{
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 10px;
+    width: 35%;
+    padding: 20px;
+    justify-content: center;
+    align-items: flex-start;
+
+}

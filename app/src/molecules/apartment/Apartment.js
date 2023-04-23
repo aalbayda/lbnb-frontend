@@ -6,7 +6,7 @@ import {StarRating} from "../../atoms";
 
 const Apartment = () => {
     return (
-        <div className="sample-container">
+        <div className="apartment-carousel-container">
             <div className="carousel-container">
                 <div className="carousel-upper">
                     <img

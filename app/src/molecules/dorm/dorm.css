@@ -1,0 +1,33 @@
+.dorm-carousel-container{
+    display: flex;
+    width: 100%;
+
+    padding: 20px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.dorm-carousel-card{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 500px;
+}
+
+.dorm-carousel-card-upper{
+    display: flex;
+}
+
+.dorm-carousel-card-upper img {
+    width: 300px; 
+    height: 250px;
+    object-fit: cover;
+}
+
+.dorm-carousel-card-lower{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    padding: 10px;
+}
