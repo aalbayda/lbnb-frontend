@@ -10,7 +10,17 @@ const NavBar = () => {
     <div className="navbar-container">
       <div className="navbar-wrapper">
         <div className="navbar-left">
-          <p class="small">LBNB</p>
+          <p class="small">
+            <a
+              href="/"
+              style={{
+                textDecoration: "none",
+                fontSize: "32px",
+              }}
+            >
+              🌱
+            </a>
+          </p>
         </div>
         <div className="navbar-right">
           <p class="small">About</p>
@@ -27,6 +37,6 @@ const NavBar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default NavBar;

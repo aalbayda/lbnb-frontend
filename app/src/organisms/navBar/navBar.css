@@ -21,31 +21,31 @@ p {
 }
 
 .navbar-wrapper {
-    display: flex;
-    width: 100%;
-  
-    /* align-items: center; */
-    justify-content: space-between;
-    flex-direction: row;
-    column-gap: 100px;
-    padding: 40px;
+  display: flex;
+  width: 100%;
+
+  /* align-items: center; */
+  justify-content: space-between;
+  flex-direction: row;
+  column-gap: 100px;
+  padding: 40px;
 }
 
 .navbar-left {
-    display: flex;
-    width: 80%;
-    align-items: center;
+  display: flex;
+  width: 80%;
+  align-items: center;
 }
 
 .navbar-right {
-    display: flex;
-    width: 20%;
+  display: flex;
+  width: 20%;
 
-    align-items: center;
-    text-align: center;
-    column-gap: 30px;
-    justify-content: flex-end;
-    /* padding-right: 0px;
+  align-items: center;
+  text-align: center;
+  column-gap: 30px;
+  justify-content: flex-end;
+  /* padding-right: 0px;
     margin-right: 0px; */
 }
 

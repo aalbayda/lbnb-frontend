@@ -1,5 +1,5 @@
 import React from "react";
-import "./userProfile.css";
+import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Container,
@@ -8,53 +8,47 @@ import {
   Image,
   Dropdown,
   DropdownButton,
-  Carousel,
 } from "react-bootstrap";
 import { CardListing, NavBar } from "../../organisms";
+import { Rating } from "@mui/material";
 
-const favorites = [1, 2, 3, 4, 5]; // api connect here
+const units = [1, 2, 3, 4, 5]; // api connect here
 
-const UserProfile = () => {
+const LandlordProfile = () => {
   return (
     <Container>
       <NavBar></NavBar>
 
       <Row className="justify-content-md-center">
         <Image
-          src="https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
+          src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
           roundedCircle
           fluid
           style={{ width: 400 }}
         />
       </Row>
       <Col className="text-center">
-        <h1 className="mt-4 header1">BRUNO SMITH</h1>
+        <h1 className="mt-4 header1">WILLIAM GATES</h1>
+        <Rating
+          className="rating-large"
+          defaultValue={3.5}
+          precision={0.5}
+          sx={{
+            fontSize: "4rem",
+          }}
+        />
       </Col>
 
       <Col className="text-center">
         <h1 className="small">
-          📞 09123456 &nbsp;&nbsp;&nbsp; 📬 brunosmith@gmail.com.com
+          📞 09123456 &nbsp;&nbsp;&nbsp; 📬 billgates@hotmail.com
           &nbsp;&nbsp;&nbsp;📅 Member since July 2022
         </h1>
       </Col>
 
       <Col>
-        <h1 className="mt-5 text-center header2">🌟 Favorites 🌟</h1>
-        <Carousel variant="dark" className="mt-4 mb-5">
-          {favorites.map((f) => (
-            <Carousel.Item>
-              <div className="ml-4">
-                <CardListing />
-              </div>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </Col>
-      <Col>
         <Row>
-          <h1 className="mt-5 text-center header2">
-            🧾 Reservation History 🧾
-          </h1>
+          <h1 className="mt-5 text-center header2">Units Owned</h1>
         </Row>
         <Row className="text-center mt-4">
           <DropdownButton
@@ -68,7 +62,7 @@ const UserProfile = () => {
           </DropdownButton>
         </Row>
         <Row className="justify-content-md-center mt-4">
-          {favorites.map((unit) => (
+          {units.map((unit) => (
             <div className="cardlist-flex mb-5">
               <CardListing />
             </div>
@@ -79,4 +73,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default LandlordProfile;
