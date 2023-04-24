@@ -1,53 +1,51 @@
 .admin-panel-div {
-    margin: 0 15%;
+  margin: 0 15%;
 }
 
 .bloc-tabs {
-    display: flex;
+  display: flex;
 }
 
 .tabs {
-    background: var(--color-light-accent-green);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    color: var(--color-heading-dark);
-    padding: 10px;
-    text-align: center;
-    width: 168px;
-    height: 46px;
-    cursor: pointer;
-    position: relative;
-    outline: none;
+  background: var(--color-light-accent-green);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 20px;
+  color: var(--color-heading-dark);
+  padding: 10px;
+  text-align: center;
+  width: 168px;
+  height: 46px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
 }
 
 .active-tabs {
-    background: var(--color-heading-dark);
-    color: white;
+  background: var(--color-heading-dark);
+  color: white;
 }
 
 .active-tabs:before {
-    content: "";
-    display: block;
+  content: "";
+  display: block;
 }
 
 .tab-header {
-    height: 70px;
+  height: 5px;
 }
 
 .content {
-    background: white;
-    padding: 20px;
-    height: 100%;
-    display: none;
-
+  background: white;
+  padding: 20px;
+  height: 100%;
+  display: none;
 }
 
 .content-tabs {
-    box-sizing: border-box;
-    border: 2px solid var(--color-heading-dark);
+  box-sizing: border-box;
+  border: 2px solid var(--color-heading-dark);
 }
 
-
 .active-content {
-    display: block;
+  display: block;
 }

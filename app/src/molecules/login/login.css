@@ -1,0 +1,71 @@
+Modal {
+    max-width: 350px;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-background);
+    
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 20px;
+}
+
+input {
+    border-bottom: 1;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    padding: 5px;
+    background-color: var(--color-background);
+}
+
+.login-container {
+    max-width: 3500px;
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: center;
+    margin: 0px;
+    border: none;
+}
+
+.login-container-createAccount {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.createButton {
+    color: var(--color-light-accent-green);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.createButton:focus, .createButton:hover, .createButton:active, .createButton:visited{
+    background-color: transparent !important;
+    color: var(--color-light-accent-green) !important;
+}
+
+p.large-bold {
+    color: var(--color-light-accent-green);
+}
+
+.login-btn {
+    background-color: var(--color-light-accent-green);
+    border: none;
+    cursor: pointer;
+}
+
+.login-btn:focus, .login-btn:hover, .login-btn:active, .login-btn:visited{
+    background-color: var(--color-light-accent-green) !important;
+    color: var(--color-background);
+}
