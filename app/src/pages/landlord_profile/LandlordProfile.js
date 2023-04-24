@@ -15,7 +15,7 @@ import {AiFillPhone, AiFillCalendar} from 'react-icons/ai';
 import {MdEmail} from 'react-icons/md';
 import Fab from '@mui/material/Fab';
 import {IoMdAddCircle} from 'react-icons/io';
-import { AddAccoms } from "../../molecules";
+import { AddAccoms, AddRooms } from "../../molecules";
 const units = [1, 2, 3, 4, 5]; // api connect here
 
 const LandlordProfile = () => {
@@ -33,7 +33,7 @@ const LandlordProfile = () => {
         >
           <IoMdAddCircle className="icon-add"/>
         </Fab>
-        <AddAccoms
+        <AddRooms
               show={modalShow}
               onHide={() => setModalShow(false)}
         />
