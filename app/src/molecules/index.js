@@ -3,3 +3,4 @@ export { default as Signup } from './signup/Signup';
 export { default as Apartment } from './apartment/Apartment';
 export { default as Hotels } from './hotels/Hotels';
 export { default as Dorm } from './dorm/Dorm';
+export { default as AddAccoms } from './addAccoms/AddAccoms';

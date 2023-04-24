@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './review_headers.css';
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 
 const ReviewHeaders = () => {
