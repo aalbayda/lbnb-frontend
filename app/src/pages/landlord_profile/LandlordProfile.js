@@ -9,35 +9,17 @@ import {
   // Dropdown,
   // DropdownButton,
 } from "react-bootstrap";
-import { CardListing, NavBar } from "../../organisms";
+import { CardListingAddRoom, NavBar } from "../../organisms";
 import { Rating } from "@mui/material";
 import {AiFillPhone, AiFillCalendar} from 'react-icons/ai';
 import {MdEmail} from 'react-icons/md';
-import Fab from '@mui/material/Fab';
-import {IoMdAddCircle} from 'react-icons/io';
-import { AddAccoms, AddRooms } from "../../molecules";
-const units = [1, 2, 3, 4, 5]; // api connect here
+import { AddAccomsButton } from "../../atoms";
+const units = [1, 2]; // api connect here
 
 const LandlordProfile = () => {
-  const [modalShow, setModalShow] = React.useState(false);
   return (
-    <Container>
-      <div className="whole-screen">
-        <Fab 
-          aria-label="add"
-          sx={{
-            width: "90px",
-            height: "90px"
-          }}
-          onClick={(e) =>  setModalShow(true)}
-        >
-          <IoMdAddCircle className="icon-add"/>
-        </Fab>
-        <AddRooms
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-        />
-      </div>
+    <div className="landlord-profile-container">
+      <AddAccomsButton/>
       <NavBar/>
       <Col className="body-container">
         <Row className="justify-content-md-center">
@@ -61,14 +43,14 @@ const LandlordProfile = () => {
           />
         </Col>
 
-        <Col className="text-center info-items">
-            <Col className="info-item">
-              <AiFillPhone className="icon"/>
-              <p className="regular">09123456789</p>
-            </Col>
+        <Col className="info-items">
             <Col className="info-item"> 
               <MdEmail className="icon"/>
               <p className="regular">billgates@hotmail.com</p>
+            </Col>
+            <Col className="info-item">
+              <AiFillPhone className="icon"/>
+              <p className="regular">09123456789</p>
             </Col>
             <Col className="info-item">
               <AiFillCalendar className="icon"/>
@@ -94,13 +76,13 @@ const LandlordProfile = () => {
           <Row className="justify-content-md-center mt-4">
             {units.map((unit) => (
               <div className="cardlist-flex mb-5">
-                <CardListing />
+                <CardListingAddRoom />
               </div>
             ))}
           </Row>
         </Col>
       </Col>
-    </Container>
+    </div>
   );
 };
 
