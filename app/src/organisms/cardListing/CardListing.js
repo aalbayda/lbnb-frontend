@@ -4,6 +4,7 @@ import "./cardListing.css";
 import "../../index.css";
 import { Col } from "react-bootstrap";
 import { ViewMoreButton } from "../../atoms";
+import { RiHeart3Fill } from "react-icons/ri";
 
 const CardListing = () => {
   // change these values
@@ -28,6 +29,9 @@ const CardListing = () => {
             src={image}
             alt="accommodation-img"
           ></img>
+          <div class="heart-button">
+            <RiHeart3Fill className="heart-icon" />{" "}
+          </div>
         </div>
       </Col>
 
