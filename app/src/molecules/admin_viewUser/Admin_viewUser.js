@@ -1,12 +1,20 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import {Row, Col, Container} from "react-bootstrap";
 import './admin_viewUser.css';
 import {
-    Image,
-  } from "react-bootstrap";
+  Image,
+} from "react-bootstrap";
+
 
 function Admin_viewUser (props) {
+  const [editUser, setEditUser] = React.useState(false);
+
+  function editUserClicked() {
+    setEditUser(true);
+  }
+
   return (
     <Modal
       {...props}
@@ -30,20 +38,68 @@ function Admin_viewUser (props) {
                 <div className="adminviewuser-items">
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Name:</p>
-                        <p className="regular">Mark Lewis</p>
+
+                        {
+                          editUser
+                          ? <input placeholder="Mark Lewis"></input>
+                          : <p className="regular">Mark Lewis</p>
+                        }
+                        
                     </div>
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Email:</p>
-                        <p className="regular">mldamalerio@gmail.com</p>
+
+                        {
+                          editUser
+                          ? <input placeholder="mldamalerio@gmail.com"></input>
+                          : <p className="regular">mldamalerio@gmail.com</p>
+                        }
+
                     </div>
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Password:</p>
-                        <p className="regular">************</p>
+
+                        {
+                          editUser
+                          ? <input placeholder="************"></input>
+                          : <p className="regular">************</p>
+                        }
+
                     </div>
                 </div>
-              <Button className="adminedituser">
-                  Edit
-              </Button>
+
+              {
+                editUser
+                ? 
+                  <Row>
+
+                    <Col>
+                      <Button
+                        onClick={editUserClicked}
+                        className="adminedituser">
+                          Save
+                      </Button>
+                    </Col>
+
+                    <Col>
+                      <Button 
+                        variant="outline-danger"
+                        onClick={editUserClicked}
+                        className="admincancel">
+                          Cancel
+                      </Button>
+                    </Col>
+
+                  </Row>
+
+                : <Button
+                  onClick={editUserClicked}
+                  className="adminedituser">
+                      Edit
+                  </Button>
+              }
+
+              
         </div>
       </Modal.Body>
     </Modal>
