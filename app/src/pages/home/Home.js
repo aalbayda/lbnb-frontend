@@ -9,6 +9,8 @@ import {
   DormCarousel,
   Multilayerfilter,
 } from "../../organisms";
+import Chat from "../../molecules/chats/Chat";
+
 const Home = () => {
   return (
     <div className="home-container">
@@ -18,6 +20,7 @@ const Home = () => {
       <ApartmentCarousel />
       <DormCarousel />
       <HotelsCarousel />
+      <Chat/>
       <Footer />
     </div>
   );
