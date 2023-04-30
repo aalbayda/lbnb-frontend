@@ -63,8 +63,20 @@
 }
 
 .price-section {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: flex-end;
     /* padding: 10px; */
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 /* accommodation elements */
@@ -81,6 +93,10 @@
     left: 3px;
 }
 
+.name-loc-section a {
+    color: var(--color-yellow-accent);
+}
+
 .card-listing {
     display: flex;
     margin: 0;
@@ -93,9 +109,15 @@
     /* flex-wrap: wrap; */
 }
 
-.heart-button {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    cursor: pointer;
+.addRoom-btn.btn {
+    background-color: transparent;
+    color: var(--color-heading-dark);
+    border: none;
+    cursor: pointer !important;
+}
+
+.addRoom-btn.btn:focus, .addRoom-btn.btn:hover, .addRoom-btn.btn:active, .addRoom-btn.btn:visited{
+    background-color: transparent !important;
+    color: var(--color-light-accent-green) !important;
+    cursor: pointer !important;
 }

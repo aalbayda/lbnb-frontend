@@ -55,14 +55,14 @@ input {
     align-items: center;
 }
 
-.signinButton {
+.signinButton.btn {
     color: var(--color-light-accent-green);
     background-color: transparent;
     opacity: 75%;
     border: none;
     cursor: pointer;
 }
-.signinButton:focus, .signinButton:hover, .signinButton:active, .signinButton:visited{
+.signinButton.btn:focus, .signinButton.btn:hover, .signinButton.btn:active, .signinButton.btn:visited{
     background-color: transparent !important;
     color: var(--color-light-accent-green) !important;
 }
@@ -71,13 +71,13 @@ p.large-bold {
     color: var(--color-light-accent-green);
 }
 
-.signup-btn {
+.signup-btn.btn {
     background-color: var(--color-light-accent-green);
     border: none;
     cursor: pointer;
 }
 
-.signup-btn:focus, .signup-btn:hover, .signup-btn:active, .signup-btn:visited{
+.signup-btn.btn:focus, .signup-btn.btn:hover, .signup-btn.btn:active, .signup-btn.btn:visited{
     background-color: var(--color-light-accent-green) !important;
     color: var(--color-background);
 }

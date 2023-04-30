@@ -42,15 +42,20 @@ input {
     flex-direction: row;
 
     align-items: center;
+    justify-content: center;
 }
 
-.createButton {
+.login-container-createAccount p {
+    margin-bottom: 0px;
+}
+
+.createButton.btn {
     color: var(--color-light-accent-green);
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-.createButton:focus, .createButton:hover, .createButton:active, .createButton:visited{
+.createButton.btn:focus, .createButton.btn:hover, .createButton.btn:active, .createButton.btn:visited{
     background-color: transparent !important;
     color: var(--color-light-accent-green) !important;
 }
@@ -59,13 +64,13 @@ p.large-bold {
     color: var(--color-light-accent-green);
 }
 
-.login-btn {
+.login-btn.btn {
     background-color: var(--color-light-accent-green);
     border: none;
     cursor: pointer;
 }
 
-.login-btn:focus, .login-btn:hover, .login-btn:active, .login-btn:visited{
+.login-btn.btn:focus, .login-btn.btn:hover, .login-btn.btn:active, .login-btn.btn:visited{
     background-color: var(--color-light-accent-green) !important;
     color: var(--color-background);
 }

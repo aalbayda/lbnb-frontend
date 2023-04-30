@@ -5,6 +5,9 @@ background-color {
   color: var(--color-background);
 }
 
+p {
+  margin: 0px;
+}
 .header1 {
   font-family: var(--font-family-headers);
   font-size: 76.29px;
@@ -90,6 +93,15 @@ background-color {
   color: var(--color-heading-dark);
   width: 80%;
   text-align: center;
+}
+
+.bold-green {
+  font-weight: bold;
+  color: var(--color-heading-dark);
+}
+
+.light-green {
+  color: var(--color-light-accent-green)
 }
 
 :root {

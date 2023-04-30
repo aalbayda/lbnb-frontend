@@ -45,11 +45,13 @@ p {
   text-align: center;
   column-gap: 30px;
   justify-content: flex-end;
-  /* padding-right: 0px;
-    margin-right: 0px; */
 }
 
-.login-btn {
+.navbar-right p {
+  margin-bottom: 0px;
+}
+
+.login-btn.btn {
     background-color: var(--color-light-accent-green);
     min-width: 90px;
     border: none;
@@ -58,7 +60,9 @@ p {
 
 }
 
-.login-btn:focus, .login-btn:hover, .login-btn:active, .login-btn:visited{
-    background-color: var(--color-light-accent-green) !important;
+.login-btn.btn:focus, .login-btn.btn:hover, .login-btn.btn:active, .login-btn.btn:visited{
+    background-color: var(--color-heading-dark) !important;
     color: var(--color-background);
+    border:none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
