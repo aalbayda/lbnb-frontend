@@ -36,6 +36,7 @@
     flex-direction: row;
 
     column-gap: 10px;
+    padding: 5px;
 }
 
 .adminviewuser-item p{  
@@ -63,4 +64,8 @@
 .adminedituser.btn:focus, .adminedituser.btn:hover, .adminedituser.btn:active, .adminedituser.btn:visited{
     background-color: var(--color-light-accent-green) !important;
     color: var(--color-background);
+}
+
+.admincancel.btn {
+    width: 100px;
 }
