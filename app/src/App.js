@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import "./App.css";
+/*
 import {
   AccomsPage,
   AdminPage,
@@ -11,9 +13,22 @@ import {
   UserProfile,
   Details,
 } from "./pages";
+*/
+import LoadingScreenPage from "./atoms/loadingScreenPage/LoadingScreenPage";
+
+const AccomsPage = lazy(()=> import("./pages/accomsPage/AccomsPage.js"));
+const AdminPage = lazy(()=> import("./pages/adminPage/AdminPage.js"));
+const Home = lazy(()=> import("./pages/home/Home.js"));
+const LandlordHome = lazy(()=> import("./pages/landlordHome/LandlordHome.js"));
+const LandlordProfile = lazy(()=> import("./pages/landlord_profile/LandlordProfile.js"));
+const Listing = lazy(()=> import("./pages/listing/Listing.js"));
+const UserProfile = lazy(()=> import("./pages/userProfile/UserProfile.js"));
+const Details = lazy(()=> import("./pages/detailsPage/details.js"));
+
 
 const App = () => {
   return (
+    <Suspense fallback={<LoadingScreenPage />}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route
@@ -73,6 +88,7 @@ const App = () => {
         }
       />
     </Routes>
+    </Suspense>
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import './navBar.css';
 import Button from 'react-bootstrap/Button';
 import {Login} from "../../molecules";
+import {logo} from "../../assets/images";
 
 const NavBar = () => {
   const [modalShow, setModalShow] = React.useState(false);
@@ -12,12 +13,12 @@ const NavBar = () => {
           <p class="small">
             <a
               href="/"
-              style={{
-                textDecoration: "none",
-                fontSize: "32px",
-              }}
             >
-              🌱
+              <img
+                className="logo"
+                src={logo}
+                alt="logo"
+              />
             </a>
           </p>
         </div>
