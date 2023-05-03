@@ -9,3 +9,6 @@ export { default as AdminViewUser } from './admin_viewUser/Admin_viewUser';
 export { default as AdminViewLandlord } from './admin_viewlandlord/Admin_viewlandlord';
 export { default as LandlordTable } from './landlordTable/LandlordTable';
 export { default as UserTable } from './userTable/UserTable';
+
+export { default as ReviewHeaders } from "./listing_details/review_headers";
+export { default as ReviewCommentCard } from "./listing_details/review_comment_card";
