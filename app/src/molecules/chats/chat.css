@@ -9,3 +9,38 @@
 .rcw-launcher{
     background-color: #9CAA64;
 }
+
+.rcw-conversation-container{
+  width: 20%;
+  height: 40%;
+}
+
+.rcw-picker-icon{
+  width: 10px;
+  height: 10px;
+  position: relative;
+  align-self:flex-end;
+}
+
+.rcw-newmessage{
+  width: 10px;
+  height:5px;
+  position: relative;
+}
+
+/* .rcw-picker-btn .rcw-send-icon, .rcw-send .rcw-send-icon{
+  width: 2px;
+  height: 2px;
+  float:right;
+  position: relative;
+
+} */
+
+.rcw-sender{
+  position: relative;
+}
+
+img.rcw-send-icon{
+  width: 10px;
+  position: relative;
+}

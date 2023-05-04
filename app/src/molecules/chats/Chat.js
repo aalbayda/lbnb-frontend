@@ -4,8 +4,9 @@ import { Widget, addResponseMessage } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import './chat.css';
 
-import temp from "../../assets/images/templogo.png";
+
 function Chat() {
+  
   useEffect(() => {
     addResponseMessage('Welcome to this awesome chat!');
   }, []);
@@ -20,7 +21,6 @@ function Chat() {
     <div className="Chats">
      <Widget
           handleNewUserMessage={handleNewUserMessage}
-          profileAvatar={temp}
           title="Testing chat widget"
           subtitle="test"
         />
