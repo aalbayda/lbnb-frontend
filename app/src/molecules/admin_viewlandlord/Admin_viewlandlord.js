@@ -3,13 +3,24 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './admin_viewlandlord.css';
 import {
-    Image,
+  Image,
 } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function Admin_viewlandlord (props) {
+
+  const [editOwner, setEditOwner] = React.useState(false);
+
+  function editOwnerClicked() {
+    setEditOwner(true);
+  }
+
+  function disableEdit() {
+    setEditOwner(false);
+  }
+
   return (
-    <Modal
+    <Modal onExited={disableEdit}
       {...props}
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -30,29 +41,62 @@ function Admin_viewlandlord (props) {
                     />
                 </div>
                 <div className="adminviewlandlord-items">
+                    {/* Name */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Name:</p>
-                        <p className="regular">Mark Lewis</p>
+
+                        {
+                          editOwner
+                          ? <input placeholder="Mark Lewis"></input>
+                          : <p className="regular">Mark Lewis</p>
+                        }
+
                     </div>
+                    {/* Email */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Email:</p>
-                        <p className="regular">mldamalerio@gmail.com</p>
+
+                        {
+                          editOwner
+                          ? <input placeholder="mldamalerio@gmail.com"></input>
+                          : <p className="regular">mldamalerio@gmail.com</p>
+                        }
+                        
                     </div>
+                    {/* Phone */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Phone Number:</p>
-                        <p className="regular">09123456789</p>
+
+                        {
+                          editOwner
+                          ? <input className="no-arrows" placeholder="09123456789"></input>
+                          : <p className="regular">09123456789</p>
+                        }
                     </div>
-                    <div className="adminviewlandlord-item">
-                        <p className="regular-bold">Password:</p>
-                        <p className="regular">************</p>
+                    {/* Password */}
+                    <div className="adminviewlandlord-item">  
+                      <p className="regular-bold">Password:</p>
+                      {
+                        editOwner
+                        ? <input type="password" placeholder="************"></input>
+                        : <p className="regular">************</p>
+                      }
                     </div>
                     <div className="adminviewlandlord-btns-left">
-                        <Button className="admineditlandlord">
-                            Edit
-                        </Button>
-                        <Button className="adminsavelandlord">
-                            Save
-                        </Button>
+
+                        
+
+                        {
+                          editOwner
+                          ? <Button className="adminsavelandlord" onClick={disableEdit}>
+                              Save
+                            </Button>
+                          : <Button className="admineditlandlord" onClick={editOwnerClicked}>
+                              Edit
+                            </Button>
+                        }
+                        
+
                     </div>
                 </div>
             </div>
