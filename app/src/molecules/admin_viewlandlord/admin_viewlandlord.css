@@ -152,6 +152,13 @@ div.modal-content {
     width: 500px;
 }
 
+.adminviewlandlord-filter-dropdown-type {
+    color: var(--color-background);
+    background-color: var(--color-light-accent-green);
+    border: none;
+    width: 100%;
+}
+
 .small.adminviewlandlord-filter-dropdown-rooms{
     display: flex;
     flex-direction: row;
@@ -169,6 +176,10 @@ div.modal-content {
 .small.adminviewlandlord-filter-dropdown:hover,
 .small.adminviewlandlord-filter-dropdown:active,
 .small.adminviewlandlord-filter-dropdown:visited,
+.small.adminviewlandlord-filter-dropdown-type:focus,
+.small.adminviewlandlord-filter-dropdown-type:hover,
+.small.adminviewlandlord-filter-dropdown-type:active,
+.small.adminviewlandlord-filter-dropdown-type:visited,
 .small.adminviewlandlord-filter-dropdown-rooms:focus, 
 .small.adminviewlandlord-filter-dropdown-rooms:hover,
 .small.adminviewlandlord-filter-dropdown-rooms:active,
