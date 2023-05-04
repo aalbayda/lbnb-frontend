@@ -15,8 +15,12 @@ function Admin_viewUser (props) {
     setEditUser(true);
   }
 
+  function disableEdit() {
+    setEditUser(false);
+  }
+
   return (
-    <Modal
+    <Modal onExited={disableEdit}
       {...props}
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -75,7 +79,7 @@ function Admin_viewUser (props) {
 
                     <Col>
                       <Button
-                        onClick={editUserClicked}
+                        onClick={disableEdit}
                         className="adminedituser">
                           Save
                       </Button>
@@ -84,7 +88,7 @@ function Admin_viewUser (props) {
                     <Col>
                       <Button 
                         variant="outline-danger"
-                        onClick={editUserClicked}
+                        onClick={disableEdit}
                         className="admincancel">
                           Cancel
                       </Button>
