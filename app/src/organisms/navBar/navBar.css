@@ -1,3 +1,17 @@
+.logo {
+  width: 15%;
+  height: 15%;
+  /* filter: drop-shadow(1px 1px 1px rgb(255, 255, 127.5)); */
+  
+}
+
+.logo:hover {
+  /* -webkit-filter: hue-rotate(360deg) saturate(5);
+  filter: hue-rotate(360deg) saturate(5); */
+  /* fill: red; */
+  filter: brightness(0.50);
+}
+
 .navbar-container {
     display: flex;
     width: 100%;
