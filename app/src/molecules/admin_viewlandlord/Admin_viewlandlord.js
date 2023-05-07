@@ -3,13 +3,39 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './admin_viewlandlord.css';
 import {
-    Image,
+  Image,
 } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function Admin_viewlandlord (props) {
+
+  const [editOwner, setEditOwner] = React.useState(false);
+  const [editAccomsRoom, setEditAccomsRoom] = React.useState(false);
+
+  function editOwnerClicked() {
+    setEditOwner(true);
+  }
+
+  function editAccomsRoomClicked() {
+    setEditAccomsRoom(true);
+  }
+
+  function disableEditOwner() {
+    setEditOwner(false);
+  }
+
+  function disableEditAccomsRoom() {
+    setEditAccomsRoom(false);
+  }
+
+  function disableAllEdit() {
+    setEditOwner(false);
+    setEditAccomsRoom(false);
+  }
+
+
   return (
-    <Modal
+    <Modal onExited={disableAllEdit}
       {...props}
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -30,29 +56,59 @@ function Admin_viewlandlord (props) {
                     />
                 </div>
                 <div className="adminviewlandlord-items">
+                    {/* Name */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Name:</p>
-                        <p className="regular">Mark Lewis</p>
+
+                        {
+                          editOwner
+                          ? <input placeholder="Mark Lewis"></input>
+                          : <p className="regular">Mark Lewis</p>
+                        }
+
                     </div>
+                    {/* Email */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Email:</p>
-                        <p className="regular">mldamalerio@gmail.com</p>
+
+                        {
+                          editOwner
+                          ? <input placeholder="mldamalerio@gmail.com"></input>
+                          : <p className="regular">mldamalerio@gmail.com</p>
+                        }
+                        
                     </div>
+                    {/* Phone */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Phone Number:</p>
-                        <p className="regular">09123456789</p>
+
+                        {
+                          editOwner
+                          ? <input className="no-arrows" placeholder="09123456789"></input>
+                          : <p className="regular">09123456789</p>
+                        }
                     </div>
-                    <div className="adminviewlandlord-item">
-                        <p className="regular-bold">Password:</p>
-                        <p className="regular">************</p>
+                    {/* Password */}
+                    <div className="adminviewlandlord-item">  
+                      <p className="regular-bold">Password:</p>
+                      {
+                        editOwner
+                        ? <input type="password" placeholder="************"></input>
+                        : <p className="regular">************</p>
+                      }
                     </div>
                     <div className="adminviewlandlord-btns-left">
-                        <Button className="admineditlandlord">
-                            Edit
-                        </Button>
-                        <Button className="adminsavelandlord">
+
+                      {
+                        editOwner
+                        ? <Button className="adminsavelandlord" onClick={disableEditOwner}>
                             Save
-                        </Button>
+                          </Button>
+                        : <Button className="admineditlandlord" onClick={editOwnerClicked}>
+                            Edit
+                          </Button>
+                      }
+
                     </div>
                 </div>
             </div>
@@ -70,26 +126,69 @@ function Admin_viewlandlord (props) {
                     </Dropdown>
                 </div>
                 <div className="adminviewlandlord-right-bottom">
+                    {/* Accomodation Name */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Accomodation Name:</p>
-                        <p className="small">White House</p>
+                        {
+                          editAccomsRoom
+                          ? <input placeholder="White House"></input>
+                          : <p className="small">White House</p>
+                        }
                     </div>
+
+                    {/* Accomodation Type */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Type</p>
-                        <p className="small">Apartment</p>
+                        
+                        {
+                          editAccomsRoom
+                          ? <Dropdown>
+                              <Dropdown.Toggle id="dropdown-basic" className="small adminviewlandlord-filter-dropdown-type">
+                                  Apartment
+                              </Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                  <Dropdown.Item className="small" href="#/action-1">Apartment</Dropdown.Item>
+                                  <Dropdown.Item className="small" href="#/action-2">Bedspace</Dropdown.Item>
+                                  <Dropdown.Item className="small" href="#/action-3">Dorm</Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          : <p className="small">Apartment</p>
+                        }
                     </div>
+
+                    {/* Description */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Description</p>
-                        <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris.</p>
+                        {
+                          editAccomsRoom
+                          ? <input placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris."></input>
+                          : <p className="small">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris.</p>
+                        }
+                        
                     </div>
+
+                    {/* Location */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Location:</p>
-                        <p className="small">Somewhere in Elbi</p>
+                        {
+                          editAccomsRoom
+                          ? <input placeholder="Somewhere in Elbi"></input>
+                          : <p className="small">Somewhere in Elbi</p>
+                        }
+                        
                     </div>
+
+                    {/* Amenities */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Amenities:</p>
-                        <p className="small">Something Something</p>
+                        {
+                          editAccomsRoom
+                          ? <input placeholder="Something Something"></input>
+                          : <p className="small">Something Something</p>
+                        }
+                        
                     </div>
+
                     <Dropdown>
                     <Dropdown.Toggle id="dropdown-basic" className="small adminviewlandlord-filter-dropdown-rooms">
                         Rooms
@@ -100,25 +199,51 @@ function Admin_viewlandlord (props) {
                         <Dropdown.Item className="small adminviewlandlord-filter-dropdown-item" href="#/action-3">Room3</Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown>
+
+                    {/* Room Name */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Room Name</p>
-                        <p className="small">Room 1</p>
+                        {
+                          editAccomsRoom
+                          ? <input placeholder="Room 1"></input>
+                          : <p className="small">Room 1</p>
+                        }
+                        
                     </div>
+
+                    {/* Capacity */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Capacity:</p>
-                        <p className="small">1</p>
+                        {
+                          editAccomsRoom
+                          ? <input type="number" min="0" placeholder="1"></input>
+                          : <p className="small">1</p>
+                        }
+                        
                     </div>
+
+                    {/* Price */}
                     <div className="adminviewlandlord-item">
                         <p className="small-bold">Price</p>
-                        <p className="small">5000</p>
+
+                        {
+                          editAccomsRoom
+                          ? <input type="number" min="0" placeholder="5000"></input>
+                          : <p className="small">5000</p>
+                        }
                     </div>
+
+                    {/* Button */}
                     <div className="adminviewlandlord-btns">
-                        <Button className="admineditlandlord">
-                            Edit
-                        </Button>
-                        <Button className="adminsavelandlord">
+                      {
+                        editAccomsRoom
+                        ? <Button className="adminsavelandlord" onClick={disableEditAccomsRoom}>
                             Save
-                        </Button>
+                          </Button>
+                        : <Button className="admineditlandlord" onClick={editAccomsRoomClicked}>
+                            Edit
+                          </Button>
+                      }
                     </div>
                 </div>
             </div>
