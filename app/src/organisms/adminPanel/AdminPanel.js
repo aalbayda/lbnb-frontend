@@ -12,6 +12,9 @@ const AdminPanel = () => {
     setToggleState(index);
   };
 
+  // const [accoms, setAccoms] = React.useState([]);
+  // const [users, setUsers] = React.useState([]);
+
   return (
     <div class="admin-panel-div">
       <h1 className="large-bold">ADMIN PANEL</h1>
@@ -36,7 +39,7 @@ const AdminPanel = () => {
           }
           onClick={() => toggleTab(2)}
         >
-          Owners
+          Accoms
         </div>
       </div>
       <div className="tab-header active-tabs"></div>

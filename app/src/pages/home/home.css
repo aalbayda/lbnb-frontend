@@ -2,3 +2,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.cardlist-flex {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}

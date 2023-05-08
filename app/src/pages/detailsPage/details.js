@@ -8,7 +8,7 @@ import { NavBar,
  } from "../../organisms";
 
 
-const Details = () => {
+const Details = (props) => {
   return (
     <div class="detials-page-main-div">
       <NavBar />

@@ -99,3 +99,21 @@
     right: 14px;
     cursor: pointer;
 }
+
+
+.carousel-btn {
+    background-color: var(--color-light-accent-green);
+    color: var(--color-background);
+
+    width: 150px;
+    min-width: 150px;
+
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+.carousel-btn:focus, .carousel-btn:hover, .carousel-btn:active, .carousel-btn:visited{
+    background-color: var(--color-light-accent-green);
+    color: var(--color-background);
+}
