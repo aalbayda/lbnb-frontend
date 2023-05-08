@@ -8,16 +8,25 @@ import { ReviewHeaders,
 
 
 const RatingReviewSection =()=>{
+  const num__of_reviews=5;
     return(
         <Container className="review-section-div">
           <ReviewHeaders />
           <div className="rev-comm-card-div">
-            <ReviewCommentCard />
-            <ReviewCommentCard />
-            <ReviewCommentCard />
+            {ReviewCommentCardLoop(num__of_reviews)}
           </div>
         </Container>
     )
+}
+
+const ReviewCommentCardLoop = (num) => {
+  const array = []
+
+  for(var i = 1; i <= num; i++){
+    array.push(<ReviewCommentCard />)
+  }
+
+  return array
 }
 
 export default RatingReviewSection;

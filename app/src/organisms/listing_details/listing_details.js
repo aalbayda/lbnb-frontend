@@ -1,10 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
-import { RiHeart3Fill } from "react-icons/ri";
-import { Row, Col, Container, Button } from "react-bootstrap";
-import { RoomButtons
-} from "../../molecules";
+import { Row, Col, Container} from "react-bootstrap";
+import { RoomButtons} from "../../molecules";
+import { HeartReact} from "../../atoms";
 
 const ListingDetails = () => {
   const image =
@@ -18,6 +17,7 @@ const ListingDetails = () => {
   const separator = "|";
   const rating = "1.5K";
   const capacity = "300";
+
 
   return (
     <Container>
@@ -51,10 +51,7 @@ const ListingDetails = () => {
           </div>
         </Col>
         <Col className="heart-icon-col">
-          <Button variant="outline-light">
-            {" "}
-            <RiHeart3Fill className="heart-icon" />{" "}
-          </Button>
+          <HeartReact/>
         </Col>
       </Row>
     </Container>
