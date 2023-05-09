@@ -4,6 +4,13 @@
   margin: 0;
 }
 
+input {
+    height: 30px;
+}
+
+.phone-number-input {
+    white-space: nowrap;
+}
 
 .modal-dialog {
     display: flex;

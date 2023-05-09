@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button';
 import './admin_viewlandlord.css';
 import {
   Image,
+  Col,
+  Row,
+  Container
 } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -80,7 +83,7 @@ function Admin_viewlandlord (props) {
                     </div>
                     {/* Phone */}
                     <div className="adminviewlandlord-item">
-                        <p className="regular-bold">Phone Number:</p>
+                        <p className="regular-bold phone-number-input">Phone Number:</p>
 
                         {
                           editOwner
@@ -112,6 +115,7 @@ function Admin_viewlandlord (props) {
                     </div>
                 </div>
             </div>
+
             <div className="adminviewlandlord-right">
                 <div className="adminviewlandlord-right-top">
                     <Dropdown>
@@ -248,6 +252,7 @@ function Admin_viewlandlord (props) {
                 </div>
             </div>
         </div>
+        
       </Modal.Body>
     </Modal>
   );
