@@ -23,12 +23,12 @@ const LandlordProfile = () => {
       <NavBar/>
       <Col className="body-container">
         <Row className="justify-content-md-center">
-          <Image
+          {/* <Image
             className="profileImage"
             src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
             roundedCircle
             fluid
-          />
+          /> */}
         </Row>
         <Col className="text-center">
           <h1 className="mt-4 header2 bold-green">WILLIAM GATES</h1>

@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
 import { RiHeart3Fill } from "react-icons/ri";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { RoomButtons
+} from "../../molecules";
 
 const ListingDetails = () => {
   const image =
@@ -44,12 +46,7 @@ const ListingDetails = () => {
               <p>{description}</p>
             </div>
             <div className="room-buttons">
-              <button className="r1 r-add-style" active>
-                {" "}
-                Room for 1
-              </button>
-              <button className="r2 r-add-style"> Room for 2</button>
-              <button className="r3 r-add-style"> Room for 3</button>
+              <RoomButtons/>
             </div>
           </div>
         </Col>
