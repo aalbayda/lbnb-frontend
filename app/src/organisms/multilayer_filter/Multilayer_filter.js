@@ -1,4 +1,5 @@
-import React from "react";
+import {React, useState} from "react";
+import axios from "axios";
 import './multilayer_filter.css';
 import {AiFillFilter} from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
@@ -7,37 +8,82 @@ import { ImPriceTags } from 'react-icons/im';
 import Button from 'react-bootstrap/Button';
 import { MdOutlinePlace, MdGroups } from 'react-icons/md';
 import Form from 'react-bootstrap/Form';
-const Multilayer_filter = () => {
+const url = 'https://mockup-backend-128.herokuapp.com';
+
+const Multilayer_filter = (props) => {
+  const [search, setSearch] = useState("");
+  const [priceTo, setPriceTo] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [location, setLocation] = useState("");
+  const [filterType, setFilterType] = useState("");
+
+  const handleSearched = () => {
+    let filterReq = "";
+    if (filterType === "Dorm") {
+      filterReq = "Lodge";
+    }
+    else if (filterType === "Apartment") {
+      filterReq = "Motel";
+    }
+    // else {
+    //   filterReq = "Hotel";
+    // }
+
+    console.log(location)
+
+    axios.post(url+'/filter-accommodation', {
+      filters: {
+          name: search,
+          address: '',
+          location: location,
+          type: filterReq,
+          priceFrom: '',
+          priceTo: '',
+          capacity: capacity
+      }
+    })
+    .then(function (response) {
+      const query = response.data.accommodations;
+      props.handleQuery(query);
+    })
+    .catch(function (error) {
+      console.log("Error!!!");
+      console.log(error);
+    });
+
+    props.toggleSearched();
+  }
+
   return (
     <div className="mlf-container">
       <div className="mlf-upper">
         <Dropdown>
           <Dropdown.Toggle id="dropdown-basic" className="small filter-dropdown">
             <AiFillFilter/>
-            Filter
+            {filterType ? filterType : "Type"}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item onClick={()=>setFilterType('Dorm')}>Dorm</Dropdown.Item>
+            <Dropdown.Item onClick={()=>setFilterType('Hotel')}>Hotel</Dropdown.Item>
+            <Dropdown.Item onClick={()=>setFilterType('Apartment')}>Apartment</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
       <div className="mlf-lower">
-        <div class="divTable">
-              <div class="divTableCell search">
+        <div className="divTable">
+              <div className="divTableCell search">
                 <BiSearch className="icon"/>
-                <input className="small mlf_search" placeholder='Search' type="text"/>
+                <input className="small mlf_search" placeholder='Search' type="text" onChange={e => setSearch(e.target.value)}/>
               </div>
-              <div class="divTableCell price">
+              <div className="divTableCell price">
                 <ImPriceTags className="icon"/>
-                <input className="small mlf_price" placeholder='Price Range' type="number"/>
+                <input disabled className="small mlf_price" placeholder='Max Price' type="number" onChange={e => setPriceTo(e.target.value)}/>
               </div>
-              <div class="divTableCell capacity">
+              <div className="divTableCell capacity">
                 <MdGroups className="icon"/>
-                <input className="small mlf_price" placeholder='Capacity' type="number"/>
+                <input className="small mlf_price" placeholder='Capacity' type="number" onChange={e => setCapacity(e.target.value)}/>
               </div>
-              <div class="divTableCell InElbi">
+              <div className="divTableCell InElbi">
                   <MdOutlinePlace className="icon"/>
                 <div className="InElbi-Right">
                 <Form>
@@ -50,6 +96,7 @@ const Multilayer_filter = () => {
                           name="group1"
                           type={type}
                           id={`inline-${type}-1`}
+                          onClick={e => setLocation("Within LB")}
                       />
                       <Form.Check
                           className="tiny"
@@ -58,14 +105,15 @@ const Multilayer_filter = () => {
                           name="group1"
                           type={type}
                           id={`inline-${type}-2`}
+                          onClick={e => setLocation("Outside LB")}
                       />
                       </div>
                   ))}
                   </Form>
                   </div>
               </div>
-              <div class="divTableCell search">
-              <Button className="small carousel-btn"> Search </Button>
+              <div className="divTableCell search">
+              <Button onClick={handleSearched} className="small carousel-btn"> Search </Button>
               </div>
         </div>
       </div>
