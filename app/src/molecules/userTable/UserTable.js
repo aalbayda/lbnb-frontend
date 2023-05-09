@@ -6,7 +6,7 @@ function UserTable (props) {
     const [modalShow, setModalShow] = useState(false);
   return (
     <div>
-        <Table striped bordered hover>
+        <Table striped hover>
                 <thead>
                 <tr>
                     <th>
