@@ -23,7 +23,7 @@ const ReviewCommentCardLoop = (num) => {
   const array = []
 
   for(var i = 1; i <= num; i++){
-    array.push(<ReviewCommentCard />)
+    array.push(<ReviewCommentCard key={i}/>)
   }
 
   return array

@@ -3,19 +3,45 @@ import './heart_react.css';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Height } from "@mui/icons-material";
-import { height } from "@mui/system";
+import axios from "axios";
+const url = "https://mockup-backend-128.herokuapp.com";
 
-const HeartReact = () => {
+const HeartReact = (props) => {
+    const accomName = props.accomName ? props.accomName : "Owner";
+    const userName = props.userName ? props.userName : "User";
+
     const [clicked, setClicked] = React.useState(false);
 
     const handleClick=()=>{
-        if (clicked == false){
-            setClicked(true)
+        if (clicked == true){
+            setClicked(false)
+            // console.log(accomName, userName, !clicked);
+            axios.post(url + '/accommodation/remove-from-favorites', {
+                userName: userName,
+                accommName: accomName
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
         else{
-            setClicked(false)
+            setClicked(true)
+            // console.log(accomName, userName, !clicked);
+            axios.post(url + '/accommodation/add-to-favorites', {
+                userName: userName,
+                accommName: accomName
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }
+
         
     }
     return(

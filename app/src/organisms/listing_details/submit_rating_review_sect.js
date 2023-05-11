@@ -4,10 +4,38 @@ import './submit_rating_review_sect.css';
 import {Row, Container} from "react-bootstrap";
 // import {MUIStarRating, CommentTextField, SubmitButton} from '../../atoms'
 import { Rating, TextField } from "@mui/material";
+import axios from "axios";
+const url = "https://mockup-backend-128.herokuapp.com";
 
-const SubmitRatingReviewSect = () => {
-    const [tfValue, setTFValue] = React.useState("");
+const SubmitRatingReviewSect = (props) => {
+    const [comment, setComment] = React.useState("");
     const [rateVal, setRateVal] = React.useState(0);
+    const timestamp= new Date();
+    const userName="userName";
+    const accomName="accomName";
+
+    const handleSubmit=()=>{
+        if(rateVal != 0){
+            axios.post(url+'/accommodation/add-review', {
+                comment: comment,
+                userName: userName,
+                timestamp: timestamp,
+                accommName: accomName,
+                rating: rateVal
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log("Error")
+                console.log(error);
+            });
+        }
+        setComment(""); 
+        setRateVal(0);
+        console.log(comment);
+        console.log(rateVal);
+    }
     
     return(
         <Container className="comment-star-container">
@@ -22,7 +50,7 @@ const SubmitRatingReviewSect = () => {
                     color: "#1C3103", 
                     mr: 1,
                     }}
-                    onChange={(newValue) => setRateVal(newValue.target.value)}
+                    onChange={(newValue) => setRateVal(parseFloat(newValue.target.value))}
                     value={rateVal}
                 />
                 <TextField
@@ -33,15 +61,10 @@ const SubmitRatingReviewSect = () => {
                     label="Multiline"
                     multiline
                     maxRows={4}
-                    onChange={(newValue) => setTFValue(newValue.target.value)}
-                    value={tfValue}
+                    onChange={(newValue) => setComment(newValue.target.value)}
+                    value={comment}
                 />
-                <button className="submit-button" onClick={()=>{
-                    setTFValue(""); 
-                    setRateVal(0);
-                    console.log(tfValue);
-                    console.log(rateVal);
-                    }}> Submit </button>
+                <button className="submit-button" onClick={handleSubmit}> Submit </button>
                 </div>  
             </Row>
           

@@ -6,11 +6,11 @@ import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { ViewMoreButton } from "../../atoms";
 import { RiHeart3Fill } from "react-icons/ri";
+import {useNavigate} from "react-router-dom";
 
 
 
 const CardListing = (props) => {
-
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const name = props.name ? props.name : "Casa de Felicidad";
@@ -20,9 +20,13 @@ const CardListing = (props) => {
   const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const amenities = props.amenities ? props.amenities : "";
-  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱500";
+  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱900";
+  const max_price = props.max_price;
+  const min_price = props.min_price;
   const stars = "★★★★☆";
   const reviews = "(32 reviews)";
+
+  const navigate=useNavigate();
 
   return (
     <div className="card-listing">
@@ -66,7 +70,17 @@ const CardListing = (props) => {
           </div>
           <Button
               className="small-bold carousel-btn"
-              onClick={() => (window.location.href += "details")}
+              onClick={()=> {
+                navigate('/details',{replace:true, state: {
+                  name:name, 
+                  location:location,
+                  capacity: capacity, 
+                  max_price: max_price,
+                  min_price: min_price,
+                  description: description,
+                  amenities: amenities
+                }})
+              }}
             >View More</Button>
         </div>
       </Col>

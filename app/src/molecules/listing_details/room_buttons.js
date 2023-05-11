@@ -17,7 +17,7 @@ const getButtonsUsingForLoop = (num) => {
     const array = []
 
     for(var i = 1; i <= num; i++){
-      array.push( <button className="r-add-style"> Room for {i}</button>)
+      array.push( <button key={i} className="r-add-style"> Room for {i}</button>)
     }
 
     return array

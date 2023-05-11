@@ -5,18 +5,22 @@ import { Row, Col, Container} from "react-bootstrap";
 import { RoomButtons} from "../../molecules";
 import { HeartReact} from "../../atoms";
 
-const ListingDetails = () => {
+const ListingDetails = (props) => {
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const description =
+  const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  const name = "Casa de Felicidad";
-  const location = "Los Banos, Laguna";
-  const price = "₱ 8,000";
+  const accommName = props.accommName ? props.accommName : "Casa de Felicidad";
+  const address = props.address ? props.address : "📍 Los Banos, Laguna";
+  // const price = props.max_price ? "₱" + props.max_price : "₱500";
+  const min_price = props.min_price ? "₱" + props.min_price : "₱1000";
+  const max_price = props.max_price ? "₱" + props.max_price : "₱5000";
+  const amenities = props.amenities? "✔️"+ props.amenities:"✔️ with wifi";
   const stars = "★★★★☆";
   const separator = "|";
   const rating = "1.5K";
-  const capacity = "300";
+  const capacity = props.capacity ? props.capacity : "🚪 20";
+  const userName = "User-L";
 
 
   return (
@@ -28,8 +32,8 @@ const ListingDetails = () => {
         <Col>
           <div className="name-location-div">
             <div className="name-location-section">
-              <h1 className="headings">{name}</h1>
-              <h7 className="headings">{location}</h7>
+              <h1 className="headings">{accommName}</h1>
+              <h7 className="headings">{address}</h7>
               <div class="star-separator-capacity-div">
                 <p className="star-separator-capacity-text">
                   {stars} {separator}{" "}
@@ -40,10 +44,11 @@ const ListingDetails = () => {
                   Rating {separator}{" "}
                 </p>
                 <p className="star-separator-capacity">{capacity}</p>
-                <p className="star-separator-capacity-text"> Capacity </p>
               </div>
-              <h2 className="headings-price">{price}</h2>
+              <h2 className="headings-price">{min_price} - {max_price}</h2>
+              <p></p>
               <p>{description}</p>
+              <p>{amenities}</p>
             </div>
             <div className="room-buttons">
               <RoomButtons/>
@@ -51,7 +56,7 @@ const ListingDetails = () => {
           </div>
         </Col>
         <Col className="heart-icon-col">
-          <HeartReact/>
+          <HeartReact userName={userName} accomName={accommName}/>
         </Col>
       </Row>
     </Container>

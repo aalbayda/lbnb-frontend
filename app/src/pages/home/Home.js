@@ -36,6 +36,8 @@ const Home = () => {
           description={query.ACCOMMODATION_DESCRIPTION} 
           amenities={query.ACCOMMODATION_AMENITIES}
           max_price={query.MAX_PRICE}
+          min_price={query.MIN_PRICE}
+          capacity={query.CAPACITY}
           />) 
           : <div>No results found.</div>}
       </div>
