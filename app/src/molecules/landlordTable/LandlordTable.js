@@ -33,7 +33,7 @@ function LandlordTable (props) {
     })
   return (
     <div>
-        <Table striped bordered hover>
+        <Table striped hover>
                 <thead>
                 <tr>
                     <th>
@@ -68,7 +68,9 @@ function LandlordTable (props) {
                             </td>
                         </tr>
                     })}
-                    {/* <td>
+
+                    {/* TODO: sample table, delete after map is implemented */}
+                    <td>
                     <p className="small">1</p>
                     </td>
                     <td>
@@ -89,7 +91,8 @@ function LandlordTable (props) {
                         onHide={() => setModalShow(false)}
                         /> 
                     </div>
-                    </td> */}
+                    </td>
+
                 </tbody>
             </Table>
     </div>
