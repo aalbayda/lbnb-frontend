@@ -6,8 +6,13 @@ import axios from "axios";
 
 function UserTable (props) {
 
-    const [modalShow, setModalShow] = useState(false);
+    // const [modalShow, setModalShow] = useState(false);
     const [studentBackend, setStudentBackend] = useState([{}]);
+    const [selectedStudent, setSelectedStudent] = useState(null);
+
+    const handleCloseModal = () => {
+        setSelectedStudent(null);
+    };
 
     // fetch all students
     useEffect(() => {
@@ -71,17 +76,14 @@ function UserTable (props) {
                             </td>
                             <td>
                             <div className="admin-btns">
+
+                                {/* Button to show modal conditionally */}
                                 <Button 
                                     className="small admin-view-btn"
-                                    onClick={() => {setModalShow(true); console.log("MODAL CLICKED")}}
+                                    onClick={() => {setSelectedStudent(student)}}
                                 >View
                                 </Button>
 
-                                <AdminViewUser
-                                    studentInfo={student}
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)}
-                                />
                             </div>
                             </td>
                         </tr>
@@ -119,6 +121,17 @@ function UserTable (props) {
 
                 </tbody>
             </Table>
+
+
+        {/* ONLY RENDER IF THERE IS A SELECTED STUDENT */}
+        {selectedStudent && (
+            <AdminViewUser
+            studentInfo={selectedStudent}
+            show={true}
+            onHide={handleCloseModal}
+            />
+        )}
+
     </div>
   );
 }
