@@ -7,70 +7,111 @@ const url = 'https://mockup-backend-128.herokuapp.com';
 
 function LandlordTable (props) {
     const [modalShow, setModalShow] = useState(false);
-    const [accoms, setAccoms] = useState([]);
-    useEffect(() => {
-        axios.post(url+'/filter-accommodation', {
-            filters: {
-                name: '',
-                address: '',
-                location: '',
-                type: '',
-                priceFrom: '',
-                priceTo: '',
-                capacity: '',
-                max_price: ''
-            }
-          })
-          .then(function (response) {
-            console.log(response.data.accommmodations);
-            setAccoms(response.data.accommodations);
-          })
-          .catch(function (error) {
-            console.log("Error!!!");
-            console.log(error);
-          });
+    // const [accoms, setAccoms] = useState([]);
 
-    })
+    const [ownerBackend, setOwnerBackend] = useState([{}]);
+    const [selectedOwner, setSelectedOwner] = useState(null);
+
+    const handleCloseModal = () => {
+      setSelectedOwner(null);
+    };
+
+    useEffect(() => {
+        // axios.post(url+'/filter-accommodation', {
+        //     filters: {
+        //         name: '',
+        //         address: '',
+        //         location: '',
+        //         type: '',
+        //         priceFrom: '',
+        //         priceTo: '',
+        //         capacity: '',
+        //         max_price: ''
+        //     }
+        //   })
+        //   .then(function (response) {
+        //     console.log(response.data.accommmodations);
+        //     setAccoms(response.data.accommodations);
+        //   })
+        //   .catch(function (error) {
+        //     console.log("Error!!!");
+        //     console.log(error);
+        //   });
+
+        // fetch all owners
+        axios.get(url + '/view-all-owners')
+        // handle success
+        .then(function (response) {
+            setOwnerBackend(response.data);
+            console.log(response.data);
+        })
+        // handle error
+        .catch(function (error) {
+            console.log("There is an error fetching the owners (admin page)")
+            console.log(error);
+        })
+        // always executed
+        .finally(function () {
+        
+        });
+
+    }, [])
   return (
     <div>
         <Table striped hover>
                 <thead>
                 <tr>
                     <th>
+                    <p className="small-bold">ID #</p>
+                    </th>
+                    <th>
                     <p className="small-bold">Name</p>
                     </th>
                     <th>
-                    <p className="small-bold">Type</p>
+                    <p className="small-bold">Email</p>
                     </th>
                     <th>
-                    <p className="small-bold">Description</p>
-                    </th>
-                    <th>
-                    <p className="small-bold">Location</p>
+                    <p className="small-bold">Action</p>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
 
-                    {accoms.map(accom => {
-                        <tr>
+                  {
+                    typeof ownerBackend.owners === "undefined"
+                    ? <p>Loading...</p>
+                    : ownerBackend.owners.map((owner) => {
+                        // extract the needed data
+                        const {USER_ID, USER_FNAME, USER_LNAME, USER_EMAIL} = owner;
+                        return <tr key={USER_ID}>
                             <td>
-                            <p className="small">{accom.ACCOMMODATION_NAME}</p>
+                            <p className="small">{USER_ID}</p>
                             </td>
                             <td>
-                            <p className="small">{accom.ACCOMMODATION_TYPE}</p>
+                            <p className="small">{USER_FNAME} {USER_LNAME}</p>
                             </td>
                             <td>
-                            <p className="small">{accom.ACCOMMODATION_DESCRIPTION}</p>
+                            <p className="small">{USER_EMAIL}</p>
                             </td>
                             <td>
-                            <p className="small">{accom.ACCOMMODATION_LOCATION}</p>
+                            <div className="admin-btns">
+
+                                {/* Button to show modal conditionally */}
+                                <Button 
+                                    className="small admin-view-btn"
+                                    onClick={() => {setSelectedOwner(owner)}}
+                                >View
+                                </Button>
+
+                            </div>
                             </td>
                         </tr>
-                    })}
+                    })
+                  }
+
 
                     {/* TODO: sample table, delete after map is implemented */}
-                    <td>
+                    {/* <td>
                     <p className="small">1</p>
                     </td>
                     <td>
@@ -91,10 +132,19 @@ function LandlordTable (props) {
                         onHide={() => setModalShow(false)}
                         /> 
                     </div>
-                    </td>
+                    </td> */}
 
                 </tbody>
             </Table>
+
+        {/* ONLY RENDER IF THERE IS A SELECTED STUDENT */}
+        {selectedOwner && (
+            <AdminViewLandlord
+            ownerInfo={selectedOwner}
+            show={true}
+            onHide={handleCloseModal}
+            />
+        )}
     </div>
   );
 }
