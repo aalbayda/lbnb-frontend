@@ -4,6 +4,13 @@
   margin: 0;
 }
 
+input {
+    height: 30px;
+}
+
+.phone-number-input {
+    white-space: nowrap;
+}
 
 .modal-dialog {
     display: flex;
@@ -78,7 +85,7 @@ div.modal-content {
     width: 100px;
 }
 
-.admineditlandlord.btn:focus, .admineditlandlord.btn:hover, .admineditlandlord.btn:active, .admineditlandlord.btn:visited{
+.admineditlandlord.btn:hover{
     background-color: var(--color-heading-dark) !important;
     color: var(--color-background);
 }
@@ -91,7 +98,7 @@ div.modal-content {
     width: 100px;  
 }
 
-.adminsavelandlord.btn:focus, .adminsavelandlord.btn:hover, .adminsavelandlord.btn:active, .adminsavelandlord.btn:visited{
+.adminsavelandlord.btn:hover {
     background-color: transparent!important;
     color: var(--color-heading-dark);
     border: 1px solid var(--color-heading-dark);
@@ -188,6 +195,10 @@ div.modal-content {
     background-color: var(--color-heading-dark);   
 }
 
+.dropdown-item:active {
+    background-color: var(--color-background);
+}
+
 .small.adminviewlandlord-filter-dropdown-item{
     display: flex;
     flex-direction: row;
@@ -220,3 +231,4 @@ div.modal-content {
     justify-content: center;
     align-items: center;
 }
+
