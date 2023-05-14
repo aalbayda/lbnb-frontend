@@ -1,11 +1,6 @@
-.container {
-    position:absolute;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.75s, visibility 0.75s;
-    left: 0;
-    right: 0;
-    display: flex;
+.space {
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .loader {
@@ -23,7 +18,6 @@
 }
 
 .loader::after{
-    content: "";
     width: 75px;
     height: 75px;
     border: 15px solid #dddddd;

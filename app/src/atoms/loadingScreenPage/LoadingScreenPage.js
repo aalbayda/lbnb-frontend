@@ -1,8 +1,9 @@
 import "./loadingScreenPage.css";
 
 export default function Loading() {
-    return(
+  return(
+    <div className="container">
       <div className="loader"/>
-    );
-
-  }
+    </div>
+  );
+}

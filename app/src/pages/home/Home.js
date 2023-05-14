@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, lazy } from "react";
 import "./home.css";
 import {
   NavBar,
@@ -8,10 +8,10 @@ import {
   ApartmentCarousel,
   HotelsCarousel,
   DormCarousel,
-  Multilayerfilter,
-  CardListing
+  Multilayerfilter
 } from "../../organisms";
-
+import LoadingComponent from "../../atoms/loadingComponent/LoadingComponent.js";
+const CardListing = lazy(()=> import("../../organisms/cardListing/CardListing"));
 
 const Home = () => {
   const [queries, setQueries] = useState("");
@@ -27,26 +27,31 @@ const Home = () => {
       <NavBar />
       <Banner />
       <Multilayerfilter toggleSearched={toggleSearched} handleQuery={handleQuery} />
-      { searched ?
-      
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
-        {queries ? queries.map(query => <CardListing 
-          name={query.ACCOMMODATION_NAME} 
-          location={query.ACCOMMODATION_LOCATION} 
-          description={query.ACCOMMODATION_DESCRIPTION} 
-          amenities={query.ACCOMMODATION_AMENITIES}
-          max_price={query.MAX_PRICE}
-          />) 
-          : <div>No results found.</div>}
+      { 
+      searched ?
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+          { 
+          queries ? <div>No results found.</div>
+          : queries ?
+            queries.map(query => 
+              <CardListing 
+                name={query.ACCOMMODATION_NAME} 
+                location={query.ACCOMMODATION_LOCATION} 
+                description={query.ACCOMMODATION_DESCRIPTION} 
+                amenities={query.ACCOMMODATION_AMENITIES}
+                max_price={query.MAX_PRICE}
+              />
+            ) 
+          : <LoadingComponent />
+          }
       </div>
 
- : <div>
+    : <div>
         <ApartmentCarousel />
         <DormCarousel />
         <HotelsCarousel />
       </div>
       }
-
       <Footer />
     </div>
   );
