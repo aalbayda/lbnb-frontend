@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import "./adminPanel.css";
 import "../../index.css";
-import { UserTable, LandlordTable} from "../../molecules";
+import { UserTable, LandlordTable, AccomsTable} from "../../molecules";
 
 const AdminPanel = () => {
   const [toggleState, setToggleState] = React.useState(1);
@@ -21,6 +21,8 @@ const AdminPanel = () => {
 
       {/* Tabs */}
       <div className="bloc-tabs">
+
+        {/* User Tab */}
         <div
           className={
             toggleState === 1
@@ -31,6 +33,8 @@ const AdminPanel = () => {
         >
           Users
         </div>
+
+        {/* Owner Tab */}
         <div
           className={
             toggleState === 2
@@ -39,114 +43,54 @@ const AdminPanel = () => {
           }
           onClick={() => toggleTab(2)}
         >
+          Owners
+        </div>
+
+        {/* Accoms Tab */}
+        <div
+          className={
+            toggleState === 3
+              ? "tabs small-bold active-tabs"
+              : "tabs small-bold"
+          }
+          onClick={() => toggleTab(3)}
+        >
           Accoms
         </div>
+
+
       </div>
       <div className="tab-header active-tabs"></div>
 
       {/* Content */}
       <div className="content-tabs">
+
+
         {/* Content 1 */}
         <div
           className={toggleState === 1 ? "content active-content" : "content"}
         >
           <UserTable/>
-          {/* <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>
-                  <p className="small-bold">ID#</p>
-                </th>
-                <th>
-                  <p className="small-bold">Name</p>
-                </th>
-                <th>
-                  <p className="small-bold">Email</p>
-                </th>
-                <th>
-                  <p className="small-bold">Action</p>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <p className="small">1</p>
-                </td>
-                <td>
-                  <p className="small">Mark</p>
-                </td>
-                <td>
-                  <p className="small">otto@gmail.com</p>
-                </td>
-                <td>
-                  <div className="admin-btns">
-                    <Button 
-                      className="small admin-view-btn"
-                      onClick={() => setModalShow(true)}
-                      >View
-                    </Button>
-                    <AdminViewUser
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    /> 
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table> */}
         </div>
+
+
 
         {/* Content 2 */}
         <div
           className={toggleState === 2 ? "content active-content" : "content"}
         >
           <LandlordTable/>
-             {/* <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>
-                  <p className="small-bold">ID#</p>
-                </th>
-                <th>
-                  <p className="small-bold">Name</p>
-                </th>
-                <th>
-                  <p className="small-bold">Email</p>
-                </th>
-                <th>
-                  <p className="small-bold">Action</p>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <p className="small">1</p>
-                </td>
-                <td>
-                  <p className="small">Mark</p>
-                </td>
-                <td>
-                  <p className="small">otto@gmail.com</p>
-                </td>
-                <td>
-                  <div className="admin-btns">
-                    <Button 
-                      className="small admin-view-btn"
-                      onClick={() => setModalShow(true)}
-                      >View
-                    </Button>
-                    <AdminViewLandlord
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                    /> 
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table> */}
         </div>
+
+        {/* Content 3 */}
+        <div
+          className={toggleState === 3 ? "content active-content" : "content"}
+        >
+          <AccomsTable/>
+        </div>
+
+
+
       </div>
     </div>
   );
