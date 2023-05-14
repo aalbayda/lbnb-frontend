@@ -5,21 +5,36 @@ import { Row, Col, Container} from "react-bootstrap";
 import { RoomButtons} from "../../molecules";
 import { HeartReact} from "../../atoms";
 
+// image={image}
+// userName={userName}
+// ownerName={ownerName}
+// accommName={accommName} 
+// address={address} 
+// location_place={location_place}
+// rating={rating}
+// min_capacity={min_capacity}
+// max_capacity={max_capacity}
+// max_price={max_price}
+// description={description}
+// amenities={amenities}
+
 const ListingDetails = (props) => {
   const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const userName = props.userName ? props.userName : "student1";
+  const ownerName = props.ownerName ? props.ownerName : "owner1";
+  const accommName = props.accommName ? props.accommName : "Comfort Dorm";
+  const address = props.address ? props.address : "📍 Los Banos, Laguna";
+  const location_place = props.location_place ? props.location_place : "Inside Campus";
+  const rating = props.rating ? props.rating : "3★";
+  const min_capacity = props.min_capacity ? props.min_capacity : "1"
+  const max_capacity = props.max_capacity ? props.max_capacity : "5";
+  const max_price = props.max_price ? "₱" + props.max_price : "₱5000";
   const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  const accommName = props.accommName ? props.accommName : "Casa de Felicidad";
-  const userName = props.userName ? props.userName : "jcruz";
-  const address = props.address ? props.address : "📍 Los Banos, Laguna";
-  const min_price = props.min_price ? "₱" + props.min_price : "₱1000";
-  const max_price = props.max_price ? "₱" + props.max_price : "₱5000";
   const amenities = props.amenities? "✔️"+ props.amenities:"✔️ with wifi";
-  const stars = props.star ? props.star :"★★★★☆";
   const separator = "|";
-  const rating = props.rating ? props.rating : "1.5K";
-  const capacity = props.capacity ? props.capacity : "🚪 20";
-
+  
+  
 
   return (
     <Container>
@@ -31,19 +46,14 @@ const ListingDetails = (props) => {
           <div className="name-location-div">
             <div className="name-location-section">
               <h1 className="headings">{accommName}</h1>
-              <h7 className="headings">{address}</h7>
+              <h7 className="headings">{address} - {location_place}</h7>
               <div class="star-separator-capacity-div">
                 <p className="star-separator-capacity-text">
-                  {stars} {separator}{" "}
+                  {rating} {separator}{" "}
                 </p>
-                <p className="star-separator-capacity">{rating} </p>
-                <p className="star-separator-capacity-text">
-                  {" "}
-                  Rating {separator}{" "}
-                </p>
-                <p className="star-separator-capacity">{capacity}</p>
+                <p className="star-separator-capacity">{min_capacity} - {max_capacity} Capacity</p>
               </div>
-              <h2 className="headings-price">{min_price} - {max_price}</h2>
+              <h2 className="headings-price">{max_price}</h2>
               <p></p>
               <p>{description}</p>
               <p>{amenities}</p>

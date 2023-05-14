@@ -5,10 +5,27 @@ import { Container } from "react-bootstrap";
 import { ReviewHeaders, 
   ReviewCommentCard
 } from "../../molecules";
+import axios from "axios";
+const url = "https://mockup-backend-128.herokuapp.com";
 
 
-const RatingReviewSection =()=>{
+const RatingReviewSection =(props)=>{
   const num__of_reviews=5;
+  const accommName= props.accommName;
+
+  //to fetch review from the backend
+  // const[reviews, setReviews]=React.useState();
+  // axios.post(url+"/accommodation/get-reviews", {
+  //   accommodationName:accommName
+  // })
+  // .then(function (response) {
+  //   setReviews(response.data.result)
+  //   console.log(response)
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
+
     return(
         <Container className="review-section-div">
           <ReviewHeaders />

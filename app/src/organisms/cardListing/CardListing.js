@@ -9,24 +9,27 @@ import { RiHeart3Fill } from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
 
 
-
 const CardListing = (props) => {
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const owner = "Owner";
 
-  const name = props.name ? props.name : "Casa de Felicidad";
-  const location = props.location ? "📍 " + props.location : "📍 Los Banos, Laguna";
-  const capacity = props.capacity ? "🚪 " + props.capacity : "🚪 Accommodates 3 people";
+  //data passed from the home page
+  const accommName = props.accommName ? props.accommName : "Harmony Hotel";
+  const ownerName= props.ownerName ? props.ownerName : "owner1";
+  const location= props.location ? props.location : "inside campus";
+  const address = props.address ? "📍 " + props.address : "📍 Los Banos, Laguna";
   const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const amenities = props.amenities ? props.amenities : "with wifi";
-  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱900";
-  const max_price = props.max_price;
-  const min_price = props.min_price;
+  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱900"; //to be rendered in the page
+  const capacity = props.max_capacity ? "🚪 " + props.max_capacity : "🚪 Accommodates 3 people"; // to be render in the page
+  const max_price = props.max_price ? props.max_price : "1000"; //to be passed as arguments 
+  const min_capacity=props.min_capacity ? props.min_capacity : "1"; 
+  const max_capacity = props.max_capacity ? props.max_capacity : "3";
+  const rating= props.rating ? props.rating : "3★"; // TODO: to be converted to stars
+  // const stars = "★★★★☆";
 
-  const stars = "★★★★☆";
-  const reviews = "(32 reviews)";
+  const reviews = "(32 reviews)"; // TODO: dummy data (to be fetched)
 
   const navigate=useNavigate();
 
@@ -49,13 +52,13 @@ const CardListing = (props) => {
       <Col xs={6}>
         <div className="middle-section add-padding">
           <div className="name-loc-section">
-            <h1 className="large-bold accom-name">{name}</h1>
+            <h1 className="large-bold accom-name">{accommName}</h1>
             <p className="small">
               <a style={{ textDecoration: "none" }} href="/LandlordProfile">
-                leased by {owner}
+                leased by {ownerName}
               </a>
             </p>
-            <p className="small">{location}</p>
+            <p className="small">{address}</p>
           </div>
           <p className="small accom-desc">{description + " " + amenities + "."}</p>
         </div>
@@ -66,7 +69,7 @@ const CardListing = (props) => {
           <div className="price-section">
             <h2 className="large-bold price-range">{price}</h2>
             <div>
-              <p className="small review-stars">{stars}</p>
+              <p className="small review-stars">{rating}</p>
               <p className="small review-num">{reviews}</p>
             </div>
           </div>
@@ -75,15 +78,17 @@ const CardListing = (props) => {
               onClick={()=> {
                 navigate('/details',{replace:true, state: {
                   image:image,
-                  ownername:owner,
-                  accommname:name, 
+                  ownerName:ownerName,
+                  accommname:accommName, 
                   location:location,
+                  address: address,
                   capacity: capacity, 
                   max_price: max_price,
-                  min_price: min_price,
+                  min_capacity: min_capacity,
+                  max_capacity: max_capacity,
                   description: description,
                   amenities: amenities,
-                  star:stars,
+                  rating:rating,
                   reviews:reviews
                 }})
               }}

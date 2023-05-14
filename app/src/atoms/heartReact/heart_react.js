@@ -13,6 +13,7 @@ const HeartReact = (props) => {
     const [clicked, setClicked] = React.useState(false);
 
     const handleClick=()=>{
+        console.log(accomName, userName);
         if (clicked == true){
             setClicked(false)
             // console.log(accomName, userName, !clicked);
