@@ -15,6 +15,20 @@ Modal {
     border-radius: 20px;
 }
 
+.content {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-background);
+    
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 20px; */
+}
+
+
+.inactive-content {
+    display: none;
+}
+
 input {
     border-bottom: 1;
     border-top: none;
