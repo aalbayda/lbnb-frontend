@@ -11,3 +11,17 @@
     width:80%;
     text-align: center;
 }
+
+.icon {
+    height: 20px;
+    width: 20px;
+}
+
+.prev-button {
+    margin-right: 200px;
+
+}
+
+.next-button {
+    margin-left: 200px;
+}

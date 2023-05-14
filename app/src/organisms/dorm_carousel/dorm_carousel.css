@@ -19,3 +19,17 @@
     max-width: 80%;
     /* column-gap: 10px; */
 }
+
+.icon {
+    height: 20px;
+    width: 20px;
+}
+
+.prev-button {
+    margin-right: 200px;
+
+}
+
+.next-button {
+    margin-left: 200px;
+}

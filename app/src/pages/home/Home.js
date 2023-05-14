@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import "./home.css";
 import {
   NavBar,
@@ -11,12 +11,25 @@ import {
   Multilayerfilter,
   CardListing
 } from "../../organisms";
+const url = 'https://mockup-backend-128.herokuapp.com';
 
 
 const Home = () => {
   const [queries, setQueries] = useState("");
   const [searched, setSearched] = useState(false);
+  const [topAccoms, setTopAccoms] = useState([]);
   const toggleSearched = () => setSearched(true);
+
+  axios.get(url + '/get-top-five-accommodations')
+  .then(response => {
+    // Handle successful response
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handle error
+    console.error(error);
+  });
+
   const handleQuery = (queries) =>  {
     setQueries(queries);
     console.log("passed up successfully");
@@ -40,7 +53,7 @@ const Home = () => {
           : <div>No results found.</div>}
       </div>
 
- : <div>
+    : <div className="home-carousel-list">
         <ApartmentCarousel />
         <DormCarousel />
         <HotelsCarousel />
