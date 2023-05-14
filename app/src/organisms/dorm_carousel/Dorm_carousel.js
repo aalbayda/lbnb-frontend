@@ -4,7 +4,7 @@ import './dorm_carousel.css';
 import {Dorm} from '../../molecules';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-const Hotels_carousel = () =>  {
+const Dorm_carousel = ({topDorms}) =>  {
     const [index, setIndex] = useState(0);
   
     const handleSelect = (selectedIndex, e) => {
@@ -47,23 +47,28 @@ const Hotels_carousel = () =>  {
             >
                 <Carousel.Item>
                     <div className="dorm-item">
-                        <Dorm/>
-                        <Dorm/>
-                        <Dorm/>
+                        <Dorm 
+                          topDorms = {topDorms[0]}
+                        />
+                        <Dorm
+                          topDorms = {topDorms[1]}
+                        />
+                        <Dorm
+                          topDorms = {topDorms[2]}
+                        />
                     </div>
                 </Carousel.Item>
                 <Carousel.Item>
                     <div className="dorm-item">
-                        <Dorm/>
-                        <Dorm/>
-                        <Dorm/>
-                    </div>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <div className="dorm-item">
-                        <Dorm/>
-                        <Dorm/>
-                        <Dorm/>
+                        <Dorm
+                          topDorms = {topDorms[3]}
+                        />
+                        <Dorm
+                          topDorms = {topDorms[4]}
+                        />
+                        <Dorm
+                          topDorms = {topDorms[5]}
+                        />
                     </div>
                 </Carousel.Item>
             </Carousel>
@@ -73,4 +78,4 @@ const Hotels_carousel = () =>  {
 
 
 
-export default Hotels_carousel;
+export default Dorm_carousel;

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
 import { StarRating } from "../../atoms";
 
-const Apartment = () => {
+const Apartment = ({topApartments}) => {
   return (
     <div className="apartment-carousel-container">
       <div className="carousel-container">
@@ -13,11 +13,10 @@ const Apartment = () => {
         </div>
         <div className="carousel-lower">
           <div className="carousel-lowerleft">
-            <p className="large-bold">TITLE</p>
+            <p className="apartment-title large-bold">{topApartments.title}</p>
             <StarRating />
             <p className="small">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore.
+              {topApartments.description}
             </p>
           </div>
           <div className="carousel-lowerright">

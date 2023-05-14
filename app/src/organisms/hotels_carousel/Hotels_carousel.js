@@ -4,7 +4,7 @@ import './hotels_carousel.css';
 import {Hotels} from '../../molecules';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 
-const Hotels_carousel = () =>  {
+const Hotels_carousel = ({topHotels}) =>  {
     const [index, setIndex] = useState(0);
     const nextButton = () => {
         return (
@@ -44,13 +44,29 @@ const Hotels_carousel = () =>  {
         
             >
                 <Carousel.Item>
-                    <Hotels/>
+                    <Hotels
+                      topHotels = {topHotels[0]}
+                    />
                 </Carousel.Item>
                 <Carousel.Item>
-                    <Hotels/>
+                    <Hotels
+                      topHotels = {topHotels[1]}
+                    />
                 </Carousel.Item>
                 <Carousel.Item>
-                    <Hotels/>
+                    <Hotels
+                      topHotels = {topHotels[2]}
+                    />
+                </Carousel.Item>
+                <Carousel.Item>
+                    <Hotels
+                      topHotels = {topHotels[3]}
+                    />
+                </Carousel.Item>
+                <Carousel.Item>
+                    <Hotels
+                      topHotels = {topHotels[4]}
+                    />
                 </Carousel.Item>
             </Carousel>
         </div>

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
 import { StarRating } from "../../atoms";
 
-const Apartment = () => {
+const Hotels = ({topHotels}) => {
   return (
     <div className="hotels-carousel-container">
       <div className="hotels-carousel">
@@ -12,11 +12,10 @@ const Apartment = () => {
           <img className="d-block w-100" src={banner1} alt="First slide" />
         </div>
         <div className="hotels-carousel-right">
-          <p className="large-bold">TITLE</p>
+          <p className="large-bold">{topHotels.title}</p>
           <StarRating />
           <p className="small">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore.
+            {topHotels.description}
           </p>
           <Button
             className="small-bold carousel-btn"
@@ -31,4 +30,4 @@ const Apartment = () => {
   );
 };
 
-export default Apartment;
+export default Hotels;

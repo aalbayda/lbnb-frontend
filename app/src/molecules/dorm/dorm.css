@@ -31,3 +31,9 @@
     row-gap: 5px;
     padding: 10px;
 }
+
+.small.dorm-description{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: justify;
+}

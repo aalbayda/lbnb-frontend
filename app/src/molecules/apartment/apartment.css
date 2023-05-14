@@ -16,6 +16,9 @@
     align-content: center;
 }
 
+.apartment-title.large-bold{
+    text-align: left;
+}
 .carousel-lower {
     padding: 20px;
     display: flex;
