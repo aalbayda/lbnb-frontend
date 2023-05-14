@@ -13,16 +13,18 @@ import {useNavigate} from "react-router-dom";
 const CardListing = (props) => {
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const owner = "Owner";
+
   const name = props.name ? props.name : "Casa de Felicidad";
   const location = props.location ? "📍 " + props.location : "📍 Los Banos, Laguna";
   const capacity = props.capacity ? "🚪 " + props.capacity : "🚪 Accommodates 3 people";
-  const owner = "Owner";
   const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  const amenities = props.amenities ? props.amenities : "";
+  const amenities = props.amenities ? props.amenities : "with wifi";
   const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱900";
   const max_price = props.max_price;
   const min_price = props.min_price;
+
   const stars = "★★★★☆";
   const reviews = "(32 reviews)";
 
@@ -72,13 +74,17 @@ const CardListing = (props) => {
               className="small-bold carousel-btn"
               onClick={()=> {
                 navigate('/details',{replace:true, state: {
-                  name:name, 
+                  image:image,
+                  ownername:owner,
+                  accommname:name, 
                   location:location,
                   capacity: capacity, 
                   max_price: max_price,
                   min_price: min_price,
                   description: description,
-                  amenities: amenities
+                  amenities: amenities,
+                  star:stars,
+                  reviews:reviews
                 }})
               }}
             >View More</Button>

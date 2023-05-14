@@ -10,17 +10,18 @@ const url = "https://mockup-backend-128.herokuapp.com";
 const SubmitRatingReviewSect = (props) => {
     const [comment, setComment] = React.useState("");
     const [rateVal, setRateVal] = React.useState(0);
-    const timestamp= new Date();
-    const userName="userName";
-    const accomName="accomName";
+    const timestamp= new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString();
+    const accommName = props.accommName ? props.accommName : "Casa de Felicidad";
+    const userName = props.userName ? props.userName : "jcruz";
 
+    console.log(timestamp);
     const handleSubmit=()=>{
         if(rateVal != 0){
             axios.post(url+'/accommodation/add-review', {
                 comment: comment,
                 userName: userName,
                 timestamp: timestamp,
-                accommName: accomName,
+                accommName: accommName,
                 rating: rateVal
             })
             .then(function (response) {
@@ -33,8 +34,6 @@ const SubmitRatingReviewSect = (props) => {
         }
         setComment(""); 
         setRateVal(0);
-        console.log(comment);
-        console.log(rateVal);
     }
     
     return(

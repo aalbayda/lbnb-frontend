@@ -6,21 +6,19 @@ import { RoomButtons} from "../../molecules";
 import { HeartReact} from "../../atoms";
 
 const ListingDetails = (props) => {
-  const image =
-    "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const description = props.description ? props.description :
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const accommName = props.accommName ? props.accommName : "Casa de Felicidad";
+  const userName = props.userName ? props.userName : "jcruz";
   const address = props.address ? props.address : "📍 Los Banos, Laguna";
-  // const price = props.max_price ? "₱" + props.max_price : "₱500";
   const min_price = props.min_price ? "₱" + props.min_price : "₱1000";
   const max_price = props.max_price ? "₱" + props.max_price : "₱5000";
   const amenities = props.amenities? "✔️"+ props.amenities:"✔️ with wifi";
-  const stars = "★★★★☆";
+  const stars = props.star ? props.star :"★★★★☆";
   const separator = "|";
-  const rating = "1.5K";
+  const rating = props.rating ? props.rating : "1.5K";
   const capacity = props.capacity ? props.capacity : "🚪 20";
-  const userName = "User-L";
 
 
   return (
