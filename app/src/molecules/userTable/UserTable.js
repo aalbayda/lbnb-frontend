@@ -21,12 +21,12 @@ function UserTable (props) {
         // handle success
         .then(function (response) {
             setStudentBackend(response.data);
-            // console.log(response.data);
+            console.log(response.data);
         })
         // handle error
         .catch(function (error) {
             console.log("There is an error fetching the students (admin page)")
-            // console.log(error);
+            console.log(error);
         })
         // always executed
         .finally(function () {
