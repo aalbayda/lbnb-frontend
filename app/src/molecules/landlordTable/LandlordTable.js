@@ -17,17 +17,38 @@ function LandlordTable (props) {
     };
 
     useEffect(() => {
+        // axios.post(url+'/filter-accommodation', {
+        //     filters: {
+        //         name: '',
+        //         address: '',
+        //         location: '',
+        //         type: '',
+        //         priceFrom: '',
+        //         priceTo: '',
+        //         capacity: '',
+        //         max_price: ''
+        //     }
+        //   })
+        //   .then(function (response) {
+        //     console.log(response.data.accommmodations);
+        //     setAccoms(response.data.accommodations);
+        //   })
+        //   .catch(function (error) {
+        //     console.log("Error!!!");
+        //     console.log(error);
+        //   });
+
         // fetch all owners
         axios.get(url + '/view-all-owners')
         // handle success
         .then(function (response) {
             setOwnerBackend(response.data);
-            // console.log(response.data);
+            console.log(response.data);
         })
         // handle error
         .catch(function (error) {
             console.log("There is an error fetching the owners (admin page)")
-            // console.log(error);
+            console.log(error);
         })
         // always executed
         .finally(function () {
@@ -87,6 +108,31 @@ function LandlordTable (props) {
                         </tr>
                     })
                   }
+
+
+                    {/* TODO: sample table, delete after map is implemented */}
+                    {/* <td>
+                    <p className="small">1</p>
+                    </td>
+                    <td>
+                    <p className="small">Mark</p>
+                    </td>
+                    <td>
+                    <p className="small">otto@gmail.com</p>
+                    </td>
+                    <td>
+                    <div className="admin-btns">
+                        <Button 
+                        className="small admin-view-btn"
+                        onClick={() => setModalShow(true)}
+                        >View
+                        </Button>
+                        <AdminViewLandlord
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        /> 
+                    </div>
+                    </td> */}
 
                 </tbody>
             </Table>
