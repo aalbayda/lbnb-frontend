@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import "./adminPanel.css";
 import "../../index.css";
-import { UserTable, LandlordTable, AccomsTable} from "../../molecules";
+import { UserTable, LandlordTable, AccomsTable } from "../../molecules";
 
 const AdminPanel = () => {
   const [toggleState, setToggleState] = React.useState(1);
@@ -21,7 +21,6 @@ const AdminPanel = () => {
 
       {/* Tabs */}
       <div className="bloc-tabs">
-
         {/* User Tab */}
         <div
           className={
@@ -57,33 +56,31 @@ const AdminPanel = () => {
         >
           Accoms
         </div>
-
-
       </div>
       <div className="tab-header active-tabs"></div>
 
       {/* Content */}
       <div className="content-tabs">
-
-
         {/* Content 1 */}
-        <div className={toggleState === 1 ? "content active-content" : "content"}>
-          <UserTable/>
+        <div
+          className={toggleState === 1 ? "content active-content" : "content"}
+        >
+          <UserTable />
         </div>
+
         {/* Content 2 */}
-        <div className={toggleState === 2 ? "content active-content" : "content"}>
-          <LandlordTable/>
+        <div
+          className={toggleState === 2 ? "content active-content" : "content"}
+        >
+          <LandlordTable />
         </div>
 
         {/* Content 3 */}
         <div
           className={toggleState === 3 ? "content active-content" : "content"}
         >
-          <AccomsTable/>
+          <AccomsTable />
         </div>
-
-
-
       </div>
     </div>
   );
