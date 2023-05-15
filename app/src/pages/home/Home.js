@@ -29,7 +29,7 @@ const Home = () => {
       .catch((error) => {
         console.error(error);
       });
-  });
+  }, []);
 
   const handleQuery = (queries) => {
     setQueries(queries);

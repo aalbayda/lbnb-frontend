@@ -1,9 +1,11 @@
-import React from "react";
+import { React, useState } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./admin_viewlandlord.css";
 import { Image, Col, Row, Container } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
+const url = "https://mockup-backend-128.herokuapp.com";
 
 function Admin_viewlandlord(props) {
   const { ownerInfo } = props;
@@ -16,8 +18,14 @@ function Admin_viewlandlord(props) {
     USER_CONTACTNUM,
   } = ownerInfo;
 
-  const [editOwner, setEditOwner] = React.useState(false);
-  const [editAccomsRoom, setEditAccomsRoom] = React.useState(false);
+  const [fname, setFname] = useState(USER_FNAME);
+  const [lname, setLname] = useState(USER_LNAME);
+  const [email, setEmail] = useState(USER_EMAIL);
+  const [contact, setContact] = useState(USER_CONTACTNUM);
+  const [password, setPassword] = useState("");
+
+  const [editOwner, setEditOwner] = useState(false);
+  const [editAccomsRoom, setEditAccomsRoom] = useState(false);
 
   function editOwnerClicked() {
     setEditOwner(true);
@@ -27,8 +35,24 @@ function Admin_viewlandlord(props) {
     setEditAccomsRoom(true);
   }
 
-  function disableEditOwner() {
+  function handleSave() {
     setEditOwner(false);
+    axios
+      .post(url + "/edit-user", {
+        email: email,
+        newPassword: password,
+        newUsername: email,
+        newFirstName: fname,
+        newLastName: lname,
+        newContactNum: contact,
+      })
+      .then((response) => {
+        console.log(response.data);
+        // setRating(response.data.averageRating);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function disableEditAccomsRoom() {
@@ -63,14 +87,27 @@ function Admin_viewlandlord(props) {
             <div className="adminviewlandlord-items">
               {/* Name */}
               <div className="adminviewlandlord-item">
-                <p className="regular-bold">Name:</p>
+                <p className="regular-bold">First Name:</p>
 
                 {editOwner ? (
-                  <input placeholder={USER_FNAME + " " + USER_LNAME}></input>
+                  <input
+                    placeholder={USER_FNAME}
+                    onChange={(e) => setFname(e.target.value)}
+                  ></input>
                 ) : (
-                  <p className="regular">
-                    {USER_FNAME} {USER_LNAME}
-                  </p>
+                  <p className="regular">{USER_FNAME}</p>
+                )}
+              </div>
+              <div className="adminviewlandlord-item">
+                <p className="regular-bold">Last Name:</p>
+
+                {editOwner ? (
+                  <input
+                    placeholder={USER_LNAME}
+                    onChange={(e) => setLname(e.target.value)}
+                  ></input>
+                ) : (
+                  <p className="regular">{USER_LNAME}</p>
                 )}
               </div>
               {/* Email */}
@@ -78,7 +115,10 @@ function Admin_viewlandlord(props) {
                 <p className="regular-bold">Email:</p>
 
                 {editOwner ? (
-                  <input placeholder={USER_EMAIL}></input>
+                  <input
+                    placeholder={USER_EMAIL}
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
                 ) : (
                   <p className="regular">{USER_EMAIL}</p>
                 )}
@@ -89,6 +129,7 @@ function Admin_viewlandlord(props) {
 
                 {editOwner ? (
                   <input
+                    onChange={(e) => setContact(e.target.value)}
                     className="no-arrows"
                     placeholder={USER_CONTACTNUM}
                   ></input>
@@ -100,17 +141,18 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="regular-bold">Password:</p>
                 {editOwner ? (
-                  <input type="password" placeholder="************"></input>
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    placeholder="************"
+                  ></input>
                 ) : (
                   <p className="regular">************</p>
                 )}
               </div>
               <div className="adminviewlandlord-btns-left">
                 {editOwner ? (
-                  <Button
-                    className="adminsavelandlord"
-                    onClick={disableEditOwner}
-                  >
+                  <Button className="adminsavelandlord" onClick={handleSave}>
                     Save
                   </Button>
                 ) : (

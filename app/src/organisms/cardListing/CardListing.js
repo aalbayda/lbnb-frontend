@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
@@ -6,19 +7,22 @@ import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { ViewMoreButton } from "../../atoms";
 import { RiHeart3Fill } from "react-icons/ri";
-
-
+const url = "https://mockup-backend-128.herokuapp.com";
 
 const CardListing = (props) => {
-
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const name = props.name ? props.name : "Casa de Felicidad";
-  const location = props.location ? "📍 " + props.location : "📍 Los Banos, Laguna";
-  const capacity = props.capacity ? "🚪 " + props.capacity : "🚪 Accommodates 3 people";
+  const location = props.location
+    ? "📍 " + props.location
+    : "📍 Los Banos, Laguna";
+  const capacity = props.capacity
+    ? "🚪 " + props.capacity
+    : "🚪 Accommodates 3 people";
   const owner = "Owner";
-  const description = props.description ? props.description :
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
+  const description = props.description
+    ? props.description
+    : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const amenities = props.amenities ? props.amenities : "";
   const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱500";
   const stars = "★★★★☆";
@@ -51,7 +55,9 @@ const CardListing = (props) => {
             </p>
             <p className="small">{location}</p>
           </div>
-          <p className="small accom-desc">{description + " " + amenities + "."}</p>
+          <p className="small accom-desc">
+            {description + " " + amenities + "."}
+          </p>
         </div>
       </Col>
 
@@ -65,9 +71,11 @@ const CardListing = (props) => {
             </div>
           </div>
           <Button
-              className="small-bold carousel-btn"
-              onClick={() => (window.location.href += "details")}
-            >View More</Button>
+            className="small-bold carousel-btn"
+            onClick={() => (window.location.href += "details")}
+          >
+            View More
+          </Button>
         </div>
       </Col>
     </div>

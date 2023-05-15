@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import axios from "axios";
+import cookie from "cookie";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./login.css";
@@ -68,13 +69,21 @@ function Login(props) {
           setMissingLogin(true);
         } else if (response.data.success) {
           // console.log(response.data);
-          // console.log(response.data);
+          console.log(response.data);
           let date = new Date();
           date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
           document.cookie = `authToken=${
-            response.data.authToken
+            response.data.authToken +
+            "|" +
+            response.data.userType +
+            "|" +
+            response.data.username +
+            "|" +
+            response.data.fname +
+            " " +
+            response.data.lname
           }; path=/; expires=${date.toUTCString()}`;
-
+          console.log(document.cookie);
           // set whether personal or business
 
           window.location.reload();

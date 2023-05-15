@@ -1,17 +1,19 @@
-import React, {useState} from "react";
+import { React, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing_addRoom.css";
 import "../../index.css";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
 import { ViewMoreButton } from "../../atoms";
 import { AddRooms } from "../../molecules";
-const CardListing_addRoom = () => {
+
+const CardListing_addRoom = ({ unit }) => {
+  console.log(unit);
   // change these values
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const name = "Casa de Felicidad";
+  const name = unit ? unit.ACCOMMODATION_NAME : "Casa de Felicidad";
   const location = "Los Banos, Laguna";
   const owner = "William";
   const description =
@@ -58,15 +60,10 @@ const CardListing_addRoom = () => {
             </div>
           </div>
           <div className="button-section">
-            <Button 
-              className="small-bold addRoom-btn"
-              onClick={(e) =>  setModalShow(true)}>
-              Add Room
+            <Button className="addRoom-btn" onClick={(e) => setModalShow(true)}>
+              ADD ROOM
             </Button>
-            <AddRooms
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            />
+            <AddRooms show={modalShow} onHide={() => setModalShow(false)} />
             <ViewMoreButton />
           </div>
         </div>

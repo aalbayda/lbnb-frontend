@@ -17,13 +17,27 @@ const NavBar = () => {
   useEffect(() => {
     // Check if authToken exists in cookie
     if (cookie.parse(document.cookie)["authToken"]) {
+      let authToken = cookie.parse(document.cookie)["authToken"];
+      let type = authToken.split("|")[1];
       console.log("Log in detected!");
       setLoggedIn(true);
+
+      if (type === "Student") {
+        setUser(true);
+        setOwner(false);
+      } else if (type === "Owner") {
+        setOwner(true);
+        setUser(false);
+      } else if (type === "Admin") {
+        setOwner(false);
+        setUser(false);
+        setAdmin(true);
+      }
     } else {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
 
   const logout = () => {
     document.cookie =
@@ -44,9 +58,17 @@ const NavBar = () => {
         <div className="navbar-right">
           {/* <p className="small">About</p> */}
 
-          {isLoggedIn ? (
+          {isUser || isOwner ? (
             <p className="small">
-              <a href="/userprofile">Profile</a>
+              <a href={isUser ? "/userprofile" : "/landlordprofile"}>Profile</a>
+            </p>
+          ) : (
+            <p></p>
+          )}
+
+          {isAdmin ? (
+            <p className="small">
+              <a href="/adminpage">Admin</a>
             </p>
           ) : (
             <p></p>

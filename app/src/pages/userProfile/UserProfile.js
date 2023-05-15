@@ -25,7 +25,7 @@ const UserProfile = () => {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
 
   return (
     <div>
