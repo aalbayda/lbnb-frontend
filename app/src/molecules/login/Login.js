@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import {React, useState, useEffect} from "react";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import "./login.css";
 import Form from "react-bootstrap/Form";
 const url = "https://mockup-backend-128.herokuapp.com";
 
-function Login(props) {
+const Login = (props) => {
   const [toggleState, setToggleState] = useState(1);
   const [missingLogin, setMissingLogin] = useState(false);
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -24,6 +24,10 @@ function Login(props) {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  useEffect(() => {
+    toggleTab(1);
+  }, []);
 
   const handleSignUp = () => {
     if (email === "" || password === "" || fname === "" || lname === "") {
@@ -215,15 +219,16 @@ function Login(props) {
               >
                 Incorrect credentials!
               </div>
-            ) : (
-              <div></div>
-            )}
-            <Button
-              className="tiny italic signinButton"
-              onClick={() => toggleTab(1)}
-            >
-              Already have an account?
-            </Button>
+         ))}
+          </Form>
+            <Button 
+              className="signup-btn" 
+              onClick={() => {
+                handleSignUp();
+              }}
+            >SIGN UP</Button>
+            {invalidLogin ? <div className="tiny text-center" style={{fontStyle: 'italic', color: 'red'}}>At least one field is invalid!</div> : <div></div>}
+            <Button  className="tiny italic signinButton" onClick={() => toggleTab(1)}>Already have an account?</Button>
           </div>
         </div>
       </Modal.Body>
