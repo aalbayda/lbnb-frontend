@@ -11,6 +11,9 @@ import {
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function Admin_viewlandlord (props) {
+  const {ownerInfo} = props;
+  const {USER_ID, USER_FNAME, USER_LNAME, USER_EMAIL, USER_PASSWORD, USER_CONTACTNUM} = ownerInfo;
+
 
   const [editOwner, setEditOwner] = React.useState(false);
   const [editAccomsRoom, setEditAccomsRoom] = React.useState(false);
@@ -59,14 +62,15 @@ function Admin_viewlandlord (props) {
                     />
                 </div>
                 <div className="adminviewlandlord-items">
+
                     {/* Name */}
                     <div className="adminviewlandlord-item">
                         <p className="regular-bold">Name:</p>
 
                         {
                           editOwner
-                          ? <input placeholder="Mark Lewis"></input>
-                          : <p className="regular">Mark Lewis</p>
+                          ? <input placeholder={USER_FNAME + " " + USER_LNAME}></input>
+                          : <p className="regular">{USER_FNAME} {USER_LNAME}</p>
                         }
 
                     </div>
@@ -76,8 +80,8 @@ function Admin_viewlandlord (props) {
 
                         {
                           editOwner
-                          ? <input placeholder="mldamalerio@gmail.com"></input>
-                          : <p className="regular">mldamalerio@gmail.com</p>
+                          ? <input placeholder={USER_EMAIL}></input>
+                          : <p className="regular">{USER_EMAIL}</p>
                         }
                         
                     </div>
@@ -87,8 +91,8 @@ function Admin_viewlandlord (props) {
 
                         {
                           editOwner
-                          ? <input className="no-arrows" placeholder="09123456789"></input>
-                          : <p className="regular">09123456789</p>
+                          ? <input className="no-arrows" placeholder={USER_CONTACTNUM}></input>
+                          : <p className="regular">{USER_CONTACTNUM}</p>
                         }
                     </div>
                     {/* Password */}

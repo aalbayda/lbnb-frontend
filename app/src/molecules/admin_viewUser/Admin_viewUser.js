@@ -9,6 +9,9 @@ import {
 
 
 function Admin_viewUser (props) {
+  const {studentInfo} = props;
+  const {USER_ID, USER_FNAME, USER_LNAME, USER_EMAIL, USER_PASSWORD} = studentInfo;
+
   const [editUser, setEditUser] = React.useState(false);
 
   function editUserClicked() {
@@ -40,26 +43,30 @@ function Admin_viewUser (props) {
                     />
                 </div>
                 <div className="adminviewuser-items">
+
+                    {/* USER NAME */}
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Name:</p>
 
                         {
                           editUser
-                          ? <input placeholder="Mark Lewis"></input>
-                          : <p className="regular">Mark Lewis</p>
+                          ? <input placeholder={USER_FNAME + " " + USER_LNAME}></input>
+                          : <p className="regular">{USER_FNAME} {USER_LNAME}</p>
                         }
-                        
                     </div>
+
+                    {/* USER EMAIL */}
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Email:</p>
 
                         {
                           editUser
-                          ? <input placeholder="mldamalerio@gmail.com"></input>
-                          : <p className="regular">mldamalerio@gmail.com</p>
+                          ? <input placeholder={USER_EMAIL}></input>
+                          : <p className="regular">{USER_EMAIL}</p>
                         }
-
                     </div>
+
+                    {/* USER PASSWORD */}
                     <div className="adminviewuser-item">
                         <p className="regular-bold">Password:</p>
 

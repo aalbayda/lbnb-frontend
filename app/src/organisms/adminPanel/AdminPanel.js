@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import "./adminPanel.css";
 import "../../index.css";
-import { UserTable, LandlordTable} from "../../molecules";
+import { UserTable, LandlordTable, AccomsTable} from "../../molecules";
 
 const AdminPanel = () => {
   const [toggleState, setToggleState] = React.useState(1);
@@ -21,6 +21,8 @@ const AdminPanel = () => {
 
       {/* Tabs */}
       <div className="bloc-tabs">
+
+        {/* User Tab */}
         <div
           className={
             toggleState === 1
@@ -31,6 +33,8 @@ const AdminPanel = () => {
         >
           Users
         </div>
+
+        {/* Owner Tab */}
         <div
           className={
             toggleState === 2
@@ -39,13 +43,29 @@ const AdminPanel = () => {
           }
           onClick={() => toggleTab(2)}
         >
+          Owners
+        </div>
+
+        {/* Accoms Tab */}
+        <div
+          className={
+            toggleState === 3
+              ? "tabs small-bold active-tabs"
+              : "tabs small-bold"
+          }
+          onClick={() => toggleTab(3)}
+        >
           Accoms
         </div>
+
+
       </div>
       <div className="tab-header active-tabs"></div>
 
       {/* Content */}
       <div className="content-tabs">
+
+
         {/* Content 1 */}
         <div className={toggleState === 1 ? "content active-content" : "content"}>
           <UserTable/>
@@ -54,6 +74,16 @@ const AdminPanel = () => {
         <div className={toggleState === 2 ? "content active-content" : "content"}>
           <LandlordTable/>
         </div>
+
+        {/* Content 3 */}
+        <div
+          className={toggleState === 3 ? "content active-content" : "content"}
+        >
+          <AccomsTable/>
+        </div>
+
+
+
       </div>
     </div>
   );
