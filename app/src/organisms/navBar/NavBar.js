@@ -76,6 +76,7 @@ const NavBar = () => {
 
             <Login
               show={modalShow}
+              status = {1}
               onHide={() => setModalShow(false)}
             />
         </div>
