@@ -31,10 +31,10 @@ const LandlordProfile = () => {
   });
   return (
     <div>
+      <NavBar />
       {isLoggedIn ? (
         <div className="landlord-profile-container">
           <AddAccomsButton />
-          <NavBar />
           <Col className="body-container">
             <Row className="justify-content-md-center">
               {/* <Image
@@ -98,7 +98,14 @@ const LandlordProfile = () => {
           </Col>
         </div>
       ) : (
-        <div>Unauthorized route.</div>
+        <Container>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>Unauthorized route.</Row>
+        </Container>
       )}
     </div>
   );

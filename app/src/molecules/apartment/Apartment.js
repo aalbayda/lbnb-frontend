@@ -2,9 +2,10 @@ import React from "react";
 import "./apartment.css";
 import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
-import { StarRating } from "../../atoms";
+import { Rating } from "@mui/material";
+// import { StarRating } from "../../atoms";
 
-const Apartment = ({topApartments}) => {
+const Apartment = ({ topApartments }) => {
   return (
     <div className="apartment-carousel-container">
       <div className="carousel-container">
@@ -13,11 +14,15 @@ const Apartment = ({topApartments}) => {
         </div>
         <div className="carousel-lower">
           <div className="carousel-lowerleft">
-            <p className="apartment-title large-bold">{topApartments.title}</p>
-            <StarRating />
-            <p className="small">
-              {topApartments.description}
+            <p className="apartment-title large-bold">
+              {topApartments.ACCOMMODATION_NAME}
             </p>
+            <Rating
+              name="read-only"
+              // value={5}
+              value={topApartments.AVERAGE_RATING}
+            />
+            <p className="small">{topApartments.ACCOMMODATION_DESCRIPTION}</p>
           </div>
           <div className="carousel-lowerright">
             <Button
