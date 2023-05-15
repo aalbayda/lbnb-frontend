@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import { React, useState, useEffect } from "react";
+import cookie from "cookie";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -11,58 +12,71 @@ import {
 } from "react-bootstrap";
 import { CardListingAddRoom, NavBar } from "../../organisms";
 import { Rating } from "@mui/material";
-import {AiFillPhone, AiFillCalendar} from 'react-icons/ai';
-import {MdEmail} from 'react-icons/md';
+import { AiFillPhone, AiFillCalendar } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
 import { AddAccomsButton } from "../../atoms";
 const units = [1, 2]; // api connect here
 
 const LandlordProfile = () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    // Check if authToken exists in cookie
+    if (cookie.parse(document.cookie)["authToken"]) {
+      console.log("Log in detected!");
+      setLoggedIn(true);
+    } else {
+      console.log("Log in not detected");
+      setLoggedIn(false);
+    }
+  });
   return (
-    <div className="landlord-profile-container">
-      <AddAccomsButton/>
-      <NavBar/>
-      <Col className="body-container">
-        <Row className="justify-content-md-center">
-          {/* <Image
+    <div>
+      <NavBar />
+      {isLoggedIn ? (
+        <div className="landlord-profile-container">
+          <AddAccomsButton />
+          <Col className="body-container">
+            <Row className="justify-content-md-center">
+              {/* <Image
             className="profileImage"
             src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
             roundedCircle
             fluid
           /> */}
-        </Row>
-        <Col className="text-center">
-          <h1 className="mt-4 header2 bold-green">WILLIAM GATES</h1>
-          <Rating
-            className="rating-medium"
-            defaultValue={3.5}
-            precision={0.5}
-            sx={{
-              fontSize: "3rem",
-              color: "#F0AF01"
-            }}
-          />
-        </Col>
+            </Row>
+            <Col className="text-center">
+              <h1 className="mt-4 header2 bold-green">WILLIAM GATES</h1>
+              <Rating
+                className="rating-medium"
+                defaultValue={3.5}
+                precision={0.5}
+                sx={{
+                  fontSize: "3rem",
+                  color: "#F0AF01",
+                }}
+              />
+            </Col>
 
-        <Col className="info-items">
-            <Col className="info-item"> 
-              <MdEmail className="icon"/>
-              <p className="regular">billgates@hotmail.com</p>
+            <Col className="info-items">
+              <Col className="info-item">
+                <MdEmail className="icon" />
+                <p className="regular">billgates@hotmail.com</p>
+              </Col>
+              <Col className="info-item">
+                <AiFillPhone className="icon" />
+                <p className="regular">09123456789</p>
+              </Col>
+              <Col className="info-item">
+                <AiFillCalendar className="icon" />
+                <p className="regular">Member since July 2022</p>
+              </Col>
             </Col>
-            <Col className="info-item">
-              <AiFillPhone className="icon"/>
-              <p className="regular">09123456789</p>
-            </Col>
-            <Col className="info-item">
-              <AiFillCalendar className="icon"/>
-              <p className="regular">Member since July 2022</p>
-            </Col>
-        </Col>
 
-        <Col>
-          <Row>
-            <h1 className="mt-5 text-center header2">Units Owned</h1>
-          </Row>
-          {/* <Row className="text-center mt-4">
+            <Col>
+              <Row>
+                <h1 className="mt-5 text-center header2">Units Owned</h1>
+              </Row>
+              {/* <Row className="text-center mt-4">
             <DropdownButton
               variant="success"
               id="dropdown-basic-button"
@@ -73,15 +87,26 @@ const LandlordProfile = () => {
               <Dropdown.Item href="#/action-3">Type</Dropdown.Item>
             </DropdownButton>
           </Row> */}
-          <Row className="justify-content-md-center mt-4">
-            {units.map((unit) => (
-              <div className="cardlist-flex mb-5">
-                <CardListingAddRoom />
-              </div>
-            ))}
-          </Row>
-        </Col>
-      </Col>
+              <Row className="justify-content-md-center mt-4">
+                {units.map((unit) => (
+                  <div className="cardlist-flex mb-5">
+                    <CardListingAddRoom />
+                  </div>
+                ))}
+              </Row>
+            </Col>
+          </Col>
+        </div>
+      ) : (
+        <Container>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>&nbsp;</Row>
+          <Row>Unauthorized route.</Row>
+        </Container>
+      )}
     </div>
   );
 };

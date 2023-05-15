@@ -26,8 +26,8 @@
   background: var(--color-heading-dark);
 }
 
-div.tabs.small-bold.active-tabs{
-  color: var(--color-background)
+div.tabs.small-bold.active-tabs {
+  color: var(--color-background);
 }
 
 .active-tabs:before {
@@ -56,6 +56,10 @@ div.tabs.small-bold.active-tabs{
 
 .active-content {
   display: block;
+}
+
+.inactive-content {
+  display: none;
 }
 
 /* .admin-btns {

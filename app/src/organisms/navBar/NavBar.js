@@ -1,83 +1,70 @@
-import {React, useState} from "react";
-import './navBar.css';
+import { React, useState, useEffect } from "react";
+import "./navBar.css";
+import cookie from "cookie";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
-import {Login} from "../../molecules";
-import {logo} from "../../assets/images";
-const url = 'https://mockup-backend-128.herokuapp.com';
+import Button from "react-bootstrap/Button";
+import { Login } from "../../molecules";
+import { logo } from "../../assets/images";
+const url = "https://mockup-backend-128.herokuapp.com";
 
 const NavBar = () => {
-  const [signedIn, setSignedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
+  const [isOwner, setOwner] = useState(false);
+  const [isUser, setUser] = useState(false);
 
-  // const checkCookie = () => {
-  //   const authToken = document.cookie.split(" ")[1].split("=")[1];
-  //   // console.log(tokens)
-  //   // for (let token in tokens) {
-  //   //   console.log(token)
-  //   //   let newToken = token.split("=");
-  //   //   console.log(newToken);
-  //   //   if (newToken[0] === "authToken") authToken = newToken[1];
-  //   // }
+  useEffect(() => {
+    // Check if authToken exists in cookie
+    if (cookie.parse(document.cookie)["authToken"]) {
+      console.log("Log in detected!");
+      setLoggedIn(true);
+    } else {
+      console.log("Log in not detected");
+      setLoggedIn(false);
+    }
+  });
 
-  //   console.log(authToken)
-
-  //   axios.post(url+'/login', {
-  //     authToken: authToken
-  //   })
-  //   .then(function (response) {
-  //     console.log(response.data);
-  //     // if (!response.data) {
-  //     //   setInvalidLogin(true);
-  //     // }
-  //     // else {
-  //     //   console.log(response.data)
-  //     //   document.cookie = `authToken=${response.data.authToken}; path=/;`;
-  //     //   window.location.reload(); 
-  //     // }
-  //     return true;
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error!!!");
-  //     console.log(error);
-  //     return false;
-  //   });
-  // }
+  const logout = () => {
+    document.cookie =
+      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.reload();
+  };
 
   return (
     <div className="navbar-container">
       <div className="navbar-wrapper">
         <div className="navbar-left">
           <p class="small">
-            <a
-              href="/"
-            >
-              <img
-                className="logo"
-                src={logo}
-                alt="logo"
-              />
+            <a href="/">
+              <img className="logo" src={logo} alt="logo" />
             </a>
           </p>
         </div>
         <div className="navbar-right">
-          <p className="small">About</p>
-               <Button className="login-btn" onClick={() => setModalShow(true)}>
-                Login
-              </Button> 
+          {/* <p className="small">About</p> */}
 
-            {/* {
-              checkCookie() ?
-               <Button className="login-btn">Logout</Button> 
-               :  */}
+          {isLoggedIn ? (
+            <p className="small">
+              <a href="/userprofile">Profile</a>
+            </p>
+          ) : (
+            <p></p>
+          )}
 
-              {/* <Button onClick={checkCookie}>test</Button> */}
-            
+          {isLoggedIn ? (
+            <div>
+              <Button className="login-btn" onClick={logout}>
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Button className="login-btn" onClick={() => setModalShow(true)}>
+              Login
+            </Button>
+          )}
 
-            <Login
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            />
+          <Login show={modalShow} onHide={() => setModalShow(false)} />
         </div>
       </div>
     </div>

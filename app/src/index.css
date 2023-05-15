@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 background-color {
   color: var(--color-background);
@@ -84,7 +84,7 @@ p {
   color: var(--color-primary-black);
 }
 
-.italic{
+.italic {
   font-style: italic;
 }
 
@@ -101,18 +101,18 @@ p {
 }
 
 .light-green {
-  color: var(--color-light-accent-green)
+  color: var(--color-light-accent-green);
 }
 
 :root {
   --font-family-headers: "Raleway", sans-serif;
-  --font-family-text: 'Poppins', sans-serif;
+  --font-family-text: "Poppins", sans-serif;
 
-  --color-heading-dark: #1C3103;
-  --color-light-accent-yellow: #FCF186;
-  --color-light-accent-green: #9CAA64;
+  --color-heading-dark: #1c3103;
+  --color-light-accent-yellow: #fcf186;
+  --color-light-accent-green: #9caa64;
   --color-primary-black: #191919;
   --color-secondary-black: #404040;
-  --color-yellow-accent: #F0AF01;
-  --color-background: #F9F6F2;
+  --color-yellow-accent: #f0af01;
+  --color-background: #f9f6f2;
 }
