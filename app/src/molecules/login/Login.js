@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -24,6 +24,10 @@ function Login(props) {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  useEffect(() => {
+    toggleTab(1);
+  }, []);
 
   const handleSignUp = () => {
     if (email === "" || password === "" || fname === "" || lname === "") {
