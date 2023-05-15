@@ -42,12 +42,22 @@ const NavBar = () => {
           </p>
         </div>
         <div className="navbar-right">
-          <p className="small">About</p>
+          {/* <p className="small">About</p> */}
 
           {isLoggedIn ? (
-            <Button className="login-btn" onClick={logout}>
-              Logout
-            </Button>
+            <p className="small">
+              <a href="/userprofile">Profile</a>
+            </p>
+          ) : (
+            <p></p>
+          )}
+
+          {isLoggedIn ? (
+            <div>
+              <Button className="login-btn" onClick={logout}>
+                Logout
+              </Button>
+            </div>
           ) : (
             <Button className="login-btn" onClick={() => setModalShow(true)}>
               Login

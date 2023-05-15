@@ -58,6 +58,10 @@ div.tabs.small-bold.active-tabs {
   display: block;
 }
 
+.inactive-content {
+  display: none;
+}
+
 /* .admin-btns {
   display: flex;
   flex-direction: row;

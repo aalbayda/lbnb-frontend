@@ -74,10 +74,15 @@ function Login(props) {
           document.cookie = `authToken=${
             response.data.authToken
           }; path=/; expires=${date.toUTCString()}`;
+
+          // set whether personal or business
+
           window.location.reload();
         } else if (!response.data.success) {
           console.log(response.data);
           setWrongLogin(true);
+        } else {
+          console.log(response.data);
         }
       })
       .catch(function (error) {

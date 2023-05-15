@@ -63,21 +63,33 @@ const AdminPanel = () => {
       <div className="content-tabs">
         {/* Content 1 */}
         <div
-          className={toggleState === 1 ? "content active-content" : "content"}
+          className={
+            toggleState === 1
+              ? "content active-content"
+              : "content inactive-content"
+          }
         >
           <UserTable />
         </div>
 
         {/* Content 2 */}
         <div
-          className={toggleState === 2 ? "content active-content" : "content"}
+          className={
+            toggleState === 2
+              ? "content active-content"
+              : "content inactive-content"
+          }
         >
           <LandlordTable />
         </div>
 
         {/* Content 3 */}
         <div
-          className={toggleState === 3 ? "content active-content" : "content"}
+          className={
+            toggleState === 3
+              ? "content active-content"
+              : "content inactive-content"
+          }
         >
           <AccomsTable />
         </div>
