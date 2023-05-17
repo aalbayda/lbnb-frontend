@@ -44,6 +44,7 @@ const Multilayer_filter = (props) => {
     })
     .then(function (response) {
       const query = response.data.accommodations;
+      console.log(response);
       props.handleQuery(query);
     })
     .catch(function (error) {

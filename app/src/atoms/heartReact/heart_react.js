@@ -9,8 +9,9 @@ const url = "https://mockup-backend-128.herokuapp.com";
 const HeartReact = (props) => {
     const accomName = props.accomName ? props.accomName : "Owner";
     const userName = props.userName ? props.userName : "User";
+    const isFavorite = props.isFavorite ? props.isFavorite : false;
 
-    const [clicked, setClicked] = React.useState(false);
+    const [clicked, setClicked] = React.useState(isFavorite);
 
     const handleClick=()=>{
         console.log(accomName, userName);

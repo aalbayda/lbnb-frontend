@@ -1,20 +1,25 @@
 import React from "react";
+import { useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-// import { ViewMoreButton } from "../../atoms";
 import { RiHeart3Fill } from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
+import { Rating } from "@mui/material";
+import axios from "axios";
+const url = "https://mockup-backend-128.herokuapp.com";
 
 
 const CardListing = (props) => {
+  //dummy data
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const userName="student2"
 
-  //data passed from the home page
-  const accommName = props.accommName ? props.accommName : "Harmony Hotel";
+  //data passed from the home page (multilayer filter props)
+  const accommName = props.accommName ? props.accommName : "Comfort Dorm";
   const ownerName= props.ownerName ? props.ownerName : "owner1";
   const location= props.location ? props.location : "inside campus";
   const address = props.address ? "📍 " + props.address : "📍 Los Banos, Laguna";
@@ -26,12 +31,29 @@ const CardListing = (props) => {
   const max_price = props.max_price ? props.max_price : "1000"; //to be passed as arguments 
   const min_capacity=props.min_capacity ? props.min_capacity : "1"; 
   const max_capacity = props.max_capacity ? props.max_capacity : "3";
-  const rating= props.rating ? props.rating : "3★"; // TODO: to be converted to stars
-  // const stars = "★★★★☆";
+  const rating= props.rating ? props.rating : 3; 
 
-  const reviews = "(32 reviews)"; // TODO: dummy data (to be fetched)
+
+  const[isFavorite, setfave]=React.useState(false);
+  useEffect(()=>{
+      axios.post(url+"/accommodation/is-favorite", {
+        userName: userName,
+        accommodationName:accommName
+      })
+      .then(function (response) {
+        if(response.data.success){
+          setfave(response.data.isFavorite)
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
+  }, [])
+ 
 
   const navigate=useNavigate();
+
 
   return (
     <div className="card-listing">
@@ -69,17 +91,28 @@ const CardListing = (props) => {
           <div className="price-section">
             <h2 className="large-bold price-range">{price}</h2>
             <div>
-              <p className="small review-stars">{rating}</p>
-              <p className="small review-num">{reviews}</p>
+              <p className="small review-stars">
+                <Rating
+                  className="rating-medium"
+                  defaultValue={rating}
+                  precision={0.5}
+                  readOnly= {true}
+                  sx={{
+                    fontSize: "2rem",
+                    color: "#1C3103", 
+                    mr: 1,
+                  }}/>
+              </p>
             </div>
           </div>
           <Button
               className="small-bold carousel-btn"
               onClick={()=> {
                 navigate('/details',{replace:true, state: {
+                  userName: userName,
                   image:image,
                   ownerName:ownerName,
-                  accommname:accommName, 
+                  accommName:accommName, 
                   location:location,
                   address: address,
                   capacity: capacity, 
@@ -89,7 +122,7 @@ const CardListing = (props) => {
                   description: description,
                   amenities: amenities,
                   rating:rating,
-                  reviews:reviews
+                  isFavorite: isFavorite,
                 }})
               }}
             >View More</Button>

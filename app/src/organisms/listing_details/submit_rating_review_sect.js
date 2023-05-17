@@ -57,7 +57,7 @@ const SubmitRatingReviewSect = (props) => {
                         width: 950,
                     }}
                     id="fullWidth"
-                    label="Multiline"
+                    label="Write Comment"
                     multiline
                     maxRows={4}
                     onChange={(newValue) => setComment(newValue.target.value)}

@@ -7,18 +7,15 @@ import { NavBar,
     SubmitRatingReviewSect
  } from "../../organisms";
 import {useLocation} from "react-router-dom";
-import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
 
 const Details = () => {
   const location = useLocation();
-  
-  const userName="student2"; //dummy data (to be updated for authentication)
 
   //passed data from the cardlisting
+  const userName=location.state.userName ? location.state.userName : "student2"; 
   const image= location.state.image ? location.state.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const ownerName= location.state.ownerName ? location.state.ownername : "owner1";
-  const accommName= location.state.accommName ? location.state.accommName : "Harmony Hotel";
+  const accommName= location.state.accommName ? location.state.accommName : "Comfort Dorm";
   const address= location.state.address ? location.state.address : "Los Banos Laguna";
   const location_place =location.state.location ? location.state.location : "Inside Campus";
   const min_capacity= location.state.min_capacity ? location.state.min_capacity : "2";
@@ -26,22 +23,8 @@ const Details = () => {
   const max_price = location.state.max_price ? location.state.max_price: "5000";
   const description = location.state.description ? location.state.description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const amenities = location.state.amenities ? location.state.amenities: "with wifi"
-  const rating = location.state.rating ? location.state.rating : "3★";
-  const reviews = location.state.reviews ? location.state.reviews: "43";
-  
-
-  // to fetch rooms
-  // const[room, setRooms]=React.useState();
-  // axios.post(url+"/accommodation/get-rooms", {
-  //   accommodationName:accommName
-  // })
-  // .then(function (response) {
-  //   // setRooms(response.data.result)
-  //   console.log(response)
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
+  const rating = location.state.rating ? location.state.rating : "3";
+  const isFavorite= location.state.isFavorite ? location.state.isFavorite: false;
 
  
   
@@ -61,9 +44,11 @@ const Details = () => {
         max_price={max_price}
         description={description}
         amenities={amenities}
+        isFavorite= {isFavorite}
         />
       <RatingReviewSection
         accommName={accommName}
+        userName={userName}
       />
       <SubmitRatingReviewSect
         userName = {userName}
