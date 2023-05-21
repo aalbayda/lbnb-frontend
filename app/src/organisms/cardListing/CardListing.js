@@ -8,7 +8,6 @@ import { Button } from "react-bootstrap";
 import { RiHeart3Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
-import axios from "axios";
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const CardListing = (props) => {
@@ -37,7 +36,7 @@ const CardListing = (props) => {
   const max_capacity = props.max_capacity ? props.max_capacity : "3";
   const rating = props.rating ? props.rating : 3;
 
-  const [isFavorite, setfave] = React.useState(false);
+  const [isFavorite, setfave] = useState(false);
   useEffect(() => {
     axios
       .post(url + "/accommodation/is-favorite", {
