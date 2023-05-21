@@ -10,7 +10,8 @@ const MUIStarRating = () =>{
             precision={0.5}
             sx={{
               fontSize: "2rem",
-              color: "#1C3103"
+              color: "#1C3103", 
+              mr: 1,
             }}
         />
     )
