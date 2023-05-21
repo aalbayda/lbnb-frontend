@@ -10,19 +10,20 @@ const Home = () => {
                     <div className="footer-top-left">
                         <p className="large-bold">AboutUS</p>
                         <p className="small footer-text-left">
-                            Welcome to Accomodo - Lorem ipsum 
-                            dolor sit amet, consectetur adipiscing 
-                            elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore. 
+                            Driven by our passion for technology
+                            and social impact, we are dedicated to
+                            creating innovative applications that serve
+                            the needs of society. 
                         </p>
-                        <Button className="tiny-bold footer-btn">Know the Devs</Button>
+                        <Button 
+                            onClick={()=>{window.location.href = '/devPage'}}
+                            className="tiny-bold footer-btn">Know the Devs</Button>
                     </div>
                     <div className="footer-top-right">
                         <p className="small footer-text-right">
-                            Welcome to Accomodo - Lorem ipsum 
-                            dolor sit amet, consectetur adipiscing 
-                            elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore. 
+                            Find Your Perfect Stay in  Los Baños with LBNB.
+                            Discover cozy accommodations
+                            tailored for students and travelers. Browse and relax. Your stress-free stay awaits. Welcome to LBNB! 
                         </p>
                     </div>
                 </div>
