@@ -16,11 +16,6 @@ function Login(props) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [invalidLogin, setInvalidLogin] = useState(false);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -85,7 +80,9 @@ function Login(props) {
             "|" +
             response.data.fname +
             " " +
-            response.data.lname
+            response.data.lname +
+            "|" +
+            response.data.userId
           }; path=/; expires=${date.toUTCString()}`;
           console.log(document.cookie);
           // set whether personal or business

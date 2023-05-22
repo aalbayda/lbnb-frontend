@@ -62,17 +62,17 @@ const LandlordProfile = () => {
           console.error(error);
         });
 
-      axios
-        .post(url + "/user/get-user-pic", {
-          username: email,
-        })
-        .then((response) => {
-          console.log(response.data);
-          setPicture(response.data.imageUrl);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      // axios
+      //   .post(url + "/user/get-user-pic", {
+      //     username: email,
+      //   })
+      //   .then((response) => {
+      //     console.log(response.data);
+      //     setPicture(response.data.imageUrl);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     } else {
       console.log("Log in not detected");
       setLoggedIn(false);
@@ -84,8 +84,8 @@ const LandlordProfile = () => {
       <NavBar />
       {isLoggedIn ? (
         <div className="landlord-profile-container">
-          {cookie.parse(document.cookie)["authToken"].split("|")[1] ===
-          "Owner" ? (
+          {cookie.parse(document.cookie)["authToken"].split("|")[2] ===
+          location.state.USER_USERNAME ? (
             <AddAccomsButton />
           ) : (
             <></>

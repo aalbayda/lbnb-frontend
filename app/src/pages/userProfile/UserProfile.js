@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import cookie from "cookie";
+import axios from "axios";
 import "./userProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -12,9 +13,23 @@ import {
   Carousel,
 } from "react-bootstrap";
 import { CardListing, NavBar } from "../../organisms";
-const favorites = [1, 2, 3, 4, 5]; // api connect here
+import { FavoriteBorderOutlined } from "@mui/icons-material";
 
 const UserProfile = () => {
+  const [favorites, setFavorites] = useState([
+    {
+      ACCOMMODATION_ID: 14,
+      ACCOMMODATION_NAME: "Sunset Hotel",
+      ACCOMMODATION_TYPE: "Hotel",
+      ACCOMMODATION_ADDRESS: "456 XYZ Avenue",
+      ACCOMMODATION_LOCATION: "Within Campus",
+      ACCOMMODATION_DESCRIPTION:
+        "A luxurious hotel with stunning sunset views and excellent service.",
+      ACCOMMODATION_AMENITIES: "Swimming pool, Fitness center, Restaurant",
+      ACCOMMODATION_ISARCHIVED: 0,
+      ACCOMMODATION_OWNER_ID: 114,
+    },
+  ]); // api connect here
   const [isLoggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
     // Check if authToken exists in cookie
@@ -25,6 +40,23 @@ const UserProfile = () => {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
+
+    axios
+      .post("https://mockup-backend-128.herokuapp.com/user/get-all-favorites", {
+        username: cookie.parse(document.cookie)["authToken"].split("|")[2],
+      })
+      .then((res) => {
+        console.log(res.data);
+        // setFavorites(res.data.favorites);
+      })
+      .catch((err) => {
+        console.log(
+          `Could not find favorites of ${
+            cookie.parse(document.cookie)["authToken"].split("|")[2]
+          }`
+        );
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -42,15 +74,17 @@ const UserProfile = () => {
             />
           </Row>
           <Col className="text-center">
-            <h1 className="mt-4 header1">BRUNO SMITH</h1>
-          </Col>
-
-          <Col className="text-center">
-            <h1 className="small">
-              📞 09123456 &nbsp;&nbsp;&nbsp; 📬 brunosmith@gmail.com.com
-              &nbsp;&nbsp;&nbsp;📅 Member since July 2022
+            <h1 className="mt-4 header1">
+              {cookie.parse(document.cookie)["authToken"].split("|")[3]}
             </h1>
           </Col>
+          {/* 
+          <Col className="text-center">
+            <h1 className="small">
+              📞 {cookie.parse(document.cookie)["authToken"].split("|")[2]} &nbsp;&nbsp;&nbsp; 📬 {cookie.parse(document.cookie)["authToken"].split("|")[2]+"@example.com"}
+              &nbsp;&nbsp;&nbsp;
+            </h1>
+          </Col> */}
 
           <Col>
             <h1 className="mt-5 text-center header2">🌟 Favorites 🌟</h1>
@@ -58,7 +92,7 @@ const UserProfile = () => {
               {favorites.map((f) => (
                 <Carousel.Item>
                   <div className="ml-4">
-                    <CardListing />
+                    <CardListing listing={f} />
                   </div>
                 </Carousel.Item>
               ))}
