@@ -69,6 +69,6 @@ p.footer-text-left {
 }
 
 .footer-btn:focus, .footer-btn:hover, .footer-btn:active, .footer-btn:visited{
-    background-color: var(--color-light-accent-green) !important;
+    background-color: var(--color-heading-dark) !important;
     color: var(--color-background);
 }

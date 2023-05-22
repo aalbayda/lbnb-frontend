@@ -10,19 +10,19 @@ const Apartment = ({ topApartments }) => {
     <div className="apartment-carousel-container">
       <div className="carousel-container">
         <div className="carousel-upper">
-          <img className="d-block w-100" src={banner1} alt="First slide" />
+          <img className="d-block w-100" src={topApartments.APARTMENT_PHOTO} alt="First slide" />
         </div>
         <div className="carousel-lower">
           <div className="carousel-lowerleft">
             <p className="apartment-title large-bold">
-              {topApartments.ACCOMMODATION_NAME}
+              {topApartments.APARTMENT_NAME}
             </p>
             <Rating
               name="read-only"
-              // value={5}
+              readOnly
               value={topApartments.AVERAGE_RATING}
             />
-            <p className="small">{topApartments.ACCOMMODATION_DESCRIPTION}</p>
+            <p className="small">{topApartments.APARTMENT_DESCRIPTION}</p>
           </div>
           <div className="carousel-lowerright">
             <Button

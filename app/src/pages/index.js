@@ -6,3 +6,4 @@ export { default as Listing } from "./listing/Listing";
 export { default as UserProfile } from "./userProfile/UserProfile";
 export { default as Home } from "./home/Home";
 export { default as Details } from "./detailsPage/details";
+export { default as DevPage } from "./devPage/DevPage";

@@ -8,6 +8,7 @@ export { default as ApartmentCarousel } from "./apartment_carousel/Apartment_car
 export { default as HotelsCarousel } from "./hotels_carousel/Hotels_carousel";
 export { default as DormCarousel } from "./dorm_carousel/Dorm_carousel";
 export { default as Multilayerfilter } from "./multilayer_filter/Multilayer_filter";
+export { default as DevTile } from "./devTile/DevTile";
 
 export { default as RatingReviewSection } from "./listing_details/rating_review_section";
 export { default as ListingDetails } from "./listing_details/listing_details";
