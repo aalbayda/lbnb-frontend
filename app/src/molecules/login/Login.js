@@ -92,8 +92,10 @@ function Login(props) {
 
           window.location.reload();
         } else if (!response.data.success) {
+          console.log("not a success");
           console.log(response.data);
-          setWrongLogin(true);
+          setMissingLogin(true);
+          console.log(wrongLogin);
         } else {
           console.log(response.data);
         }
@@ -142,7 +144,17 @@ function Login(props) {
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-                At least one field is missing or invalid!
+                At least one field is invalid!
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {wrongLogin ? (
+              <div
+                className="tiny text-center"
+                style={{ fontStyle: "italic", color: "red" }}
+              >
+                Incorrect credentials!
               </div>
             ) : (
               <div></div>
@@ -216,17 +228,7 @@ function Login(props) {
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-                At least one field is missing or invalid!
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {wrongLogin ? (
-              <div
-                className="tiny text-center"
-                style={{ fontStyle: "italic", color: "red" }}
-              >
-                Incorrect credentials!
+                At least one field is invalid!
               </div>
             ) : (
               <div></div>
