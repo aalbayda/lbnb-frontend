@@ -10,31 +10,39 @@ import { useNavigate } from "react-router-dom";
 import { Rating } from "@mui/material";
 const url = "https://mockup-backend-128.herokuapp.com";
 
-const CardListing = (props) => {
+const CardListing = ({ listing }) => {
   //dummy data
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const userName = "student2";
 
   //data passed from the home page (multilayer filter props)
-  const accommName = props.accommName ? props.accommName : "Comfort Dorm";
-  const ownerName = props.ownerName ? props.ownerName : "owner1";
-  const location = props.location ? props.location : "inside campus";
-  const address = props.address
-    ? "📍 " + props.address
+  const accommName = listing.ACCOMMODATION_NAME
+    ? listing.ACCOMMODATION_NAME
+    : "Comfort Dorm";
+  const ownerName = "owner";
+  const location = listing.ACCOMMODATION_LOCATION
+    ? listing.ACCOMMODATION_LOCATION
+    : "inside campus";
+  const address = listing.ACCOMMODATION_ADDRESS
+    ? "📍 " + listing.ACCOMMODATION_ADDRESS
     : "📍 Los Banos, Laguna";
-  const description = props.description
-    ? props.description
+  const description = listing.ACCOMMODATION_DESCRIPTION
+    ? listing.ACCOMMODATION_DESCRIPTION
     : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  const amenities = props.amenities ? props.amenities : "with wifi";
-  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱900"; //to be rendered in the page
-  const capacity = props.max_capacity
-    ? "🚪 " + props.max_capacity
+  const amenities = listing.ACCOMMODATION_AMENITIES
+    ? "Amenities: " + listing.ACCOMMODATION_AMENITIES
+    : "with wifi";
+  const price = listing.max_price
+    ? "Up to ₱" + listing.max_price
+    : "Up to ₱900"; //to be rendered in the page
+  const capacity = listing.max_capacity
+    ? "🚪 " + listing.max_capacity
     : "🚪 Accommodates 3 people"; // to be render in the page
-  const max_price = props.max_price ? props.max_price : "1000"; //to be passed as arguments
-  const min_capacity = props.min_capacity ? props.min_capacity : "1";
-  const max_capacity = props.max_capacity ? props.max_capacity : "3";
-  const rating = props.rating ? props.rating : 3;
+  const max_price = listing.max_price ? listing.max_price : "1000"; //to be passed as arguments
+  const min_capacity = listing.min_capacity ? listing.min_capacity : "1";
+  const max_capacity = listing.max_capacity ? listing.max_capacity : "3";
+  const rating = listing.rating ? listing.rating : 3;
 
   const [isFavorite, setfave] = useState(false);
   useEffect(() => {

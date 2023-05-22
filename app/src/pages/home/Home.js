@@ -21,7 +21,9 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(url + "/get-top-five-accommodations")
+      .post(url + "/get-top-five-accommodations", {
+        type: "Dorm",
+      })
       .then((response) => {
         console.log(response.data);
         setTopAccoms(response.data.accommodation);
@@ -33,6 +35,7 @@ const Home = () => {
 
   const handleQuery = (queries) => {
     setQueries(queries);
+    console.log(queries);
     console.log("passed up successfully");
   };
 
@@ -54,15 +57,7 @@ const Home = () => {
           }}
         >
           {queries ? (
-            queries.map((query) => (
-              <CardListing
-                name={query.ACCOMMODATION_NAME}
-                location={query.ACCOMMODATION_LOCATION}
-                description={query.ACCOMMODATION_DESCRIPTION}
-                amenities={query.ACCOMMODATION_AMENITIES}
-                max_price={query.MAX_PRICE}
-              />
-            ))
+            queries.map((query) => <CardListing listing={query} />)
           ) : (
             <div>No results found.</div>
           )}

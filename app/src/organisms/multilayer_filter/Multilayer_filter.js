@@ -18,13 +18,13 @@ const Multilayer_filter = (props) => {
   const [filterType, setFilterType] = useState("");
 
   const handleSearched = () => {
-    let filterReq = "";
-    if (filterType === "Dorm") {
-      filterReq = "Lodge";
-    } else if (filterType === "Apartment") {
-      filterReq = "Motel";
-    }
-    // else {
+    // let filterReq = "";
+    // if (filterType === "Dorm") {
+    //   filterReq = "Lodge";
+    // } else if (filterType === "Apartment") {
+    //   filterReq = "Motel";
+    // }
+    // else {react
     //   filterReq = "Hotel";
     // }
 
@@ -36,10 +36,9 @@ const Multilayer_filter = (props) => {
           name: search,
           address: "",
           location: location,
-          type: filterReq,
-          priceFrom: "",
-          priceTo: "",
-          capacity: capacity,
+          type: filterType,
+          maxPrice: priceTo ? priceTo : null,
+          capacity: capacity ? capacity : null,
         },
       })
       .then(function (response) {
@@ -66,6 +65,7 @@ const Multilayer_filter = (props) => {
             {filterType ? filterType : "Type"}
           </Dropdown.Toggle>
           <Dropdown.Menu>
+            <Dropdown.Item onClick={() => setFilterType("")}>All</Dropdown.Item>
             <Dropdown.Item onClick={() => setFilterType("Dorm")}>
               Dorm
             </Dropdown.Item>
@@ -74,6 +74,9 @@ const Multilayer_filter = (props) => {
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setFilterType("Apartment")}>
               Apartment
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setFilterType("Bedspace")}>
+              Bedspace
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -92,7 +95,6 @@ const Multilayer_filter = (props) => {
           <div className="divTableCell price">
             <ImPriceTags className="icon" />
             <input
-              disabled
               className="small mlf_price"
               placeholder="Max Price"
               type="number"
@@ -121,7 +123,7 @@ const Multilayer_filter = (props) => {
                       name="group1"
                       type={type}
                       id={`inline-${type}-1`}
-                      onClick={(e) => setLocation("Within campus")}
+                      onClick={(e) => setLocation("Within Campus")}
                     />
                     <Form.Check
                       className="tiny"
@@ -130,7 +132,7 @@ const Multilayer_filter = (props) => {
                       name="group1"
                       type={type}
                       id={`inline-${type}-2`}
-                      onClick={(e) => setLocation("Outside campus")}
+                      onClick={(e) => setLocation("Outside Campus")}
                     />
                   </div>
                 ))}
