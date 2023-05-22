@@ -56,11 +56,16 @@ const Home = () => {
           {queries ? (
             queries.map((query) => (
               <CardListing
-                name={query.ACCOMMODATION_NAME}
-                location={query.ACCOMMODATION_LOCATION}
-                description={query.ACCOMMODATION_DESCRIPTION}
+                accommName={query.ACCOMMODATION_NAME} 
+                ownerName={query.USER_USERNAME}
+                location={query.ACCOMMODATION_LOCATION} 
+                address={query.ACCOMMODATION_ADDRESS}
+                description={query.ACCOMMODATION_DESCRIPTION} 
                 amenities={query.ACCOMMODATION_AMENITIES}
-                max_price={query.MAX_PRICE}
+                max_price={query.max_price} 
+                min_capacity={query.min_capacity}
+                max_capacity={query.max_capacity}
+                rating={query.rating}
               />
             ))
           ) : (

@@ -15,32 +15,10 @@ const RatingReviewSection =(props)=>{
   const userName= props.userName;
 
   const review_dummy= [
-      {
-          "REVIEW_ID": 84,
-          "REVIEW_RATING": 3.5,
-          "REVIEW_COMMENT": "Decent place to stay.",
-          "REVIEW_DATE": "2023-05-11T18:08:48.000Z",
-          "USER_ID": 84,
-          "ACCOMMODATION_ID": 94
-      }
   ]
 
   //to fetch review from the backend
   const[reviews, setReviews]=React.useState(review_dummy);
-  useEffect(()=>{
-    axios.post(url+"/accommodation/get-reviews", {
-      accommodationName:accommName
-    })
-    .then(function (response) {
-      if(response.data.success){
-        setReviews(response.data.reviews)
-      }
-      console.log(response)
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }, [])
 
   const reviewItems= reviews.map(
     (review) => {
@@ -58,9 +36,44 @@ const RatingReviewSection =(props)=>{
     }
   )
 
+  const[reviewRating, setReviewRating ]= React.useState("all")
+  
+  const handleToggle = (rating) =>{
+    setReviewRating(rating);
+
+    axios.post(url+"/accommodation/get-reviews", {
+      accommodationName:accommName
+    })
+    .then(function (response) {
+      if(response.data.success){
+        const review_data= response.data.reviews;
+        if (rating === "all"){
+          setReviews(review_data);
+        }
+        else{
+          const filterRevs = review_data.filter(
+            data => {
+              console.log(Math.floor(data.REVIEW_RATING));
+              if(Math.floor(data.REVIEW_RATING) ===  parseInt(rating)){
+                return data;
+              }
+            }
+          )
+          setReviews(filterRevs);
+        }
+      }
+      console.log(rating);
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
     return(
         <Container className="review-section-div">
-          <ReviewHeaders />
+          <ReviewHeaders 
+            handleToggle={handleToggle}/>
           <div className="rev-comm-card-div">
             {reviewItems}
           </div>
