@@ -16,12 +16,22 @@ import { Rating } from "@mui/material";
 import { AiFillPhone, AiFillCalendar } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { AddAccomsButton } from "../../atoms";
+import { CardListing } from "../../organisms";
+
+import { useLocation } from "react-router-dom";
+
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const LandlordProfile = () => {
+  const location = useLocation();
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [rating, setRating] = useState(0);
   const [owned, setOwned] = useState([]);
+  const name = location.state.USER_FNAME + " " + location.state.USER_LNAME;
+  const number = location.state.USER_CONTACTNUM;
+  const email = location.state.USER_EMAIL;
+  const username = location.state.USER_USERNAME;
+  const [picture, setPicture] = useState("");
 
   useEffect(() => {
     // Check if authToken exists in cookie
@@ -30,7 +40,7 @@ const LandlordProfile = () => {
       setLoggedIn(true);
       axios
         .post(url + "/owner/get-average-rating", {
-          username: cookie.parse(document.cookie)["authToken"].split("|")[2],
+          username: username,
         })
         .then((response) => {
           // console.log(response.data);
@@ -42,11 +52,23 @@ const LandlordProfile = () => {
 
       axios
         .post(url + "/accommodation/get-user-accommodations", {
-          ownerName: cookie.parse(document.cookie)["authToken"].split("|")[2],
+          ownerName: username,
         })
         .then((response) => {
           console.log(response.data);
           setOwned(response.data.result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      axios
+        .post(url + "/user/get-user-pic", {
+          username: email,
+        })
+        .then((response) => {
+          console.log(response.data);
+          setPicture(response.data.imageUrl);
         })
         .catch((error) => {
           console.error(error);
@@ -79,7 +101,8 @@ const LandlordProfile = () => {
             </Row>
             <Col className="text-center">
               <h1 className="mt-4 header2 bold-green">
-                {cookie.parse(document.cookie)["authToken"].split("|")[3]}
+                {name}
+                {/* {cookie.parse(document.cookie)["authToken"].split("|")[3]} */}
               </h1>
               <Rating
                 className="rating-medium"
@@ -97,12 +120,13 @@ const LandlordProfile = () => {
               <Col className="info-item">
                 <MdEmail className="icon" />
                 <p className="regular">
-                  {cookie.parse(document.cookie)["authToken"].split("|")[2]}
+                  {email}
+                  {/* {cookie.parse(document.cookie)["authToken"].split("|")[2]} */}
                 </p>
               </Col>
               <Col className="info-item">
                 <AiFillPhone className="icon" />
-                <p className="regular">09123456789</p>
+                <p className="regular">{number}</p>
               </Col>
               {/* <Col className="info-item">
                 <AiFillCalendar className="icon" />
@@ -128,7 +152,7 @@ const LandlordProfile = () => {
               <Row className="justify-content-md-center mt-4">
                 {owned.map((unit) => (
                   <div className="cardlist-flex mb-5">
-                    <CardListingAddRoom unit={unit} />
+                    <CardListing listing={unit} />
                   </div>
                 ))}
               </Row>

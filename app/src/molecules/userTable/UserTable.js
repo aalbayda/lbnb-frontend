@@ -87,6 +87,14 @@ function UserTable(props) {
                       >
                         View
                       </Button>
+                      <Button
+                        className="small admin-delete-btn"
+                        onClick={() => {
+                          setSelectedStudent(student);
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </td>
                 </tr>

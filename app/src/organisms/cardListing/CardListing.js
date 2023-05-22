@@ -7,11 +7,14 @@ import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { RiHeart3Fill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
+
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const CardListing = ({ listing }) => {
   //dummy data
+  const [imageAPI, setImageAPI] = useState("");
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const userName = "student2";
@@ -20,7 +23,7 @@ const CardListing = ({ listing }) => {
   const accommName = listing.ACCOMMODATION_NAME
     ? listing.ACCOMMODATION_NAME
     : "Comfort Dorm";
-  const ownerName = "owner";
+  const [owner, setOwner] = useState({ USER_FNAME: "owner", USER_LNAME: "" });
   const location = listing.ACCOMMODATION_LOCATION
     ? listing.ACCOMMODATION_LOCATION
     : "inside campus";
@@ -60,6 +63,37 @@ const CardListing = ({ listing }) => {
       .catch(function (error) {
         console.log(error);
       });
+
+    axios
+      .post(url + "/accommodation/get-accommodation-pic", {
+        accommodationName: accommName,
+      })
+      .then(function (response) {
+        if (response.data.success) {
+          console.log(response.data);
+          setImageAPI(response.data.imageUrl);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .post(url + "/get-user-by-id", {
+        userId: listing.ACCOMMODATION_OWNER_ID,
+      })
+      .then(function (response) {
+        if (response.data.success) {
+          console.log("Owner:");
+          console.log(response.data);
+          setOwner(response.data.user);
+        }
+      })
+      .catch(function (error) {
+        console.log("error getting owner");
+        console.log(error);
+      });
+    // do something with listing.ACCOMMODATION_OWNER_ID
   }, []);
 
   const navigate = useNavigate();
@@ -71,7 +105,7 @@ const CardListing = ({ listing }) => {
         <div className="img-div">
           <img
             className="accommodation-img"
-            src={image}
+            src={imageAPI ? imageAPI : image}
             alt="accommodation-img"
           ></img>
           <div class="heart-button">
@@ -85,9 +119,9 @@ const CardListing = ({ listing }) => {
           <div className="name-loc-section">
             <h1 className="large-bold accom-name">{accommName}</h1>
             <p className="small">
-              <a style={{ textDecoration: "none" }} href="/LandlordProfile">
-                leased by {ownerName}
-              </a>
+              <Link to="/landlordprofile" replace={true} state={owner}>
+                leased by {owner.USER_FNAME + " " + owner.USER_LNAME}
+              </Link>
             </p>
             <p className="small">{address}</p>
           </div>
@@ -125,7 +159,7 @@ const CardListing = ({ listing }) => {
                 state: {
                   userName: userName,
                   image: image,
-                  ownerName: ownerName,
+                  owner: owner,
                   accommName: accommName,
                   location: location,
                   address: address,
