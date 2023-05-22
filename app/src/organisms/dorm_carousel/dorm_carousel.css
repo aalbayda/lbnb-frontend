@@ -5,6 +5,8 @@
 
     justify-content: center;
     align-items: center;
+    width: 100%;
+    /* height: 500px; */
 }
 
 .subtitle {
@@ -16,7 +18,8 @@
     display: flex;
     flex-direction: row;
 
-    max-width: 80%;
+    max-width: 100%;
+    /* height: 100%; */
     /* column-gap: 10px; */
 }
 
@@ -32,4 +35,8 @@
 
 .next-button {
     margin-left: 200px;
+}
+
+a.carousel-control-next, a.carousel-control-prev {
+    width: 10px;
 }

@@ -17,11 +17,15 @@
     width: 20px;
 }
 
-.prev-button {
+/* .prev-button {
     margin-right: 200px;
+} */
 
+a.carousel-control-next, a.carousel-control-prev {
+    width: 10px;
 }
 
-.next-button {
+/* .next-button {
     margin-left: 200px;
-}
+    width: 10px;
+} */

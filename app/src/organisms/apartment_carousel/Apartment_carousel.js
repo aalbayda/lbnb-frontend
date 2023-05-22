@@ -43,21 +43,6 @@ const Apartment_carousel = ({ topApartments }) => {
             <Apartment topApartments={apt}></Apartment>
           </Carousel.Item>
         ))}
-        {/* <Carousel.Item>
-          <Apartment topApartments={topApartments[0]} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <Apartment topApartments={topApartments[1]} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <Apartment topApartments={topApartments[2]} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <Apartment topApartments={topApartments[3]} />
-        </Carousel.Item>
-        <Carousel.Item>
-          <Apartment topApartments={topApartments[4]} />
-        </Carousel.Item> */}
       </Carousel>
     </div>
   );

@@ -5,6 +5,7 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { Login } from "../../molecules";
 import { logo } from "../../assets/images";
+import { Link } from "react-router-dom";
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const NavBar = () => {
@@ -13,6 +14,7 @@ const NavBar = () => {
   const [isAdmin, setAdmin] = useState(false);
   const [isOwner, setOwner] = useState(false);
   const [isUser, setUser] = useState(false);
+  const [ownerDetails, setOwnerDetails] = useState("");
 
   useEffect(() => {
     // Check if authToken exists in cookie
@@ -21,6 +23,17 @@ const NavBar = () => {
       let type = authToken.split("|")[1];
       console.log("Log in detected!");
       setLoggedIn(true);
+
+      axios
+        .post(url + "/get-user-by-id", {
+          userId: authToken.split("|")[4],
+        })
+        .then((res) => {
+          console.log(`Your user id ${authToken.split("|")[4]}...`);
+          console.log(res.data);
+          setOwnerDetails(res.data.user);
+        })
+        .catch((err) => console.log(err));
 
       if (type === "Student") {
         setUser(true);
@@ -58,9 +71,20 @@ const NavBar = () => {
         <div className="navbar-right">
           {/* <p className="small">About</p> */}
 
-          {isUser || isOwner ? (
+          {isUser ? (
             <p className="small">
-              <a href={isUser ? "/userprofile" : "/landlordprofile"}>Profile</a>
+              <a href={"/userprofile"}>Profile</a>
+            </p>
+          ) : (
+            <p></p>
+          )}
+
+          {isOwner ? (
+            <p className="small">
+              <Link to="/landlordprofile" state={ownerDetails}>
+                Profile
+              </Link>
+              {/* <a href={isUser ? "/userprofile" : "/landlordprofile"}>Profile</a> */}
             </p>
           ) : (
             <p></p>

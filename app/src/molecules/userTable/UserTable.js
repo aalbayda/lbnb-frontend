@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./userTable.css";
 import { Table, Button } from "react-bootstrap";
 import { AdminViewUser, AdminViewLandlord } from "../../molecules";
@@ -12,6 +12,10 @@ function UserTable(props) {
 
   const handleCloseModal = () => {
     setSelectedStudent(null);
+  };
+
+  const handleDelete = () => {
+    console.log(selectedStudent);
   };
 
   // fetch all students
@@ -82,10 +86,19 @@ function UserTable(props) {
                       <Button
                         className="small admin-view-btn"
                         onClick={() => {
-                          setSelectedStudent(student);
+                          // setSelectedStudent(student);
                         }}
                       >
                         View
+                      </Button>
+                      <Button
+                        className="small admin-delete-btn"
+                        onClick={() => {
+                          // setSelectedStudent(student);
+                          handleDelete();
+                        }}
+                      >
+                        Delete
                       </Button>
                     </div>
                   </td>

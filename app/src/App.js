@@ -24,6 +24,7 @@ const LandlordProfile = lazy(()=> import("./pages/landlord_profile/LandlordProfi
 const Listing = lazy(()=> import("./pages/listing/Listing.js"));
 const UserProfile = lazy(()=> import("./pages/userProfile/UserProfile.js"));
 const Details = lazy(()=> import("./pages/detailsPage/details.js"));
+const DevPage = lazy(()=> import("./pages/devPage/DevPage.js"));
 
 
 const App = () => {
@@ -84,6 +85,14 @@ const App = () => {
         element={
           <div>
             <Details />
+          </div>
+        }
+      />
+      <Route
+        path="/DevPage"
+        element={
+          <div>
+            <DevPage />
           </div>
         }
       />

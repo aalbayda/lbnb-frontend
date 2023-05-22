@@ -14,10 +14,14 @@
 }
 
 .hotels-prev-button {
-    margin-right: 0px !important;
+    margin-right: -250px !important;
 
 }
 
 .hotels-next-button {
-    margin-left: 0px !important;
+    margin-left: -250px !important;
+}
+
+a.carousel-control-next, a.carousel-control-prev {
+    width: 10px;
 }

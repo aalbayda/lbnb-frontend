@@ -83,6 +83,14 @@ function LandlordTable(props) {
                       >
                         View
                       </Button>
+                      <Button
+                        className="small admin-delete-btn"
+                        onClick={() => {
+                          setSelectedOwner(owner);
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </td>
                 </tr>
