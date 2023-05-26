@@ -18,3 +18,9 @@
     align-items: center;
     justify-content: center;
 }
+
+/* .search-list {
+    display: flex;
+    flex-direction: column;
+    column-gap: 200px;
+} */

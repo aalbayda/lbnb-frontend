@@ -97,7 +97,7 @@
     color: var(--color-yellow-accent);
 }
 
-.card-listing {
+.card-listing-add-room {
     display: flex;
     margin: 0;
     padding: 0;

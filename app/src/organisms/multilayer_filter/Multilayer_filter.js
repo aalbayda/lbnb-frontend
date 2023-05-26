@@ -25,9 +25,6 @@ const Multilayer_filter = (props) => {
     else if (filterType === "Apartment") {
       filterReq = "Motel";
     }
-    // else {
-    //   filterReq = "Hotel";
-    // }
 
     console.log(location)
 
@@ -90,7 +87,7 @@ const Multilayer_filter = (props) => {
                   {['radio'].map((type) => (
                       <div key={`inline-${type}`} className="mb-3">
                       <Form.Check
-                          className="tiny"
+                          className="custom-radio tiny"
                           inline
                           label="Inside Campus"
                           name="group1"
@@ -99,7 +96,7 @@ const Multilayer_filter = (props) => {
                           onClick={e => setLocation("Within LB")}
                       />
                       <Form.Check
-                          className="tiny"
+                          className="custom-radio tiny"
                           inline
                           label="Outside Campus"
                           name="group1"

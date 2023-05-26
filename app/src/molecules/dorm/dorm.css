@@ -13,11 +13,22 @@
     flex-direction: column;
     width: 250px;
     height: 500px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .dorm-carousel-card-upper{
     display: flex;
 }
+
+.zoom-in-effect {
+display: inline-block;
+transition: transform 0.3s ease;
+}
+
+.zoom-in-effect:hover {
+transform: scale(1.01);
+}
+  
 
 .dorm-carousel-card-upper img {
     width: 300px; 
@@ -30,6 +41,16 @@
     flex-direction: column;
     row-gap: 5px;
     padding: 10px;
+}
+
+.dorm-carousel-card-lowest{
+    display: flex;
+
+    height: 100%;
+    width: 250px;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px;
 }
 
 .small.dorm-description{

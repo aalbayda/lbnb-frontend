@@ -91,5 +91,6 @@ transform: scale(1.1);
 }
 
 .devtile_icon:hover {
-transform: translateY(-3px);
+    color: var(--color-dark-header);
+    transform: translateY(-3px);
 }

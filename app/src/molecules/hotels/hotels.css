@@ -26,11 +26,18 @@ div.hotels-carousel-container {
 
 }
 
-.hotels-carousel-left img {
-    width: 300px; 
+.hotels-carousel-left {
+    width: 500px;
     height: 350px;
+    overflow: hidden;
+  }
+  
+.hotels-carousel-left img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
+
 
 .hotels-carousel-right{
     display: flex;
@@ -43,4 +50,17 @@ div.hotels-carousel-container {
     align-items: flex-start;
     margin: 0px;
 
+}
+
+.hotels-carousel-left {
+    position: relative;
+    overflow: hidden;
+}
+
+.hotels-carousel-left img.d-block.w-100.photo {
+    transition: transform 0.3s ease-out;
+}
+
+.hotels-carousel-left img.d-block.w-100.photo:hover {
+    transform: scale(1.01);
 }

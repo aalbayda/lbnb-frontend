@@ -8,7 +8,7 @@ import { Rating } from "@mui/material";
 const Dorm = ({topDorms}) => {
   return (
     <div className="dorm-carousel-container">
-      <div className="dorm-carousel-card">
+      <div className="shine-div zoom-in-effect dorm-carousel-card">
         <div className="dorm-carousel-card-upper">
           <img className="d-block w-100" src={topDorms.DORM_PHOTO} alt="First slide" />
         </div>
@@ -22,7 +22,9 @@ const Dorm = ({topDorms}) => {
           <p className="small dorm-description">
             {topDorms.DORM_DESCRIPTION}
           </p>
-          <Button
+        </div>
+        <div className="dorm-carousel-card-lowest">
+        <Button
             className="small-bold carousel-btn"
             onClick={() => (window.location.href += "details")}
           >

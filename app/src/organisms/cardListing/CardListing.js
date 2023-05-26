@@ -25,7 +25,7 @@ const CardListing = (props) => {
   const reviews = "(32 reviews)";
 
   return (
-    <div className="card-listing">
+    <div className="card-listing zoom-in-effect">
       {/* fixed variable width column */}
       <Col md="auto">
         <div className="img-div">

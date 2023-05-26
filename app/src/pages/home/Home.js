@@ -20,6 +20,8 @@ const Home = () => {
   const [searched, setSearched] = useState(false);
   const toggleSearched = () => setSearched(true);
   const [topAccoms, setTopAccoms] = useState([]);
+  const [topDorms, setTopDorms] = useState([]);
+  const [topHotels, setTopHotels] = useState([]);
 
 
   const top_apartments = [
@@ -129,21 +131,44 @@ const Home = () => {
     }
   ];
   
-  
-  
-  
+  useEffect(() => {
+    axios
+      .post(url + "/get-top-five-accommodations", {Type: 'dorm'})
+      .then((response) => {
+        console.log("-Dorm-");
+        console.log(response.data);
+        setTopDorms(response.data.accommodation);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
-      .get(url + "/get-top-five-accommodations")
+      .post(url + "/get-top-five-accommodations", {Type: 'Accomodation'})
       .then((response) => {
+        console.log("-Accomodations-");
         console.log(response.data);
         setTopAccoms(response.data.accommodation);
       })
       .catch((error) => {
         console.error(error);
       });
-  });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post(url + "/get-top-five-accommodations", {Type: 'Hotel'})
+      .then((response) => {
+        console.log("-Hotels-");
+        console.log(response.data);
+        setTopHotels(response.data.accommodation);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const handleQuery = (queries) => {
     setQueries(queries);
@@ -159,7 +184,7 @@ const Home = () => {
         handleQuery={handleQuery}
       />
       {searched ? (
-        <div
+        <div className="searched-list"
           style={{
             display: "flex",
             justifyContent: "center",

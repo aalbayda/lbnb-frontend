@@ -52,6 +52,12 @@ const DevPage = () => {
                             team={"Frontend Developer"}
                             email={"mldamalerio@up.edu.ph"}                          
                         />
+                        <DevTile
+                            nickname={"Gnet"}
+                            name={"Gwyneth Balucio"}
+                            team={"Database & Frontend Developer"}
+                            email={"gnbalucio@up.edu.ph"}                            
+                        />
                         <DevTile 
                             nickname={"Kael"}
                             name={"Michael Jay Makiling"}
@@ -82,36 +88,32 @@ const DevPage = () => {
                             email={"kmvillagen@up.edu.ph"}                           
                         />
                     </div>
-                </div>
-                <div className="team-members-list">
-                    <p className="header3 bold">Database Developers</p>
-                    <div className="team-list">
+                    <div className="team-listb">
                         <DevTile
                             nickname={"Brian"}
                             name={"Loria Brian"}
-                            team={"Database Developer"}
+                            team={"Database & Backend Developer"}
                             email={"bnloria@up.edu.ph"}                           
-                        />
-                        <DevTile
-                            nickname={"Gnet"}
-                            name={"Gwyneth Balucio"}
-                            team={"Database Developer"}
-                            email={"gnbalucio@up.edu.ph"}                            
                         />
                         <DevTile
                             nickname={"Dale"}
                             name={"Alesundreau Ratuiste"}
-                            team={"Database Developer"}
+                            team={"Database & Backend Developer"}
                             email={"adratuiste@up.edu.ph"}                            
                         />
                         <DevTile
                             nickname={"Kyle"}
                             name={"Kyle Sotto"}
-                            team={"Database Developer"}
+                            team={"Database & Backend Developer"}
                             email={"klsotto@up.edu.ph"}                            
                         />
                     </div>
                 </div>
+                {/* <div className="team-members-list">
+                    <p className="header3 bold">Database Developers</p>
+                    <div className="team-list">
+                    </div>
+                </div> */}
             </div>
             {/* <Footer /> */}
         </div>

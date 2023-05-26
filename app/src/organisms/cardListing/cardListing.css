@@ -83,7 +83,8 @@
 
 .card-listing {
     display: flex;
-    margin: 0;
+    /* margin: 0; */
+    margin-top: 25px;
     padding: 0;
     width: 1135px; 
     height: 299px; 
@@ -91,6 +92,15 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     /* flex-wrap: wrap; */
+}
+
+.card-listing.zoom-in-effect{
+    /* display: inline-block; */
+    transition: transform 0.3s ease;
+}
+
+.card-listing.zoom-in-effect:hover {
+    transform: scale(1.01);
 }
 
 .heart-button {

@@ -34,7 +34,7 @@ const Hotels_carousel = ({topHotels}) =>  {
     return (
         <div className="hotel-carousel-container">
             <p className="header3 title">Hotels</p>
-            <p className="small subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <p className="small subtitle">Experience budget-friendly hotels that doesn't compromise on comfort. </p>
             <Carousel 
                 activeIndex={index}
                 onSelect={handleSelect}

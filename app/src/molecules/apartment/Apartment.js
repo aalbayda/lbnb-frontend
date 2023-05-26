@@ -8,7 +8,7 @@ import { Rating } from "@mui/material";
 const Apartment = ({ topApartments }) => {
   return (
     <div className="apartment-carousel-container">
-      <div className="carousel-container">
+      <div className="shine-div carousel-container">
         <div className="carousel-upper">
           <img className="d-block w-100" src={topApartments.APARTMENT_PHOTO} alt="First slide" />
         </div>
