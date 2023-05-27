@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./home.css";
-import {apartment1, apartment2, apartment3, apartment4, apartment5, dorm6, hotel1, hotel2, hotel3, hotel4, hotel5, dorm1, dorm2, dorm3, dorm4, dorm5} from "../../assets/images";
+// import {apartment1, apartment2, apartment3, apartment4, apartment5, dorm6, hotel1, hotel2, hotel3, hotel4, hotel5, dorm1, dorm2, dorm3, dorm4, dorm5} from "../../assets/images";
+import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import {
   NavBar,
   Banner,
@@ -15,13 +16,103 @@ import {
 const url = "https://mockup-backend-128.herokuapp.com";
 
 
+
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [queries, setQueries] = useState("");
   const [searched, setSearched] = useState(false);
   const toggleSearched = () => setSearched(true);
   const [topApartments, setTopApartments] = useState([]);
   const [topDorms, setTopDorms] = useState([]);
   const [topHotels, setTopHotels] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async (type) => {
+      try {
+        const response = await axios.post(url + "/get-top-five-accommodations", { type });
+        console.log(`-${type}-`);
+        console.log(response.data);
+        return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+  
+    Promise.all([
+      fetchData('Dorm'),
+      fetchData('Apartment'),
+      fetchData('Hotel')
+    ]).then(([dorms, apartments, hotels]) => {
+      setTopDorms(dorms);
+      setTopApartments(apartments);
+      setTopHotels(hotels);
+      setLoading(false);
+    });
+  }, []);
+  
+
+  const handleQuery = (queries) => {
+    setQueries(queries);
+    console.log("passed up successfully");
+  };
+
+  return (
+    <div className="home-container">
+      <NavBar />
+      <Banner />
+      <Multilayerfilter
+        toggleSearched={toggleSearched}
+        handleQuery={handleQuery}
+      />
+       { loading ? 
+          <div className="centeredSpinner">
+              <LoadingScreenPage
+              size={80}
+              color={'#4f4a47'}
+              loading={loading}
+              />
+          </div> :
+      <div>
+      {searched ? (
+        <div className="searched-list"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {queries ? (
+            queries.map((query) => (
+              <CardListing
+                key={queries.id}
+                name={query.ACCOMMODATION_NAME}
+                location={query.ACCOMMODATION_LOCATION}
+                description={query.ACCOMMODATION_DESCRIPTION}
+                amenities={query.ACCOMMODATION_AMENITIES}
+                max_price={query.MAX_PRICE}
+              />
+            ))
+          ) : (
+            <div>No results found.</div>
+          )}
+        </div>
+      ) : (
+        <div className="home-carousel-list">
+          <ApartmentCarousel topApartments={topApartments} />
+          <DormCarousel topDorms={topDorms} />
+          <HotelsCarousel topHotels={topHotels} />
+        </div>
+      )}
+      </div>}
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;
 
 
   // const top_apartments = [
@@ -130,94 +221,3 @@ const Home = () => {
   //     DORM_PHOTO: dorm6
   //   }
   // ];
-  
-  useEffect(() => {
-    axios
-      .post(url + "/get-top-five-accommodations", {type: 'Dorm'})
-      .then((response) => {
-        console.log("-Dorm-");
-        console.log(response.data);
-        setTopDorms(response.data.accommodation);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .post(url + "/get-top-five-accommodations", {type: 'Apartment'})
-      .then((response) => {
-        console.log("-Accomodations-");
-        console.log(response.data);
-        setTopApartments(response.data.accommodation);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .post(url + "/get-top-five-accommodations", {type: 'Hotel'})
-      .then((response) => {
-        console.log("-Hotels-");
-        console.log(response.data);
-        setTopHotels(response.data.accommodation);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  const handleQuery = (queries) => {
-    setQueries(queries);
-    console.log("passed up successfully");
-  };
-
-  return (
-    <div className="home-container">
-      <NavBar />
-      <Banner />
-      <Multilayerfilter
-        toggleSearched={toggleSearched}
-        handleQuery={handleQuery}
-      />
-      {searched ? (
-        <div className="searched-list"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          {queries ? (
-            queries.map((query) => (
-              <CardListing
-                name={query.ACCOMMODATION_NAME}
-                location={query.ACCOMMODATION_LOCATION}
-                description={query.ACCOMMODATION_DESCRIPTION}
-                amenities={query.ACCOMMODATION_AMENITIES}
-                max_price={query.MAX_PRICE}
-              />
-            ))
-          ) : (
-            <div>No results found.</div>
-          )}
-        </div>
-      ) : (
-        <div className="home-carousel-list">
-          <ApartmentCarousel topApartments={topApartments} />
-          <DormCarousel topDorms={topDorms} />
-
-          <HotelsCarousel topHotels={topHotels} />
-        </div>
-      )}
-
-      <Footer />
-    </div>
-  );
-};
-
-export default Home;

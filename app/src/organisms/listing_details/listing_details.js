@@ -6,24 +6,40 @@ import { MdReportGmailerrorred } from "react-icons/md";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { RoomButtons, ReportModal
 } from "../../molecules";
+import { Rating } from "@mui/material";
 
-const ListingDetails = () => {
+
+const ListingDetails = ({props}) => {
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const description =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  const name = "Casa fe Felicidad";
-  const location = "Los Banos, Laguna";
+  // const description =
+  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
+  // const name = "Casa fe Felicidad";
+  // const location = "Los Banos, Laguna";
   const price = "₱ 8,000";
   const stars = "★★★★☆";
   const separator = "|";
   const rating = "1.5K";
   const capacity = "300";
 
+    // const {
+  //   ACCOMMODATION_ADDRESS,
+  //   ACCOMMODATION_AMENITIES,
+  //   ACCOMMODATION_DESCRIPTION,
+  //   ACCOMMODATION_ID,
+  //   ACCOMMODATION_LOCATION,
+  //   ACCOMMODATION_NAME,
+  //   ACCOMMODATION_OWNER_ID,
+  //   ACCOMMODATION_TYPE,
+  //   AVERAGE_RATING,
+  // } = props;
   const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container>
+      {console.log("--- inside")}
+      {console.log(props)}
+      {console.log(props.ACCOMMODATION_NAME)}
       <Row className="listing-detials">
         <div className="room-img-div">
           <img className="room-img" src={image} alt="accommodation-img"></img>
@@ -32,7 +48,7 @@ const ListingDetails = () => {
           <div className="name-location-div">
             <div className="name-location-section">
               <div className="name-icon-list">
-                <h1 className="headings">{name}</h1>
+                <h1 className="headings">{props.ACCOMMODATION_NAME}</h1>
                 <div className="listing-details-icons">
                   <Button 
                     className="report-button"
@@ -47,21 +63,26 @@ const ListingDetails = () => {
                   </Button>
                 </div>
               </div>
-              <h7 className="headings">{location}</h7>
+              <h7 className="headings">{props.ACCOMMODATION_LOCATIONS}</h7>
               <div class="star-separator-capacity-div">
-                <p className="star-separator-capacity-text">
+                  <Rating
+                    name="read-only"
+                    readOnly
+                    value={props.AVERAGE_RATING}
+                  />
+                {/* <p className="star-separator-capacity-text">
                   {stars} {separator}{" "}
                 </p>
                 <p className="star-separator-capacity">{rating} </p>
                 <p className="star-separator-capacity-text">
                   {" "}
                   Rating {separator}{" "}
-                </p>
-                <p className="star-separator-capacity">{capacity}</p>
-                <p className="star-separator-capacity-text"> Capacity </p>
+                </p> */}
+                {/* <p className="star-separator-capacity">{props.ACCOMODATION_CAPACITY}</p>
+                <p className="star-separator-capacity-text"> Capacity </p> */}
               </div>
               <h2 className="headings-price">{price}</h2>
-              <p>{description}</p>
+              <p>{props.ACCOMMODATION_DESCRIPTION}</p>
             </div>
             <div className="room-buttons">
               <RoomButtons/>

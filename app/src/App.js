@@ -14,11 +14,13 @@ import {
   Details,
 } from "./pages";
 */
+
+import { Home } from "./pages";
 import LoadingScreenPage from "./atoms/loadingScreenPage/LoadingScreenPage";
 
 const AccomsPage = lazy(()=> import("./pages/accomsPage/AccomsPage.js"));
 const AdminPage = lazy(()=> import("./pages/adminPage/AdminPage.js"));
-const Home = lazy(()=> import("./pages/home/Home.js"));
+// const Home = lazy(()=> import("./pages/home/Home.js"));
 const LandlordHome = lazy(()=> import("./pages/landlordHome/LandlordHome.js"));
 const LandlordProfile = lazy(()=> import("./pages/landlord_profile/LandlordProfile.js"));
 const Listing = lazy(()=> import("./pages/listing/Listing.js"));
