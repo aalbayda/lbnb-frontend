@@ -10,17 +10,17 @@ const Hotels = ({topHotels}) => {
     <div className="hotels-carousel-container">
       <div className=" hotels-carousel">
         <div className="hotels-carousel-left">
-          <img className="shine-div d-block w-100 photo" src={topHotels.HOTEL_PHOTO} alt="First slide" />
+          <img className="shine-div d-block w-100 photo" src={banner1} alt="First slide" />
         </div>
         <div className="hotels-carousel-right">
-          <p className="large-bold">{topHotels.HOTEL_NAME}</p>
+          <p className="large-bold">{topHotels.ACCOMMODATION_NAME}</p>
           <Rating
               name="read-only"
               readOnly
               value={topHotels.AVERAGE_RATING}
             />
           <p className="small">
-            {topHotels.HOTEL_DESCRIPTION}
+            {topHotels.ACCOMMODATION_DESCRIPTION}
           </p>
           <Button
             className="small-bold carousel-btn"

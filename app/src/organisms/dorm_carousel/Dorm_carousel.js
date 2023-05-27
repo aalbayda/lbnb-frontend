@@ -69,9 +69,9 @@ const Dorm_carousel = ({topDorms}) =>  {
                         <Dorm
                           topDorms = {topDorms[4]}
                         />
-                        <Dorm
+                        {/* <Dorm
                           topDorms = {topDorms[5]}
-                        />
+                        /> */}
                     </div>
                 </Carousel.Item>
             </Carousel>

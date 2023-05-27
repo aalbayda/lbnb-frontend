@@ -10,26 +10,26 @@ const Dorm = ({topDorms}) => {
     <div className="dorm-carousel-container">
       <div className="shine-div zoom-in-effect dorm-carousel-card">
         <div className="dorm-carousel-card-upper">
-          <img className="d-block w-100" src={topDorms.DORM_PHOTO} alt="First slide" />
+          <img className="d-block w-100" src={banner1} alt="First slide" />
         </div>
         <div className="dorm-carousel-card-lower">
-          <p className="large-bold">{topDorms.DORM_NAME}</p>
+          <p className="large-bold">{topDorms.ACCOMMODATION_NAME}</p>
           <Rating
               name="read-only"
               value={topDorms.AVERAGE_RATING}
               readOnly
             />
           <p className="small dorm-description">
-            {topDorms.DORM_DESCRIPTION}
+            {topDorms.ACCOMMODATION_DESCRIPTION}
           </p>
-        </div>
-        <div className="dorm-carousel-card-lowest">
+                  {/* <div className="dorm-carousel-card-lowest"> */}
         <Button
-            className="small-bold carousel-btn"
+            className="small-bold carousel-btn dorm-btn"
             onClick={() => (window.location.href += "details")}
           >
             View More
           </Button>
+        {/* </div> */}
         </div>
       </div>
     </div>
