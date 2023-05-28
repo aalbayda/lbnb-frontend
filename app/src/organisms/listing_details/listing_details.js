@@ -7,6 +7,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { RoomButtons, ReportModal
 } from "../../molecules";
 import { Rating } from "@mui/material";
+import {ChatButton} from '../../atoms'
 
 
 const ListingDetails = ({props}) => {
@@ -87,7 +88,9 @@ const ListingDetails = ({props}) => {
             <div className="room-buttons">
               <RoomButtons/>
             </div>
+            <ChatButton/>
           </div>
+
         </Col>
         <Row className="heart-icon-col">
         </Row>
