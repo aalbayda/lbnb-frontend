@@ -93,7 +93,7 @@ const Multilayer_filter = (props) => {
                           name="group1"
                           type={type}
                           id={`inline-${type}-1`}
-                          onClick={e => setLocation("Within LB")}
+                          onClick={e => setLocation("Within Campus")}
                       />
                       <Form.Check
                           className="custom-radio tiny"
@@ -102,7 +102,7 @@ const Multilayer_filter = (props) => {
                           name="group1"
                           type={type}
                           id={`inline-${type}-2`}
-                          onClick={e => setLocation("Outside LB")}
+                          onClick={e => setLocation("Outside Campus")}
                       />
                       </div>
                   ))}
