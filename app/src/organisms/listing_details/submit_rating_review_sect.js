@@ -12,7 +12,7 @@ const SubmitRatingReviewSect = (props) => {
     const [rateVal, setRateVal] = React.useState(0);
     const timestamp= new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString();
     const accommName = props.accommName ? props.accommName : "Comfort Dorm";
-    const userName = props.userName ? props.userName : "student1";
+    const userName = props.userName ? props.userName : "student2";
 
     const handleSubmit=()=>{
         console.log(userName, timestamp, accommName, comment);
@@ -22,7 +22,7 @@ const SubmitRatingReviewSect = (props) => {
                 userName: userName,
                 timestamp: timestamp,
                 accommName: accommName,
-                rating: rateVal
+                rating: rateVal,
             })
             .then(function (response) {
                 console.log(response);

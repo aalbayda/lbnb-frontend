@@ -14,7 +14,7 @@ const Details = () => {
   //passed data from the cardlisting
   const userName=location.state.userName ? location.state.userName : "student2"; 
   const image= location.state.image ? location.state.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const ownerName= location.state.ownerName ? location.state.ownername : "owner1";
+  const ownerName= location.state.owner ? location.state.owner : "owner1";
   const accommName= location.state.accommName ? location.state.accommName : "Comfort Dorm";
   const address= location.state.address ? location.state.address : "Los Banos Laguna";
   const location_place =location.state.location ? location.state.location : "Inside Campus";

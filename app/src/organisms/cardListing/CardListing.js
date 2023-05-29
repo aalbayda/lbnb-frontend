@@ -13,11 +13,11 @@ import { Rating } from "@mui/material";
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const CardListing = ({ listing }) => {
-  //dummy data
+  //username in dummy - do authentication
+  const userName = "student2";
   const [imageAPI, setImageAPI] = useState("");
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const userName = "student2";
 
   //data passed from the home page (multilayer filter props)
   const accommName = listing.ACCOMMODATION_NAME
@@ -48,6 +48,7 @@ const CardListing = ({ listing }) => {
   const rating = listing.rating ? listing.rating : 3;
 
   const [isFavorite, setfave] = useState(false);
+
   useEffect(() => {
     axios
       .post(url + "/accommodation/is-favorite", {
@@ -56,9 +57,9 @@ const CardListing = ({ listing }) => {
       })
       .then(function (response) {
         if (response.data.success) {
+          console.log(response);
           setfave(response.data.isFavorite);
         }
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

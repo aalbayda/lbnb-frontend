@@ -9,7 +9,6 @@ const url = "https://mockup-backend-128.herokuapp.com";
 //TODO: fetch user image, implement toggle of stars
 
 const ReviewCommentCard = (props) => {
-    // const user_img = "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
     const comment = props.comment ? props.comment : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
     const user_name= props.userName? props.userName : "student2";
     const rating = props.rating ? props.rating : 3;
