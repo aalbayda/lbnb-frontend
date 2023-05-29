@@ -18,33 +18,28 @@ const Multilayer_filter = (props) => {
   const [filterType, setFilterType] = useState("");
 
   const handleSearched = () => {
-    let filterReq = "";
-    if (filterType === "Dorm") {
-      filterReq = "Lodge";
-    } else if (filterType === "Apartment") {
-      filterReq = "Motel";
-    }
-
-    console.log(location);
-
     axios
       .post(url + "/filter-accommodation", {
         filters: {
           name: search,
-          address: "",
           location: location,
-          type: filterReq,
-          priceFrom: "",
-          priceTo: "",
+          type: filterType,
+          maxPrice: priceTo,
           capacity: capacity,
         },
       })
       .then(function (response) {
         const query = response.data.accommodations;
-        props.handleQuery(query);
+        const filters = {
+          name: search,
+          location: location,
+          type: filterType,
+          maxPrice: priceTo,
+          capacity: capacity,
+        };
+        props.handleQuery(query, filters);
       })
       .catch(function (error) {
-        console.log("Error!!!");
         console.log(error);
       });
 
@@ -71,6 +66,9 @@ const Multilayer_filter = (props) => {
             </Dropdown.Item>
             <Dropdown.Item onClick={() => setFilterType("Apartment")}>
               Apartment
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setFilterType("Bedspace")}>
+              Bedspace
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
