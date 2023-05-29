@@ -8,6 +8,7 @@ const AdminPanel = () => {
   const [toggleState, setToggleState] = useState(1);
   const [modalShow, setModalShow] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
 
   // function to toggle tabs
   const toggleTab = (index) => {
@@ -19,18 +20,24 @@ const AdminPanel = () => {
     if (cookie.parse(document.cookie)["authToken"]) {
       console.log("Log in detected!");
       setLoggedIn(true);
+
+      if (
+        cookie.parse(document.cookie)["authToken"].split("|")[1] === "Admin"
+      ) {
+        setAdmin(true);
+      }
     } else {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
 
   // const [accoms, setAccoms] = React.useState([]);
   // const [users, setUsers] = React.useState([]);
 
   return (
     <div class="admin-panel-div">
-      {isLoggedIn ? (
+      {isAdmin ? (
         <div>
           <h1 className="large-bold">ADMIN PANEL</h1>
 

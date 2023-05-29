@@ -1,9 +1,11 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./admin_viewlandlord.css";
 import { Image, Col, Row, Container } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
+const url = "https://mockup-backend-128.herokuapp.com";
 
 function Admin_viewlandlord(props) {
   const { ownerInfo } = props;
@@ -16,8 +18,60 @@ function Admin_viewlandlord(props) {
     USER_CONTACTNUM,
   } = ownerInfo;
 
-  const [editOwner, setEditOwner] = React.useState(false);
-  const [editAccomsRoom, setEditAccomsRoom] = React.useState(false);
+  const [newAccomName, setNewAccomName] = useState("");
+  const [newAccomType, setNewAccomType] = useState("");
+  const [newAccomAddress, setNewAccomAddress] = useState("");
+  const [newAccomDescription, setNewAccomDescription] = useState("");
+  const [newAccomAmenities, setNewAccomAmenities] = useState("");
+
+  const [fname, setFname] = useState(USER_FNAME);
+  const [lname, setLname] = useState(USER_LNAME);
+  const [email, setEmail] = useState(USER_EMAIL);
+  const [contact, setContact] = useState(USER_CONTACTNUM);
+  const [password, setPassword] = useState("");
+  const [editOwner, setEditOwner] = useState(false);
+  const [editAccomsRoom, setEditAccomsRoom] = useState(false);
+  const [accoms, setAccoms] = useState([]);
+  const [selectedAccom, setSelectedAccom] = useState("");
+  const [rooms, setRooms] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState("");
+
+  useEffect(() => {
+    console.log(USER_EMAIL);
+    axios
+      .post(url + "/accommodation/get-user-accommodations", {
+        ownerName: USER_EMAIL,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setAccoms(response.data.result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // if (selectedAccom) {
+    //   axios
+    //     .post(url + "/filter-accommodation", {
+    //       filters: {
+    //         name: selectedAccom,
+    //         address: "",
+    //         location: "",
+    //         type: "",
+    //         ownerUsername: "",
+    //         maxPrice: null,
+    //         capacity: null,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       setAccomDetails(response.data.accommodations[0]);
+    //       console.log(setAccomDetails);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // }
+  }, []);
 
   function editOwnerClicked() {
     setEditOwner(true);
@@ -27,12 +81,45 @@ function Admin_viewlandlord(props) {
     setEditAccomsRoom(true);
   }
 
-  function disableEditOwner() {
+  function handleSaveLandlord() {
     setEditOwner(false);
+    axios
+      .post(url + "/edit-user", {
+        email: email,
+        newPassword: password,
+        newUsername: email,
+        newFirstName: fname,
+        newLastName: lname,
+        newContactNum: contact,
+      })
+      .then((response) => {
+        console.log(response.data);
+        // setRating(response.data.averageRating);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
-  function disableEditAccomsRoom() {
+  function handleSaveAccom() {
     setEditAccomsRoom(false);
+    axios
+      .post(url + "/edit-accommodation", {
+        name: selectedAccom.ACCOMMODATION_NAME,
+        newName: newAccomName,
+        newType: newAccomType,
+        newDescription: newAccomDescription,
+        newAddress: newAccomAddress,
+        newLocation: selectedAccom.ACCOMMODATION_LOCATION,
+        newAmenities: newAccomAmenities,
+      })
+      .then((response) => {
+        console.log(response.data);
+        // setRating(response.data.averageRating);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function disableAllEdit() {
@@ -63,14 +150,27 @@ function Admin_viewlandlord(props) {
             <div className="adminviewlandlord-items">
               {/* Name */}
               <div className="adminviewlandlord-item">
-                <p className="regular-bold">Name:</p>
+                <p className="regular-bold">First Name:</p>
 
                 {editOwner ? (
-                  <input placeholder={USER_FNAME + " " + USER_LNAME}></input>
+                  <input
+                    placeholder={USER_FNAME}
+                    onChange={(e) => setFname(e.target.value)}
+                  ></input>
                 ) : (
-                  <p className="regular">
-                    {USER_FNAME} {USER_LNAME}
-                  </p>
+                  <p className="regular">{USER_FNAME}</p>
+                )}
+              </div>
+              <div className="adminviewlandlord-item">
+                <p className="regular-bold">Last Name:</p>
+
+                {editOwner ? (
+                  <input
+                    placeholder={USER_LNAME}
+                    onChange={(e) => setLname(e.target.value)}
+                  ></input>
+                ) : (
+                  <p className="regular">{USER_LNAME}</p>
                 )}
               </div>
               {/* Email */}
@@ -78,7 +178,10 @@ function Admin_viewlandlord(props) {
                 <p className="regular-bold">Email:</p>
 
                 {editOwner ? (
-                  <input placeholder={USER_EMAIL}></input>
+                  <input
+                    placeholder={USER_EMAIL}
+                    onChange={(e) => setEmail(e.target.value)}
+                  ></input>
                 ) : (
                   <p className="regular">{USER_EMAIL}</p>
                 )}
@@ -89,6 +192,7 @@ function Admin_viewlandlord(props) {
 
                 {editOwner ? (
                   <input
+                    onChange={(e) => setContact(e.target.value)}
                     className="no-arrows"
                     placeholder={USER_CONTACTNUM}
                   ></input>
@@ -100,7 +204,11 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="regular-bold">Password:</p>
                 {editOwner ? (
-                  <input type="password" placeholder="************"></input>
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    placeholder="************"
+                  ></input>
                 ) : (
                   <p className="regular">************</p>
                 )}
@@ -109,7 +217,7 @@ function Admin_viewlandlord(props) {
                 {editOwner ? (
                   <Button
                     className="adminsavelandlord"
-                    onClick={disableEditOwner}
+                    onClick={handleSaveLandlord}
                   >
                     Save
                   </Button>
@@ -135,179 +243,216 @@ function Admin_viewlandlord(props) {
                   Accomodations
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-1"
-                  >
-                    Accom1
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-2"
-                  >
-                    Accom2
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-3"
-                  >
-                    Accom3
-                  </Dropdown.Item>
+                  {accoms.map((accom) => (
+                    <Dropdown.Item
+                      className="small adminviewlandlord-filter-dropdown-item"
+                      onClick={() => {
+                        console.log(accom);
+                        setSelectedAccom(accom);
+                      }}
+                    >
+                      {newAccomName ? newAccomName : accom.ACCOMMODATION_NAME}
+                    </Dropdown.Item>
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
             </div>
-            <div className="adminviewlandlord-right-bottom">
-              {/* Accomodation Name */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Accomodation Name:</p>
-                {editAccomsRoom ? (
-                  <input placeholder="White House"></input>
-                ) : (
-                  <p className="small">White House</p>
-                )}
-              </div>
 
-              {/* Accomodation Type */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Type</p>
+            {selectedAccom ? (
+              <div>
+                <div className="adminviewlandlord-right-bottom">
+                  {/* Accomodation Name */}
+                  <div className="adminviewlandlord-item">
+                    <p className="small-bold">Accommodation Name:</p>
 
-                {editAccomsRoom ? (
-                  <Dropdown>
+                    {editAccomsRoom ? (
+                      <input
+                        placeholder={selectedAccom.ACCOMMODATION_NAME}
+                        onChange={(e) => setNewAccomName(e.target.value)}
+                      ></input>
+                    ) : (
+                      <p className="small">
+                        {newAccomType
+                          ? newAccomType
+                          : selectedAccom.ACCOMMODATION_NAME}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Accomodation Type */}
+                  <div className="adminviewlandlord-item">
+                    <p className="small-bold">Type:</p>
+
+                    {editAccomsRoom ? (
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          id="dropdown-basic"
+                          className="small adminviewlandlord-filter-dropdown-type"
+                        >
+                          Apartment
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          <Dropdown.Item
+                            onClick={() => setNewAccomType("Apartment")}
+                            className="small"
+                          >
+                            Apartment
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => setNewAccomType("Dorm")}
+                            className="small"
+                          >
+                            Dorm
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            onClick={() => setNewAccomType("Bedspace")}
+                            className="small"
+                          >
+                            Bedspace
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    ) : (
+                      <p className="small">
+                        {selectedAccom.ACCOMMODATION_TYPE}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Description */}
+                  <div className="adminviewlandlord-item">
+                    <p className="small-bold">Description</p>
+                    {editAccomsRoom ? (
+                      <input
+                        onChange={(e) => setNewAccomDescription(e.target.value)}
+                        placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris."
+                      ></input>
+                    ) : (
+                      <p className="small">
+                        {newAccomDescription
+                          ? newAccomDescription
+                          : selectedAccom.ACCOMMODATION_DESCRIPTION}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Location */}
+                  <div className="adminviewlandlord-item">
+                    <p className="small-bold">Address:</p>
+                    {editAccomsRoom ? (
+                      <input
+                        onChange={(e) => setNewAccomAddress(e.target.value)}
+                        placeholder="Somewhere in Elbi"
+                      ></input>
+                    ) : (
+                      <p className="small">
+                        {newAccomAddress
+                          ? newAccomAddress
+                          : selectedAccom.ACCOMMODATION_ADDRESS}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Amenities */}
+                  <div className="adminviewlandlord-item">
+                    <p className="small-bold">Amenities:</p>
+                    {editAccomsRoom ? (
+                      <input
+                        onChange={(e) => setNewAccomAmenities(e.target.value)}
+                        placeholder="Something Something"
+                      ></input>
+                    ) : (
+                      <p className="small">
+                        {newAccomAmenities
+                          ? newAccomAmenities
+                          : selectedAccom.ACCOMMODATION_AMENITIES}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* <Dropdown>
                     <Dropdown.Toggle
                       id="dropdown-basic"
-                      className="small adminviewlandlord-filter-dropdown-type"
+                      className="small adminviewlandlord-filter-dropdown-rooms"
                     >
-                      Apartment
+                      Rooms
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item className="small" href="#/action-1">
-                        Apartment
+                      <Dropdown.Item
+                        className="small adminviewlandlord-filter-dropdown-item"
+                        href="#/action-1"
+                      >
+                        Room1
                       </Dropdown.Item>
-                      <Dropdown.Item className="small" href="#/action-2">
-                        Bedspace
+                      <Dropdown.Item
+                        className="small adminviewlandlord-filter-dropdown-item"
+                        href="#/action-2"
+                      >
+                        Room2
                       </Dropdown.Item>
-                      <Dropdown.Item className="small" href="#/action-3">
-                        Dorm
+                      <Dropdown.Item
+                        className="small adminviewlandlord-filter-dropdown-item"
+                        href="#/action-3"
+                      >
+                        Room3
                       </Dropdown.Item>
                     </Dropdown.Menu>
-                  </Dropdown>
-                ) : (
-                  <p className="small">Apartment</p>
-                )}
+                  </Dropdown> */}
+
+                  {/* Room Name */}
+                  {/* <div className="adminviewlandlord-item">
+                    <p className="small-bold">Room Name</p>
+                    {editAccomsRoom ? (
+                      <input placeholder="Room 1"></input>
+                    ) : (
+                      <p className="small">Room 1</p>
+                    )}
+                  </div> */}
+
+                  {/* Capacity */}
+                  {/* <div className="adminviewlandlord-item">
+                    <p className="small-bold">Capacity:</p>
+                    {editAccomsRoom ? (
+                      <input type="number" min="0" placeholder="1"></input>
+                    ) : (
+                      <p className="small">1</p>
+                    )}
+                  </div> */}
+
+                  {/* Price */}
+                  {/* <div className="adminviewlandlord-item">
+                    <p className="small-bold">Price</p>
+
+                    {editAccomsRoom ? (
+                      <input type="number" min="0" placeholder="5000"></input>
+                    ) : (
+                      <p className="small">5000</p>
+                    )}
+                  </div> */}
+
+                  {/* Button */}
+                  <div className="adminviewlandlord-btns">
+                    {editAccomsRoom ? (
+                      <Button
+                        className="adminsavelandlord"
+                        onClick={handleSaveAccom}
+                      >
+                        Save
+                      </Button>
+                    ) : (
+                      <Button
+                        className="admineditlandlord"
+                        onClick={editAccomsRoomClicked}
+                      >
+                        Edit
+                      </Button>
+                    )}
+                  </div>
+                </div>
               </div>
-
-              {/* Description */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Description</p>
-                {editAccomsRoom ? (
-                  <input placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris."></input>
-                ) : (
-                  <p className="small">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus non tempor mauris.
-                  </p>
-                )}
-              </div>
-
-              {/* Location */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Location:</p>
-                {editAccomsRoom ? (
-                  <input placeholder="Somewhere in Elbi"></input>
-                ) : (
-                  <p className="small">Somewhere in Elbi</p>
-                )}
-              </div>
-
-              {/* Amenities */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Amenities:</p>
-                {editAccomsRoom ? (
-                  <input placeholder="Something Something"></input>
-                ) : (
-                  <p className="small">Something Something</p>
-                )}
-              </div>
-
-              <Dropdown>
-                <Dropdown.Toggle
-                  id="dropdown-basic"
-                  className="small adminviewlandlord-filter-dropdown-rooms"
-                >
-                  Rooms
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-1"
-                  >
-                    Room1
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-2"
-                  >
-                    Room2
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className="small adminviewlandlord-filter-dropdown-item"
-                    href="#/action-3"
-                  >
-                    Room3
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-
-              {/* Room Name */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Room Name</p>
-                {editAccomsRoom ? (
-                  <input placeholder="Room 1"></input>
-                ) : (
-                  <p className="small">Room 1</p>
-                )}
-              </div>
-
-              {/* Capacity */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Capacity:</p>
-                {editAccomsRoom ? (
-                  <input type="number" min="0" placeholder="1"></input>
-                ) : (
-                  <p className="small">1</p>
-                )}
-              </div>
-
-              {/* Price */}
-              <div className="adminviewlandlord-item">
-                <p className="small-bold">Price</p>
-
-                {editAccomsRoom ? (
-                  <input type="number" min="0" placeholder="5000"></input>
-                ) : (
-                  <p className="small">5000</p>
-                )}
-              </div>
-
-              {/* Button */}
-              <div className="adminviewlandlord-btns">
-                {editAccomsRoom ? (
-                  <Button
-                    className="adminsavelandlord"
-                    onClick={disableEditAccomsRoom}
-                  >
-                    Save
-                  </Button>
-                ) : (
-                  <Button
-                    className="admineditlandlord"
-                    onClick={editAccomsRoomClicked}
-                  >
-                    Edit
-                  </Button>
-                )}
-              </div>
-            </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </Modal.Body>

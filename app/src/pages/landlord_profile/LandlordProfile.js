@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import axios from "axios";
 import cookie from "cookie";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,26 +16,80 @@ import { Rating } from "@mui/material";
 import { AiFillPhone, AiFillCalendar } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { AddAccomsButton } from "../../atoms";
-const units = [1, 2]; // api connect here
+import { CardListing } from "../../organisms";
+
+import { useLocation } from "react-router-dom";
+
+const url = "https://mockup-backend-128.herokuapp.com";
 
 const LandlordProfile = () => {
+  const location = useLocation();
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [owned, setOwned] = useState([]);
+  const name = location.state.USER_FNAME + " " + location.state.USER_LNAME;
+  const number = location.state.USER_CONTACTNUM;
+  const email = location.state.USER_EMAIL;
+  const username = location.state.USER_USERNAME;
+  const [picture, setPicture] = useState("");
+
   useEffect(() => {
     // Check if authToken exists in cookie
     if (cookie.parse(document.cookie)["authToken"]) {
       console.log("Log in detected!");
       setLoggedIn(true);
+      axios
+        .post(url + "/owner/get-average-rating", {
+          username: username,
+        })
+        .then((response) => {
+          // console.log(response.data);
+          setRating(response.data.averageRating);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      axios
+        .post(url + "/accommodation/get-user-accommodations", {
+          ownerName: username,
+        })
+        .then((response) => {
+          console.log(response.data);
+          setOwned(response.data.result);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // axios
+      //   .post(url + "/user/get-user-pic", {
+      //     username: email,
+      //   })
+      //   .then((response) => {
+      //     console.log(response.data);
+      //     setPicture(response.data.imageUrl);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     } else {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
+
   return (
     <div>
       <NavBar />
       {isLoggedIn ? (
         <div className="landlord-profile-container">
-          <AddAccomsButton />
+          {cookie.parse(document.cookie)["authToken"].split("|")[2] ===
+          location.state.USER_USERNAME ? (
+            <AddAccomsButton />
+          ) : (
+            <></>
+          )}
           <Col className="body-container">
             <Row className="justify-content-md-center">
               {/* <Image
@@ -45,11 +100,15 @@ const LandlordProfile = () => {
           /> */}
             </Row>
             <Col className="text-center">
-              <h1 className="mt-4 header2 bold-green">WILLIAM GATES</h1>
+              <h1 className="mt-4 header2 bold-green">
+                {name}
+                {/* {cookie.parse(document.cookie)["authToken"].split("|")[3]} */}
+              </h1>
               <Rating
                 className="rating-medium"
-                defaultValue={3.5}
-                precision={0.5}
+                name="read-only"
+                value={rating}
+                // precision={0.5}
                 sx={{
                   fontSize: "3rem",
                   color: "#F0AF01",
@@ -60,16 +119,19 @@ const LandlordProfile = () => {
             <Col className="info-items">
               <Col className="info-item">
                 <MdEmail className="icon" />
-                <p className="regular">billgates@hotmail.com</p>
+                <p className="regular">
+                  {email}
+                  {/* {cookie.parse(document.cookie)["authToken"].split("|")[2]} */}
+                </p>
               </Col>
               <Col className="info-item">
                 <AiFillPhone className="icon" />
-                <p className="regular">09123456789</p>
+                <p className="regular">{number}</p>
               </Col>
-              <Col className="info-item">
+              {/* <Col className="info-item">
                 <AiFillCalendar className="icon" />
                 <p className="regular">Member since July 2022</p>
-              </Col>
+              </Col> */}
             </Col>
 
             <Col>
@@ -88,9 +150,9 @@ const LandlordProfile = () => {
             </DropdownButton>
           </Row> */}
               <Row className="justify-content-md-center mt-4">
-                {units.map((unit) => (
+                {owned.map((unit) => (
                   <div className="cardlist-flex mb-5">
-                    <CardListingAddRoom />
+                    <CardListing listing={unit} />
                   </div>
                 ))}
               </Row>

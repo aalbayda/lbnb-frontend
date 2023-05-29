@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
+import cookie from "cookie";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./login.css";
@@ -15,11 +16,6 @@ function Login(props) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [modalShow, setModalShow] = useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [invalidLogin, setInvalidLogin] = useState(false);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -72,19 +68,31 @@ function Login(props) {
           setMissingLogin(true);
         } else if (response.data.success) {
           // console.log(response.data);
-          // console.log(response.data);
+          console.log(response.data);
           let date = new Date();
           date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
           document.cookie = `authToken=${
-            response.data.authToken
+            response.data.authToken +
+            "|" +
+            response.data.userType +
+            "|" +
+            response.data.username +
+            "|" +
+            response.data.fname +
+            " " +
+            response.data.lname +
+            "|" +
+            response.data.userId
           }; path=/; expires=${date.toUTCString()}`;
-
+          console.log(document.cookie);
           // set whether personal or business
 
           window.location.reload();
         } else if (!response.data.success) {
+          console.log("not a success");
           console.log(response.data);
-          setWrongLogin(true);
+          setMissingLogin(true);
+          console.log(wrongLogin);
         } else {
           console.log(response.data);
         }
@@ -133,7 +141,17 @@ function Login(props) {
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-                At least one field is missing or invalid!
+                At least one field is invalid!
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {wrongLogin ? (
+              <div
+                className="tiny text-center"
+                style={{ fontStyle: "italic", color: "red" }}
+              >
+                Incorrect credentials!
               </div>
             ) : (
               <div></div>
@@ -207,17 +225,7 @@ function Login(props) {
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-                At least one field is missing or invalid!
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {wrongLogin ? (
-              <div
-                className="tiny text-center"
-                style={{ fontStyle: "italic", color: "red" }}
-              >
-                Incorrect credentials!
+                At least one field is invalid!
               </div>
             ) : (
               <div></div>

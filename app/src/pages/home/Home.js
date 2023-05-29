@@ -3,6 +3,7 @@ import axios from "axios";
 import "./home.css";
 // import {apartment1, apartment2, apartment3, apartment4, apartment5, dorm6, hotel1, hotel2, hotel3, hotel4, hotel5, dorm1, dorm2, dorm3, dorm4, dorm5} from "../../assets/images";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
+
 import {
   NavBar,
   Banner,
@@ -54,6 +55,7 @@ const Home = () => {
 
   const handleQuery = (queries) => {
     setQueries(queries);
+    console.log(queries);
     console.log("passed up successfully");
   };
 
