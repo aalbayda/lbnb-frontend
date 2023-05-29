@@ -18,6 +18,7 @@ const Multilayer_filter = (props) => {
   const [filterType, setFilterType] = useState("");
 
   const handleSearched = () => {
+
     // let filterReq = "";
     // if (filterType === "Dorm") {
     //   filterReq = "Lodge";

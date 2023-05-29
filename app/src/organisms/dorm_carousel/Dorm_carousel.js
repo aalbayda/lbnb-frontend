@@ -36,7 +36,10 @@ const Dorm_carousel = ({topDorms}) =>  {
     return (
         <div className="dorm-carousel-container">
             <p className="header3 title">Dorm</p>
-            <p className="small subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <p className="small subtitle">
+                    Experience student-friendly dormitories,
+                    designed to cater the needs of budget-conscious students
+                    <br/> seeking comfortable and conducive learning environment. </p>
             <Carousel 
                 activeIndex={index}
                 onSelect={handleSelect}
@@ -66,9 +69,9 @@ const Dorm_carousel = ({topDorms}) =>  {
                         <Dorm
                           topDorms = {topDorms[4]}
                         />
-                        <Dorm
+                        {/* <Dorm
                           topDorms = {topDorms[5]}
-                        />
+                        /> */}
                     </div>
                 </Carousel.Item>
             </Carousel>

@@ -8,6 +8,7 @@ import { NavBar,
  } from "../../organisms";
 import {useLocation} from "react-router-dom";
 
+
 const Details = () => {
   const location = useLocation();
 
@@ -27,7 +28,7 @@ const Details = () => {
   const isFavorite= location.state.isFavorite ? location.state.isFavorite: false;
 
  
-  
+ 
   return (
     <div class="detials-page-main-div">
       <NavBar />

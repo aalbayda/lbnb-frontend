@@ -6,14 +6,16 @@
 
   align-items: center;
   justify-content: center;
-  margin-top: -25px;
+  margin-top: -125px;
   width: 100%;
+  padding: 100px;
+  padding-bottom: 0px;
 }
 
 .mlf-upper {
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 100%;
 
   justify-content: flex-start;
   align-items: flex-start;
@@ -25,7 +27,7 @@
 
   align-items: center;
   justify-content: center;
-  width: 80%;
+  width: 100%;
 }
 
 .divTable {
@@ -41,7 +43,7 @@
 
     text-align: center;
 
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: none;
   }
@@ -57,8 +59,13 @@
   align-items: center;
 
   /* border: 0.0001em solid black; */
+  padding: 10px;
 
   box-shadow: 0 3px 2px rgba(.1,.1,.1,.1);
+}
+
+div.mb-3{
+  margin-bottom: 0px !important; 
 }
 
 .divTableCell.search {
@@ -110,13 +117,14 @@
   padding: 10px;
 }
 
-.InElbi-right {
+div.InElbi-right {
   display: flex;
   flex-direction: column;
 
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .capacity {
   padding: 10px;
@@ -132,6 +140,12 @@
   background-color: var(--color-light-accent-green);
   border: none;
   width: 150px;
+}
+
+.small.filter-dropdown:active,
+.small.filter-dropdown:focus,
+.small.filter-dropdown:hover{
+  background-color: var(--color-heading-dark);
 }
 
 .carousel-btn.btn {
@@ -151,3 +165,27 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
+
+.custom-radio .form-check-input[type='radio'] {
+  /* Hide the default radio button */
+  display: none;
+}
+
+.custom-radio .form-check-input[type='radio'] + .form-check-label:before {
+  /* Define the custom radio button */
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  margin-left: -15px;
+  border: 2px solid var(--color-secondary-black); /* Border color for unchecked state */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-radio .form-check-input[type='radio']:checked + .form-check-label:before {
+  /* Styles for the checked radio button */
+  background-color: var(--color-light-accent-green); /* Fill color for checked state */
+  border-color: var(--color-light-accent-green); /* Border color for checked state */
+}

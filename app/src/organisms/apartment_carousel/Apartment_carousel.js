@@ -40,7 +40,10 @@ const Apartment_carousel = ({ topApartments }) => {
       >
         {topApartments.map((apt) => (
           <Carousel.Item>
-            <Apartment topApartments={apt}></Apartment>
+            <Apartment 
+              key={topApartments.id}
+              topApartments={apt}>
+            </Apartment>
           </Carousel.Item>
         ))}
       </Carousel>

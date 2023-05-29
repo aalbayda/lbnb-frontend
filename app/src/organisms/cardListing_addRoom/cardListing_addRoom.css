@@ -97,6 +97,30 @@
   color: var(--color-yellow-accent);
 }
 
+.card-listing-add-room {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 1135px; 
+    height: 299px; 
+    background: rgba(217, 217, 217, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    /* flex-wrap: wrap; */
+}
+
+.addRoom-btn.btn {
+    background-color: transparent;
+    color: var(--color-heading-dark);
+    border: none;
+    cursor: pointer !important;
+}
+
+.addRoom-btn.btn:focus, .addRoom-btn.btn:hover, .addRoom-btn.btn:active, .addRoom-btn.btn:visited{
+    background-color: transparent !important;
+    color: var(--color-light-accent-green) !important;
+    cursor: pointer !important;
+=======
 .card-listing {
   display: flex;
   margin: 0;

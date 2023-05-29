@@ -1,3 +1,4 @@
+
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
@@ -5,6 +6,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import { HeartReact } from "../../atoms";
 import { Rating } from "@mui/material";
 import axios from "axios";
+import {ChatButton} from '../../atoms'
 const url = "https://mockup-backend-128.herokuapp.com";
 
 const ListingDetails = (props) => {
@@ -104,8 +106,24 @@ const ListingDetails = (props) => {
     );
   });
 
+    // const {
+  //   ACCOMMODATION_ADDRESS,
+  //   ACCOMMODATION_AMENITIES,
+  //   ACCOMMODATION_DESCRIPTION,
+  //   ACCOMMODATION_ID,
+  //   ACCOMMODATION_LOCATION,
+  //   ACCOMMODATION_NAME,
+  //   ACCOMMODATION_OWNER_ID,
+  //   ACCOMMODATION_TYPE,
+  //   AVERAGE_RATING,
+  // } = props;
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <Container>
+      {console.log("--- inside")}
+      {console.log(props)}
+      {console.log(props.ACCOMMODATION_NAME)}
       <Row className="listing-detials">
         <div className="room-img-div">
           <img className="room-img" src={image} alt="accommodation-img"></img>
@@ -142,6 +160,7 @@ const ListingDetails = (props) => {
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>
+            <ChatButton/>
           </div>
         </Col>
         <Col className="heart-icon-col">
@@ -152,6 +171,7 @@ const ListingDetails = (props) => {
           />
         </Col>
       </Row>
+      <ReportModal show={modalShow} onHide={() => setModalShow(false)}/>
     </Container>
   );
 };

@@ -109,10 +109,45 @@ p {
   --font-family-text: "Poppins", sans-serif;
 
   --color-heading-dark: #1c3103;
+  --color-report: #ff2626;
   --color-light-accent-yellow: #fcf186;
   --color-light-accent-green: #9caa64;
   --color-primary-black: #191919;
   --color-secondary-black: #404040;
   --color-yellow-accent: #f0af01;
   --color-background: #f9f6f2;
+}
+
+/* ANIMATIONS */
+.shine-div {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-div::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.shine-div:hover::before {
+  opacity: 1;
+  animation: shine 1s forwards;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

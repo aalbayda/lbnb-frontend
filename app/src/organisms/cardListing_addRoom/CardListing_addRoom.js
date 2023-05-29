@@ -23,7 +23,7 @@ const CardListing_addRoom = ({ unit }) => {
   const reviews = "(32 reviews)";
 
   return (
-    <div className="card-listing">
+    <div className="card-listing-add-room">
       {/* fixed variable width column */}
       <Col md="auto">
         <div className="img-div">

@@ -72,10 +72,8 @@ p {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.login-btn.btn:focus,
 .login-btn.btn:hover,
-.login-btn.btn:active,
-.login-btn.btn:visited {
+.login-btn.btn:active {
   background-color: var(--color-heading-dark) !important;
   color: var(--color-background);
   border: none;
