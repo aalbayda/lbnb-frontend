@@ -26,28 +26,8 @@ const ListingDetails = (props) => {
   const isFavorite = props.isFavorite ? props.isFavorite : false;
   const separator = "|";
 
-  const rooms_dummy = [
-    {
-      ROOM_ID: 4,
-      ROOM_NAME: "Cozy Single Room",
-      ROOM_PRICE: 2000,
-      ROOM_CAPACITY: 1,
-      ROOM_ISARCHIVED: 0,
-      ACCOMODATION_ID: 4,
-    },
-    {
-      ROOM_ID: 54,
-      ROOM_NAME: "Standard Single Room",
-      ROOM_PRICE: 1500,
-      ROOM_CAPACITY: 2,
-      ROOM_ISARCHIVED: 0,
-      ACCOMODATION_ID: 4,
-    },
-  ];
-
   // // to fetch rooms
-  const [rooms, setRooms] = useState(rooms_dummy);
-  // const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]);
   useEffect(() => {
     axios
       .post(url + "/accommodation/get-rooms", {
@@ -106,24 +86,10 @@ const ListingDetails = (props) => {
     );
   });
 
-    // const {
-  //   ACCOMMODATION_ADDRESS,
-  //   ACCOMMODATION_AMENITIES,
-  //   ACCOMMODATION_DESCRIPTION,
-  //   ACCOMMODATION_ID,
-  //   ACCOMMODATION_LOCATION,
-  //   ACCOMMODATION_NAME,
-  //   ACCOMMODATION_OWNER_ID,
-  //   ACCOMMODATION_TYPE,
-  //   AVERAGE_RATING,
-  // } = props;
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container>
-      {console.log("--- inside")}
-      {console.log(props)}
-      {console.log(props.ACCOMMODATION_NAME)}
       <Row className="listing-detials">
         <div className="room-img-div">
           <img className="room-img" src={image} alt="accommodation-img"></img>
@@ -160,7 +126,7 @@ const ListingDetails = (props) => {
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>
-            <ChatButton/>
+            {/* <ChatButton/> */}
           </div>
         </Col>
         <Col className="heart-icon-col">
@@ -171,7 +137,7 @@ const ListingDetails = (props) => {
           />
         </Col>
       </Row>
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)}/>
+      {/* <ReportModal show={modalShow} onHide={() => setModalShow(false)}/> */}
     </Container>
   );
 };

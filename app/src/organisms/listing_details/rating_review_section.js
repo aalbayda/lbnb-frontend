@@ -26,7 +26,7 @@ const RatingReviewSection =(props)=>{
   ]
 
   //to fetch review from the backend
-  const[reviews, setReviews]=React.useState(review_dummy);
+  const[reviews, setReviews]=React.useState([]);
   useEffect(()=>{
     axios.post(url+"/accommodation/get-reviews", {
       accommodationName:accommName

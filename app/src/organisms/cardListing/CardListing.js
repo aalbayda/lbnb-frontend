@@ -15,6 +15,7 @@ const url = "https://mockup-backend-128.herokuapp.com";
 const CardListing = ({ listing }) => {
   //username in dummy - do authentication
   const userName = "student2";
+  
   const [imageAPI, setImageAPI] = useState("");
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";

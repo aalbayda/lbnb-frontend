@@ -36,7 +36,6 @@
   margin: 0;
   padding: 0;
   width: 299px;
-
   position: relative;
 }
 
@@ -120,7 +119,8 @@
     background-color: transparent !important;
     color: var(--color-light-accent-green) !important;
     cursor: pointer !important;
-=======
+}
+
 .card-listing {
   display: flex;
   margin: 0;
