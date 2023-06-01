@@ -67,7 +67,6 @@ const Home = () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    console.log(report);
   };
 
   const handleQuery = (queries, filters) => {
@@ -130,6 +129,8 @@ const Home = () => {
                     description={query.ACCOMMODATION_DESCRIPTION}
                     amenities={query.ACCOMMODATION_AMENITIES}
                     max_price={query.MAX_PRICE}
+                    owner={query.USER_FNAME + " " + query.USER_LNAME}
+                    rating={query.rating}
                   />
                 ))
               ) : (

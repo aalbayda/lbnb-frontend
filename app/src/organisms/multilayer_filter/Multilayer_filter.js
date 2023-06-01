@@ -87,7 +87,6 @@ const Multilayer_filter = (props) => {
           <div className="divTableCell price">
             <ImPriceTags className="icon" />
             <input
-              disabled
               className="small mlf_price"
               placeholder="Max Price"
               type="number"

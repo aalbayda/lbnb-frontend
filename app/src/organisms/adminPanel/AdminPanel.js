@@ -2,7 +2,12 @@ import { React, useState, useEffect } from "react";
 import cookie from "cookie";
 import "./adminPanel.css";
 import "../../index.css";
-import { UserTable, LandlordTable, AccomsTable } from "../../molecules";
+import {
+  UserTable,
+  LandlordTable,
+  AccomsTable,
+  ReportsTable,
+} from "../../molecules";
 
 const AdminPanel = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -71,6 +76,18 @@ const AdminPanel = () => {
             >
               Accoms
             </div>
+
+            {/* Reports Tab */}
+            <div
+              className={
+                toggleState === 4
+                  ? "tabs small-bold active-tabs"
+                  : "tabs small-bold"
+              }
+              onClick={() => toggleTab(4)}
+            >
+              Reports
+            </div>
           </div>
           <div className="tab-header active-tabs"></div>
 
@@ -107,6 +124,17 @@ const AdminPanel = () => {
               }
             >
               <AccomsTable />
+            </div>
+
+            {/* Content 3 */}
+            <div
+              className={
+                toggleState === 4
+                  ? "content active-content"
+                  : "content inactive-content"
+              }
+            >
+              <ReportsTable />
             </div>
           </div>
         </div>

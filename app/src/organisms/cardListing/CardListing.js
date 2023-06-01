@@ -6,23 +6,25 @@ import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { ViewMoreButton } from "../../atoms";
 import { RiHeart3Fill } from "react-icons/ri";
-
-
+import { Rating } from "@mui/material";
 
 const CardListing = (props) => {
-
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const name = props.name ? props.name : "Casa de Felicidad";
-  const location = props.location ? "📍 " + props.location : "📍 Los Banos, Laguna";
-  const capacity = props.capacity ? "🚪 " + props.capacity : "🚪 Accommodates 3 people";
-  const owner = "Owner";
-  const description = props.description ? props.description :
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
+  const location = props.location
+    ? "📍 " + props.location
+    : "📍 Los Banos, Laguna";
+  const capacity = props.capacity
+    ? "🚪 " + props.capacity
+    : "🚪 Accommodates 3 people";
+  const owner = props.owner ? props.owner : "Owner";
+  const description = props.description
+    ? props.description
+    : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
   const amenities = props.amenities ? props.amenities : "";
   const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱500";
   const stars = "★★★★☆";
-  const reviews = "(32 reviews)";
 
   return (
     <div className="card-listing zoom-in-effect">
@@ -51,7 +53,9 @@ const CardListing = (props) => {
             </p>
             <p className="small">{location}</p>
           </div>
-          <p className="small accom-desc">{description + " " + amenities + "."}</p>
+          <p className="small accom-desc">
+            {description + " " + amenities + "."}
+          </p>
         </div>
       </Col>
 
@@ -60,14 +64,25 @@ const CardListing = (props) => {
           <div className="price-section">
             <h2 className="large-bold price-range">{price}</h2>
             <div>
-              <p className="small review-stars">{stars}</p>
-              <p className="small review-num">{reviews}</p>
+              <p className="small review-stars">
+                {props.rating ? (
+                  <Rating
+                    className="rating-medium"
+                    name="read-only"
+                    value={props.rating}
+                  />
+                ) : (
+                  stars
+                )}
+              </p>
             </div>
           </div>
           <Button
-              className="small-bold carousel-btn"
-              onClick={() => (window.location.href += "details")}
-            >View More</Button>
+            className="small-bold carousel-btn"
+            onClick={() => (window.location.href += "details")}
+          >
+            View More
+          </Button>
         </div>
       </Col>
     </div>

@@ -73,7 +73,9 @@ const UserProfile = () => {
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
-          <Row className="justify-content-md-center">Unauthorized route.</Row>
+          <Row className="justify-content-md-center">
+            Unauthorized route. {(window.location.href = "/")}
+          </Row>
         </Container>
       )}
     </div>

@@ -1,16 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
+import cookie from "cookie";
 import { RiHeart3Fill } from "react-icons/ri";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import { RoomButtons, ReportModal
-} from "../../molecules";
+import { RoomButtons, ReportModal } from "../../molecules";
 import { Rating } from "@mui/material";
-import {ChatButton} from '../../atoms'
+import { ChatButton } from "../../atoms";
 
-
-const ListingDetails = ({props}) => {
+const ListingDetails = ({ props }) => {
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   // const description =
@@ -23,7 +22,7 @@ const ListingDetails = ({props}) => {
   const rating = "1.5K";
   const capacity = "300";
 
-    // const {
+  // const {
   //   ACCOMMODATION_ADDRESS,
   //   ACCOMMODATION_AMENITIES,
   //   ACCOMMODATION_DESCRIPTION,
@@ -51,26 +50,29 @@ const ListingDetails = ({props}) => {
               <div className="name-icon-list">
                 <h1 className="headings">{props.ACCOMMODATION_NAME}</h1>
                 <div className="listing-details-icons">
-                  <Button 
-                    className="report-button"
-                    onClick={() => setModalShow(true)}
-                  >
-                    <MdReportGmailerrorred className="icon report-icon"/>
-                  </Button>
+                  {cookie.parse(document.cookie)["authToken"] ? (
+                    <Button
+                      className="report-button"
+                      onClick={() => setModalShow(true)}
+                    >
+                      <MdReportGmailerrorred className="icon report-icon" />
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                   <Button variant="outline-light">
                     {" "}
-                    <RiHeart3Fill className="heart-icon" />
-                    {" "}
+                    <RiHeart3Fill className="heart-icon" />{" "}
                   </Button>
                 </div>
               </div>
               <h7 className="headings">{props.ACCOMMODATION_LOCATIONS}</h7>
               <div class="star-separator-capacity-div">
-                  <Rating
-                    name="read-only"
-                    readOnly
-                    value={props.AVERAGE_RATING}
-                  />
+                <Rating
+                  name="read-only"
+                  readOnly
+                  value={props.AVERAGE_RATING}
+                />
                 {/* <p className="star-separator-capacity-text">
                   {stars} {separator}{" "}
                 </p>
@@ -86,16 +88,18 @@ const ListingDetails = ({props}) => {
               <p>{props.ACCOMMODATION_DESCRIPTION}</p>
             </div>
             <div className="room-buttons">
-              <RoomButtons/>
+              <RoomButtons />
             </div>
-            <ChatButton/>
+            <ChatButton />
           </div>
-
         </Col>
-        <Row className="heart-icon-col">
-        </Row>
+        <Row className="heart-icon-col"></Row>
       </Row>
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)}/>
+      <ReportModal
+        props={props}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </Container>
   );
 };

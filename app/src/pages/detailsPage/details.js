@@ -1,14 +1,13 @@
 import React from "react";
 import "./details.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NavBar,
-    ListingDetails,
-    RatingReviewSection,
-    SubmitRatingReviewSect
- } from "../../organisms";
- import {useLocation} from 'react-router-dom';
-
-
+import {
+  NavBar,
+  ListingDetails,
+  RatingReviewSection,
+  SubmitRatingReviewSect,
+} from "../../organisms";
+import { useLocation } from "react-router-dom";
 
 const Details = () => {
   const location = useLocation();
@@ -29,11 +28,9 @@ const Details = () => {
   return (
     <div class="detials-page-main-div">
       <NavBar />
-      <ListingDetails 
-        props = {props}
-      />
-      <RatingReviewSection/>
-      <SubmitRatingReviewSect/>
+      <ListingDetails props={props} />
+      <RatingReviewSection />
+      <SubmitRatingReviewSect />
     </div>
   );
 };
