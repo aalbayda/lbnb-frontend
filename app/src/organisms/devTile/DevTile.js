@@ -2,12 +2,12 @@ import { React } from "react";
 import "./devTile.css";
 import { banner1 } from "../../assets/images";
 import {AiFillGithub, AiFillLinkedin} from 'react-icons/ai';
-const DevTile = ({nickname, name, email, team}) => {
+const DevTile = ({nickname, name, email, team, photo}) => {
     return (
         <div className="devtile-container">
         <div className="devtile-card">
             <div className="devtile-card-upper">
-                <img className="photo d-block w-100" src={banner1} alt="First slide" />
+                <img className="photo d-block w-100" src={photo} alt="First slide" />
             </div>
             <div className="devtile-card-lower">
                 <p className="header4 center">{nickname}</p>

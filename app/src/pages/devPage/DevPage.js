@@ -6,7 +6,7 @@ import {
     Footer,
     DevTile
   } from "../../organisms";
-
+import { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12} from '../../assets/images';
 const DevPage = () => {
     return (
         <div className="devpage-container">
@@ -19,6 +19,7 @@ const DevPage = () => {
                         name={"Rey Russel Dayahan"}
                         team={"Backend Developer"}
                         email={"rrdayahan@up.edu.ph"}
+                        photo={image2}
                     />
                 <div className="team-members-list">
                     <p className="header3 bold">Team Heads</p>
@@ -28,12 +29,14 @@ const DevPage = () => {
                             name={"Genesis Topinio"}
                             team={"Backend Developer"}
                             email={"gntopinio@up.edu.ph"}
+                            photo={image11}
                         />
                         <DevTile
                             nickname={"Garchi"}
                             name={"Leonard Garchitorena"}
                             team={"Database Developer"}
                             email={"lpgarchitorena@up.edu.ph"}
+                            photo={image5}
                         />
                         <DevTile 
                             nickname={"Bob"}
@@ -50,25 +53,29 @@ const DevPage = () => {
                             nickname={"Mark"}
                             name={"Mark Lewis Damalerio"}
                             team={"Frontend Developer"}
-                            email={"mldamalerio@up.edu.ph"}                          
+                            email={"mldamalerio@up.edu.ph"}
+                            photo={image7}                      
                         />
                         <DevTile
                             nickname={"Gnet"}
                             name={"Gwyneth Balucio"}
-                            team={"Database & Frontend Developer"}
-                            email={"gnbalucio@up.edu.ph"}                            
+                            team={"DB & Frontend Developer"}
+                            email={"gnbalucio@up.edu.ph"}
+                            photo={image8}                            
                         />
                         <DevTile 
                             nickname={"Kael"}
                             name={"Michael Jay Makiling"}
                             team={"Frontend Developer"}
-                            email={"mrmakiling@up.edu.ph"}                           
+                            email={"mrmakiling@up.edu.ph"}   
+                            photo={image1}                        
                         />
                         <DevTile
                             nickname={"Jra"}
                             name={"Jramae Gallos"}
                             team={"Frontend Developer"}
-                            email={"jmgallos@up.edu.ph"}                           
+                            email={"jmgallos@up.edu.ph"}
+                            photo={image3}                        
                         />
                     </div>
                 </div>
@@ -79,33 +86,38 @@ const DevPage = () => {
                             nickname={"Lyco"}
                             name={"Lyco Sheen Lacuesta"}
                             team={"Backend Developer"}
-                            email={"lslacuesta@up.edu.ph"}                           
+                            email={"lslacuesta@up.edu.ph"}
+                            photo={image9}                           
                         />
                         <DevTile
                             nickname={"Kyle"}
                             name={"Kyle Martin Villagen"}
                             team={"Backend Developer"}
-                            email={"kmvillagen@up.edu.ph"}                           
+                            email={"kmvillagen@up.edu.ph"}
+                            photo={image12}                           
                         />
                     </div>
                     <div className="team-listb">
                         <DevTile
                             nickname={"Brian"}
                             name={"Loria Brian"}
-                            team={"Database & Backend Developer"}
-                            email={"bnloria@up.edu.ph"}                           
+                            team={"DB & Backend Developer"}
+                            email={"bnloria@up.edu.ph"}
+                            photo={image4}                           
                         />
                         <DevTile
                             nickname={"Dale"}
                             name={"Alesundreau Ratuiste"}
-                            team={"Database & Backend Developer"}
-                            email={"adratuiste@up.edu.ph"}                            
+                            team={"DB & Backend Developer"}
+                            email={"adratuiste@up.edu.ph"}
+                            photo={image10}                            
                         />
                         <DevTile
                             nickname={"Kyle"}
                             name={"Kyle Sotto"}
-                            team={"Database & Backend Developer"}
-                            email={"klsotto@up.edu.ph"}                            
+                            team={"DB & Backend Developer"}
+                            email={"klsotto@up.edu.ph"}
+                            photo={image6}                            
                         />
                     </div>
                 </div>
