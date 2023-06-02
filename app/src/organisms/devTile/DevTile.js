@@ -2,7 +2,7 @@ import { React } from "react";
 import "./devTile.css";
 import { banner1 } from "../../assets/images";
 import {AiFillGithub, AiFillLinkedin} from 'react-icons/ai';
-const DevTile = ({nickname, name, email, team, photo}) => {
+const DevTile = ({nickname, name, email, team, photo, github, linkedin}) => {
     return (
         <div className="devtile-container">
         <div className="devtile-card">
@@ -17,16 +17,18 @@ const DevTile = ({nickname, name, email, team, photo}) => {
                 <div className="devtile_links">
                     <p>Socials</p>
                     <div className="devtile_logos">
-                        <AiFillGithub className="devtile_icon"/>
-                        <AiFillLinkedin className="devtile_icon"/>
+                        <a href={github} className="link">
+                            <AiFillGithub className="devtile_icon"/>
+                        </a>
+                        {linkedin !== "" ? (
+                        <a href={linkedin} className="link">
+                            <AiFillLinkedin className="devtile_icon" />
+                        </a>
+                        ) : (
+                        <div></div>
+                        )}
                     </div>
                 </div>
-            {/* <Button
-                className="small-bold carousel-btn"
-                onClick={() => (window.location.href += "details")}
-            >
-                View More
-            </Button> */}
             </div>
         </div>
         </div>

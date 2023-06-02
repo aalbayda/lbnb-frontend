@@ -75,6 +75,7 @@
     height: 30px;
     width: 30px;
     color: var(--color-light-accent-green);
+    transition: color 0.3s ease;
 }
 .devtile-card-upper{
     position: relative;
@@ -89,11 +90,12 @@ transition: transform 0.3s ease-out;
 transform: scale(1.1);
 }
 
-.devtile_icon {
+.link:hover .devtile_icon {
     transition: transform 0.3s ease-out;
-}
-
-.devtile_icon:hover {
-    color: var(--color-dark-header);
+    color: #1c3103 !important;
     transform: translateY(-3px);
-}
+  }
+  
+  .link {
+    color: inherit; 
+  }

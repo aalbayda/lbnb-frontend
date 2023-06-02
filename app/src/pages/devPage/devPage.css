@@ -4,10 +4,6 @@
 
     width: 100%;
 
-
-    /* margin-top: 100px; */
-    /* padding: 20px; */
-
     justify-content: center;
     align-items: center;
 }
@@ -24,7 +20,7 @@
 }
 
 .header1.bold.light-green{
-    color:var(--color-heading-dark);
+    color: #1c3103 !important;
     font-weight: bold;
 }
 

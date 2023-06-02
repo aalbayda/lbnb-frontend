@@ -23,4 +23,5 @@ export { default as image9 } from './devs/image9.jpg';
 export { default as image10 } from './devs/image10.jpg';
 export { default as image11 } from './devs/image11.jpg';
 export { default as image12 } from './devs/image12.jpg';
+export { default as image13 } from './devs/image13.jpg';
 export { default as logo } from './SVG/LBnB_logo.svg';
