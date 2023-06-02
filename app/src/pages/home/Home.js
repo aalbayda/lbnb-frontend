@@ -13,6 +13,7 @@ import {
   Multilayerfilter,
   CardListing,
 } from "../../organisms";
+// import images from '../../assets/images/dorms';
 import { Row, Button } from "react-bootstrap";
 const url = "https://mockup-backend-128.herokuapp.com";
 
@@ -26,6 +27,14 @@ const Home = () => {
   const [topApartments, setTopApartments] = useState([]);
   const [topDorms, setTopDorms] = useState([]);
   const [topHotels, setTopHotels] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState('');
+
+  // const handleSearch = (event) => {
+  //   setSearchQuery(event.target.value);
+  // }
+  
+  // const filteredImages = images.filter(image => image.includes(searchQuery));
+
 
   useEffect(() => {
     const fetchData = async (type) => {
@@ -35,7 +44,6 @@ const Home = () => {
           { type }
         );
         console.log(`-${type}-`);
-
         console.log(response.data);
 
         return response.data.accommodation;
@@ -53,6 +61,7 @@ const Home = () => {
       setTopDorms(dorms);
       setTopApartments(apartments);
       setTopHotels(hotels);
+
       setLoading(false);
     });
   }, []);

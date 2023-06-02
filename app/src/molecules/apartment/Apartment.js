@@ -5,36 +5,18 @@ import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
 import { Rating } from "@mui/material";
 // import { StarRating } from "../../atoms";
-import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+// import axios from "axios";
+// const url = "https://mockup-backend-128.herokuapp.com";
+import images from '../../assets/images/apartments/images';
 
 const Apartment = ({ topApartments }) => {
   const [photo, setPhoto] = useState(null);
   let navigate = useNavigate();
-
   useEffect(() => {
-    const fetchData = async (photo) => {
-      try {
-        const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
-        console.log(`-${photo}-`);
-        console.log(response.data);
-        // console.log("Success: ", response.data.success)
-        if (response.data.success === true){
-          setPhoto(response.data.imageUrl);
-        } else {
-          console.log("huh?")
-          setPhoto(banner1);
-        }
-        // return response.data.accommodation;
-      } catch (error) {
-        console.error(error);
-        // return [];
-      }
-    };
-  
-    // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
-    fetchData(topApartments.ACCOMMODATION_NAME);
-  }, []);
+    const filteredImageKey = Object.keys(images).find(key => key === topApartments.ACCOMMODATION_NAME);
+    const filteredImage = filteredImageKey ? images[filteredImageKey] : banner1;
+    setPhoto(filteredImage);
+  }, [topApartments.ACCOMMODATION_NAME]);
 
   return (
     <div className="apartment-carousel-container">
