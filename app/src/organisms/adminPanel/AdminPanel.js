@@ -28,7 +28,7 @@ const AdminPanel = () => {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
 
   // const [accoms, setAccoms] = React.useState([]);
   // const [users, setUsers] = React.useState([]);
