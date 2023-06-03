@@ -2,14 +2,22 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import "./login.css";
 import Form from "react-bootstrap/Form";
 const url = "https://mockup-backend-128.herokuapp.com";
 
 function Login(props) {
   const [toggleState, setToggleState] = useState(1);
+  const [loading, setLoading] = useState(false);
+
   const [missingLogin, setMissingLogin] = useState(false);
   const [wrongLogin, setWrongLogin] = useState(false);
+
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
+  const [signupErrorMessage, setSignupErrorMessage] = useState("");
+  const [radioClicked, setRadioClicked] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
@@ -18,6 +26,8 @@ function Login(props) {
 
   const toggleTab = (index) => {
     setToggleState(index);
+    setLoginErrorMessage("");
+    setSignupErrorMessage("");
   };
 
   useEffect(() => {
@@ -25,8 +35,35 @@ function Login(props) {
   }, []);
 
   const handleSignUp = () => {
+    setLoading(true);
+
     if (email === "" || password === "" || fname === "" || lname === "") {
-      setMissingLogin(true);
+      setSignupErrorMessage("At least one field is missing or invalid!");
+      setLoading(false);
+      return;
+    }
+
+    const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
+    const emailMatch = regexPattern.test(email);
+
+    if (!emailMatch) {
+      setSignupErrorMessage("Invalid email!");
+      setLoading(false);
+      return;
+    }
+
+    const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
+    const passwordMatch = passwordPattern.test(password);
+
+    if (!passwordMatch) {
+      setSignupErrorMessage("Password must contain at least 8 alphanumeric characters");
+      setLoading(false);
+      return;
+    }
+
+    if (!radioClicked) {
+      setSignupErrorMessage("Click one type of account!");
+      setLoading(false);
       return;
     }
 
@@ -42,18 +79,35 @@ function Login(props) {
         isPersonalAccount: !isBusinessAccount,
       })
       .then(function (response) {
+        setSignupErrorMessage("");
+        setRadioClicked(false);
         console.log(response);
         window.location.reload();
+        setLoading(false);
       })
       .catch(function (error) {
         console.log("Error!!!");
         console.log(error);
+        setLoading(false);
       });
   };
 
   const handleLogin = () => {
+    setLoading(true);
+
     if (email === "" || password === "") {
-      setMissingLogin(true);
+      // setMissingLogin(true);
+      setLoginErrorMessage("At least one field is missing or invalid!");
+      setLoading(false);
+      return;
+    }
+
+    const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
+    const emailMatch = regexPattern.test(email);
+
+    if (!emailMatch) {
+      setLoginErrorMessage("Invalid email!");
+      setLoading(false);
       return;
     }
 
@@ -65,7 +119,10 @@ function Login(props) {
       .then(function (response) {
         if (!response.data) {
           setMissingLogin(true);
+          setLoading(false);
         } else if (response.data.success) {
+          setLoginErrorMessage("");
+
           // console.log(response.data);
           console.log(response.data);
           let date = new Date();
@@ -87,18 +144,21 @@ function Login(props) {
           // set whether personal or business
 
           window.location.reload();
+          setLoading(false);
         } else if (!response.data.success) {
           console.log("not a success");
           console.log(response.data);
-          setMissingLogin(true);
-          console.log(wrongLogin);
+          setLoginErrorMessage("Wrong credentials!");
+          setLoading(false);
         } else {
           console.log(response.data);
+          setLoading(false);
         }
       })
       .catch(function (error) {
         console.log("Error!!!");
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -132,10 +192,25 @@ function Login(props) {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button className="login-btn" onClick={handleLogin}>
+
+            {loading 
+            ? <p>Loading</p>
+            : <Button className="login-btn" onClick={handleLogin}>
               SIGN IN
             </Button>
-            {missingLogin ? (
+            }
+            
+
+            {loginErrorMessage !== "" &&
+            <div
+                className="tiny text-center"
+                style={{ fontStyle: "italic", color: "red" }}
+              >
+              {loginErrorMessage}
+              </div>
+            }
+
+            {/* {missingLogin ? (
               <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
@@ -145,6 +220,15 @@ function Login(props) {
             ) : (
               <div></div>
             )}
+
+            {/* Check if invalid email */}
+            {/* {invalidEmail && <div
+                className="tiny text-center"
+                style={{ fontStyle: "italic", color: "red" }}
+              >
+                Invalid email!
+              </div>} */} 
+
           </div>
         </div>
         <div className={toggleState === 2 ? "content" : "inactive-content"}>
@@ -192,7 +276,7 @@ function Login(props) {
                     name="group1"
                     type={type}
                     id={`inline-${type}-1`}
-                    onClick={(e) => setIsBusinessAccount(false)}
+                    onClick={(e) => {setIsBusinessAccount(false); setRadioClicked(true)}}
                   />
                   <Form.Check
                     className="tiny"
@@ -202,14 +286,29 @@ function Login(props) {
                     type={type}
                     id={`inline-${type}-2`}
                     onChange={(e) => setIsBusinessAccount(true)}
+                    onClick={(e) => setRadioClicked(true)}
                   />
                 </div>
               ))}
             </Form>
-            <Button className="signup-btn" onClick={handleSignUp}>
+      
+            {loading 
+            ? <p>Loading</p>
+            : <Button className="signup-btn" onClick={handleSignUp}>
               SIGN UP
             </Button>
-            {missingLogin ? (
+            }
+
+            {signupErrorMessage !== "" &&
+            <div
+                className="tiny text-center"
+                style={{ fontStyle: "italic", color: "red" }}
+              >
+              {signupErrorMessage}
+              </div>
+            }
+
+            {/* {missingLogin ? (
               <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
@@ -228,7 +327,7 @@ function Login(props) {
               </div>
             ) : (
               <div></div>
-            )}
+            )} */}
             <Button
               className="tiny italic signinButton"
               onClick={() => toggleTab(1)}
