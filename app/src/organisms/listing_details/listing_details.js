@@ -110,3 +110,4 @@ const ListingDetails = ({ props }) => {
 };
 
 export default ListingDetails;
+
