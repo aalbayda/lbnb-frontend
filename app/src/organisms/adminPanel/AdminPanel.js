@@ -28,7 +28,7 @@ const AdminPanel = () => {
       console.log("Log in not detected");
       setLoggedIn(false);
     }
-  });
+  }, []);
 
   // const [accoms, setAccoms] = React.useState([]);
   // const [users, setUsers] = React.useState([]);
@@ -97,8 +97,8 @@ const AdminPanel = () => {
             <div
               className={
                 toggleState === 1
-                  ? "content active-content"
-                  : "content inactive-content"
+                  ? "tcontent active-content"
+                  : "tcontent inactive-content"
               }
             >
               <UserTable />
@@ -108,8 +108,8 @@ const AdminPanel = () => {
             <div
               className={
                 toggleState === 2
-                  ? "content active-content"
-                  : "content inactive-content"
+                  ? "tcontent active-content"
+                  : "tcontent inactive-content"
               }
             >
               <LandlordTable />
@@ -119,8 +119,8 @@ const AdminPanel = () => {
             <div
               className={
                 toggleState === 3
-                  ? "content active-content"
-                  : "content inactive-content"
+                  ? "tcontent active-content"
+                  : "tcontent inactive-content"
               }
             >
               <AccomsTable />
@@ -130,8 +130,8 @@ const AdminPanel = () => {
             <div
               className={
                 toggleState === 4
-                  ? "content active-content"
-                  : "content inactive-content"
+                  ? "tcontent active-content"
+                  : "tcontent inactive-content"
               }
             >
               <ReportsTable />
