@@ -6,7 +6,7 @@ import cookie from "cookie";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { ViewMoreButton } from "../../atoms";
-import { RiHeart3Fill } from "react-icons/ri";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
 
 const CardListing = (props) => {
@@ -39,7 +39,7 @@ const CardListing = (props) => {
           ></img>
           <div class="heart-button">
             {cookie.parse(document.cookie)["authToken"] ? (
-              <RiHeart3Fill className="heart-icon" />
+              <RiHeart3Line className="heart-icon" />
             ) : (
               <></>
             )}

@@ -6,6 +6,7 @@ import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import "./login.css";
 import Form from "react-bootstrap/Form";
 import config from "../../config";
+import { encryptToken } from "../../auth";
 const url = config.apiUrl;
 
 function Login(props) {
@@ -130,19 +131,9 @@ function Login(props) {
           console.log(response.data);
           let date = new Date();
           date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
-          document.cookie = `authToken=${
-            response.data.authToken +
-            "|" +
-            response.data.userType +
-            "|" +
-            response.data.username +
-            "|" +
-            response.data.fname +
-            " " +
-            response.data.lname +
-            "|" +
-            response.data.userId
-          }; path=/; expires=${date.toUTCString()}`;
+          document.cookie = `authCookie=${encryptToken(
+            response.data
+          )}; path=/; expires=${date.toUTCString()}`;
           console.log(document.cookie);
           // set whether personal or business
 
