@@ -5,41 +5,49 @@ import { banner1 } from "../../assets/images";
 import { useNavigate } from 'react-router-dom';
 // import { StarRating } from "../../atoms";
 import { Rating } from "@mui/material";
-// import axios from "axios";
+import axios from "axios";
 // const url = "https://mockup-backend-128.herokuapp.com";
-import images from '../../assets/images/hotels/images';
+// import images from '../../assets/images/hotels/images';
+const url = "https://elbnb-server.herokuapp.com";
 
 const Hotels = ({topHotels}) => {
   let navigate = useNavigate();
   const [photo, setPhoto] = useState(null);
-  useEffect(() => {
-    const filteredImageKey = Object.keys(images).find(key => key === topHotels.ACCOMMODATION_NAME);
-    const filteredImage = filteredImageKey ? images[filteredImageKey] : banner1;
-    setPhoto(filteredImage);
-  }, [topHotels.ACCOMMODATION_NAME]);
   // useEffect(() => {
-  //   const fetchData = async (photo) => {
-  //     try {
-  //       const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
-  //       console.log(`-${photo}-`);
-  //       console.log(response.data);
-  //       // console.log("Success: ", response.data.success)
-  //       if (response.data.success === true){
-  //         setPhoto(response.data.imageUrl);
-  //       } else {
-  //         console.log("huh?")
-  //         setPhoto(banner1);
-  //       }
-  //       // return response.data.accommodation;
-  //     } catch (error) {
-  //       console.error(error);
-  //       // return [];
-  //     }
-  //   };
-  
-  //   // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
-  //   fetchData(topHotels.ACCOMMODATION_NAME);
-  // }, []);
+  //   const filteredImageKey = Object.keys(images).find(key => key === topHotels.ACCOMMODATION_NAME);
+  //   const filteredImage = filteredImageKey ? images[filteredImageKey] : banner1;
+  //   setPhoto(filteredImage);
+  // }, [topHotels.ACCOMMODATION_NAME]);
+
+  useEffect(() => {
+    const fetchData = async (name) => {
+      try {
+        const response = await axios.post(
+          url + "/accommodation/get-accommodation-pic",
+          { name }
+        );
+        console.log(`-${name}-`);
+        console.log(response.data);
+        if (response.data.success === false){
+          return banner1
+        }
+
+        return response.data.accommodation;
+      } catch (error) {
+        // setPhoto(banner1);
+        console.error(error);
+        return banner1;
+      }
+    };
+
+    Promise.all([
+      fetchData(topHotels.ACCOMMODATION_NAME),
+    ]).then(([hotel]) => {
+      setPhoto(hotel);
+
+    });
+  }, []);
+
   return (
     <div className="hotels-carousel-container">
       <div className=" hotels-carousel">

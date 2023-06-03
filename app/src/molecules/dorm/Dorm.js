@@ -4,19 +4,49 @@ import { useNavigate } from 'react-router-dom';
 import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
 // import { StarRating } from "../../atoms";
-import images from '../../assets/images/dorms/images';
+// import images from '../../assets/images/dorms/images';
 import { Rating } from "@mui/material";
-// import axios from "axios";
+import axios from "axios";
 // const url = "https://mockup-backend-128.herokuapp.com";
+const url = "https://elbnb-server.herokuapp.com";
 
 const Dorm = ({topDorms}) => {
   let navigate = useNavigate();
   const [photo, setPhoto] = useState(null);
+  // useEffect(() => {
+  //   const filteredImageKey = Object.keys(images).find(key => key === topDorms.ACCOMMODATION_NAME);
+  //   const filteredImage = filteredImageKey ? images[filteredImageKey] : banner1;
+  //   setPhoto(filteredImage);
+  // }, [topDorms.ACCOMMODATION_NAME]);
+
+    
   useEffect(() => {
-    const filteredImageKey = Object.keys(images).find(key => key === topDorms.ACCOMMODATION_NAME);
-    const filteredImage = filteredImageKey ? images[filteredImageKey] : banner1;
-    setPhoto(filteredImage);
-  }, [topDorms.ACCOMMODATION_NAME]);
+    const fetchData = async (name) => {
+      try {
+        const response = await axios.post(
+          url + "/accommodation/get-accommodation-pic",
+          { name }
+        );
+        console.log(`-${name}-`);
+        console.log(response.data);
+        if (response.data.success === false){
+          return banner1
+        }
+
+        return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+
+    Promise.all([
+      fetchData(topDorms.ACCOMMODATION_NAME),
+    ]).then(([dorm]) => {
+      setPhoto(dorm);
+
+    });
+  }, []);
 
   return (
     <div className="dorm-carousel-container">
