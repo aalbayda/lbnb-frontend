@@ -99,6 +99,7 @@ const Multilayer_filter = (props) => {
               className="small mlf_price"
               placeholder="Capacity"
               type="number"
+              min="0"
               onChange={(e) => setCapacity(e.target.value)}
             />
           </div>
