@@ -17,7 +17,7 @@ import { AiFillPhone, AiFillCalendar } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { AddAccomsButton } from "../../atoms";
 import { CardListing } from "../../organisms";
-
+import { ChatButton } from "../../atoms";
 import { useLocation } from "react-router-dom";
 
 const url = "https://mockup-backend-128.herokuapp.com";
@@ -32,6 +32,10 @@ const LandlordProfile = () => {
   const email = location.state.USER_EMAIL;
   const username = location.state.USER_USERNAME;
   const [picture, setPicture] = useState("");
+  let curruname = cookie.parse(document.cookie)["authToken"].split("|")[2];
+  let ownername = location.state.USER_USERNAME;
+
+  console.log(curruname+ownername)
 
   useEffect(() => {
     // Check if authToken exists in cookie
@@ -124,6 +128,7 @@ const LandlordProfile = () => {
                   {/* {cookie.parse(document.cookie)["authToken"].split("|")[2]} */}
                 </p>
               </Col>
+              <ChatButton/>
               <Col className="info-item">
                 <AiFillPhone className="icon" />
                 <p className="regular">{number}</p>

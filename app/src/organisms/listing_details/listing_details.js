@@ -21,6 +21,10 @@ const ListingDetails = ({ props }) => {
   const separator = "|";
   const rating = "1.5K";
   const capacity = "300";
+  let curruname = cookie.parse(document.cookie)["authToken"].split("|")[2]
+  let ownername = props.USER_FNAME;
+
+  console.log(curruname)
 
   // const {
   //   ACCOMMODATION_ADDRESS,
@@ -39,7 +43,8 @@ const ListingDetails = ({ props }) => {
     <Container>
       {console.log("--- inside")}
       {console.log(props)}
-      {console.log(props.ACCOMMODATION_NAME)}
+      {console.log(props.ACCOMMODATION_NAME)} 
+      {console.log(props.USER_FNAME)}
       <Row className="listing-detials">
         <div className="room-img-div">
           <img className="room-img" src={image} alt="accommodation-img"></img>
