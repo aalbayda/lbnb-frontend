@@ -100,6 +100,11 @@ const Multilayer_filter = (props) => {
               placeholder="Capacity"
               type="number"
               min="0"
+              onKeyDown={(e) => {
+                if (e.key === '-' || e.key === '+') {
+                  e.preventDefault();
+                }
+              }}
               onChange={(e) => setCapacity(e.target.value)}
             />
           </div>
