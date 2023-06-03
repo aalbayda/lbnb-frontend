@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./home.css";
+import config from "../../config";
 // import {apartment1, apartment2, apartment3, apartment4, apartment5, dorm6, hotel1, hotel2, hotel3, hotel4, hotel5, dorm1, dorm2, dorm3, dorm4, dorm5} from "../../assets/images";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import {
@@ -14,7 +15,7 @@ import {
   CardListing,
 } from "../../organisms";
 import { Row, Button } from "react-bootstrap";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -28,32 +29,29 @@ const Home = () => {
   const [topHotels, setTopHotels] = useState([]);
 
   useEffect(() => {
-    const fetchData = async (type) => {
-      try {
-        const response = await axios.post(
-          url + "/get-top-five-accommodations",
-          { type }
-        );
-        console.log(`-${type}-`);
-
-        console.log(response.data);
-
-        return response.data.accommodation;
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    };
-
-    Promise.all([
-      fetchData("Dorm"),
-      fetchData("Apartment"),
-      fetchData("Hotel"),
-    ]).then(([dorms, apartments, hotels]) => {
-      setTopDorms(dorms);
-      setTopApartments(apartments);
-      setTopHotels(hotels);
-      setLoading(false);
+    ["Dorm", "Apartment", "Hotel"].map((type) => {
+      axios
+        .post(url + "/get-top-five-accommodations", { type })
+        .then((res) => {
+          const topAccoms = res.data.accommodation;
+          if (topAccoms) {
+            const type = topAccoms[0].ACCOMMODATION_TYPE;
+            if (type === "Apartment") {
+              setTopApartments(topAccoms);
+            } else if (type === "Dorm") {
+              setTopDorms(topAccoms);
+            } else if (type === "Hotel") {
+              setTopHotels(topAccoms);
+            }
+            setLoading(false);
+          }
+        })
+        .catch((err) => {
+          console.log(
+            `Attempted to query ${url + "/get-top-five-accommodations"}`
+          );
+          console.error(err);
+        });
     });
   }, []);
 
@@ -73,7 +71,11 @@ const Home = () => {
     setQueries(queries);
     setReportFilters(filters);
     axios
-      .post(url + "/generate-report", { filters: filters })
+      .post(
+        url + "/generate-report",
+        { filters: filters },
+        { responseType: "arraybuffer" }
+      )
       .then((res) => {
         console.log("Generating report link");
         setReport(res.data);

@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 import "./multilayer_filter.css";
+import config from "../../config";
 import { AiFillFilter } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -8,7 +9,7 @@ import { ImPriceTags } from "react-icons/im";
 import Button from "react-bootstrap/Button";
 import { MdOutlinePlace, MdGroups } from "react-icons/md";
 import Form from "react-bootstrap/Form";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 const Multilayer_filter = (props) => {
   const [search, setSearch] = useState("");
@@ -101,7 +102,7 @@ const Multilayer_filter = (props) => {
               type="number"
               min="0"
               onKeyDown={(e) => {
-                if (e.key === '-' || e.key === '+') {
+                if (e.key === "-" || e.key === "+") {
                   e.preventDefault();
                 }
               }}
