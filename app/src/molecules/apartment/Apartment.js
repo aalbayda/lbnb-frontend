@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./apartment.css";
-import { useNavigate } from 'react-router-dom';
+import config from "../../config";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { banner1 } from "../../assets/images";
 import { Rating } from "@mui/material";
 // import { StarRating } from "../../atoms";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 const Apartment = ({ topApartments }) => {
   const [photo, setPhoto] = useState(null);
@@ -15,14 +16,17 @@ const Apartment = ({ topApartments }) => {
   useEffect(() => {
     const fetchData = async (photo) => {
       try {
-        const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
+        const response = await axios.post(
+          url + "/accommodation/get-accommodation-pic",
+          { accommodationName: photo }
+        );
         console.log(`-${photo}-`);
         console.log(response.data);
         // console.log("Success: ", response.data.success)
-        if (response.data.success === true){
+        if (response.data.success === true) {
           setPhoto(response.data.imageUrl);
         } else {
-          console.log("huh?")
+          console.log("huh?");
           setPhoto(banner1);
         }
         // return response.data.accommodation;
@@ -31,7 +35,7 @@ const Apartment = ({ topApartments }) => {
         // return [];
       }
     };
-  
+
     // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
     fetchData(topApartments.ACCOMMODATION_NAME);
   }, []);
@@ -40,7 +44,12 @@ const Apartment = ({ topApartments }) => {
     <div className="apartment-carousel-container">
       <div className="shine-div carousel-container">
         <div className="carousel-upper">
-          <img className="d-block w-100" src={photo} alt="First slide" loading="lazy"/>
+          <img
+            className="d-block w-100"
+            src={photo}
+            alt="First slide"
+            loading="lazy"
+          />
         </div>
         <div className="carousel-lower">
           <div className="carousel-lowerleft">
@@ -63,9 +72,9 @@ const Apartment = ({ topApartments }) => {
               //   window.location.href += "details";
               //   // Additional code logic that uses props
               // }}
-              onClick={()=>{navigate('/details',
-              {state:{props:topApartments}}
-              )}}
+              onClick={() => {
+                navigate("/details", { state: { props: topApartments } });
+              }}
             >
               {" "}
               View More{" "}

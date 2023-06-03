@@ -5,7 +5,8 @@ import Button from "react-bootstrap/Button";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import "./login.css";
 import Form from "react-bootstrap/Form";
-const url = "https://mockup-backend-128.herokuapp.com";
+import config from "../../config";
+const url = config.apiUrl;
 
 function Login(props) {
   const [toggleState, setToggleState] = useState(1);
@@ -56,7 +57,9 @@ function Login(props) {
     const passwordMatch = passwordPattern.test(password);
 
     if (!passwordMatch) {
-      setSignupErrorMessage("Password must contain at least 8 alphanumeric characters");
+      setSignupErrorMessage(
+        "Password must contain at least 8 alphanumeric characters"
+      );
       setLoading(false);
       return;
     }
@@ -193,22 +196,22 @@ function Login(props) {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            {loading 
-            ? <p>Loading</p>
-            : <Button className="login-btn" onClick={handleLogin}>
-              SIGN IN
-            </Button>
-            }
-            
+            {loading ? (
+              <p>Loading</p>
+            ) : (
+              <Button className="login-btn" onClick={handleLogin}>
+                SIGN IN
+              </Button>
+            )}
 
-            {loginErrorMessage !== "" &&
-            <div
+            {loginErrorMessage !== "" && (
+              <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-              {loginErrorMessage}
+                {loginErrorMessage}
               </div>
-            }
+            )}
 
             {/* {missingLogin ? (
               <div
@@ -227,8 +230,7 @@ function Login(props) {
                 style={{ fontStyle: "italic", color: "red" }}
               >
                 Invalid email!
-              </div>} */} 
-
+              </div>} */}
           </div>
         </div>
         <div className={toggleState === 2 ? "content" : "inactive-content"}>
@@ -276,7 +278,10 @@ function Login(props) {
                     name="group1"
                     type={type}
                     id={`inline-${type}-1`}
-                    onClick={(e) => {setIsBusinessAccount(false); setRadioClicked(true)}}
+                    onClick={(e) => {
+                      setIsBusinessAccount(false);
+                      setRadioClicked(true);
+                    }}
                   />
                   <Form.Check
                     className="tiny"
@@ -291,22 +296,23 @@ function Login(props) {
                 </div>
               ))}
             </Form>
-      
-            {loading 
-            ? <p>Loading</p>
-            : <Button className="signup-btn" onClick={handleSignUp}>
-              SIGN UP
-            </Button>
-            }
 
-            {signupErrorMessage !== "" &&
-            <div
+            {loading ? (
+              <p>Loading</p>
+            ) : (
+              <Button className="signup-btn" onClick={handleSignUp}>
+                SIGN UP
+              </Button>
+            )}
+
+            {signupErrorMessage !== "" && (
+              <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
-              {signupErrorMessage}
+                {signupErrorMessage}
               </div>
-            }
+            )}
 
             {/* {missingLogin ? (
               <div

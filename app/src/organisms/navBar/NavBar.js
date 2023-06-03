@@ -1,12 +1,13 @@
 import { React, useState, useEffect } from "react";
 import "./navBar.css";
+import config from "../../config";
 import cookie from "cookie";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import { Login } from "../../molecules";
 import { logo } from "../../assets/images";
 import { Link } from "react-router-dom";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 const NavBar = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);

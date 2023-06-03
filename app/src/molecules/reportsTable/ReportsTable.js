@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
+import config from "../../config";
 // import { AdminViewUser, AdminViewLandlord } from "../../molecules";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 function ReportsTable(props) {
   // const [modalShow, setModalShow] = useState(false);

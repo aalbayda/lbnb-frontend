@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./landlordTable.css";
+import config from "../../config";
 import { Table, Button } from "react-bootstrap";
 import { AdminViewLandlord } from "../../molecules";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 function LandlordTable(props) {
   const [modalShow, setModalShow] = useState(false);
