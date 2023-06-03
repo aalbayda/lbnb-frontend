@@ -1,6 +1,5 @@
 import { React } from "react";
 import "./devTile.css";
-import { banner1 } from "../../assets/images";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 const DevTile = ({ nickname, name, email, team, photo, github, linkedin }) => {
   return (

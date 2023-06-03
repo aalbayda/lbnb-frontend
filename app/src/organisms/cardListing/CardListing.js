@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
+import cookie from "cookie";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 // import { ViewMoreButton } from "../../atoms";
@@ -37,7 +38,11 @@ const CardListing = (props) => {
             alt="accommodation-img"
           ></img>
           <div class="heart-button">
-            <RiHeart3Fill className="heart-icon" />{" "}
+            {cookie.parse(document.cookie)["authToken"] ? (
+              <RiHeart3Fill className="heart-icon" />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </Col>
