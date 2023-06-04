@@ -60,10 +60,20 @@ const UserProfile = () => {
           <Col>
             <h1 className="mt-5 text-center header2">🌟 Favorites 🌟</h1>
             <Carousel variant="dark" className="mt-4 mb-5">
-              {favorites.map((f) => (
+              {favorites.map((f, index) => (
                 <Carousel.Item>
                   <div className="ml-4">
-                    <CardListing />
+                    <CardListing
+                      key={index}
+                      name={f.ACCOMMODATION_NAME}
+                      location={f.ACCOMMODATION_LOCATION}
+                      description={f.ACCOMMODATION_DESCRIPTION}
+                      amenities={f.ACCOMMODATION_AMENITIES}
+                      address={f.ACCOMMODATION_ADDRESS}
+                      max_price={f.max_price}
+                      owner={f.USER_FNAME + " " + f.USER_LNAME}
+                      rating={f.rating}
+                    />
                   </div>
                 </Carousel.Item>
               ))}
