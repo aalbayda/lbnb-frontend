@@ -25,10 +25,17 @@ const url = config.apiUrl;
 
 const UserProfile = () => {
   const [favorites, setFavorites] = useState([]);
+  const [dp, setDP] = useState("");
+
   useEffect(() => {
     axios
       .post(url + "/user/get-all-favorites", { username: getAuthUsername() })
       .then((res) => setFavorites(res.data.favorites))
+      .catch((err) => console.error(err));
+
+    axios
+      .post(url + "/user/get-user-pic", { username: getAuthUsername() })
+      .then((res) => setDP(res.data.imageUrl))
       .catch((err) => console.error(err));
   }, []);
 
@@ -38,14 +45,18 @@ const UserProfile = () => {
 
       {isLoggedIn() && getAuthType() === "Student" ? (
         <Container>
-          {/* <Row className="justify-content-md-center">
-            <Image
-              src="https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
-              roundedCircle
-              fluid
-              style={{ width: 400 }}
-            />
-          </Row> */}
+          {dp ? (
+            <Row className="justify-content-md-center">
+              <Image
+                src="https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
+                roundedCircle
+                fluid
+                style={{ width: 400 }}
+              />
+            </Row>
+          ) : (
+            <></>
+          )}
           <Col className="text-center">
             <h1 className="mt-4 header1">{getAuthName()}</h1>
           </Col>
