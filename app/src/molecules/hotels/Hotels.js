@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import { StarRating } from "../../atoms";
 import { Rating } from "@mui/material";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = "https://elbnb-server.herukoapp.com";
 
 const Hotels = ({topHotels}) => {
   let navigate = useNavigate();

@@ -20,7 +20,7 @@ import { CardListing } from "../../organisms";
 import { ChatButton } from "../../atoms";
 import { useLocation } from "react-router-dom";
 
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = "https://elbnb-server.herukoapp.com";
 
 const LandlordProfile = () => {
   const location = useLocation();

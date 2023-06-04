@@ -6,7 +6,7 @@ import { banner1 } from "../../assets/images";
 // import { StarRating } from "../../atoms";
 import { Rating } from "@mui/material";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = "https://elbnb-server.herukoapp.com";
 
 const Dorm = ({topDorms}) => {
   let navigate = useNavigate();

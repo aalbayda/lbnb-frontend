@@ -11,8 +11,9 @@ import { ChatButton } from "../../atoms";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import io from "socket.io-client";
 import Chat from "../../pages/chatPage";
-const url = 'https://mockup-backend-128.herokuapp.com';
-const socket = io.connect('http://localhost:3000');
+import { isLoggedIn, getAuthUsername } from '../../auth';
+const url = 'https://elbnb-server.herukoapp.com';
+const socket = io.connect('https://elbnb-server.herukoapp.com');
 
 const ListingDetails = ({ props }) => {
   const image =
@@ -26,7 +27,7 @@ const ListingDetails = ({ props }) => {
   const separator = "|";
   const rating = "1.5K";
   const capacity = "300";
-  let curruname = cookie.parse(document.cookie)["authToken"].split("|")[2]
+  let curruname = getAuthUsername();
   let ownername = props.USER_FNAME;
 
   console.log(curruname)
