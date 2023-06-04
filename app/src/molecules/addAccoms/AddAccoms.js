@@ -10,7 +10,6 @@ import config from "../../config";
 const url = config.apiUrl;
 
 function AddAccoms(props) {
-  const [modalShow, setModalShow] = useState(false);
   const [newLocation, setNewLocation] = useState("Within Campus");
   const [newName, setNewName] = useState("");
   const [newType, setNewType] = useState("Dorm");
@@ -22,7 +21,6 @@ function AddAccoms(props) {
     console.log("Adding...");
     if (!newName || !newType || !newAddress | !newDescription) {
       window.alert("Missing fields!");
-      window.location.reload();
       return;
     }
 

@@ -129,6 +129,7 @@ const LandlordProfile = () => {
                   <div className="cardlist-flex mb-5">
                     <CardListing
                       key={index}
+                      owner_username={location.state.username}
                       name={unit.ACCOMMODATION_NAME}
                       location={unit.ACCOMMODATION_LOCATION}
                       description={unit.ACCOMMODATION_DESCRIPTION}

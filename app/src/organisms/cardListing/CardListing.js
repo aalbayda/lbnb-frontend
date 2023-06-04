@@ -11,9 +11,11 @@ import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
 import { Link } from "react-router-dom";
+import { AddRooms } from "../../molecules";
 const url = config.apiUrl;
 
 const CardListing = (props) => {
+  const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavorite = () => {
@@ -142,6 +144,23 @@ const CardListing = (props) => {
               </p>
             </div>
           </div>
+          {getAuthUsername() === props.owner_username ? (
+            <div>
+              <Button
+                className="small-bold carousel-btn"
+                onClick={(e) => setModalShow(true)}
+              >
+                Add Room
+              </Button>
+              <AddRooms
+                show={modalShow}
+                accommodationName={name}
+                onHide={() => setModalShow(true)}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
           <Button
             className="small-bold carousel-btn"
             onClick={() => (window.location.href += "details")}

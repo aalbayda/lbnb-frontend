@@ -4,6 +4,7 @@ import "./userProfile.css";
 import "../../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Image, Carousel, Button } from "react-bootstrap";
+import { CardListing, NavBar } from "../../organisms";
 import {
   isLoggedIn,
   getAuthUsername,
@@ -12,7 +13,6 @@ import {
   getAuthMobile,
   getAuthEmail,
 } from "../../auth";
-import { CardListing, NavBar } from "../../organisms";
 import config from "../../config";
 const url = config.apiUrl;
 
