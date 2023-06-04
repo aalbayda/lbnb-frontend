@@ -106,7 +106,7 @@ const CardListing = (props) => {
               <p className="small">
                 <Link
                   to="/landlordprofile"
-                  state={{ name: owner, username: props.USER_USERNAME }}
+                  state={{ name: owner, username: props.owner_username }}
                 >
                   leased by {owner}
                 </Link>

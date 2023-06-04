@@ -46,11 +46,10 @@ const LandlordProfile = () => {
         isStudent: false,
       })
       .then((res) => {
-        console.log("Found owner.");
-        setNumber(res.data.USER_CONTACTNUM);
-        setEmail(res.data.USER_EMAIL);
-        // setRating(res.data.rating);
-        setId(res.data.USER_ID); // might need this
+        console.log("Found owner", location.state.username);
+        console.log(res.data);
+        setNumber(res.data.users[0].USER_CONTACTNUM);
+        setEmail(res.data.users[0].USER_EMAIL);
       })
       .catch((err) => console.error(err));
 
@@ -61,6 +60,15 @@ const LandlordProfile = () => {
       })
       .then((res) => {
         if (res.data.result) setOwned(res.data.result);
+      })
+      .catch((err) => console.error(err));
+
+    axios
+      .post(url + "/owner/get-average-rating", {
+        username: location.state.username,
+      })
+      .then((res) => {
+        if (res.data.success) setRating(res.data.averageRating);
       })
       .catch((err) => console.error(err));
   }, []);
