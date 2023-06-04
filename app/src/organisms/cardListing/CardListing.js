@@ -26,24 +26,36 @@ const CardListing = (props) => {
           console.log(res.data);
         })
         .catch((err) => console.error(err));
+    } else {
+      console.log("Removing from", getAuthUsername());
+      axios
+        .post(url + "/accommodation/remove-from-favorites", {
+          userName: getAuthUsername(),
+          accommName: props.name,
+        })
+        .then((res) => {
+          console.log("Removed from favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
     }
     setIsFavorite(!isFavorite);
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn() && getAuthType() === "Student") {
-  //     axios
-  //       .post(url + "/accommodation/is-favorite", {
-  //         username: getAuthUsername(),
-  //         accommodationName: props.name,
-  //       })
-  //       .then((res) => {
-  //         setIsFavorite(res.data.isFavorite);
-  //         console.log(res.data.isFavorite);
-  //       })
-  //       .catch((err) => console.error(err));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isLoggedIn() && getAuthType() === "Student") {
+      axios
+        .post(url + "/accommodation/is-favorite", {
+          username: getAuthUsername(),
+          accommodationName: props.name,
+        })
+        .then((res) => {
+          setIsFavorite(res.data.isFavorite);
+          console.log(res.data.isFavorite);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, []);
 
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
@@ -75,7 +87,7 @@ const CardListing = (props) => {
             src={image}
             alt="accommodation-img"
           ></img>
-          <div class="heart-button">
+          <div className="heart-button">
             {isLoggedIn() && getAuthType() === "Student" ? (
               isFavorite ? (
                 <RiHeart3Fill onClick={handleFavorite} className="heart-icon" />

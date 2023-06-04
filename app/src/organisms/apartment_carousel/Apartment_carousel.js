@@ -38,12 +38,9 @@ const Apartment_carousel = ({ topApartments }) => {
         nextIcon={nextButton()}
         prevIcon={prevButton()}
       >
-        {topApartments.map((apt) => (
-          <Carousel.Item>
-            <Apartment 
-              key={topApartments.id}
-              topApartments={apt}>
-            </Apartment>
+        {topApartments.map((apt, index) => (
+          <Carousel.Item key={index}>
+            <Apartment key={topApartments.id} topApartments={apt}></Apartment>
           </Carousel.Item>
         ))}
       </Carousel>

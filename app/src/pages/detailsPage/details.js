@@ -26,7 +26,7 @@ const Details = () => {
   // } = props;
 
   return (
-    <div class="detials-page-main-div">
+    <div className="detials-page-main-div">
       <NavBar />
       <ListingDetails props={props} />
       <RatingReviewSection />
