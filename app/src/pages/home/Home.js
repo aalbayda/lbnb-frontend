@@ -121,9 +121,9 @@ const Home = () => {
               {/* <div className="reports-btn"> */}
               {/* </div> */}
               {queries ? (
-                queries.map((query) => (
+                queries.map((query, index) => (
                   <CardListing
-                    key={queries.id}
+                    key={index}
                     name={query.ACCOMMODATION_NAME}
                     location={query.ACCOMMODATION_LOCATION}
                     description={query.ACCOMMODATION_DESCRIPTION}

@@ -1,4 +1,5 @@
-import { useState, React } from "react";
+import { useState, useEffect, React } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
@@ -12,14 +13,35 @@ const url = config.apiUrl;
 
 const CardListing = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  // useEffect(() => {
-  //   if (isLoggedIn()) {
-  //     axios.post(url + "/is-favorite", {
-  //       username: getAuthUsername(),
-  //       accommodationName: props.name
-  //     }).then(res => {
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      console.log("Adding for", getAuthUsername());
+      axios
+        .post(url + "/accommodation/add-to-favorites", {
+          userName: getAuthUsername(),
+          accommName: props.name,
+        })
+        .then((res) => {
+          console.log("Added to favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+    setIsFavorite(!isFavorite);
+  };
 
-  //     })
+  // useEffect(() => {
+  //   if (isLoggedIn() && getAuthType() === "Student") {
+  //     axios
+  //       .post(url + "/accommodation/is-favorite", {
+  //         username: getAuthUsername(),
+  //         accommodationName: props.name,
+  //       })
+  //       .then((res) => {
+  //         setIsFavorite(res.data.isFavorite);
+  //         console.log(res.data.isFavorite);
+  //       })
+  //       .catch((err) => console.error(err));
   //   }
   // }, []);
 
@@ -56,15 +78,9 @@ const CardListing = (props) => {
           <div class="heart-button">
             {isLoggedIn() && getAuthType() === "Student" ? (
               isFavorite ? (
-                <RiHeart3Fill
-                  onClick={() => setIsFavorite(false)}
-                  className="heart-icon"
-                />
+                <RiHeart3Fill onClick={handleFavorite} className="heart-icon" />
               ) : (
-                <RiHeart3Line
-                  onClick={() => setIsFavorite(true)}
-                  className="heart-icon"
-                />
+                <RiHeart3Line onClick={handleFavorite} className="heart-icon" />
               )
             ) : (
               <></>
