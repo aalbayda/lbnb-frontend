@@ -72,7 +72,7 @@ const ListingDetails = ({ props }) => {
                 </div>
               </div>
               <h7 className="headings">{props.ACCOMMODATION_LOCATIONS}</h7>
-              <div class="star-separator-capacity-div">
+              <div className="star-separator-capacity-div">
                 <Rating
                   name="read-only"
                   readOnly

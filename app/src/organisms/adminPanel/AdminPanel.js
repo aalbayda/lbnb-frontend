@@ -34,7 +34,7 @@ const AdminPanel = () => {
   // const [users, setUsers] = React.useState([]);
 
   return (
-    <div class="admin-panel-div">
+    <div className="admin-panel-div">
       {isLoggedIn ? (
         <div>
           <h1 className="large-bold">ADMIN PANEL</h1>

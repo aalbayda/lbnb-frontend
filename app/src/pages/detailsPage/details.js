@@ -29,7 +29,7 @@ const Details = () => {
  
  
   return (
-    <div class="detials-page-main-div">
+    <div className="detials-page-main-div">
       <NavBar />
       <ListingDetails 
         image={image}

@@ -1,16 +1,17 @@
 const axios = require("axios");
-const url = 'https://mockup-backend-128.herokuapp.com';
+import config from "./config";
 
-axios.post(url+'/filter-accommodation', {
+axios
+  .post(config.apiUrl + "/filter-accommodation", {
     filters: {
-        name: '',
-        address: '',
-        location: '',
-        type: '',
-        priceFrom: '',
-        priceTo: '',
-        capacity: ''
-    }
+      name: "",
+      address: "",
+      location: "",
+      type: "",
+      priceFrom: "",
+      priceTo: "",
+      capacity: "",
+    },
   })
   .then(function (response) {
     console.log(response.data);

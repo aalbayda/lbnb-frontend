@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
-import "./multilayer_filter.css";
 import config from "../../config";
+import "./multilayer_filter.css";
 import { AiFillFilter } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -91,6 +91,13 @@ const Multilayer_filter = (props) => {
               className="small mlf_price"
               placeholder="Max Price"
               type="number"
+              min="0"
+              max="100000"
+              onKeyDown={(e) => {
+                if (e.key !== "Backspace" && isNaN(e.key)) {
+                  e.preventDefault();
+                }
+              }}
               onChange={(e) => setPriceTo(e.target.value)}
             />
           </div>
@@ -101,8 +108,9 @@ const Multilayer_filter = (props) => {
               placeholder="Capacity"
               type="number"
               min="0"
+              max="10"
               onKeyDown={(e) => {
-                if (e.key === "-" || e.key === "+") {
+                if (e.key !== "Backspace" && isNaN(e.key)) {
                   e.preventDefault();
                 }
               }}
