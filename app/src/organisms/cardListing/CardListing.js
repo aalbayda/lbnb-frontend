@@ -111,9 +111,12 @@ const CardListing = (props) => {
           <div className="name-loc-section">
             <h1 className="large-bold accom-name">{name}</h1>
             <p className="small">
-              <a style={{ textDecoration: "none" }} href="/LandlordProfile">
+              <Link
+                to="/landlordprofile"
+                state={{ name: owner, username: props.USER_USERNAME }}
+              >
                 leased by {owner}
-              </a>
+              </Link>
             </p>
             <p className="small">
               {location} - {address}

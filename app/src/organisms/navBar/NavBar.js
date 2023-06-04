@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { Login } from "../../molecules";
 import { logo } from "../../assets/images";
 import { Link } from "react-router-dom";
-import { isLoggedIn, getAuthType } from "../../auth";
+import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
 const url = config.apiUrl;
 
 const NavBar = () => {
@@ -41,7 +41,12 @@ const NavBar = () => {
 
           {isLoggedIn && getAuthType() === "Owner" ? (
             <p className="small">
-              <Link>Profile</Link>
+              <Link
+                to="/landlordprofile"
+                state={{ name: getAuthName(), username: getAuthUsername() }}
+              >
+                Profile
+              </Link>
             </p>
           ) : (
             <p></p>

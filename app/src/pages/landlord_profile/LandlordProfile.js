@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import cookie from "cookie";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -17,87 +16,71 @@ import { AiFillPhone, AiFillCalendar } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { AddAccomsButton } from "../../atoms";
 import { CardListing } from "../../organisms";
-
 import { useLocation } from "react-router-dom";
-
-const url = "https://mockup-backend-128.herokuapp.com";
+import {
+  isLoggedIn,
+  getAuthUsername,
+  getAuthType,
+  getAuthName,
+  getAuthMobile,
+  getAuthEmail,
+} from "../../auth";
+import config from "../../config";
+const url = config.apiUrl;
 
 const LandlordProfile = () => {
   const location = useLocation();
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [rating, setRating] = useState(0);
   const [owned, setOwned] = useState([]);
-  const name = location.state.USER_FNAME + " " + location.state.USER_LNAME;
-  const number = location.state.USER_CONTACTNUM;
-  const email = location.state.USER_EMAIL;
-  const username = location.state.USER_USERNAME;
+  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState(location.state.name);
   const [picture, setPicture] = useState("");
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    // Check if authToken exists in cookie
-    if (cookie.parse(document.cookie)["authToken"]) {
-      console.log("Log in detected!");
-      setLoggedIn(true);
-      axios
-        .post(url + "/owner/get-average-rating", {
-          username: username,
-        })
-        .then((response) => {
-          // console.log(response.data);
-          setRating(response.data.averageRating);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    axios
+      .post(url + "/filter-users", {
+        name: location.state.username,
+        isStudent: false,
+      })
+      .then((res) => {
+        setNumber(res.data.USER_CONTACTNUM);
+        setEmail(res.data.USER_EMAIL);
+        setId(res.data.USER_ID); // might need this
+      })
+      .catch((err) => console.error(err));
 
-      axios
-        .post(url + "/accommodation/get-user-accommodations", {
-          ownerName: username,
-        })
-        .then((response) => {
-          console.log(response.data);
-          setOwned(response.data.result);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      // axios
-      //   .post(url + "/user/get-user-pic", {
-      //     username: email,
-      //   })
-      //   .then((response) => {
-      //     console.log(response.data);
-      //     setPicture(response.data.imageUrl);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
-    } else {
-      console.log("Log in not detected");
-      setLoggedIn(false);
-    }
+    // get accoms here
+    axios
+      .post(url + "/get-user-accommodations", {
+        ownerName: location.state.username,
+      })
+      .then((res) => {
+        setOwned(res.data.result);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <div>
       <NavBar />
-      {isLoggedIn ? (
+      {isLoggedIn() ? (
         <div className="landlord-profile-container">
-          {cookie.parse(document.cookie)["authToken"].split("|")[2] ===
-          location.state.USER_USERNAME ? (
+          {location.state.username === getAuthUsername() ? (
             <AddAccomsButton />
           ) : (
             <></>
           )}
           <Col className="body-container">
             <Row className="justify-content-md-center">
-              {/* <Image
-            className="profileImage"
-            src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
-            roundedCircle
-            fluid
-          /> */}
+              <Image
+                className="profileImage"
+                src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
+                roundedCircle
+                fluid
+              />
             </Row>
             <Col className="text-center">
               <h1 className="mt-4 header2 bold-green">
@@ -166,7 +149,7 @@ const LandlordProfile = () => {
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
-          <Row>Unauthorized route. {(window.location.href = "/")}</Row>
+          <Row>Unauthorized route.</Row>
         </Container>
       )}
     </div>

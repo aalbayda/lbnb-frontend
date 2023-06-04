@@ -134,6 +134,7 @@ const Home = () => {
                     address={query.ACCOMMODATION_ADDRESS}
                     max_price={query.max_price}
                     owner={query.USER_FNAME + " " + query.USER_LNAME}
+                    owner_username={query.USER_USERNAME}
                     rating={query.rating}
                   />
                 ))
