@@ -128,6 +128,7 @@ const Home = () => {
                     location={query.ACCOMMODATION_LOCATION}
                     description={query.ACCOMMODATION_DESCRIPTION}
                     amenities={query.ACCOMMODATION_AMENITIES}
+                    address={query.ACCOMMODATION_ADDRESS}
                     max_price={query.max_price}
                     owner={query.USER_FNAME + " " + query.USER_LNAME}
                     rating={query.rating}

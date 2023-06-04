@@ -1,14 +1,28 @@
-import React from "react";
+import { useState, React } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
+import config from "../../config";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { isLoggedIn, getAuthUsername, getAuthName } from "../../auth";
+import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
+const url = config.apiUrl;
 
 const CardListing = (props) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  // useEffect(() => {
+  //   if (isLoggedIn()) {
+  //     axios.post(url + "/is-favorite", {
+  //       username: getAuthUsername(),
+  //       accommodationName: props.name
+  //     }).then(res => {
+
+  //     })
+  //   }
+  // }, []);
+
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const name = props.name ? props.name : "Casa de Felicidad";
@@ -19,6 +33,9 @@ const CardListing = (props) => {
     ? "🚪 " + props.capacity
     : "🚪 Accommodates 3 people";
   const owner = props.owner ? props.owner : "Owner";
+  const address = props.address
+    ? props.address
+    : "Somewhere in Neverland, UPLB";
   const description = props.description
     ? props.description
     : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
@@ -37,7 +54,21 @@ const CardListing = (props) => {
             alt="accommodation-img"
           ></img>
           <div class="heart-button">
-            {isLoggedIn() ? <RiHeart3Line className="heart-icon" /> : <></>}
+            {isLoggedIn() && getAuthType() === "Student" ? (
+              isFavorite ? (
+                <RiHeart3Fill
+                  onClick={() => setIsFavorite(false)}
+                  className="heart-icon"
+                />
+              ) : (
+                <RiHeart3Line
+                  onClick={() => setIsFavorite(true)}
+                  className="heart-icon"
+                />
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </Col>
@@ -51,7 +82,9 @@ const CardListing = (props) => {
                 leased by {owner}
               </a>
             </p>
-            <p className="small">{location}</p>
+            <p className="small">
+              {location} - {address}
+            </p>
           </div>
           <p className="small accom-desc">
             {description + " " + amenities + "."}

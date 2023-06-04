@@ -16,7 +16,7 @@ const NavBar = () => {
 
   const logout = () => {
     document.cookie =
-      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload();
   };
 
@@ -44,7 +44,6 @@ const NavBar = () => {
               <Link to="/landlordprofile" state={ownerDetails}>
                 Profile
               </Link>
-              {/* <a href={isUser ? "/userprofile" : "/landlordprofile"}>Profile</a> */}
             </p>
           ) : (
             <p></p>
