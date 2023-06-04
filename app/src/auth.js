@@ -1,7 +1,9 @@
 import cookie from "cookie";
 
 const decryptToken = () => {
-  return JSON.parse(atob(cookie.parse(document.cookie["authCookie"])));
+  if (document.cookie)
+    return JSON.parse(atob(cookie.parse(document.cookie)["authCookie"]));
+  return false;
 };
 
 // Takes in response object from /login
@@ -10,7 +12,8 @@ export function encryptToken(data) {
 }
 
 export function isLoggedIn() {
-  return decryptToken["authToken"].length > 0;
+  if (decryptToken()) return true;
+  return false;
 }
 
 export function getAuthUsername() {
@@ -27,4 +30,8 @@ export function getAuthEmail() {
 
 export function getAuthMobile() {
   return decryptToken()["contactNum"];
+}
+
+export function getAuthType() {
+  return decryptToken()["userType"];
 }

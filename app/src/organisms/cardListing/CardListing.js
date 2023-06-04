@@ -2,10 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
-import cookie from "cookie";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-// import { ViewMoreButton } from "../../atoms";
+import { isLoggedIn, getAuthUsername, getAuthName } from "../../auth";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
 
@@ -38,11 +37,7 @@ const CardListing = (props) => {
             alt="accommodation-img"
           ></img>
           <div class="heart-button">
-            {cookie.parse(document.cookie)["authToken"] ? (
-              <RiHeart3Line className="heart-icon" />
-            ) : (
-              <></>
-            )}
+            {isLoggedIn() ? <RiHeart3Line className="heart-icon" /> : <></>}
           </div>
         </div>
       </Col>

@@ -134,9 +134,6 @@ function Login(props) {
           document.cookie = `authCookie=${encryptToken(
             response.data
           )}; path=/; expires=${date.toUTCString()}`;
-          console.log(document.cookie);
-          // set whether personal or business
-
           window.location.reload();
           setLoading(false);
         } else if (!response.data.success) {
