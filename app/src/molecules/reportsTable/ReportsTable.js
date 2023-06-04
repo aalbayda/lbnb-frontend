@@ -54,6 +54,9 @@ function ReportsTable(props) {
             <th>
               <p className="small-bold">Reporter</p>
             </th>
+            <th>
+              <p className="small-bold">Report</p>
+            </th>
           </tr>
         </thead>
 
@@ -62,7 +65,8 @@ function ReportsTable(props) {
             <p>Loading...</p>
           ) : (
             reports.map((report) => {
-              const { REPORT_DATE, ACCOMMODATION_ID, USER_ID } = report;
+              const { REPORT_DATE, ACCOMMODATION_ID, USER_ID, REPORT_DETAILS } =
+                report;
               let userName = "";
               // Get reporter name by id
               axios
@@ -92,6 +96,10 @@ function ReportsTable(props) {
 
                   <td>
                     <p>{userName}</p>
+                  </td>
+
+                  <td>
+                    <p>{REPORT_DETAILS}</p>
                   </td>
                 </tr>
               );

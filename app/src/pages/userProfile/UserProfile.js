@@ -1,16 +1,9 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./userProfile.css";
+import "../../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Container,
-  Row,
-  Col,
-  Image,
-  Dropdown,
-  DropdownButton,
-  Carousel,
-} from "react-bootstrap";
+import { Container, Row, Col, Image, Carousel, Button } from "react-bootstrap";
 import {
   isLoggedIn,
   getAuthUsername,
@@ -24,8 +17,45 @@ import config from "../../config";
 const url = config.apiUrl;
 
 const UserProfile = () => {
+  const [editing, setEditing] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [dp, setDP] = useState("");
+  const [newname, setNewname] = useState("");
+  const [newnumber, setNewnumber] = useState("");
+  const [newemail, setNewemail] = useState("");
+  const [newpassword, setNewpassword] = useState("");
+
+  const handleClick = () => {
+    if (editing && !newpassword) {
+      window.alert(
+        "Invalid password! If you want the same password, enter your current password."
+      );
+      return;
+    }
+
+    if (editing) {
+      axios
+        .post(url + "/edit-user", {
+          email: getAuthEmail(),
+          newUsername: newemail ? newemail : getAuthEmail(),
+          newFirstName: newname
+            ? newname.split(" ")[0]
+            : getAuthName().split(" ")[0],
+          newLastName: newname
+            ? newname.split(" ")[1]
+            : getAuthName().split(" ")[1],
+          newContactNum: newnumber ? newnumber : getAuthMobile(),
+          newPassword: newpassword,
+        })
+        .then((res) => {
+          console.log(res.data);
+          console.log("Success edit");
+        })
+        .catch((err) => console.error(err));
+    }
+
+    setEditing(!editing);
+  };
 
   useEffect(() => {
     axios
@@ -45,27 +75,70 @@ const UserProfile = () => {
 
       {isLoggedIn() && getAuthType() === "Student" ? (
         <Container>
-          {dp ? (
-            <Row className="justify-content-md-center">
-              <Image
-                src="https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
-                roundedCircle
-                fluid
-                style={{ width: 400 }}
-              />
-            </Row>
-          ) : (
-            <></>
-          )}
-          <Col className="text-center">
-            <h1 className="mt-4 header1">{getAuthName()}</h1>
+          <Row className="justify-content-md-center">
+            <Image
+              src={
+                dp
+                  ? dp
+                  : "https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
+              }
+              roundedCircle
+              fluid
+              style={{ width: 400 }}
+            />
+          </Row>
+          <Col className="text-center mt-5">
+            {editing ? "🪪" : ""}{" "}
+            {editing ? (
+              <input
+                placeholder="New Name"
+                onChange={(e) => setNewname(e.target.value)}
+              ></input>
+            ) : (
+              <h1 className="header1">{getAuthName()}</h1>
+            )}
           </Col>
 
           <Col className="text-center">
             <h1 className="small">
-              📞 {getAuthMobile()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📬{" "}
-              {getAuthEmail()}
+              📞{" "}
+              {editing ? (
+                <input
+                  placeholder="New Number"
+                  onChange={(e) => setNewnumber(e.target.value)}
+                ></input>
+              ) : (
+                getAuthMobile()
+              )}
             </h1>
+            <h1 className="small">
+              📬{" "}
+              {editing ? (
+                <input
+                  placeholder="New Email"
+                  onChange={(e) => setNewemail(e.target.value)}
+                ></input>
+              ) : (
+                getAuthEmail()
+              )}
+            </h1>
+            {editing ? "🔑" : <></>}
+
+            {editing ? (
+              <input
+                placeholder="New Password"
+                type="password"
+                onChange={(e) => setNewpassword(e.target.value)}
+              ></input>
+            ) : (
+              <></>
+            )}
+          </Col>
+
+          <Col className="text-center mt-5">
+            <Button onClick={handleClick} className="small-bold carousel-btn">
+              {editing ? "Save" : "Edit Details"}
+            </Button>
           </Col>
 
           <Col>
@@ -99,9 +172,7 @@ const UserProfile = () => {
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
           <Row>&nbsp;</Row>
-          <Row className="justify-content-md-center">
-            Unauthorized route. {(window.location.href = "/")}
-          </Row>
+          <Row className="justify-content-md-center">Unauthorized route.</Row>
         </Container>
       )}
     </div>
