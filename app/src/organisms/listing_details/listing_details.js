@@ -8,6 +8,11 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { RoomButtons, ReportModal } from "../../molecules";
 import { Rating } from "@mui/material";
 import { ChatButton } from "../../atoms";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import io from "socket.io-client";
+import Chat from "../../pages/chatPage";
+const url = 'https://mockup-backend-128.herokuapp.com';
+const socket = io.connect('http://localhost:3000');
 
 const ListingDetails = ({ props }) => {
   const image =
@@ -38,6 +43,8 @@ const ListingDetails = ({ props }) => {
   //   AVERAGE_RATING,
   // } = props;
   const [modalShow, setModalShow] = useState(false);
+  const [username, setUsername] = useState('');
+  const [room, setRoom] = useState('');
 
   return (
     <Container>
@@ -94,8 +101,31 @@ const ListingDetails = ({ props }) => {
             </div>
             <div className="room-buttons">
               <RoomButtons />
-            </div>
-            <ChatButton />
+            </div> 
+            <Router>
+              <div className='ChatApp'>
+                <Routes>
+                  <Route
+                    path= {url + "/" + curruname+ownername}
+                    element={
+                      <Chat
+                        username={username}
+                        setUsername={setUsername}
+                        room={room}
+                        setRoom={setRoom}
+                        socket={socket}
+                      />
+                    }
+                  />
+                  {/* Add this */}
+                  <Route
+                    path='/chat'
+                    element={<Chat username={username} room={room} socket={socket} />}
+                  />
+                </Routes>
+              </div>
+            </Router>
+            <Chat username={curruname} room={curruname+ownername} socket={socket}/>
           </div>
         </Col>
         <Row className="heart-icon-col"></Row>
