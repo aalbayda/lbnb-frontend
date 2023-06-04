@@ -18,8 +18,8 @@ import { Row, Button } from "react-bootstrap";
 const url = config.apiUrl;
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-  const [queries, setQueries] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [queries, setQueries] = useState(null);
   const [report, setReport] = useState("");
   const [searched, setSearched] = useState(false);
   const toggleSearched = () => setSearched(true);
@@ -29,30 +29,32 @@ const Home = () => {
 
   useEffect(() => {
     // Initially did three categories, but for beta testing we will use a general top five
-    [""].map((type) => {
-      axios
-        .post(url + "/get-top-five-accommodations", { type })
-        .then((res) => {
-          const topAccoms = res.data.accommodation;
-          if (topAccoms) {
-            const type = topAccoms[0].ACCOMMODATION_TYPE;
-            if (type === "Apartment") {
-              setTopApartments(topAccoms);
-            } else if (type === "Dorm") {
-              setTopDorms(topAccoms);
-            } else if (type === "Hotel") {
-              setTopHotels(topAccoms);
-            }
-            setLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(
-            `Attempted to query ${url + "/get-top-five-accommodations"}`
-          );
-          console.error(err);
-        });
-    });
+    // [""].map((type) => {
+    axios
+      .post(url + "/get-top-five-accommodations", { type: "" })
+      .then((res) => {
+        const topAccoms = res.data.accommodation;
+        setTopApartments(topAccoms);
+        // setLoading(false);
+        // if (topAccoms) {
+        //   const type = topAccoms[0].ACCOMMODATION_TYPE;
+        //   if (type === "Apartment") {
+        //     setTopApartments(topAccoms);
+        //   } else if (type === "Dorm") {
+        //     setTopDorms(topAccoms);
+        //   } else if (type === "Hotel") {
+        //     setTopHotels(topAccoms);
+        //   }
+        //   setLoading(false);
+        // }
+      })
+      .catch((err) => {
+        console.log(
+          `Attempted to query ${url + "/get-top-five-accommodations"}`
+        );
+        console.error(err);
+      });
+    // });
   }, []);
 
   const generateReports = () => {
@@ -135,6 +137,8 @@ const Home = () => {
                     rating={query.rating}
                   />
                 ))
+              ) : queries === null ? (
+                <div>Loading...</div>
               ) : (
                 <div>No results found.</div>
               )}

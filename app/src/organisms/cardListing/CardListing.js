@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
+import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import config from "../../config";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
@@ -12,6 +13,7 @@ import { Rating } from "@mui/material";
 const url = config.apiUrl;
 
 const CardListing = (props) => {
+  const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavorite = () => {
     if (!isFavorite) {
@@ -52,8 +54,11 @@ const CardListing = (props) => {
         .then((res) => {
           setIsFavorite(res.data.isFavorite);
           console.log(res.data.isFavorite);
+          setLoading(false);
         })
         .catch((err) => console.error(err));
+    } else {
+      setLoading(false);
     }
   }, []);
 
