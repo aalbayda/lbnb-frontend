@@ -33,7 +33,7 @@ const NavBar = () => {
         <div className="navbar-right">
           {isLoggedIn && getAuthType() === "Student" ? (
             <p className="small">
-              <a href={"/userprofile"}>Profile</a>
+              <Link to="/userprofile">Profile</Link>
             </p>
           ) : (
             <p></p>
@@ -41,9 +41,7 @@ const NavBar = () => {
 
           {isLoggedIn && getAuthType() === "Owner" ? (
             <p className="small">
-              <Link to="/landlordprofile" state={ownerDetails}>
-                Profile
-              </Link>
+              <Link>Profile</Link>
             </p>
           ) : (
             <p></p>

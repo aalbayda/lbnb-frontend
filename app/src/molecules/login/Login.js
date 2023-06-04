@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import "./login.css";
 import Form from "react-bootstrap/Form";
-import config from "../../config";
 import { encryptToken } from "../../auth";
+import config from "../../config";
 const url = config.apiUrl;
 
 function Login(props) {

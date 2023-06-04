@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import cookie from "cookie";
+import axios from "axios";
 import "./userProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -11,44 +11,49 @@ import {
   DropdownButton,
   Carousel,
 } from "react-bootstrap";
+import {
+  isLoggedIn,
+  getAuthUsername,
+  getAuthType,
+  getAuthName,
+  getAuthMobile,
+  getAuthEmail,
+} from "../../auth";
 import { CardListing, NavBar } from "../../organisms";
-const favorites = [1, 2, 3, 4, 5]; // api connect here
+import config from "../../config";
+const url = config.apiUrl;
 
 const UserProfile = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   useEffect(() => {
-    // Check if authToken exists in cookie
-    if (cookie.parse(document.cookie)["authToken"]) {
-      console.log("Log in detected!");
-      setLoggedIn(true);
-    } else {
-      console.log("Log in not detected");
-      setLoggedIn(false);
-    }
-  });
+    axios
+      .post(url + "/user/get-all-favorites", { username: getAuthUsername() })
+      .then((res) => setFavorites(res.data.favorites))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div>
       <NavBar></NavBar>
 
-      {isLoggedIn ? (
+      {isLoggedIn() && getAuthType() === "Student" ? (
         <Container>
-          <Row className="justify-content-md-center">
+          {/* <Row className="justify-content-md-center">
             <Image
               src="https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
               roundedCircle
               fluid
               style={{ width: 400 }}
             />
-          </Row>
+          </Row> */}
           <Col className="text-center">
-            <h1 className="mt-4 header1">BRUNO SMITH</h1>
+            <h1 className="mt-4 header1">{getAuthName()}</h1>
           </Col>
 
           <Col className="text-center">
             <h1 className="small">
-              📞 09123456 &nbsp;&nbsp;&nbsp; 📬 brunosmith@gmail.com.com
-              &nbsp;&nbsp;&nbsp;📅 Member since July 2022
+              📞 {getAuthMobile()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📬{" "}
+              {getAuthEmail()}
             </h1>
           </Col>
 
