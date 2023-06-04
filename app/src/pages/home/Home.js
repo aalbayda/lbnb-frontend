@@ -28,7 +28,8 @@ const Home = () => {
   const [topHotels, setTopHotels] = useState([]);
 
   useEffect(() => {
-    ["Dorm", "Apartment", "Hotel"].map((type) => {
+    // Initially did three categories, but for beta testing we will use a general top five
+    [""].map((type) => {
       axios
         .post(url + "/get-top-five-accommodations", { type })
         .then((res) => {
