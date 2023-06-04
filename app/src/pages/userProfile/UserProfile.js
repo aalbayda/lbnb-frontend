@@ -50,6 +50,9 @@ const UserProfile = () => {
         .then((res) => {
           console.log(res.data);
           console.log("Success edit");
+          document.cookie =
+            "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = "/";
         })
         .catch((err) => console.error(err));
     }
@@ -95,7 +98,7 @@ const UserProfile = () => {
                 onChange={(e) => setNewname(e.target.value)}
               ></input>
             ) : (
-              <h1 className="header1">{getAuthName()}</h1>
+              <h1 className="header1">{newname ? newname : getAuthName()}</h1>
             )}
           </Col>
 
@@ -107,6 +110,8 @@ const UserProfile = () => {
                   placeholder="New Number"
                   onChange={(e) => setNewnumber(e.target.value)}
                 ></input>
+              ) : newnumber ? (
+                newnumber
               ) : (
                 getAuthMobile()
               )}
@@ -118,6 +123,8 @@ const UserProfile = () => {
                   placeholder="New Email"
                   onChange={(e) => setNewemail(e.target.value)}
                 ></input>
+              ) : newemail ? (
+                newemail
               ) : (
                 getAuthEmail()
               )}
