@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./home.css";
-import config from "../../config";
 // import {apartment1, apartment2, apartment3, apartment4, apartment5, dorm6, hotel1, hotel2, hotel3, hotel4, hotel5, dorm1, dorm2, dorm3, dorm4, dorm5} from "../../assets/images";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import {
@@ -15,6 +14,7 @@ import {
   CardListing,
 } from "../../organisms";
 import { Row, Button } from "react-bootstrap";
+import config from "../../config";
 const url = config.apiUrl;
 
 const Home = () => {

@@ -6,6 +6,9 @@ import Form from "react-bootstrap/Form";
 import "./addAccoms.css";
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import { getAuthId } from "../../auth";
+import config from "../../config";
+const url = config.apiUrl;
+
 function AddAccoms(props) {
   const [modalShow, setModalShow] = useState(false);
   const [newLocation, setNewLocation] = useState("Within Campus");
@@ -16,16 +19,30 @@ function AddAccoms(props) {
   const [newAmenities, setNewAmenities] = useState("");
 
   const handleAdd = () => {
+    console.log("Adding...");
+    if (!newName || !newType || !newAddress | !newDescription) {
+      window.alert("Missing fields!");
+      window.location.reload();
+      return;
+    }
+
+    const newAccom = {
+      name: newName,
+      type: newType,
+      address: newAddress,
+      location: newLocation,
+      description: newDescription,
+      amenities: newAmenities,
+      userId: getAuthId(),
+    };
+    console.log("Passing in", newAccom);
     axios
-      .post("/add-accommodation", {
-        name: newName,
-        type: newType,
-        address: newAddress,
-        description: newDescription,
-        amenities: newAmenities,
-        userId: getAuthId(),
+      .post(url + "/add-accommodation", newAccom)
+      .then((res) => {
+        console.log("Successfully added data");
+        console.log(res.data);
+        window.location.reload();
       })
-      .then((res) => console.log("Successfully added data"))
       .catch((err) => console.error(err));
   };
 
@@ -44,7 +61,11 @@ function AddAccoms(props) {
             </Col>
             <Col>
               {" "}
-              <input className="tiny input-add-accoms" type="text" />
+              <input
+                className="tiny input-add-accoms"
+                type="text"
+                onChange={(e) => setNewName(e.target.value)}
+              />
             </Col>
           </Row>
           <Row className="input-item">
@@ -114,7 +135,11 @@ function AddAccoms(props) {
             </Col>
             <Col>
               {" "}
-              <input className="tiny input-add-accoms" type="text" />
+              <input
+                className="tiny input-add-accoms"
+                type="text"
+                onChange={(e) => setNewAddress(e.target.value)}
+              />
             </Col>
           </Row>
           <Row className="input-item">
@@ -156,7 +181,11 @@ function AddAccoms(props) {
             </Col>
             <Col>
               {" "}
-              <input className="tiny input-add-accoms" type="text" />
+              <input
+                className="tiny input-add-accoms"
+                type="text"
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
             </Col>
           </Row>
           <Row className="input-item">
@@ -165,11 +194,17 @@ function AddAccoms(props) {
             </Col>
             <Col>
               {" "}
-              <input className="tiny input-add-accoms" type="text" />
+              <input
+                className="tiny input-add-accoms"
+                type="text"
+                onChange={(e) => setNewAmenities(e.target.value)}
+              />
             </Col>
           </Row>
           <Row className="input-item">
-            <Button className="add-accoms-btn">ADD ACCOMODATION</Button>
+            <Button onClick={handleAdd} className="add-accoms-btn">
+              ADD ACCOMODATION
+            </Button>
           </Row>
         </Container>
       </Modal.Body>
