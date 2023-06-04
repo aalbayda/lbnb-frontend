@@ -35,3 +35,7 @@ export function getAuthMobile() {
 export function getAuthType() {
   return decryptToken()["userType"];
 }
+
+export function getAuthId() {
+  return decryptToken()["userId"];
+}
