@@ -1,14 +1,67 @@
-import React from "react";
+import { useState, useEffect, React } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./cardListing.css";
 import "../../index.css";
+import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
+import config from "../../config";
 import { Col } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-// import { ViewMoreButton } from "../../atoms";
-import { RiHeart3Fill } from "react-icons/ri";
+import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
+const url = config.apiUrl;
 
 const CardListing = (props) => {
+  const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      console.log("Adding for", getAuthUsername());
+      axios
+        .post(url + "/accommodation/add-to-favorites", {
+          userName: getAuthUsername(),
+          accommName: props.name,
+        })
+        .then((res) => {
+          console.log("Added to favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      console.log("Removing from", getAuthUsername());
+      axios
+        .post(url + "/accommodation/remove-from-favorites", {
+          userName: getAuthUsername(),
+          accommName: props.name,
+        })
+        .then((res) => {
+          console.log("Removed from favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+    setIsFavorite(!isFavorite);
+  };
+
+  useEffect(() => {
+    if (isLoggedIn() && getAuthType() === "Student") {
+      axios
+        .post(url + "/accommodation/is-favorite", {
+          username: getAuthUsername(),
+          accommodationName: props.name,
+        })
+        .then((res) => {
+          setIsFavorite(res.data.isFavorite);
+          console.log(res.data.isFavorite);
+          setLoading(false);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const name = props.name ? props.name : "Casa de Felicidad";
@@ -19,6 +72,9 @@ const CardListing = (props) => {
     ? "🚪 " + props.capacity
     : "🚪 Accommodates 3 people";
   const owner = props.owner ? props.owner : "Owner";
+  const address = props.address
+    ? props.address
+    : "Somewhere in Neverland, UPLB";
   const description = props.description
     ? props.description
     : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
@@ -36,8 +92,16 @@ const CardListing = (props) => {
             src={image}
             alt="accommodation-img"
           ></img>
-          <div class="heart-button">
-            <RiHeart3Fill className="heart-icon" />{" "}
+          <div className="heart-button">
+            {isLoggedIn() && getAuthType() === "Student" ? (
+              isFavorite ? (
+                <RiHeart3Fill onClick={handleFavorite} className="heart-icon" />
+              ) : (
+                <RiHeart3Line onClick={handleFavorite} className="heart-icon" />
+              )
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </Col>
@@ -51,7 +115,9 @@ const CardListing = (props) => {
                 leased by {owner}
               </a>
             </p>
-            <p className="small">{location}</p>
+            <p className="small">
+              {location} - {address}
+            </p>
           </div>
           <p className="small accom-desc">
             {description + " " + amenities + "."}

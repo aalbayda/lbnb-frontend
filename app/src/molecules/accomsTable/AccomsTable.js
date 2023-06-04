@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./accomsTable.css";
+import config from "../../config";
 import { Table, Button } from "react-bootstrap";
 // import { AdminViewUser, AdminViewLandlord } from "../../molecules";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = config.apiUrl;
 
 function AccomsTable(props) {
   // const [modalShow, setModalShow] = useState(false);
