@@ -10,6 +10,7 @@ import { Button } from "react-bootstrap";
 import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
+import { Link } from "react-router-dom";
 const url = config.apiUrl;
 
 const CardListing = (props) => {
@@ -64,23 +65,14 @@ const CardListing = (props) => {
 
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const name = props.name ? props.name : "Casa de Felicidad";
-  const location = props.location
-    ? "📍 " + props.location
-    : "📍 Los Banos, Laguna";
-  const capacity = props.capacity
-    ? "🚪 " + props.capacity
-    : "🚪 Accommodates 3 people";
-  const owner = props.owner ? props.owner : "Owner";
-  const address = props.address
-    ? props.address
-    : "Somewhere in Neverland, UPLB";
-  const description = props.description
-    ? props.description
-    : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
+  const name = props.name;
+  const location = props.location;
+  const owner = props.owner ? props.owner : "";
+  const address = props.address;
+  const description = props.description ? props.description : "";
   const amenities = props.amenities ? props.amenities : "";
-  const price = props.max_price ? "Up to ₱" + props.max_price : "Up to ₱500";
-  const stars = "★★★★☆";
+  const price = props.max_price ? "Up to ₱" + props.max_price : "";
+  const stars = "";
 
   return (
     <div className="card-listing zoom-in-effect">
@@ -110,14 +102,18 @@ const CardListing = (props) => {
         <div className="middle-section add-padding">
           <div className="name-loc-section">
             <h1 className="large-bold accom-name">{name}</h1>
-            <p className="small">
-              <Link
-                to="/landlordprofile"
-                state={{ name: owner, username: props.USER_USERNAME }}
-              >
-                leased by {owner}
-              </Link>
-            </p>
+            {props.owner ? (
+              <p className="small">
+                <Link
+                  to="/landlordprofile"
+                  state={{ name: owner, username: props.USER_USERNAME }}
+                >
+                  leased by {owner}
+                </Link>
+              </p>
+            ) : (
+              <></>
+            )}
             <p className="small">
               {location} - {address}
             </p>

@@ -7,7 +7,12 @@ import Button from "react-bootstrap/Button";
 import { Login } from "../../molecules";
 import { logo } from "../../assets/images";
 import { Link } from "react-router-dom";
-import { isLoggedIn, getAuthType, getAuthUsername } from "../../auth";
+import {
+  isLoggedIn,
+  getAuthType,
+  getAuthUsername,
+  getAuthName,
+} from "../../auth";
 const url = config.apiUrl;
 
 const NavBar = () => {

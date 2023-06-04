@@ -30,8 +30,7 @@ const url = config.apiUrl;
 
 const LandlordProfile = () => {
   const location = useLocation();
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(4);
   const [owned, setOwned] = useState([]);
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -40,25 +39,28 @@ const LandlordProfile = () => {
   const [id, setId] = useState("");
 
   useEffect(() => {
+    console.log("Searching for ", location.state.username);
     axios
       .post(url + "/filter-users", {
         name: location.state.username,
         isStudent: false,
       })
       .then((res) => {
+        console.log("Found owner.");
         setNumber(res.data.USER_CONTACTNUM);
         setEmail(res.data.USER_EMAIL);
+        // setRating(res.data.rating);
         setId(res.data.USER_ID); // might need this
       })
       .catch((err) => console.error(err));
 
     // get accoms here
     axios
-      .post(url + "/get-user-accommodations", {
+      .post(url + "/accommodation/get-user-accommodations", {
         ownerName: location.state.username,
       })
       .then((res) => {
-        setOwned(res.data.result);
+        if (res.data.result) setOwned(res.data.result);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -102,40 +104,31 @@ const LandlordProfile = () => {
             <Col className="info-items">
               <Col className="info-item">
                 <MdEmail className="icon" />
-                <p className="regular">
-                  {email}
-                  {/* {cookie.parse(document.cookie)["authToken"].split("|")[2]} */}
-                </p>
+                <p className="regular">{email}</p>
               </Col>
               <Col className="info-item">
                 <AiFillPhone className="icon" />
                 <p className="regular">{number}</p>
               </Col>
-              {/* <Col className="info-item">
-                <AiFillCalendar className="icon" />
-                <p className="regular">Member since July 2022</p>
-              </Col> */}
             </Col>
 
             <Col>
               <Row>
                 <h1 className="mt-5 text-center header2">Units Owned</h1>
               </Row>
-              {/* <Row className="text-center mt-4">
-            <DropdownButton
-              variant="success"
-              id="dropdown-basic-button"
-              title="Filter 🔍"
-            >
-              <Dropdown.Item href="#/action-1">Location</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Price (ascending)</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Type</Dropdown.Item>
-            </DropdownButton>
-          </Row> */}
               <Row className="justify-content-md-center mt-4">
-                {owned.map((unit) => (
+                {owned.map((unit, index) => (
                   <div className="cardlist-flex mb-5">
-                    <CardListing listing={unit} />
+                    <CardListing
+                      key={index}
+                      name={unit.ACCOMMODATION_NAME}
+                      location={unit.ACCOMMODATION_LOCATION}
+                      description={unit.ACCOMMODATION_DESCRIPTION}
+                      amenities={unit.ACCOMMODATION_AMENITIES}
+                      address={unit.ACCOMMODATION_ADDRESS}
+                      max_price={unit.max_price}
+                      rating={unit.rating}
+                    />
                   </div>
                 ))}
               </Row>
