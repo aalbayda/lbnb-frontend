@@ -1,9 +1,11 @@
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
-import { Row, Col, Container } from "react-bootstrap";
+import { Button, Row, Col, Container } from "react-bootstrap";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
+import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
+import { ReportModal } from "../../molecules";
 import axios from "axios";
 import {
   isLoggedIn,
@@ -27,7 +29,7 @@ const ListingDetails = (props) => {
   const description = props.props.ACCOMMODATION_DESCRIPTION;
   const amenities = props.props.ACCOMMODATION_AMENITIES;
   const separator = "|";
-
+  const [modalShow, setModalShow] = useState(false);
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     axios
@@ -132,13 +134,25 @@ const ListingDetails = (props) => {
             {/* <ChatButton/> */}
           </div>
         </Col>
+        <Col className="heart-icon-col">
+          {getAuthType() === "Student" ? (
+            <Button
+              className="report-button"
+              onClick={() => setModalShow(true)}
+            >
+              <MdReportGmailerrorred className="icon report-icon" />
+            </Button>
+          ) : (
+            <></>
+          )}
+        </Col>
         {/* <Col className="heart-icon-col">
           <div style={{ fontSize: "50px" }}>
             <RiHeart3Line />
           </div>
         </Col> */}
       </Row>
-      {/* <ReportModal show={modalShow} onHide={() => setModalShow(false)}/> */}
+      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
     </Container>
   );
 };

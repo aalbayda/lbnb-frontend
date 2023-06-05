@@ -5,7 +5,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./reportModal.css";
 import config from "../../config";
-import Form from "react-bootstrap/Form";
 const url = config.apiUrl;
 
 function ReportModal(props) {
