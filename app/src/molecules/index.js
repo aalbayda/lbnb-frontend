@@ -1,8 +1,8 @@
 export { default as Login } from "./login/Login";
 export { default as Signup } from "./signup/Signup";
 export { default as Apartment } from "./apartment/Apartment";
-export { default as Hotels } from "./hotels/Hotels";
-export { default as Dorm } from "./dorm/Dorm";
+// export { default as Hotels } from "./hotels/Hotels";
+// export { default as Dorm } from "./dorm/Dorm";
 export { default as AddAccoms } from "./addAccoms/AddAccoms";
 export { default as AddRooms } from "./addRooms/AddRooms";
 export { default as AdminViewUser } from "./admin_viewUser/Admin_viewUser";

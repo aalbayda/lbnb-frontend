@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./accomsTable.css";
 import config from "../../config";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 // import { AdminViewUser, AdminViewLandlord } from "../../molecules";
 import axios from "axios";
 const url = config.apiUrl;

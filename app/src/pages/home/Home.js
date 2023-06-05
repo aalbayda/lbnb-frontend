@@ -8,8 +8,6 @@ import {
   Banner,
   Footer,
   ApartmentCarousel,
-  HotelsCarousel,
-  DormCarousel,
   Multilayerfilter,
   CardListing,
 } from "../../organisms";

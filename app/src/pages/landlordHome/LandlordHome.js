@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./landlordHome.css";
 import { AddAccomsButton } from "../../atoms";
 import {
@@ -6,21 +6,17 @@ import {
   Banner,
   Footer,
   ApartmentCarousel,
-  HotelsCarousel,
-  DormCarousel,
   Multilayerfilter,
 } from "../../organisms";
 const LandlordHome = () => {
   return (
     <div className="landlordhome-container">
-      <AddAccomsButton/>
+      <AddAccomsButton />
       <div className="home-container">
         <NavBar />
         <Banner />
         <Multilayerfilter />
         <ApartmentCarousel />
-        <DormCarousel />
-        <HotelsCarousel />
         <Footer />
       </div>
     </div>
@@ -41,7 +37,7 @@ export default LandlordHome;
 //   <div>
 //     <p>HATDOG</p>
 //     {/* <div className="whole-screen">
-//         <Fab 
+//         <Fab
 //           aria-label="add"
 //           sx={{
 //             width: "90px",
