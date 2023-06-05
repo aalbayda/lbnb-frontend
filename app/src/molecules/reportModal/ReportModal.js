@@ -1,9 +1,16 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import cookie from "cookie";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./reportModal.css";
+import {
+  isLoggedIn,
+  getAuthUsername,
+  getAuthType,
+  getAuthName,
+  getAuthMobile,
+  getAuthEmail,
+} from "../../auth";
 import config from "../../config";
 const url = config.apiUrl;
 
@@ -31,7 +38,7 @@ function ReportModal(props) {
     axios
       .post(url + "/add-report", {
         report: report,
-        username: cookie.parse(document.cookie)["authToken"].split("|")[2],
+        username: getAuthUsername(),
         accommodationName: props.ACCOMMODATION_NAME
           ? props.ACCOMMODATION_NAME
           : "Parkside Residences",
