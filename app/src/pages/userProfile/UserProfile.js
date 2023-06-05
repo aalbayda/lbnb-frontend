@@ -156,6 +156,7 @@ const UserProfile = () => {
                   <div className="ml-4">
                     <CardListing
                       key={index}
+                      unit={f}
                       name={f.ACCOMMODATION_NAME}
                       location={f.ACCOMMODATION_LOCATION}
                       description={f.ACCOMMODATION_DESCRIPTION}

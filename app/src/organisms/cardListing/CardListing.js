@@ -12,9 +12,12 @@ import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AddRooms } from "../../molecules";
+import { useNavigate } from "react-router-dom";
+
 const url = config.apiUrl;
 
 const CardListing = (props) => {
+  let navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -163,7 +166,9 @@ const CardListing = (props) => {
           )}
           <Button
             className="small-bold carousel-btn"
-            onClick={() => (window.location.href += "details")}
+            onClick={() =>
+              navigate("/details", { state: { props: props.unit } })
+            }
           >
             View More
           </Button>

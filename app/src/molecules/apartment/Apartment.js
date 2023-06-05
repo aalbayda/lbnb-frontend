@@ -13,33 +13,6 @@ const Apartment = ({ topApartments }) => {
   const [photo, setPhoto] = useState(null);
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchData = async (photo) => {
-  //     try {
-  //       const response = await axios.post(
-  //         url + "/accommodation/get-accommodation-pic",
-  //         { accommodationName: photo }
-  //       );
-  //       console.log(`-${photo}-`);
-  //       console.log(response.data);
-  //       // console.log("Success: ", response.data.success)
-  //       if (response.data.success === true) {
-  //         setPhoto(response.data.imageUrl);
-  //       } else {
-  //         console.log("huh?");
-  //         setPhoto(banner1);
-  //       }
-  //       // return response.data.accommodation;
-  //     } catch (error) {
-  //       console.error(error);
-  //       // return [];
-  //     }
-  //   };
-
-  //   // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
-  //   fetchData(topApartments.ACCOMMODATION_NAME);
-  // }, []);
-
   return (
     <div className="apartment-carousel-container">
       <div className="shine-div carousel-container">
@@ -73,6 +46,7 @@ const Apartment = ({ topApartments }) => {
               //   // Additional code logic that uses props
               // }}
               onClick={() => {
+                console.log(topApartments);
                 navigate("/details", { state: { props: topApartments } });
               }}
             >

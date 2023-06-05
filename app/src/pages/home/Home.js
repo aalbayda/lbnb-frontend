@@ -127,6 +127,7 @@ const Home = () => {
                 queries.map((query, index) => (
                   <CardListing
                     key={index}
+                    unit={query}
                     name={query.ACCOMMODATION_NAME}
                     location={query.ACCOMMODATION_LOCATION}
                     description={query.ACCOMMODATION_DESCRIPTION}
