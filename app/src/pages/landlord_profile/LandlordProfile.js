@@ -7,6 +7,7 @@ import {
   Row,
   Col,
   Image,
+  Button,
   // Dropdown,
   // DropdownButton,
 } from "react-bootstrap";
@@ -30,13 +31,52 @@ const url = config.apiUrl;
 
 const LandlordProfile = () => {
   const location = useLocation();
+
+  const [editing, setEditing] = useState(false);
   const [rating, setRating] = useState(4);
   const [owned, setOwned] = useState([]);
+  const [newname, setNewname] = useState("");
+  const [newnumber, setNewnumber] = useState("");
+  const [newemail, setNewemail] = useState("");
+  const [newpassword, setNewpassword] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [name, setName] = useState(location.state.name);
-  const [picture, setPicture] = useState("");
-  const [id, setId] = useState("");
+  const [dp, setDP] = useState("");
+
+  const handleClick = () => {
+    if (editing && !newpassword) {
+      window.alert(
+        "Invalid password! If you want the same password, enter your current password."
+      );
+      return;
+    }
+
+    if (editing) {
+      axios
+        .post(url + "/edit-user", {
+          email: email,
+          newUsername: newemail ? newemail : email,
+          newFirstName: newname
+            ? newname.split(" ")[0]
+            : getAuthName().split(" ")[0],
+          newLastName: newname
+            ? newname.split(" ")[1]
+            : getAuthName().split(" ")[1],
+          newContactNum: newnumber ? newnumber : number,
+          newPassword: newpassword,
+        })
+        .then((res) => {
+          console.log(res.data);
+          console.log("Success edit");
+          document.cookie =
+            "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = "/";
+        })
+        .catch((err) => console.error(err));
+    }
+
+    setEditing(!editing);
+  };
 
   useEffect(() => {
     console.log("Searching for ", location.state.username);
@@ -92,11 +132,21 @@ const LandlordProfile = () => {
                 fluid
               />
             </Row>
+            <Col className="text-center mt-5">
+              {editing ? "🪪" : ""}{" "}
+              {editing ? (
+                <input
+                  placeholder="New Name"
+                  onChange={(e) => setNewname(e.target.value)}
+                ></input>
+              ) : (
+                <h1 className="header1">
+                  {newname ? newname : location.state.name}
+                </h1>
+              )}
+            </Col>
+
             <Col className="text-center">
-              <h1 className="mt-4 header2 bold-green">
-                {name}
-                {/* {cookie.parse(document.cookie)["authToken"].split("|")[3]} */}
-              </h1>
               <Rating
                 className="rating-medium"
                 name="read-only"
@@ -109,16 +159,58 @@ const LandlordProfile = () => {
               />
             </Col>
 
-            <Col className="info-items">
-              <Col className="info-item">
-                <MdEmail className="icon" />
-                <p className="regular">{email}</p>
-              </Col>
-              <Col className="info-item">
-                <AiFillPhone className="icon" />
-                <p className="regular">{number}</p>
-              </Col>
+            <Col className="text-center">
+              <h1 className="small">
+                📞{" "}
+                {editing ? (
+                  <input
+                    placeholder="New Number"
+                    onChange={(e) => setNewnumber(e.target.value)}
+                  ></input>
+                ) : newnumber ? (
+                  newnumber
+                ) : (
+                  getAuthMobile()
+                )}
+              </h1>
+              <h1 className="small">
+                📬{" "}
+                {editing ? (
+                  <input
+                    placeholder="New Email"
+                    onChange={(e) => setNewemail(e.target.value)}
+                  ></input>
+                ) : newemail ? (
+                  newemail
+                ) : (
+                  email
+                )}
+              </h1>
+              {editing ? "🔑" : <></>}
+
+              {editing ? (
+                <input
+                  placeholder="New Password"
+                  type="password"
+                  onChange={(e) => setNewpassword(e.target.value)}
+                ></input>
+              ) : (
+                <></>
+              )}
             </Col>
+
+            {getAuthUsername() === email ? (
+              <Col className="text-center mt-5">
+                <Button
+                  onClick={handleClick}
+                  className="small-bold carousel-btn"
+                >
+                  {editing ? "Save" : "Edit Details"}
+                </Button>
+              </Col>
+            ) : (
+              <></>
+            )}
 
             <Col>
               <Row>

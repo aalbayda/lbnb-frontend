@@ -13,8 +13,8 @@ const url = config.apiUrl;
 
 const Multilayer_filter = (props) => {
   const [search, setSearch] = useState("");
-  const [priceTo, setPriceTo] = useState("");
-  const [capacity, setCapacity] = useState("");
+  const [priceTo, setPriceTo] = useState(null);
+  const [capacity, setCapacity] = useState(null);
   const [location, setLocation] = useState("");
   const [filterType, setFilterType] = useState("");
 

@@ -10,9 +10,9 @@ const url = config.apiUrl;
 function AddRooms(props) {
   const [newName, setNewName] = useState("");
   const [newCapacity, setNewCapacity] = useState(0);
-  const [newAddress, setNewPrice] = useState(0);
+  const [newPrice, setNewPrice] = useState(0);
   const handleAdd = () => {
-    if (!newName || !newCapacity || !newAddress) {
+    if (!newName || !newCapacity || !newPrice) {
       window.alert("Invalid field!");
       return;
     }
@@ -61,6 +61,7 @@ function AddRooms(props) {
             <Col>
               {" "}
               <input
+                min={1}
                 className="tiny input-add-accoms"
                 type="Number"
                 onChange={(e) => setNewCapacity(e.target.value)}
@@ -74,6 +75,7 @@ function AddRooms(props) {
             <Col>
               {" "}
               <input
+                min={1}
                 className="tiny input-add-accoms"
                 type="Number"
                 onChange={(e) => setNewPrice(e.target.value)}
