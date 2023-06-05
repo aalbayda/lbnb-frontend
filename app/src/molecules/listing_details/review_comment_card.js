@@ -5,11 +5,10 @@ import config from "../../config";
 import { Row, Col, Container } from "react-bootstrap";
 const url = config.apiUrl;
 
-const ReviewCommentCard = () => {
+const ReviewCommentCard = (review) => {
   const user_img =
     "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-  const comment =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
+  const comment = review.REVIEW_COMMENT;
   const user_name = "user01";
   const stars = "★★★★☆";
   return (

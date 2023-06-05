@@ -29,8 +29,8 @@ const Details = () => {
     <div className="detials-page-main-div">
       <NavBar />
       <ListingDetails props={props} />
-      <RatingReviewSection />
-      <SubmitRatingReviewSect />
+      <RatingReviewSection props={props} />
+      <SubmitRatingReviewSect props={props} />
     </div>
   );
 };

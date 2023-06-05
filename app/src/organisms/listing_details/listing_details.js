@@ -28,11 +28,9 @@ const ListingDetails = (props) => {
   const amenities = props.props.ACCOMMODATION_AMENITIES;
   const separator = "|";
 
-  // // to fetch rooms
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     console.log("Passed down", props);
-
     axios
       .post(url + "/accommodation/get-rooms", {
         accommodationName: accommName,
@@ -52,27 +50,27 @@ const ListingDetails = (props) => {
   //atrributes that change when the room button is clicked
   const [max_price, setPrice] = useState(props.props.max_price);
   const [capacity, setCapacity] = useState(props.props.max_capacity);
-  const [image, setRoomPIc] = useState(props.image);
+  // const [image, setRoomPIc] = useState(props.image);
 
   const handleClick = (room) => {
     setPrice(room.ROOM_PRICE);
     setCapacity(String(room.ROOM_CAPACITY));
 
     //to fetch room image
-    axios
-      .post(url + "/room/get-room-pic", {
-        roomName: room.ROOM_NAME,
-        accommodationName: accommName,
-      })
-      .then(function (response) {
-        if (response.data.success) {
-          setRoomPIc(response.data.imageUrl); //TODO: post an axios error
-        }
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .post(url + "/room/get-room-pic", {
+    //     roomName: room.ROOM_NAME,
+    //     accommodationName: accommName,
+    //   })
+    //   .then(function (response) {
+    //     if (response.data.success) {
+    //       setRoomPIc(response.data.imageUrl);
+    //     }
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
 
   const roomItems = rooms.map((room) => {
@@ -94,7 +92,11 @@ const ListingDetails = (props) => {
     <Container>
       <Row className="listing-detials">
         <div className="room-img-div">
-          <img className="room-img" src={image} alt="accommodation-img"></img>
+          <img
+            className="room-img"
+            src="https://www.ikea.com/ph/en/images/products/hauga-upholstered-bed-frame-lofallet-beige__1101403_pe866663_s5.jpg?f=s"
+            alt="accommodation-img"
+          ></img>
         </div>
         <Col>
           <div className="name-location-div">
@@ -131,11 +133,11 @@ const ListingDetails = (props) => {
             {/* <ChatButton/> */}
           </div>
         </Col>
-        <Col className="heart-icon-col">
+        {/* <Col className="heart-icon-col">
           <div style={{ fontSize: "50px" }}>
             <RiHeart3Line />
           </div>
-        </Col>
+        </Col> */}
       </Row>
       {/* <ReportModal show={modalShow} onHide={() => setModalShow(false)}/> */}
     </Container>

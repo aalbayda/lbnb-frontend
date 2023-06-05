@@ -5,24 +5,41 @@ import { Row, Container } from "react-bootstrap";
 // import {MUIStarRating, CommentTextField, SubmitButton} from '../../atoms'
 import { Rating, TextField } from "@mui/material";
 import axios from "axios";
-const url = "https://mockup-backend-128.herokuapp.com";
+import {
+  isLoggedIn,
+  getAuthUsername,
+  getAuthType,
+  getAuthName,
+  getAuthEmail,
+} from "../../auth";
+import config from "../../config";
+const url = config.apiUrl;
 
 const SubmitRatingReviewSect = (props) => {
   const [comment, setComment] = React.useState("");
   const [rateVal, setRateVal] = React.useState(0);
-  const timestamp = new Date(
-    new Date().toString().split("GMT")[0] + " UTC"
-  ).toISOString();
-  const accommName = props.accommName ? props.accommName : "Comfort Dorm";
-  const userName = props.userName ? props.userName : "student2";
+  const accommName = props.props.ACCOMMODATION_NAME;
 
   const handleSubmit = () => {
-    console.log(userName, timestamp, accommName, comment);
+    if (!isLoggedIn() || !(getAuthType() === "Student")) {
+      window.alert("Log in as a registered tenant first!");
+      return;
+    }
+
+    if (!rateVal) {
+      window.alert("Add a rating first!");
+      return;
+    }
+
+    const timestamp = new Date(
+      new Date().toString().split("GMT")[0] + " UTC"
+    ).toISOString();
+    console.log(getAuthUsername(), timestamp, accommName, comment, rateVal);
     if (rateVal != 0) {
       axios
         .post(url + "/accommodation/add-review", {
           comment: comment,
-          userName: userName,
+          userName: getAuthUsername(),
           timestamp: timestamp,
           accommName: accommName,
           rating: rateVal,
@@ -47,6 +64,7 @@ const SubmitRatingReviewSect = (props) => {
             className="rating-medium"
             // defaultValue={3.5}
             precision={0.5}
+            // disabled={isLoggedIn() && getAuthType === "Student" ? false : true}
             sx={{
               fontSize: "2rem",
               color: "#1C3103",
@@ -64,6 +82,7 @@ const SubmitRatingReviewSect = (props) => {
             id="fullWidth"
             label="Write Comment"
             multiline
+            // disabled={!(isLoggedIn() && getAuthType === "Student")}
             maxRows={4}
             onChange={(newValue) => setComment(newValue.target.value)}
             value={comment}
@@ -72,6 +91,13 @@ const SubmitRatingReviewSect = (props) => {
             {" "}
             Submit{" "}
           </button>
+          {/* {isLoggedIn() && getAuthType() === "Student" ? (
+          ) : (
+            <button className="submit-button" disabled>
+              {" "}
+              Submit{" "}
+            </button>
+          )} */}
         </div>
       </Row>
     </Container>
