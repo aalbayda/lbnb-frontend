@@ -22,7 +22,7 @@ const CardListing = (props) => {
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavorite = () => {
-    if (!isFavorite) {
+    if (!isFavorite && props.name) {
       console.log("Adding for", getAuthUsername());
       axios
         .post(url + "/accommodation/add-to-favorites", {
@@ -34,7 +34,7 @@ const CardListing = (props) => {
           console.log(res.data);
         })
         .catch((err) => console.error(err));
-    } else {
+    } else if (props.name) {
       console.log("Removing from", getAuthUsername());
       axios
         .post(url + "/accommodation/remove-from-favorites", {
@@ -66,11 +66,11 @@ const CardListing = (props) => {
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [props.name]);
 
   const image =
     "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const name = props.name;
+  const name = props.name ? props.name : "";
   const location = props.location;
   const owner = props.owner ? props.owner : "";
   const address = props.address;

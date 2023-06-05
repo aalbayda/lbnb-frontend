@@ -30,13 +30,12 @@ const ListingDetails = (props) => {
 
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    console.log("Passed down", props);
     axios
       .post(url + "/accommodation/get-rooms", {
-        accommodationName: accommName,
+        accommodationName: props.props.accommName,
       })
       .then(function (response) {
-        console.log("Searching for", accommName);
+        // console.log("Searching for", accommName);
         if (response.data.success) {
           setRooms(response.data.rooms);
         }
@@ -45,7 +44,7 @@ const ListingDetails = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [props.props.accommName]);
 
   //atrributes that change when the room button is clicked
   const [max_price, setPrice] = useState(props.props.max_price);

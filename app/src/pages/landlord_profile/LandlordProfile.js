@@ -116,7 +116,7 @@ const LandlordProfile = () => {
       .post(url + "/user/get-user-pic", { username: email })
       .then((res) => setDP(res.data.imageUrl))
       .catch((err) => console.error(err));
-  }, []);
+  }, [email, location.state.username]);
 
   return (
     <div>
