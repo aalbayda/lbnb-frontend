@@ -1,45 +1,97 @@
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
-import cookie from "cookie";
-import { RiHeart3Fill } from "react-icons/ri";
-import { MdReportGmailerrorred } from "react-icons/md";
-import { Row, Col, Container, Button } from "react-bootstrap";
-import { RoomButtons, ReportModal } from "../../molecules";
+import { Row, Col, Container } from "react-bootstrap";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { Rating } from "@mui/material";
-import { ChatButton } from "../../atoms";
+import axios from "axios";
+import {
+  isLoggedIn,
+  getAuthUsername,
+  getAuthType,
+  getAuthName,
+  getAuthMobile,
+  getAuthEmail,
+} from "../../auth";
+import config from "../../config";
+const url = config.apiUrl;
 
-const ListingDetails = ({ props }) => {
-  const image =
-    "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  // const description =
-  //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris. In hac habitasse platea dictumst. Phasellus consectetur posuere mattis. Nullam.";
-  // const name = "Casa fe Felicidad";
-  // const location = "Los Banos, Laguna";
-  const price = "₱ 8,000";
-  const stars = "★★★★☆";
+const ListingDetails = (props) => {
+  // const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const userName = getAuthEmail();
+  const ownerName = props.props.USER_FNAME + " " + props.props.USER_LNAME;
+  const accommName = props.props.ACCOMMODATION_NAME;
+  const address = props.props.ACCOMMODATION_ADDRESS;
+  const location_place = props.props.ACCOMMODATION_LOCATION;
+  const rating = props.props.rating;
+  const description = props.props.ACCOMMODATION_DESCRIPTION;
+  const amenities = props.props.ACCOMMODATION_AMENITIES;
   const separator = "|";
-  const rating = "1.5K";
-  const capacity = "300";
 
-  // const {
-  //   ACCOMMODATION_ADDRESS,
-  //   ACCOMMODATION_AMENITIES,
-  //   ACCOMMODATION_DESCRIPTION,
-  //   ACCOMMODATION_ID,
-  //   ACCOMMODATION_LOCATION,
-  //   ACCOMMODATION_NAME,
-  //   ACCOMMODATION_OWNER_ID,
-  //   ACCOMMODATION_TYPE,
-  //   AVERAGE_RATING,
-  // } = props;
-  const [modalShow, setModalShow] = useState(false);
+  // // to fetch rooms
+  const [rooms, setRooms] = useState([]);
+  useEffect(() => {
+    console.log("Passed down", props);
+
+    axios
+      .post(url + "/accommodation/get-rooms", {
+        accommodationName: accommName,
+      })
+      .then(function (response) {
+        console.log("Searching for", accommName);
+        if (response.data.success) {
+          setRooms(response.data.rooms);
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  //atrributes that change when the room button is clicked
+  const [max_price, setPrice] = useState(props.props.max_price);
+  const [capacity, setCapacity] = useState(props.props.max_capacity);
+  const [image, setRoomPIc] = useState(props.image);
+
+  const handleClick = (room) => {
+    setPrice(room.ROOM_PRICE);
+    setCapacity(String(room.ROOM_CAPACITY));
+
+    //to fetch room image
+    axios
+      .post(url + "/room/get-room-pic", {
+        roomName: room.ROOM_NAME,
+        accommodationName: accommName,
+      })
+      .then(function (response) {
+        if (response.data.success) {
+          setRoomPIc(response.data.imageUrl); //TODO: post an axios error
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const roomItems = rooms.map((room) => {
+    return (
+      <button
+        key={room.ROOM_ID}
+        className="r-add-style"
+        onClick={() => handleClick(room)}
+      >
+        {" "}
+        {room.ROOM_NAME}
+      </button>
+    );
+  });
+
+  // const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container>
-      {console.log("--- inside")}
-      {console.log(props)}
-      {console.log(props.ACCOMMODATION_NAME)}
       <Row className="listing-detials">
         <div className="room-img-div">
           <img className="room-img" src={image} alt="accommodation-img"></img>
@@ -47,59 +99,45 @@ const ListingDetails = ({ props }) => {
         <Col>
           <div className="name-location-div">
             <div className="name-location-section">
-              <div className="name-icon-list">
-                <h1 className="headings">{props.ACCOMMODATION_NAME}</h1>
-                <div className="listing-details-icons">
-                  {cookie.parse(document.cookie)["authToken"] ? (
-                    <Button
-                      className="report-button"
-                      onClick={() => setModalShow(true)}
-                    >
-                      <MdReportGmailerrorred className="icon report-icon" />
-                    </Button>
-                  ) : (
-                    <></>
-                  )}
-                  <Button variant="outline-light">
-                    {" "}
-                    <RiHeart3Fill className="heart-icon" />{" "}
-                  </Button>
-                </div>
-              </div>
-              <h7 className="headings">{props.ACCOMMODATION_LOCATIONS}</h7>
-              <div className="star-separator-capacity-div">
-                <Rating
-                  name="read-only"
-                  readOnly
-                  value={props.AVERAGE_RATING}
-                />
-                {/* <p className="star-separator-capacity-text">
-                  {stars} {separator}{" "}
-                </p>
-                <p className="star-separator-capacity">{rating} </p>
+              <h1 className="headings">{accommName}</h1>
+              <h7 className="headings">
+                {address} - {location_place}
+              </h7>
+              <div class="star-separator-capacity-div">
                 <p className="star-separator-capacity-text">
-                  {" "}
-                  Rating {separator}{" "}
-                </p> */}
-                {/* <p className="star-separator-capacity">{props.ACCOMODATION_CAPACITY}</p>
-                <p className="star-separator-capacity-text"> Capacity </p> */}
+                  <Rating
+                    className="rating-medium"
+                    defaultValue={rating}
+                    precision={0.5}
+                    readOnly={true}
+                    sx={{
+                      fontSize: "1rem",
+                      color: "#1C3103",
+                      mr: 1,
+                    }}
+                  />
+                  {separator}{" "}
+                </p>
+                <p className="star-separator-capacity">{capacity} Capacity</p>
               </div>
-              <h2 className="headings-price">{price}</h2>
-              <p>{props.ACCOMMODATION_DESCRIPTION}</p>
+              <h2 className="headings-price">₱{max_price}</h2>
+              <p></p>
+              <p>{description}</p>
+              <p>{amenities}</p>
             </div>
             <div className="room-buttons">
-              <RoomButtons />
+              <div>{roomItems}</div>
             </div>
-            <ChatButton />
+            {/* <ChatButton/> */}
           </div>
         </Col>
-        <Row className="heart-icon-col"></Row>
+        <Col className="heart-icon-col">
+          <div style={{ fontSize: "50px" }}>
+            <RiHeart3Line />
+          </div>
+        </Col>
       </Row>
-      <ReportModal
-        props={props}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+      {/* <ReportModal show={modalShow} onHide={() => setModalShow(false)}/> */}
     </Container>
   );
 };
