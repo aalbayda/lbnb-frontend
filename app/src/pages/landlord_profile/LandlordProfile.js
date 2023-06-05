@@ -111,6 +111,11 @@ const LandlordProfile = () => {
         if (res.data.success) setRating(res.data.averageRating);
       })
       .catch((err) => console.error(err));
+
+    axios
+      .post(url + "/user/get-user-pic", { username: email })
+      .then((res) => setDP(res.data.imageUrl))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -127,7 +132,11 @@ const LandlordProfile = () => {
             <Row className="justify-content-md-center">
               <Image
                 className="profileImage"
-                src="https://pbs.twimg.com/profile_images/1564398871996174336/M-hffw5a_400x400.jpg"
+                src={
+                  dp
+                    ? dp
+                    : "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000"
+                }
                 roundedCircle
                 fluid
               />
@@ -228,6 +237,7 @@ const LandlordProfile = () => {
                       amenities={unit.ACCOMMODATION_AMENITIES}
                       address={unit.ACCOMMODATION_ADDRESS}
                       max_price={unit.max_price}
+                      owner={""}
                       rating={unit.rating}
                     />
                   </div>

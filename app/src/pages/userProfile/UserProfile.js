@@ -83,7 +83,7 @@ const UserProfile = () => {
               src={
                 dp
                   ? dp
-                  : "https://www.ucb.ac.uk/media/ozzc1d44/student-engagement.jpg?anchor=center&mode=crop&heightratio=1&width=1200&rnd=132475825546930000"
+                  : "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000"
               }
               roundedCircle
               fluid
