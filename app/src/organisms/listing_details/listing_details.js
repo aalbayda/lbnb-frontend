@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
 import { Button, Row, Col, Container } from "react-bootstrap";
-import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
+import { HeartReact } from "../../atoms";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
@@ -20,7 +20,7 @@ const url = config.apiUrl;
 
 const ListingDetails = (props) => {
   // const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const userName = getAuthEmail();
+  const userName = getAuthUsername();
   const ownerName = props.props.USER_FNAME + " " + props.props.USER_LNAME;
   const accommName = props.props.ACCOMMODATION_NAME;
   const address = props.props.ACCOMMODATION_ADDRESS;
@@ -29,15 +29,19 @@ const ListingDetails = (props) => {
   const description = props.props.ACCOMMODATION_DESCRIPTION;
   const amenities = props.props.ACCOMMODATION_AMENITIES;
   const separator = "|";
+  const capacity_props = props.props.max_capacity ? props.props.max_capacity : 3;
+  const price_props = props.props.max_price ? props.props.max_price : 1000;
+  const [loading, setLoading] = useState(true);
   const [modalShow, setModalShow] = useState(false);
   const [rooms, setRooms] = useState([]);
+  
+  
   useEffect(() => {
     axios
       .post(url + "/accommodation/get-rooms", {
-        accommodationName: props.props.accommName,
+        accommodationName: accommName,
       })
       .then(function (response) {
-        // console.log("Searching for", accommName);
         if (response.data.success) {
           setRooms(response.data.rooms);
         }
@@ -49,8 +53,8 @@ const ListingDetails = (props) => {
   }, [props.props.accommName]);
 
   //atrributes that change when the room button is clicked
-  const [max_price, setPrice] = useState(props.props.max_price);
-  const [capacity, setCapacity] = useState(props.props.max_capacity);
+  const [max_price, setPrice] = useState(price_props);
+  const [capacity, setCapacity] = useState(capacity_props);
   // const [image, setRoomPIc] = useState(props.image);
 
   const handleClick = (room) => {
@@ -134,7 +138,7 @@ const ListingDetails = (props) => {
             {/* <ChatButton/> */}
           </div>
         </Col>
-        <Col className="heart-icon-col">
+        <Col className="report-icon-col">
           {getAuthType() === "Student" ? (
             <Button
               className="report-button"
@@ -146,11 +150,11 @@ const ListingDetails = (props) => {
             <></>
           )}
         </Col>
-        {/* <Col className="heart-icon-col">
-          <div style={{ fontSize: "50px" }}>
-            <RiHeart3Line />
-          </div>
-        </Col> */}
+        <Col className="heart-icon-col">
+          <HeartReact
+            accomName={accommName}
+          />
+        </Col>
       </Row>
       <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
     </Container>
