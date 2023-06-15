@@ -54,6 +54,9 @@ function Login(props) {
       return;
     }
 
+
+    // TODO: check if email exists
+
     const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
     const passwordMatch = passwordPattern.test(password);
 
@@ -83,9 +86,16 @@ function Login(props) {
         isPersonalAccount: !isBusinessAccount,
       })
       .then(function (response) {
+
+        if (response.data.message === "Email is already registered.") {
+          setSignupErrorMessage("Email is already registered.");
+          setLoading(false);
+          return;
+        }
+
         setSignupErrorMessage("");
         setRadioClicked(false);
-        console.log(response);
+        console.log(response.data);
         window.location.reload();
         setLoading(false);
       })
