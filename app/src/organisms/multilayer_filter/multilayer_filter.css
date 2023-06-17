@@ -84,11 +84,13 @@ div.mb-3{
 input.small.mlf_price{
   margin-top: 0px;
   width: 150px;
+  height: auto;
 }
 
 input.small.mlf_capacity{
   margin-top: 0px;
   width: 150px;
+  height: auto;
 }
 
 .icon {
