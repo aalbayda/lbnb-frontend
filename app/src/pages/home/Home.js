@@ -13,6 +13,7 @@ import {
 } from "../../organisms";
 import { Row, Button } from "react-bootstrap";
 import config from "../../config";
+import { notFound } from "../../assets/images";
 const url = config.apiUrl;
 
 const Home = () => {
@@ -140,7 +141,14 @@ const Home = () => {
               ) : queries === null ? (
                 <div>Loading...</div>
               ) : (
-                <div>No results found.</div>
+                <div className="noResultsContainer">
+                  <p className="header4 noResultText">No Results Found</p>
+                  <img className="NotFound" src={notFound} alt="no results found" />
+                </div>
+                // <notFound className=/>
+                // <div>
+
+                //   No results found.</div>
               )}
             </div>
           ) : (

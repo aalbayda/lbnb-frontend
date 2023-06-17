@@ -26,6 +26,26 @@
   padding: 0;
 }
 
+.noResultsContainer{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+p.header4.noResultText{
+  font-weight: bold;
+  color: var(--color-heading-dark) !important;
+}
+.NotFound{
+  padding-top: -50;
+  max-width: 500px;
+  max-height: 500px;
+}
+
 /* .search-list {
     display: flex;
     flex-direction: column;
