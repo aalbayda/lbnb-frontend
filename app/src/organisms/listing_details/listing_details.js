@@ -25,7 +25,7 @@ const url = config.apiUrl;
 
 const ListingDetails = (props) => {
   // const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const userName = getAuthEmail();
+  const userName = getAuthUsername();
   const ownerName = props.props.USER_FNAME + " " + props.props.USER_LNAME;
   const accommName = props.props.ACCOMMODATION_NAME;
   const address = props.props.ACCOMMODATION_ADDRESS;
@@ -133,7 +133,7 @@ const ListingDetails = (props) => {
               <p>{description}</p>
               <p>{amenities}</p>
             </div>
-            {<ChatButton username={userName} setUsername={userName} room={userName+ownerName} setRoom={userName+ownerName} socket={socket}/>} 
+            {<ChatButton username={userName} setUsername={userName} room={accommName} setRoom={accommName} socket={socket}/>} 
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>
