@@ -17,6 +17,7 @@ import {
   getAuthEmail,
 } from "../../auth";
 import config from "../../config";
+import { noUnits } from "../../assets/images";
 const url = config.apiUrl;
 
 // const topDorms = {
@@ -121,54 +122,37 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="userProfile_Container_right">
-            <div className="userProfile_Container_right_buttons">
-              <Button
-                className={
-                  toggleState === 1
-                    ? "userProfile_button userProfile_active-tabs"
-                    : "userProfile_button"
-                }
-                onClick={() => toggleTab(1)}
-                // className="userProfile_button"
-              >
-                Favorites
-              </Button>
-              <Button 
-                className={
-                  toggleState === 2
-                    ? "userProfile_button userProfile_active-tabs"
-                    : "userProfile_button"
-                }
-                onClick={() => toggleTab(2)} 
-              >
-                History
-              </Button>
-            </div>
             <div className="userProfile_Container_right_carrousel">
-              {/* Content 1 */}
-              <div
-                className={
-                  toggleState === 1
-                    ? "header4 userProfile_Title active-content"
-                    : "inactive-content"
-                }
-              >
-                <p>Favorites</p>
+            <p className="header4 addAccoms">Favorites</p>
+            <Row className="justify-content-md-center mt-4">
+            {favorites.length === 0 ? (
+              <div className="noUnits">
+                 <img src={noUnits} alt="image" />
+                <p className="regular">No Favorites</p>
               </div>
-
-              {/* Content 2 */}
-              <div
-                className={
-                  toggleState === 2
-                    ? "header4 userProfile_Title active-content"
-                    : "inactive-content"
-                }
-              >
-                <p>Reservation History</p>
-              </div>
-
-              <CardListing/>
-              <CardListing/>
+            ) : (
+              <Carousel variant="dark" className="mt-4 mb-5">
+               {favorites.map((f, index) => (
+                 <Carousel.Item>
+                 <div className="ml-4">
+                     <CardListing
+                       key={index}
+                       unit={f}
+                       name={f.ACCOMMODATION_NAME}
+                       location={f.ACCOMMODATION_LOCATION}
+                       description={f.ACCOMMODATION_DESCRIPTION}
+                       amenities={f.ACCOMMODATION_AMENITIES}
+                      address={f.ACCOMMODATION_ADDRESS}
+                       max_price={f.max_price}
+                       owner={f.USER_FNAME + " " + f.USER_LNAME}
+                       rating={f.rating}
+                     />
+                   </div>
+                 </Carousel.Item>
+               ))}
+             </Carousel>
+            )}
+            </Row>
             </div>
           </div>
         </div>
