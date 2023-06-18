@@ -22,25 +22,61 @@ export function isLoggedIn() {
 }
 
 export function getAuthUsername() {
-	return decryptToken()["username"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.username;
+	}
+	return null;
 }
 
 export function getAuthName() {
-	return decryptToken()["fname"] + " " + decryptToken()["lname"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.fname + " " + tokenData.lname;
+	}
+	return null;
 }
 
 export function getAuthEmail() {
-	return decryptToken()["email"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.email;
+	}
+	return null;
 }
 
 export function getAuthMobile() {
-	return decryptToken()["contactNum"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.contactNum;
+	}
+	return null;
 }
 
 export function getAuthType() {
-	return decryptToken()["userType"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.userType;
+	}
+	return null;
 }
 
 export function getAuthId() {
-	return decryptToken()["userId"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decrytedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.userId;
+	}
+	return null;
 }
