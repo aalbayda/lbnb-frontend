@@ -27,6 +27,7 @@ const Listing = lazy(()=> import("./pages/listing/Listing.js"));
 const UserProfile = lazy(()=> import("./pages/userProfile/UserProfile.js"));
 const Details = lazy(()=> import("./pages/detailsPage/details.js"));
 const DevPage = lazy(()=> import("./pages/devPage/DevPage.js"));
+const NotFound = lazy(()=> import("./pages/notFound/NotFound.js"));
 
 
 const App = () => {
@@ -96,6 +97,13 @@ const App = () => {
           <div>
             <DevPage />
           </div>
+        }
+      />
+      {/* Undefined route  */}
+      <Route 
+        path="*"
+        element={
+          <NotFound />
         }
       />
     </Routes>
