@@ -10,7 +10,7 @@ import { ReportModal } from "../../molecules";
 import axios from "axios";
 import io from 'socket.io-client';
 import ChatButton from "../../atoms/chatButton/chatButton";
-import Chat from "../../pages/chatPage/chat";
+
 import {
   isLoggedIn,
   getAuthUsername,
@@ -133,7 +133,7 @@ const ListingDetails = (props) => {
               <p>{description}</p>
               <p>{amenities}</p>
             </div>
-              {<ChatButton username={userName} room={userName+ownerName} socket={socket}/> }
+            {<ChatButton username={userName} setUsername={userName} room={userName+ownerName} setRoom={userName+ownerName} socket={socket}/>} 
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>

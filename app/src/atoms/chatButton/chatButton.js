@@ -7,7 +7,7 @@ import {
   getAuthType,
 } from "../../auth";
 
-const ChatButton = ({ username, room, socket }) => {
+const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
     const navigate = useNavigate(); // Add this  
     // Add this
   const joinRoom = () => {
