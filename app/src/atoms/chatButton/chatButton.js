@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router-dom'; // Add this
 import React from "react";
+
 import "./chatButton.css";
 import {
   isLoggedIn,
+  getAuthType,
 } from "../../auth";
+
 const ChatButton = ({ username, room, socket }) => {
     const navigate = useNavigate(); // Add this  
     // Add this
   const joinRoom = () => {
-    if (!isLoggedIn() || !(getAuthType() === "Student")) {
+    if (!isLoggedIn()) {
       window.alert("Log in as a registered tenant first!");
       return;
     }
