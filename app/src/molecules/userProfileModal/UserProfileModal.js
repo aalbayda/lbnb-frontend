@@ -28,6 +28,12 @@ function UserProfileModal(props) {
   const [editing, setEditing] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+  };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -177,6 +183,16 @@ function UserProfileModal(props) {
                 type="text"
                 onChange={(e) => setNewemail(e.target.value)}
               />
+            </div>
+            <div className="userProfileModal_detail changePhoto">
+              <input className="addPhotobtn" type="file" accept="image/*" onChange={handleImageUpload} />
+              {selectedImage && (
+                <div className="userProfileCenter">
+                  <div className="userProfile_Container_left_photomodal">
+                    <img className="userPhotoModal" src={selectedImage} alt="Uploaded" style={{ width: "200px" }} />
+                  </div>
+                </div>
+              )}
             </div>
             { isChecked === true ? 
                 (
