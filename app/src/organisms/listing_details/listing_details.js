@@ -1,12 +1,16 @@
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Button, Row, Col, Container } from "react-bootstrap";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
 import axios from "axios";
+import io from 'socket.io-client';
+import ChatButton from "../../atoms/chatButton/chatButton";
+import Chat from "../../pages/chatPage/chat";
 import {
   isLoggedIn,
   getAuthUsername,
@@ -16,6 +20,7 @@ import {
   getAuthEmail,
 } from "../../auth";
 import config from "../../config";
+const socket = io.connect('https://elbnb-server.herokuapp.com')
 const url = config.apiUrl;
 
 const ListingDetails = (props) => {
@@ -128,10 +133,11 @@ const ListingDetails = (props) => {
               <p>{description}</p>
               <p>{amenities}</p>
             </div>
+              {<ChatButton username={userName} room={userName+ownerName} socket={socket}/> }
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>
-            {/* <ChatButton/> */}
+         
           </div>
         </Col>
         <Col className="heart-icon-col">
