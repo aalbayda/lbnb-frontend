@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Image, Carousel, Button } from "react-bootstrap";
 import { CardListing, NavBar } from "../../organisms";
 import { defaultPhoto } from "../../assets/images";
+import { UserProfileModal } from "../../molecules";
 // import { Dorm } from "../../molecules";
 import {
   isLoggedIn,
@@ -27,11 +28,9 @@ const UserProfile = () => {
   const [editing, setEditing] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [dp, setDP] = useState("");
-  const [newname, setNewname] = useState("");
-  const [newnumber, setNewnumber] = useState("");
-  const [newemail, setNewemail] = useState("");
-  const [newpassword, setNewpassword] = useState("");
   const [toggleState, setToggleState] = useState(1);
+  const [modalShow, setModalShow] = useState(false);
+  const [number, setNumber] = useState(getAuthMobile());
 
   // function to toggle tabs
   const toggleTab = (index) => {
@@ -39,40 +38,41 @@ const UserProfile = () => {
     console.log("toggle: ", toggleState)
   };
 
-  const handleClick = () => {
-    if (editing && !newpassword) {
-      window.alert(
-        "Invalid password! If you want the same password, enter your current password."
-      );
-      return;
-    }
+  // const handleClick = () => {
+  //   if (editing && !newpassword) {
+  //     window.alert(
+  //       "Invalid password! If you want the same password, enter your current password."
+  //     );
+  //     return;
+  //   }
 
-    if (editing) {
-      axios
-        .post(url + "/edit-user", {
-          email: getAuthEmail(),
-          newUsername: newemail ? newemail : getAuthEmail(),
-          newFirstName: newname
-            ? newname.split(" ")[0]
-            : getAuthName().split(" ")[0],
-          newLastName: newname
-            ? newname.split(" ")[1]
-            : getAuthName().split(" ")[1],
-          newContactNum: newnumber ? newnumber : getAuthMobile(),
-          newPassword: newpassword,
-        })
-        .then((res) => {
-          console.log(res.data);
-          console.log("Success edit");
-          document.cookie =
-            "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          window.location.href = "/";
-        })
-        .catch((err) => console.error(err));
-    }
+  //   if (editing) {
+  //     axios
+  //       .post(url + "/edit-user", {
+  //         email: getAuthEmail(),
+  //         newUsername: newemail ? newemail : getAuthEmail(),
+  //         newFirstName: newemail ? newemail : getAuthEmail(),
+  //         // newFirstName: newname
+  //         //   ? newname.split(" ")[0]
+  //         //   : getAuthName().split(" ")[0],
+  //         // newLastName: newname
+  //         //   ? newname.split(" ")[1]
+  //         //   : getAuthName().split(" ")[1],
+  //         newContactNum: newnumber ? newnumber : getAuthMobile(),
+  //         newPassword: newpassword,
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         console.log("Success edit");
+  //         document.cookie =
+  //           "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  //         window.location.href = "/";
+  //       })
+  //       .catch((err) => console.error(err));
+  //   }
 
-    setEditing(!editing);
-  };
+  //   setEditing(!editing);
+  // };
 
   useEffect(() => {
     axios
@@ -101,11 +101,23 @@ const UserProfile = () => {
             </div>
             <div className="userProfile_Container_left_details">
               <p className="header4 userProfile_name">{getAuthName()}</p>
-              <p className="regular userProfile_number">{getAuthMobile()}</p>
+              {getAuthMobile() === 0 ? (
+                <p className="regular userProfile_number">{getAuthMobile()}</p>
+              ) : (
+                <p></p>
+              )}
               <p className="regular userProfile_email">{getAuthEmail()}</p>
-              <Button className="userProfile_editButton">
+              <Button className="userProfile_editButton"  onClick={() => setModalShow(true)}>
                 Edit User Information
               </Button>
+              <UserProfileModal 
+                fname = {getAuthName().split(" ")[0]}
+                lname = {getAuthName().split(" ")[1]}
+                email = {getAuthEmail()}
+                number = {getAuthMobile()}
+                show={modalShow} 
+                onHide={() => setModalShow(false)} 
+              />
             </div>
           </div>
           <div className="userProfile_Container_right">
