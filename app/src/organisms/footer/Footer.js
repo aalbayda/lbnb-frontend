@@ -31,9 +31,9 @@ const Home = () => {
             </p>
           </div>
         </div>
-        {/* <div className="footer-bottom">
-          <p className="tiny">ACCOMODO © 2023 All Rights Reserved</p>
-        </div> */}
+        <div className="footer-bottom">
+          <p className="tiny">LBNB © 2023 | CMSC 128 - E1L</p>
+        </div>
       </div>
     </div>
   );

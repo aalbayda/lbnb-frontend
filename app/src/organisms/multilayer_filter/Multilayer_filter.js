@@ -50,7 +50,17 @@ const Multilayer_filter = (props) => {
   return (
     <div className="mlf-container">
       <div className="mlf-upper">
-        <Dropdown>
+        <input
+          className="small mlf_search"
+          placeholder="Search"
+          type="text"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button onClick={handleSearched} className="searchButton">
+          <BiSearch className="icon" />
+        </Button>
+        {/* <BiSearch className="icon searchIcon" /> */}
+        {/* <Dropdown>
           <Dropdown.Toggle
             id="dropdown-basic"
             className="small filter-dropdown"
@@ -72,21 +82,40 @@ const Multilayer_filter = (props) => {
               Bedspace
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
       </div>
       <div className="mlf-lower">
         <div className="divTable">
-          <div className="divTableCell search">
-            <BiSearch className="icon" />
-            <input
-              className="small mlf_search"
-              placeholder="Search"
-              type="text"
-              onChange={(e) => setSearch(e.target.value)}
-            />
+          <div className="divTableCell">
+          <AiFillFilter className="mlf_icon"/>
+          <Dropdown>
+          <Dropdown.Toggle
+            id="dropdown-basic"
+            className="small filter-dropdown"
+          >
+            {filterType ? filterType : "Type"}
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Dorm")}>
+              Dorm
+            </Dropdown.Item>
+            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Hotel")}>
+              Hotel
+            </Dropdown.Item>
+            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Apartment")}>
+              Apartment
+            </Dropdown.Item>
+            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Bedspace")}>
+              Bedspace
+            </Dropdown.Item>
+            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("")}>
+              No Preference
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
           </div>
-          <div className="divTableCell price">
-            <ImPriceTags className="icon" />
+          <div className="divTableCell">
+            <ImPriceTags className="mlf_icon"  />
             <input
               className="small mlf_price"
               placeholder="Max Price"
@@ -101,10 +130,10 @@ const Multilayer_filter = (props) => {
               onChange={(e) => setPriceTo(e.target.value)}
             />
           </div>
-          <div className="divTableCell capacity">
-            <MdGroups className="icon" />
+          <div className="divTableCell">
+            <MdGroups className="mlf_icon" />
             <input
-              className="small mlf_price"
+              className="small mlf_capacity"
               placeholder="Capacity"
               type="number"
               min="0"
@@ -117,10 +146,29 @@ const Multilayer_filter = (props) => {
               onChange={(e) => setCapacity(e.target.value)}
             />
           </div>
-          <div className="divTableCell InElbi">
-            <MdOutlinePlace className="icon" />
-            <div className="InElbi-Right">
-              <Form>
+          <div className="divTableCell">
+            {/* <div className="InElbi-Right"> */}
+            <MdOutlinePlace className="mlf_icon"/>
+            <Dropdown>
+              <Dropdown.Toggle
+                id="dropdown-basic"
+                className="small filter-dropdown"
+              >
+              {location ? location : "Location"}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("Within Campus")}>
+                Within Campus
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("Outside Campus")}>
+                Outside Campus
+                </Dropdown.Item>
+                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("")}>
+                No Preference
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+              {/* <Form>
                 {["radio"].map((type) => (
                   <div key={`inline-${type}`} className="mb-3">
                     <Form.Check
@@ -153,15 +201,15 @@ const Multilayer_filter = (props) => {
                     />
                   </div>
                 ))}
-              </Form>
-            </div>
+              </Form> */}
+            {/* </div> */}
           </div>
-          <div className="divTableCell search">
-            <Button onClick={handleSearched} className="small carousel-btn">
+          {/* <div className="divTableCell search"> */}
+            {/* <Button onClick={handleSearched} className="small carousel-btn">
               {" "}
               Search{" "}
-            </Button>
-          </div>
+            </Button> */}
+          {/* </div> */}
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
 export { default as logo } from "./LBnB_logo_png.png";
+export { default as defaultPhoto } from "./SVG/defaultPhoto.jpg";
+export { default as notFound } from "./SVG/notFound.png";
 export { default as banner1 } from "./banner1.jpg";
 export { default as banner2 } from "./banner2.jpg";
 export { default as banner3 } from "./banner3.jpg";
