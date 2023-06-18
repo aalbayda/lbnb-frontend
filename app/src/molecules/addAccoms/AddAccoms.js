@@ -16,6 +16,13 @@ function AddAccoms(props) {
   const [newAddress, setNewAddress] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newAmenities, setNewAmenities] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+  };
+  
 
   const handleAdd = () => {
     console.log("Adding...");
@@ -205,6 +212,16 @@ function AddAccoms(props) {
               />
             </Col>
           </Row>
+          <div className="userProfileModal_detail changePhoto">
+              <input className="addPhotobtn" type="file" accept="image/*" onChange={handleImageUpload} />
+              {selectedImage && (
+                <div className="userProfileCenter">
+                  <div className="userProfile_Container_left_photoAddAccom">
+                    <img className="userPhotoAddAccom" src={selectedImage} alt="Uploaded" style={{ width: "200px" }} />
+                  </div>
+                </div>
+              )}
+            </div>
           <Row className="input-item">
             <Button onClick={handleAdd} className="add-accoms-btn">
               ADD ACCOMODATION

@@ -45,6 +45,24 @@ Container p.large-bold {
   text-align: center;
 }
 
+.userProfile_Container_left_photoAddAccom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  overflow: hidden;
+}
+
+.userProfile_Container_left_photoAddAccom img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 .input-add-accoms {
   border: 1px solid var(--color-light-accent-green);
   width: 100%;
