@@ -14,7 +14,7 @@ function Terms() {
       {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
       </Button> */}
-      <a href="#" className='tiny color-blue' onClick={handleShow}>
+      <a href="#" className='tiny' style={{color: "blue"}} onClick={handleShow}>
         Terms and Conditions
       </a>
 
