@@ -6,13 +6,15 @@ Modal {
     align-items: center;
 }
 
-.modal-body {
+div.login.modal-body {
     display: flex;
     justify-content: center;
     background-color: var(--color-background);
     
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 20px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
 
 .content {
@@ -35,7 +37,10 @@ input {
     border-left: none;
     border-right: none;
 
-    padding: 5px;
+    height: 40px;
+    height: 450px;
+    
+    padding: 10px;
     background-color: var(--color-background);
 }
 
