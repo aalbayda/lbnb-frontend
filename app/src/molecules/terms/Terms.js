@@ -11,12 +11,9 @@ function Terms() {
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-      <a href="#" className='tiny' style={{color: "blue"}} onClick={handleShow}>
+      <Button variant="link" className='tiny' style={{color: "blue"}} onClick={handleShow}>
         Terms and Conditions
-      </a>
+      </Button>
 
       <Modal show={show} onHide={handleClose} centered size="lg">
         <Modal.Header closeButton>
