@@ -3,8 +3,7 @@ import axios from "axios";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { defaultPhoto } from "../../assets/images";
-import { UserProfileModal } from "../../molecules";
-import { AddAccoms } from "../../molecules";
+import { UserProfileModal, AddAccoms, Unauthorized } from "../../molecules";
 import {
   Container,
   Row,
@@ -336,12 +335,7 @@ const LandlordProfile = () => {
         // </div>
       ) : (
         <Container>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>Unauthorized route.</Row>
+          <Unauthorized />
         </Container>
       )}
     </div>

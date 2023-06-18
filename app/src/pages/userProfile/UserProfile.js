@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Image, Carousel, Button } from "react-bootstrap";
 import { CardListing, NavBar } from "../../organisms";
 import { defaultPhoto } from "../../assets/images";
-import { UserProfileModal } from "../../molecules";
+import { UserProfileModal, Unauthorized } from "../../molecules";
 // import { Dorm } from "../../molecules";
 import {
   isLoggedIn,
@@ -253,13 +253,7 @@ const UserProfile = () => {
         // </Container>
       ) : (
         <Container>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row>&nbsp;</Row>
-          <Row className="justify-content-md-center">Unauthorized route.</Row>
+          <Unauthorized />
         </Container>
       )}
     </div>

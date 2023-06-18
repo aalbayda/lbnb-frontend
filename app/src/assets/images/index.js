@@ -28,3 +28,4 @@ export { default as image11 } from "./devs/image11.jpg";
 export { default as image12 } from "./devs/image12.jpg";
 export { default as image13 } from "./devs/image13.jpg";
 export { default as noUnits } from "./SVG/noUnits.png";
+export { default as unauthorized } from "./SVG/unauthorized.png";
