@@ -2,6 +2,9 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { defaultPhoto } from "../../assets/images";
+import { UserProfileModal } from "../../molecules";
+import { AddAccoms } from "../../molecules";
 import {
   Container,
   Row,
@@ -26,6 +29,7 @@ import {
   getAuthMobile,
   getAuthEmail,
 } from "../../auth";
+import { noUnits } from "../../assets/images";
 import config from "../../config";
 const url = config.apiUrl;
 
@@ -42,6 +46,16 @@ const LandlordProfile = () => {
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [dp, setDP] = useState("");
+  const [toggleState, setToggleState] = useState(1);
+  const [modalShow1, setModalShow1] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  // const [number, setNumber] = useState(getAuthMobile());
+
+  // function to toggle tabs
+  const toggleTab = (index) => {
+    setToggleState(index);
+    console.log("toggle: ", toggleState)
+  };
 
   const handleClick = () => {
     if (editing && !newpassword) {
@@ -122,131 +136,204 @@ const LandlordProfile = () => {
     <div>
       <NavBar />
       {isLoggedIn() ? (
-        <div className="landlord-profile-container">
-          {location.state.username === getAuthUsername() ? (
-            <AddAccomsButton />
-          ) : (
-            <></>
-          )}
-          <Col className="body-container">
-            <Row className="justify-content-md-center">
-              <Image
-                className="profileImage"
-                src={
-                  dp
-                    ? dp
-                    : "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000"
-                }
-                roundedCircle
-                fluid
-              />
-            </Row>
-            <Col className="text-center mt-5">
-              {editing ? "🪪" : ""}{" "}
-              {editing ? (
-                <input
-                  placeholder="New Name"
-                  onChange={(e) => setNewname(e.target.value)}
-                ></input>
-              ) : (
-                <h1 className="header1">
-                  {newname ? newname : location.state.name}
-                </h1>
-              )}
-            </Col>
-
-            <Col className="text-center">
-              <Rating
-                className="rating-medium"
-                name="read-only"
-                value={rating}
-                // precision={0.5}
+         <div className="userProfile_Container">
+         <div className="userProfile_Container_left">
+           <div className="userProfile_Container_left_photo">
+             <Image 
+               className="userPhoto"
+               src={defaultPhoto}
+             />
+           </div>
+           <div className="userProfile_Container_left_details">
+             <p className="header4 userProfile_name">{getAuthName()}</p>
+             <Rating
+                 className="rating-medium"
+                 readOnly
+                 value={2.5}
+                 precision={0.5}
                 sx={{
-                  fontSize: "3rem",
-                  color: "#F0AF01",
-                }}
-              />
-            </Col>
-
-            <Col className="text-center">
-              <h1 className="small">
-                📞{" "}
-                {editing ? (
-                  <input
-                    placeholder="New Number"
-                    onChange={(e) => setNewnumber(e.target.value)}
-                  ></input>
-                ) : newnumber ? (
-                  newnumber
-                ) : (
-                  getAuthMobile()
-                )}
-              </h1>
-              <h1 className="small">
-                📬{" "}
-                {editing ? (
-                  <input
-                    placeholder="New Email"
-                    onChange={(e) => setNewemail(e.target.value)}
-                  ></input>
-                ) : newemail ? (
-                  newemail
-                ) : (
-                  email
-                )}
-              </h1>
-              {editing ? "🔑" : <></>}
-
-              {editing ? (
-                <input
-                  placeholder="New Password"
-                  type="password"
-                  onChange={(e) => setNewpassword(e.target.value)}
-                ></input>
-              ) : (
-                <></>
-              )}
-            </Col>
-
-            {getAuthUsername() === email ? (
-              <Col className="text-center mt-5">
-                <Button
-                  onClick={handleClick}
-                  className="small-bold carousel-btn"
-                >
-                  {editing ? "Save" : "Edit Details"}
-                </Button>
-              </Col>
+                   fontSize: "3rem",
+                   color: "#F0AF01",
+                 }}
+            />
+             {getAuthMobile() === 0 ? (
+               <p className="regular userProfile_number">{getAuthMobile()}</p>
+             ) : (
+               <p></p>
+             )}
+             <p className="regular userProfile_email">{getAuthEmail()}</p>
+             <Button className="userProfile_editButton"  onClick={() => setModalShow1(true)}>
+               Edit User Information
+             </Button>
+             <Button className="userProfile_editButton"  onClick={() => setModalShow(true)}>
+               Add Accomodation
+             </Button>
+             <AddAccoms show={modalShow} onHide={() => setModalShow(false)} />
+             <UserProfileModal 
+               fname = {getAuthName().split(" ")[0]}
+               lname = {getAuthName().split(" ")[1]}
+               email = {getAuthEmail()}
+               number = {getAuthMobile()}
+               show={modalShow1} 
+               onHide={() => setModalShow1(false)} 
+             />
+           </div>
+         </div>
+         <div className="userProfile_Container_right">
+            <p className="header4 addAccoms"> Units Owned </p>
+            <Row className="justify-content-md-center mt-4">
+            {owned.length === 0 ? (
+              <div className="noUnits">
+                 <img src={noUnits} alt="image" />
+                <p className="regular">No Owned Units</p>
+              </div>
             ) : (
-              <></>
+              owned.map((unit, index) => (
+                <div className="cardlist-flex mb-5">
+                  <CardListing
+                    key={index}
+                    unut={unit}
+                    owner_username={location.state.username}
+                    name={unit.ACCOMMODATION_NAME}
+                    location={unit.ACCOMMODATION_LOCATION}
+                    description={unit.ACCOMMODATION_DESCRIPTION}
+                    amenities={unit.ACCOMMODATION_AMENITIES}
+                    address={unit.ACCOMMODATION_ADDRESS}
+                    max_price={unit.max_price}
+                    owner={""}
+                    rating={unit.rating}
+                  />
+                </div>
+              ))
             )}
+            </Row>
+         </div>
+       </div>
+        // <div className="landlord-profile-container">
+        //   {location.state.username === getAuthUsername() ? (
+        //     <AddAccomsButton />
+        //   ) : (
+        //     <></>
+        //   )}
+        //   <Col className="body-container">
+        //     <Row className="justify-content-md-center">
+        //       <Image
+        //         className="profileImage"
+        //         src={
+        //           dp
+        //             ? dp
+        //             : "https://img.freepik.com/free-icon/user_318-804790.jpg?w=2000"
+        //         }
+        //         roundedCircle
+        //         fluid
+        //       />
+        //     </Row>
+        //     <Col className="text-center mt-5">
+        //       {editing ? "🪪" : ""}{" "}
+        //       {editing ? (
+        //         <input
+        //           placeholder="New Name"
+        //           onChange={(e) => setNewname(e.target.value)}
+        //         ></input>
+        //       ) : (
+        //         <h1 className="header1">
+        //           {newname ? newname : location.state.name}
+        //         </h1>
+        //       )}
+        //     </Col>
 
-            <Col>
-              <Row>
-                <h1 className="mt-5 text-center header2">Units Owned</h1>
-              </Row>
-              <Row className="justify-content-md-center mt-4">
-                {owned.map((unit, index) => (
-                  <div className="cardlist-flex mb-5">
-                    <CardListing
-                      key={index}
-                      unut={unit}
-                      owner_username={location.state.username}
-                      name={unit.ACCOMMODATION_NAME}
-                      location={unit.ACCOMMODATION_LOCATION}
-                      description={unit.ACCOMMODATION_DESCRIPTION}
-                      amenities={unit.ACCOMMODATION_AMENITIES}
-                      address={unit.ACCOMMODATION_ADDRESS}
-                      max_price={unit.max_price}
-                      owner={""}
-                      rating={unit.rating}
-                    />
-                  </div>
-                ))}
-              </Row>
-            </Col>
-          </Col>
-        </div>
+        //     <Col className="text-center">
+        //       <Rating
+        //         className="rating-medium"
+        //         name="read-only"
+        //         value={rating}
+        //         // precision={0.5}
+        //         sx={{
+        //           fontSize: "3rem",
+        //           color: "#F0AF01",
+        //         }}
+        //       />
+        //     </Col>
+
+        //     <Col className="text-center">
+        //       <h1 className="small">
+        //         📞{" "}
+        //         {editing ? (
+        //           <input
+        //             placeholder="New Number"
+        //             onChange={(e) => setNewnumber(e.target.value)}
+        //           ></input>
+        //         ) : newnumber ? (
+        //           newnumber
+        //         ) : (
+        //           getAuthMobile()
+        //         )}
+        //       </h1>
+        //       <h1 className="small">
+        //         📬{" "}
+        //         {editing ? (
+        //           <input
+        //             placeholder="New Email"
+        //             onChange={(e) => setNewemail(e.target.value)}
+        //           ></input>
+        //         ) : newemail ? (
+        //           newemail
+        //         ) : (
+        //           email
+        //         )}
+        //       </h1>
+        //       {editing ? "🔑" : <></>}
+
+        //       {editing ? (
+        //         <input
+        //           placeholder="New Password"
+        //           type="password"
+        //           onChange={(e) => setNewpassword(e.target.value)}
+        //         ></input>
+        //       ) : (
+        //         <></>
+        //       )}
+        //     </Col>
+
+        //     {getAuthUsername() === email ? (
+        //       <Col className="text-center mt-5">
+        //         <Button
+        //           onClick={handleClick}
+        //           className="small-bold carousel-btn"
+        //         >
+        //           {editing ? "Save" : "Edit Details"}
+        //         </Button>
+        //       </Col>
+        //     ) : (
+        //       <></>
+        //     )}
+
+        //     <Col>
+        //       <Row>
+        //         <h1 className="mt-5 text-center header2">Units Owned</h1>
+        //       </Row>
+        //       <Row className="justify-content-md-center mt-4">
+        //         {owned.map((unit, index) => (
+        //           <div className="cardlist-flex mb-5">
+        //             <CardListing
+        //               key={index}
+        //               unut={unit}
+        //               owner_username={location.state.username}
+        //               name={unit.ACCOMMODATION_NAME}
+        //               location={unit.ACCOMMODATION_LOCATION}
+        //               description={unit.ACCOMMODATION_DESCRIPTION}
+        //               amenities={unit.ACCOMMODATION_AMENITIES}
+        //               address={unit.ACCOMMODATION_ADDRESS}
+        //               max_price={unit.max_price}
+        //               owner={""}
+        //               rating={unit.rating}
+        //             />
+        //           </div>
+        //         ))}
+        //       </Row>
+        //     </Col>
+        //   </Col>
+        // </div>
       ) : (
         <Container>
           <Row>&nbsp;</Row>

@@ -46,7 +46,7 @@ function AddAccoms(props) {
 
   return (
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
-      <Modal.Body>
+      <Modal.Body className="addAccomsModal">
         <Container className="add-accoms-container">
           <Row className="input-item">
             <Col>
@@ -54,8 +54,18 @@ function AddAccoms(props) {
             </Col>
           </Row>
           <Row className="input-item">
+            {/* <div className="userProfileModal_detail">
+              <p className="small userProfileModal_text">Number</p>
+              <input
+                required
+                className="tiny userProfileInput"
+                placeholder="09XXXXXXXX"
+                type="text"
+                onChange={(e) => setNewnumber(e.target.value)}
+              /> 
+            </div> */}
             <Col xs={4}>
-              <p className="small light-green">Name</p>
+              <p className="small light-green addAccoms">Name</p>
             </Col>
             <Col>
               {" "}
@@ -68,10 +78,8 @@ function AddAccoms(props) {
           </Row>
           <Row className="input-item">
             <Col xs={4}>
-              <p className="small light-green">Type</p>
+              <p className="small light-green addAccoms">Type</p>
             </Col>
-          </Row>
-          <Row>
             <Col>
               <Form.Check
                 className="custom-radio tiny"
@@ -129,7 +137,7 @@ function AddAccoms(props) {
           </Row>
           <Row className="input-item">
             <Col xs={4}>
-              <p className="small light-green">Address</p>
+              <p className="small light-green addAccoms">Address</p>
             </Col>
             <Col>
               {" "}
@@ -142,10 +150,8 @@ function AddAccoms(props) {
           </Row>
           <Row className="input-item">
             <Col xs={4}>
-              <p className="small light-green">Location</p>
+              <p className="small light-green addAccoms">Location</p>
             </Col>
-          </Row>
-          <Row>
             <Col>
               <Form.Check
                 className="custom-radio tiny"
@@ -175,7 +181,7 @@ function AddAccoms(props) {
           </Row>
           <Row className="input-item">
             <Col xs={4}>
-              <p className="small light-green">Description</p>
+              <p className="small light-green addAccoms">Description</p>
             </Col>
             <Col>
               {" "}
@@ -188,7 +194,7 @@ function AddAccoms(props) {
           </Row>
           <Row className="input-item">
             <Col xs={4}>
-              <p className="small light-green">Amenities</p>
+              <p className="small light-green addAccoms">Amenities</p>
             </Col>
             <Col>
               {" "}
