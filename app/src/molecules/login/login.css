@@ -42,6 +42,7 @@ input {
     
     padding: 10px;
     background-color: var(--color-background);
+    text-indent: 10px;
 }
 
 .login-container {
@@ -89,10 +90,23 @@ p.large-bold {
     cursor: pointer;
 }
 
-.login-btn.btn:focus, .login-btn.btn:hover, .login-btn.btn:active, .login-btn.btn:visited{
+.login-btn.btn:focus, 
+.login-btn.btn:hover, 
+.login-btn.btn:active, 
+.login-btn.btn:visited{
     background-color: var(--color-light-accent-green) !important;
-    color: var(--color-background);
+    color: var(--color-background) !important;
 }
+
+button.signup-btn.btn.btn-primary:focus,
+button.signup-btn.btn.btn-primary:hover, 
+button.signup-btn.btn.btn-primary:active, 
+button.signup-btn.btn.btn-primary:visited{
+    background-color: var(--color-heading-dark) !important;
+    color: var(--color-background) !important;
+}
+
+
 
 .terms-div {
     margin-top: 5px;

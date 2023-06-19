@@ -46,6 +46,12 @@ p.header4.noResultText{
   max-height: 500px;
 }
 
+.Searching{
+  padding-top: -50;
+  max-width: 700px;
+  max-height: 100%;
+}
+
 /* .search-list {
     display: flex;
     flex-direction: column;

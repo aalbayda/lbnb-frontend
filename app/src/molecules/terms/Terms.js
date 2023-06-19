@@ -11,7 +11,7 @@ function Terms() {
 
   return (
     <>
-      <Button variant="link" className='tiny' style={{color: "blue"}} onClick={handleShow}>
+      <Button variant="link" className='tiny termsBtn' onClick={handleShow}>
         Terms and Conditions
       </Button>
 
