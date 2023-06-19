@@ -10,6 +10,7 @@
   width: 100%;
   padding: 100px;
   padding-bottom: 0px;
+  z-index: 1;
 }
 
 .mlf-upper {
@@ -28,6 +29,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  z-index:1;
 }
 
 .divTable {
