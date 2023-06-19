@@ -340,11 +340,11 @@ function Login(props) {
             
 
             {loading ? (
-              <Button className="signup-btn" disabled onClick={handleSignUp}>
+              <Button className="login-btn" disabled onClick={handleSignUp}>
                 loading
               </Button>
             ) : (
-              <Button className="signup-btn" onClick={handleSignUp}>
+              <Button className="login-btn" onClick={handleSignUp}>
                 SIGN UP
               </Button>
             )}
