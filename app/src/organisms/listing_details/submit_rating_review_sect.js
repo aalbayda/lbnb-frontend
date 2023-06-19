@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./submit_rating_review_sect.css";
 import { Row, Container } from "react-bootstrap";
 // import {MUIStarRating, CommentTextField, SubmitButton} from '../../atoms'
-import { Rating, TextField } from "@mui/material";
+import { Rating, TextField, Table, TableRow, TableCell, InputAdornment, tableCellClasses } from "@mui/material";
 import axios from "axios";
 import {
   isLoggedIn,
@@ -64,30 +64,44 @@ const SubmitRatingReviewSect = (props) => {
 
   return (
     <Container className="comment-star-container">
+      <h4 className="write-review-header">Write a Review</h4>
       <Row>
         <div className="star-div">
-          <Rating
-            className="rating-medium"
-            // defaultValue={3.5}
-            precision={0.5}
-            // disabled={isLoggedIn() && getAuthType === "Student" ? false : true}
-            sx={{
-              fontSize: "2rem",
-              color: "#1C3103",
-              mr: 1,
-            }}
-            onChange={(newValue) =>
-              setRateVal(parseFloat(newValue.target.value))
-            }
-            value={rateVal}
-          />
+        <Table
+          sx={{
+            [`& .${tableCellClasses.root}`]: {
+              borderBottom: "none"
+            },
+            width: '10%'
+          }}
+        >
+          <TableRow>
+            <TableCell align="left">
+              <Rating
+                className="rating-medium"
+                // defaultValue={3.5}
+                precision={0.5}
+                // disabled={isLoggedIn() && getAuthType === "Student" ? false : true}
+                sx={{
+                  fontSize: "2rem",
+                  color: "#1C3103",
+                }}
+                onChange={(newValue) =>
+                  setRateVal(parseFloat(newValue.target.value))
+                }
+                value={rateVal}
+                
+              />
+            </TableCell>
+          </TableRow>
+        </Table>
           <textarea
             className="comment-textfield"
             // sx={{
             //   width: 950,
             // }}
             id="fullWidth"
-            label="Write Comment"
+            placeholder="Got something else to say? Type here!"
             multiline
             // disabled={!(isLoggedIn() && getAuthType === "Student")}
             maxRows={4}

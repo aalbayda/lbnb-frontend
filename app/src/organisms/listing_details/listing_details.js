@@ -47,11 +47,9 @@ const ListingDetails = (props) => {
           setIsFavorite(res.data.isFavorite);
           console.log("isfavorite?")
           console.log(res.data.isFavorite);
-          setLoading(false);
         })
         .catch((err) => console.error(err));
     } else {
-      setLoading(false);
     }
   }, []);
 
