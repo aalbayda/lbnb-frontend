@@ -20,6 +20,7 @@ B13C3F - red
     background-color: #9CAA64;
     font-family: "Poppins";
     color: #F9F6F2;
+    border-radius: 3%;
   }
   
   /* Room and users component */
@@ -29,6 +30,8 @@ B13C3F - red
     
   }
   .roomTitle {
+    padding-top: 30px;
+    padding-left: 20px;
     margin-bottom: 60px;
     text-transform: uppercase;
     font-size: 2rem;

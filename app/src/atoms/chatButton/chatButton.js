@@ -8,7 +8,7 @@ import {
 } from "../../auth";
 
 const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
-    const navigate = useNavigate(); // Add this  
+  const navigate = useNavigate(); // Add this  
     // Add this
   const joinRoom = () => {
     if (!isLoggedIn()) {
@@ -25,6 +25,7 @@ const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
  
   return (
        <button className='chat-button' onClick={joinRoom}>Chat Here!</button>
+      
   );
 };
 

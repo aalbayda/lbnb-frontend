@@ -13,7 +13,7 @@ const decryptToken = () => {
 
 // Takes in response object from /login
 export function encryptToken(data) {
-	return CryptoJS.AES.encrypt(JSON.stringify(data, config.key));
+	return CryptoJS.AES.encrypt(JSON.stringify(data),config.key);
 }
 
 export function isLoggedIn() {
