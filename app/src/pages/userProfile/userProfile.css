@@ -1,4 +1,134 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.userProfile_Container{
+  display: flex;
+
+  width: 100%;
+  height: 89vh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.userProfile_Container_left{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--color-light-accent-green);
+  width: 30%;
+  height: 100%;
+}
+
+.userProfile_Container_left_photo{
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+img.userPhoto{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.userProfile_Container_left_details{
+  display: flex;
+  flex-direction: column;
+  row-gap: -20px;
+
+}
+
+.header4.userProfile_name{
+  font-weight: bold;
+  color: var(--heading-dark);
+}
+
+.userProfile_editButton {
+  margin-top: 10px;
+  background-color: var(--color-background);
+  color: var(--color-heading-dark);
+  min-width: 90px;
+  border: none;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.userProfile_editButton:hover,
+.userProfile_editButton:active {
+  background-color: var(--color-heading-dark) !important;
+  color: var(--color-background);
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.userProfile_button.userProfile_active-tabs{
+  background-color: var(--color-heading-dark) !important;
+}
+
+.userProfile_button {
+  margin-top: 10px;
+  background-color: var(--color-light-accent-green);
+  color: var(--color-background);
+  min-width: 90px;
+  border: none;
+  cursor: pointer;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.userProfile_button:hover,
+.userProfile_button:active {
+  background-color: var(--color-light-accent-green) !important;
+  color: var(--color-background);
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.userProfile_button.userProfile_active-tabs:hover,
+.userProfile_button.userProfile_active-tabs:active {
+  background-color: var(--color-heading-dark) !important;
+  color: var(--color-background);
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.userProfile_Container_right {
+  padding: 20px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+}
+
+.header4.userProfile_Title{
+  margin-top: 10px;
+  font-weight: Bold;
+  color: var(--color-heading-dark);
+
+
+}
+
+.userProfile_Container_right_buttons{
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+.userProfile_Container_right_carrousel{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+
+
+
+/* @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
@@ -97,4 +227,4 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 70px;
-}
+} */

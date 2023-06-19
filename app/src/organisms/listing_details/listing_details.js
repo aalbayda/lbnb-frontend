@@ -2,25 +2,24 @@ import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
 import { Button, Row, Col, Container } from "react-bootstrap";
-import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
 import axios from "axios";
+import io from 'socket.io-client';
+import ChatButton from "../../atoms/chatButton/chatButton";
+
 import {
-  isLoggedIn,
   getAuthUsername,
   getAuthType,
-  getAuthName,
-  getAuthMobile,
-  getAuthEmail,
 } from "../../auth";
 import config from "../../config";
+const socket = io.connect('https://elbnb-server.herokuapp.com')
 const url = config.apiUrl;
 
 const ListingDetails = (props) => {
   // const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const userName = getAuthEmail();
+  const userName = getAuthUsername();
   const ownerName = props.props.USER_FNAME + " " + props.props.USER_LNAME;
   const accommName = props.props.ACCOMMODATION_NAME;
   const address = props.props.ACCOMMODATION_ADDRESS;
@@ -128,10 +127,11 @@ const ListingDetails = (props) => {
               <p>{description}</p>
               <p>{amenities}</p>
             </div>
+            {<ChatButton username={userName} setUsername={userName} room={accommName} setRoom={accommName} socket={socket}/>} 
             <div className="room-buttons">
               <div>{roomItems}</div>
             </div>
-            {/* <ChatButton/> */}
+         
           </div>
         </Col>
         <Col className="heart-icon-col">

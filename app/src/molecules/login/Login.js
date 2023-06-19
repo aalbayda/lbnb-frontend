@@ -3,6 +3,7 @@ import axios from "axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
+import Terms from "../terms/Terms";
 import "./login.css";
 import Form from "react-bootstrap/Form";
 import { encryptToken } from "../../auth";
@@ -22,9 +23,12 @@ function Login(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repassword, setRePassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
+
+  const [checked, setChecked] = useState(false);
 
   const toggleTab = (index) => {
     setToggleState(index);
@@ -36,10 +40,14 @@ function Login(props) {
     toggleTab(1);
   }, []);
 
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
+
   const handleSignUp = () => {
     setLoading(true);
 
-    if (email === "" || password === "" || fname === "" || lname === "") {
+    if (email === "" || password === "" || repassword === "" || fname === "" || lname === "") {
       setSignupErrorMessage("At least one field is missing or invalid!");
       setLoading(false);
       return;
@@ -54,11 +62,18 @@ function Login(props) {
       return;
     }
 
-
     // TODO: check if email exists
 
     const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
     const passwordMatch = passwordPattern.test(password);
+
+    if (password !== repassword){
+      setSignupErrorMessage(
+        "Password do not match!"
+      );
+      setLoading(false);
+      return;
+    }
 
     if (!passwordMatch) {
       setSignupErrorMessage(
@@ -70,6 +85,12 @@ function Login(props) {
 
     if (!radioClicked) {
       setSignupErrorMessage("Click one type of account!");
+      setLoading(false);
+      return;
+    }
+
+    if (!checked) {
+      setSignupErrorMessage("Please read the terms and conditions");
       setLoading(false);
       return;
     }
@@ -264,6 +285,13 @@ function Login(props) {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <input
+              required
+              className="tiny"
+              placeholder="Retype Password"
+              type="password"
+              onChange={(e) => setRePassword(e.target.value)}
+            />
             {/* <input required className="tiny" placeholder='Retype Password' type="password"/> */}
 
             <Form>
@@ -291,9 +319,23 @@ function Login(props) {
                     onChange={(e) => setIsBusinessAccount(true)}
                     onClick={(e) => setRadioClicked(true)}
                   />
+
+                  <div className="terms-div">
+                    <Terms/>
+                    <Form.Check
+                    className="tiny"
+                      type="checkbox"
+                      id="exampleCheckbox"
+                      label="I agree to the terms and conditions"
+                      checked={checked}
+                      onChange={handleCheckboxChange}
+                    />
+                  </div>
                 </div>
               ))}
             </Form>
+
+            
 
             {loading ? (
               <p>Loading</p>

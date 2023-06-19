@@ -1,4 +1,6 @@
 export { default as logo } from "./LBnB_logo_png.png";
+export { default as defaultPhoto } from "./SVG/defaultPhoto.jpg";
+export { default as notFound } from "./SVG/notFound.png";
 export { default as banner1 } from "./banner1.jpg";
 export { default as banner2 } from "./banner2.jpg";
 export { default as banner3 } from "./banner3.jpg";
@@ -25,3 +27,6 @@ export { default as image10 } from "./devs/image10.jpg";
 export { default as image11 } from "./devs/image11.jpg";
 export { default as image12 } from "./devs/image12.jpg";
 export { default as image13 } from "./devs/image13.jpg";
+export { default as noUnits } from "./SVG/noUnits.png";
+export { default as unauthorized } from "./SVG/unauthorized.png";
+export { default as searching } from "./SVG/searching.png";

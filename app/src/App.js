@@ -1,7 +1,9 @@
 // import logo from './logo.svg';
 import { Routes, Route } from "react-router-dom";
+import { useState } from 'react';
 import { Suspense, lazy } from "react";
 import "./App.css";
+import io from 'socket.io-client';
 /*
 import {
   AccomsPage,
@@ -18,6 +20,8 @@ import {
 import { Home } from "./pages";
 import LoadingScreenPage from "./atoms/loadingScreenPage/LoadingScreenPage";
 
+const socket = io.connect('https://elbnb-server.herokuapp.com');
+
 const AccomsPage = lazy(()=> import("./pages/accomsPage/AccomsPage.js"));
 const AdminPage = lazy(()=> import("./pages/adminPage/AdminPage.js"));
 // const Home = lazy(()=> import("./pages/home/Home.js"));
@@ -26,10 +30,15 @@ const LandlordProfile = lazy(()=> import("./pages/landlord_profile/LandlordProfi
 const Listing = lazy(()=> import("./pages/listing/Listing.js"));
 const UserProfile = lazy(()=> import("./pages/userProfile/UserProfile.js"));
 const Details = lazy(()=> import("./pages/detailsPage/details.js"));
+const Chat = lazy(()=> import("./pages/chatPage/chat.js"));
 const DevPage = lazy(()=> import("./pages/devPage/DevPage.js"));
+const NotFound = lazy(()=> import("./pages/notFound/NotFound.js"));
 
 
 const App = () => {
+  var username = "test";
+  var room = "test";
+
   return (
     <Suspense fallback={<LoadingScreenPage />}>
     <Routes>
@@ -90,6 +99,10 @@ const App = () => {
           </div>
         }
       />
+      <Route 
+        path="/chat"
+        element={<Chat username={username} room={room} socket={socket}/>}
+        />  
       <Route
         path="/DevPage"
         element={
@@ -98,6 +111,14 @@ const App = () => {
           </div>
         }
       />
+      {/* Undefined route  */}
+      <Route 
+        path="*"
+        element={
+          <NotFound />
+        }
+      />
+      
     </Routes>
     </Suspense>
   );
