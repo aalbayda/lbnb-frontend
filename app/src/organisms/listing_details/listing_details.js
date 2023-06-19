@@ -1,9 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Button, Row, Col, Container } from "react-bootstrap";
-import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
@@ -12,12 +10,8 @@ import io from 'socket.io-client';
 import ChatButton from "../../atoms/chatButton/chatButton";
 
 import {
-  isLoggedIn,
   getAuthUsername,
   getAuthType,
-  getAuthName,
-  getAuthMobile,
-  getAuthEmail,
 } from "../../auth";
 import config from "../../config";
 const socket = io.connect('https://elbnb-server.herokuapp.com')
