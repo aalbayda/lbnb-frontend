@@ -209,6 +209,14 @@ Modal {
     margin-top: 20px;
   }
 
+  .userProfileModal_Button.loading{
+    background-color: gray !important;
+    color: var(--color-background);
+    border: none !important;
+    width: 100%;
+    margin-top: 20px;
+  }
+
   .userProfileModal_Button:focus,
   .userProfileModal_Button:hover,
   .userProfileModal_Button:active,
@@ -236,4 +244,9 @@ Modal {
 
     width: 400px;
 
+  }
+
+  p.small.errorPrompt{
+    margin-top: 10px;
+    color: var(--color-report);
   }

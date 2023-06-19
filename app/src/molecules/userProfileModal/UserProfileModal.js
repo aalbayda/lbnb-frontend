@@ -22,12 +22,13 @@ function UserProfileModal(props) {
   const [newnumber, setNewnumber] = useState("");
   const [newemail, setNewemail] = useState("");
   const [password, setpassword] = useState("");  
-  const [oldpassword, setOldPassword] = useState("");
+  // const [oldpassword, setOldPassword] = useState("");
   const [newpassword, setNewpassword] = useState("");
   const [retypepassword, setretypepassword] = useState("");
   const [editing, setEditing] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -44,6 +45,7 @@ function UserProfileModal(props) {
   }, []);
 
   const handleClick = () => {
+    setLoading(true);
     // if (editing && !newpassword) {
     //   window.alert(
     //     "Invalid password! If you want the same password, enter your current password."
@@ -51,7 +53,16 @@ function UserProfileModal(props) {
     //   return;
     // }
 
-    if (isChecked === true){
+    if (isChecked === false){
+        console.log("Entered")
+
+        if (password === "") {
+          setError("Password Field is Empty!");
+          console.log(error)
+          setLoading(false);
+          return;
+        }
+
         axios
         .post(url + "/edit-user", {
             email: getAuthEmail(),
@@ -63,12 +74,42 @@ function UserProfileModal(props) {
         })
         .then((res) => {
             console.log(res.data);
-            console.log("Success edit");
-            toggleTab(2);
-            // window.location.href = "/";
+            if (red.data.success === false){
+              setError("Invalid Password");
+              setLoading(false);
+            } else {
+              console.log("Success edit");
+              setError("");
+              setLoading(false);
+              toggleTab(2);
+              window.location.reload();
+            }
         })
         .catch((err) => console.error(err));
     } else {
+        const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
+        const passwordMatch = passwordPattern.test(newpassword);
+
+        if (password === "") {
+          setError("Old Password Field is Empty!");
+          setLoading(false);
+          return;
+        }
+
+        if (!passwordMatch) {
+          setError(
+            "Password must contain at least 8 alphanumeric characters"
+          );
+          setLoading(false);
+          return;
+        }
+
+        if (newpassword !== retypepassword) {
+          setError("New Password does not match!");
+          setLoading(false);
+          return;
+        }
+
         if (newpassword === retypepassword){
             axios
             .post(url + "/edit-user", {
@@ -80,11 +121,18 @@ function UserProfileModal(props) {
                 newPassword: newpassword ? newpassword : "",
             })
             .then((res) => {
-                console.log(res.data);
+              console.log(res.data);
+              if (red.data.success === false){
+                setError("Invalid Password");
+                setLoading(false);
+              } else {
                 console.log("Success edit");
+                setError("");
+                setLoading(false);
                 toggleTab(2);
-                // window.location.href = "/";
-            })
+                window.location.reload();
+              }
+          })
             .catch((err) => console.error(err));
         } else {
             setError("New Password did not match!")
@@ -184,7 +232,7 @@ function UserProfileModal(props) {
                             className="tiny userProfileInput"
                             placeholder="********"
                             type="password"
-                            onChange={(e) => setOldPassword(e.target.value)}
+                            onChange={(e) => setpassword(e.target.value)}
                         />
                         </div>
                         <div className="userProfileModal_detail">
@@ -235,19 +283,25 @@ function UserProfileModal(props) {
                     onClick={handleCheckboxChange}
                 />
             </div>
-            {{error} === "" ?
+            {loading ? (
+              <Button className="userProfileModal_Button" disabled onClick={handleClick} >
+               loading...
+             </Button>
+            ) : (
+              <Button className="userProfileModal_Button" onClick={handleClick} >
+                Save Changes
+              </Button>
+            )}
+             {{error} !== "" ?
                 (
-                    <p>{error}</p>
+                    <p className="small errorPrompt">{error}</p>
                 )
                 :
                 (
                     <p></p>
                 )
             }
-            <p></p>
-            <Button className="userProfileModal_Button" onClick={handleClick} >
-                Save Changes
-            </Button>
+
           </div>
         </div>
         <div className={toggleState === 2 ? "content" : "inactive-content"}>
