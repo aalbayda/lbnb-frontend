@@ -16,7 +16,7 @@ import {
   getAuthType,
 } from "../../auth";
 import config from "../../config";
-const socket = io.connect('https://elbnb-server.herokuapp.com')
+const socket = io.connect('https://chat-remote-server.herokuapp.com')
 const url = config.apiUrl;
 
 const ListingDetails = (props) => {

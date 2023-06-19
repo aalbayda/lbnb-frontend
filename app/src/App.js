@@ -19,9 +19,7 @@ import {
 
 import { Home } from "./pages";
 import LoadingScreenPage from "./atoms/loadingScreenPage/LoadingScreenPage";
-
-const socket = io.connect('https://elbnb-server.herokuapp.com');
-
+const socket = io.connect('https://chat-remote-server.herokuapp.com')
 const AccomsPage = lazy(()=> import("./pages/accomsPage/AccomsPage.js"));
 const AdminPage = lazy(()=> import("./pages/adminPage/AdminPage.js"));
 // const Home = lazy(()=> import("./pages/home/Home.js"));
