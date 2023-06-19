@@ -36,8 +36,8 @@ const NotFound = lazy(()=> import("./pages/notFound/NotFound.js"));
 
 
 const App = () => {
-  const [username, setUsername] = useState('');
-  const [room, setRoom] = useState('');
+  var username = "test";
+  var room = "test";
 
   return (
     <Suspense fallback={<LoadingScreenPage />}>
