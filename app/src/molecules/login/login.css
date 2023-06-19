@@ -95,7 +95,7 @@ p.large-bold {
 .login-btn.btn:active, 
 .login-btn.btn:visited{
     background-color: var(--color-light-accent-green) !important;
-    color: var(--color-background) m !important;
+    color: var(--color-background) !important;
 }
 
 button.signup-btn.btn.btn-primary:focus,
