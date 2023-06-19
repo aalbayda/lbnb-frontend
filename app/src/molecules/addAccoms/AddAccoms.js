@@ -57,7 +57,7 @@ function AddAccoms(props) {
         <Container className="add-accoms-container">
           <Row className="input-item">
             <Col>
-              <p className="large-bold">Add Acccomodation</p>
+              <p className="large-bold">Add Acccommodation</p>
             </Col>
           </Row>
           <Row className="input-item">
@@ -192,9 +192,8 @@ function AddAccoms(props) {
             </Col>
             <Col>
               {" "}
-              <input
-                className="tiny input-add-accoms"
-                type="text"
+              <textarea
+                className="tiny input-add-accoms description"
                 onChange={(e) => setNewDescription(e.target.value)}
               />
             </Col>
@@ -224,7 +223,7 @@ function AddAccoms(props) {
             </div>
           <Row className="input-item">
             <Button onClick={handleAdd} className="add-accoms-btn">
-              ADD ACCOMODATION
+              ADD ACCOMMODATION
             </Button>
           </Row>
         </Container>
