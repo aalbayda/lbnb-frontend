@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import { Routes, Route } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Suspense, lazy } from "react";
 import "./App.css";
 import io from 'socket.io-client';
@@ -17,9 +17,15 @@ import {
 } from "./pages";
 */
 
+import {
+  getAuthUsername,
+} from "./auth";
+
 import { Home } from "./pages";
 import LoadingScreenPage from "./atoms/loadingScreenPage/LoadingScreenPage";
-const socket = io.connect('https://chat-remote-server.herokuapp.com')
+
+const socket = io.connect('https://chat-remote-server.herokuapp.com');
+
 const AccomsPage = lazy(()=> import("./pages/accomsPage/AccomsPage.js"));
 const AdminPage = lazy(()=> import("./pages/adminPage/AdminPage.js"));
 // const Home = lazy(()=> import("./pages/home/Home.js"));
@@ -34,8 +40,19 @@ const NotFound = lazy(()=> import("./pages/notFound/NotFound.js"));
 
 
 const App = () => {
-  var username = "test";
-  var room = "test";
+  const userName = getAuthUsername();
+  const [room, setRoom] = useState('');
+
+  useEffect(() => {
+    console.log("Updated room value:", room);
+  }, [room]);
+
+  const handleDataReceivedForChat = (data) => {
+    // Access and utilize the data received from the child component
+    console.log("Handle Data Received for Chat:")
+    const accommName = data.ACCOMMODATION_NAME;
+    setRoom(accommName);
+  };
 
   return (
     <Suspense fallback={<LoadingScreenPage />}>
@@ -93,13 +110,13 @@ const App = () => {
         path="/Details"
         element={
           <div>
-            <Details />
+            <Details onDataReceived={handleDataReceivedForChat} socket={socket}/>
           </div>
         }
       />
       <Route 
         path="/chat"
-        element={<Chat username={username} room={room} socket={socket}/>}
+        element={<Chat username={userName} room={room} socket={socket}/>}
         />  
       <Route
         path="/DevPage"
