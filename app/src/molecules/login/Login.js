@@ -95,6 +95,7 @@ function Login(props) {
       return;
     }
 
+
     axios
       .post(url + "/signUp", {
         email: email,
@@ -107,16 +108,19 @@ function Login(props) {
         isPersonalAccount: !isBusinessAccount,
       })
       .then(function (response) {
-
         if (response.data.message === "Email is already registered.") {
           setSignupErrorMessage("Email is already registered.");
           setLoading(false);
           return;
         }
 
+        handleLogin()
+
         setSignupErrorMessage("");
         setRadioClicked(false);
         console.log(response.data);
+        success = true;
+        console.log("user signed up");
         window.location.reload();
         setLoading(false);
       })
@@ -125,6 +129,8 @@ function Login(props) {
         console.log(error);
         setLoading(false);
       });
+      
+      
   };
 
   const handleLogin = () => {

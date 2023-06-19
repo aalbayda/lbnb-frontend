@@ -1,41 +1,83 @@
 import cookie from "cookie";
+import CryptoJS from "crypto-js";
+import config from "./config";
 
 const decryptToken = () => {
-  if (document.cookie)
-    return JSON.parse(atob(cookie.parse(document.cookie)["authCookie"]));
-  return false;
+	if (document.cookie)
+		return CryptoJS.AES.decrypt(
+			cookie.parse(document.cookie)["authCookie"],
+			config.key
+		);
+	return false;
 };
 
 // Takes in response object from /login
 export function encryptToken(data) {
-  return btoa(JSON.stringify(data));
+	return CryptoJS.AES.encrypt(JSON.stringify(data),config.key);
+
 }
 
 export function isLoggedIn() {
-  if (decryptToken()) return true;
-  return false;
+	if (decryptToken()) return true;
+	return false;
 }
 
 export function getAuthUsername() {
-  return decryptToken()["username"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.username;
+	}
+	return null;
 }
 
 export function getAuthName() {
-  return decryptToken()["fname"] + " " + decryptToken()["lname"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.fname + " " + tokenData.lname;
+	}
+	return null;
 }
 
 export function getAuthEmail() {
-  return decryptToken()["email"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.email;
+	}
+	return null;
 }
 
 export function getAuthMobile() {
-  return decryptToken()["contactNum"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.contactNum;
+	}
+	return null;
 }
 
 export function getAuthType() {
-  return decryptToken()["userType"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.userType;
+	}
+	return null;
 }
 
 export function getAuthId() {
-  return decryptToken()["userId"];
+	const decryptedToken = decryptToken();
+
+	if(decryptedToken){
+		const tokenData = JSON.parse(decryptedToken.toString(CryptoJS.enc.Utf8));
+		return tokenData.userId;
+	}
+	return null;
 }
