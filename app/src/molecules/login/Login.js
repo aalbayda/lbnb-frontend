@@ -23,6 +23,7 @@ function Login(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repassword, setRePassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [isBusinessAccount, setIsBusinessAccount] = useState(false);
@@ -46,7 +47,7 @@ function Login(props) {
   const handleSignUp = () => {
     setLoading(true);
 
-    if (email === "" || password === "" || fname === "" || lname === "") {
+    if (email === "" || password === "" || repassword === "" || fname === "" || lname === "") {
       setSignupErrorMessage("At least one field is missing or invalid!");
       setLoading(false);
       return;
@@ -65,6 +66,14 @@ function Login(props) {
 
     const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
     const passwordMatch = passwordPattern.test(password);
+
+    if (password !== repassword){
+      setSignupErrorMessage(
+        "Password do not match!"
+      );
+      setLoading(false);
+      return;
+    }
 
     if (!passwordMatch) {
       setSignupErrorMessage(
@@ -275,6 +284,13 @@ function Login(props) {
               placeholder="Password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              required
+              className="tiny"
+              placeholder="Retype Password"
+              type="password"
+              onChange={(e) => setRePassword(e.target.value)}
             />
             {/* <input required className="tiny" placeholder='Retype Password' type="password"/> */}
 
