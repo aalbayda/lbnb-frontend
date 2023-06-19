@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "./LandlordProfile.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { defaultPhoto } from "../../assets/images";
+import { defaultPhoto, loading } from "../../assets/images";
 import { UserProfileModal, AddAccoms, Unauthorized } from "../../molecules";
 import {
   Container,
@@ -44,6 +44,7 @@ const LandlordProfile = () => {
   const [toggleState, setToggleState] = useState(1);
   const [modalShow1, setModalShow1] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [load, setLoad] = useState(true);
   // const [number, setNumber] = useState(getAuthMobile());
 
   // function to toggle tabs
@@ -53,6 +54,8 @@ const LandlordProfile = () => {
   };
 
   useEffect(() => {
+    setLoad(true);
+
     console.log("Searching for ", location.state.username);
     axios
       .post(url + "/filter-users", {
@@ -74,8 +77,12 @@ const LandlordProfile = () => {
       })
       .then((res) => {
         if (res.data.result) setOwned(res.data.result);
+        setLoad(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setLoad(false);
+        console.error(err);
+      });
 
     axios
       .post(url + "/owner/get-average-rating", {
@@ -141,32 +148,44 @@ const LandlordProfile = () => {
          </div>
          <div className="userProfile_Container_right">
             <p className="header4 addAccoms"> Units Owned </p>
-            <Row className="justify-content-md-center mt-4">
-            {owned.length === 0 ? (
-              <div className="noUnits">
-                 <img src={noUnits} alt="image" />
-                <p className="regular">No Owned Units</p>
-              </div>
-            ) : (
-              owned.map((unit, index) => (
-                <div className="cardlist-flex mb-5">
-                  <CardListing
-                    key={index}
-                    unut={unit}
-                    owner_username={location.state.username}
-                    name={unit.ACCOMMODATION_NAME}
-                    location={unit.ACCOMMODATION_LOCATION}
-                    description={unit.ACCOMMODATION_DESCRIPTION}
-                    amenities={unit.ACCOMMODATION_AMENITIES}
-                    address={unit.ACCOMMODATION_ADDRESS}
-                    max_price={unit.max_price}
-                    owner={""}
-                    rating={unit.rating}
-                  />
+            {load === true ? 
+              (
+                <div className="loadingContainer">
+                  <img className="loading" src={loading} alt="loading" />
+                  <p className="header4 noResultText">loading...</p>
                 </div>
-              ))
-            )}
-            </Row>
+              )
+              :
+              (
+                <Row className="cardlist-list justify-content-md-center mt-4">
+                {owned.length === 0 ? (
+                  <div className="noUnits">
+                     <img src={noUnits} alt="image" />
+                    <p className="regular">No Owned Units</p>
+                  </div>
+                ) : (
+                  owned.map((unit, index) => (
+                    <div className="cardlist-flex mb-5">
+                      <CardListing
+                        key={index}
+                        unit={unit}
+                        owner_username={location.state.username}
+                        name={unit.ACCOMMODATION_NAME}
+                        location={unit.ACCOMMODATION_LOCATION}
+                        description={unit.ACCOMMODATION_DESCRIPTION}
+                        amenities={unit.ACCOMMODATION_AMENITIES}
+                        address={unit.ACCOMMODATION_ADDRESS}
+                        max_price={unit.max_price}
+                        owner={""}
+                        rating={unit.rating}
+                      />
+                    </div>
+                  ))
+                )}
+                </Row>
+
+              )
+            }
          </div>
        </div>
         // <div className="landlord-profile-container">

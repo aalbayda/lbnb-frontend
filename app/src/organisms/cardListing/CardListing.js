@@ -13,14 +13,51 @@ import { Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AddRooms } from "../../molecules";
 import { useNavigate } from "react-router-dom";
-
+import { logo } from "../../assets/images";
 const url = config.apiUrl;
 
 const CardListing = (props) => {
   let navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);  
+  const [photo, setPhoto] = useState(logo);
+
+  const image =
+  "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+  const name = props.name ? props.name : "";
+  const location = props.location;
+  const owner = props.owner ? props.owner : "";
+  const address = props.address;
+  const description = props.description ? props.description : "";
+  const amenities = props.amenities ? props.amenities : "";
+  const price = props.max_price ? "Up to ₱" + props.max_price : "";
+  const stars = "";
+
+  useEffect(() => {
+    const fetchData = async (photo) => {
+      try {
+        const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
+        
+        console.log(`-${photo}-`);
+        console.log(response.data);
+        // console.log("Success: ", response.data.success)
+        if (response.data.success === true){
+          setPhoto(response.data.imageUrl);
+        } else {
+          setPhoto(image);
+        }
+        // return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        setPhoto(image);
+        // return [];
+      }
+    };
+    // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
+    fetchData(props.name);
+  }, []);
+
   const handleFavorite = () => {
     if (!isFavorite && props.name) {
       console.log("Adding for", getAuthUsername());
@@ -69,17 +106,6 @@ const CardListing = (props) => {
     }
   }, [props.name]);
 
-  const image =
-    "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
-  const name = props.name ? props.name : "";
-  const location = props.location;
-  const owner = props.owner ? props.owner : "";
-  const address = props.address;
-  const description = props.description ? props.description : "";
-  const amenities = props.amenities ? props.amenities : "";
-  const price = props.max_price ? "Up to ₱" + props.max_price : "";
-  const stars = "";
-
   return (
     <div className="card-listing zoom-in-effect">
       {/* fixed variable width column */}
@@ -87,7 +113,7 @@ const CardListing = (props) => {
         <div className="img-div">
           <img
             className="accommodation-img"
-            src={image}
+            src={photo}
             alt="accommodation-img"
           ></img>
           <div className="heart-button">

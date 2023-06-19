@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./listing_details.css";
+import LoadingScreenPage from "../../atoms/loadingScreenPage/LoadingScreenPage";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Button, Row, Col, Container } from "react-bootstrap";
 import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
@@ -21,6 +22,7 @@ import {
 } from "../../auth";
 import config from "../../config";
 const url = config.apiUrl;
+import { logo } from "../../assets/images";
 
 const ListingDetails = (props) => {
   console.log(props.props);
@@ -39,6 +41,37 @@ const ListingDetails = (props) => {
   const [rooms, setRooms] = useState([]);
 
   const [isFavorite, setIsFavorite] = useState(false);
+  const [photo, setPhoto] = useState(logo);
+  const [loading, setLoading] = useState(true);
+
+  const image =
+  "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
+
+  useEffect(() => {
+    const fetchData = async (photo) => {
+      try {
+        const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
+        console.log("AAAAAAAAAAAAAAA", accommName);
+        console.log(`-${photo}-`);
+        console.log(response.data);
+        // console.log("Success: ", response.data.success)
+        if (response.data.success === true){
+          setPhoto(response.data.imageUrl);
+          setLoading(false);
+        } else {
+          setPhoto(image);
+          setLoading(false);
+        }
+        // return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+        // return [];
+      }
+    };
+    // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
+    fetchData(accommName);
+  }, []);
 
   // load if favorite
   useEffect(() => {
@@ -147,80 +180,87 @@ const ListingDetails = (props) => {
 
   return (
     <Container>
-      <Row className="listing-detials">
-        <div className="room-img-div">
-          <img
-            className="room-img"
-            src="https://www.ikea.com/ph/en/images/products/hauga-upholstered-bed-frame-lofallet-beige__1101403_pe866663_s5.jpg?f=s"
-            alt="accommodation-img"
-          ></img>
-          <div>
-            {isLoggedIn() && getAuthType() === "Student" ? (
-              isFavorite ? (
-                <RiHeart3Fill onClick={handleFavorite} className="heart-icon heart-button" />
-              ) : (
-                <RiHeart3Line onClick={handleFavorite} className="heart-icon heart-button" />
-              )
-            ) : (
-              <></>
-            )}
-          </div>
+      {loading === true ?
+        (
+        <div className="centeredSpinner">
+          <LoadingScreenPage size={80} color={"#4f4a47"} loading={loading} />
         </div>
-        <Col>
-          <div className="name-location-div">
-            <div className="name-location-section">
-              <h1 className="headings">{accommName}</h1>
-              <h7 className="headings">
-                {address} - {location_place}
-              </h7>
-              <div class="star-separator-capacity-div">
-                <p className="star-separator-capacity-text">
-                  <Rating
-                    className="rating-medium"
-                    defaultValue={rating}
-                    precision={0.5}
-                    readOnly={true}
-                    sx={{
-                      fontSize: "1rem",
-                      color: "#1C3103",
-                      mr: 1,
-                    }}
-                  />
-                  {separator}{" "}
-                </p>
-                <p className="star-separator-capacity">{capacity} Capacity</p>
-              </div>
-              <h2 className="headings-price">₱{max_price}</h2>
-              <p></p>
-              <p>{description}</p>
-              <p>{amenities}</p>
-            </div>
-            {<ChatButton username={userName} room={accommName} socket={socket}/>}
-            <div className="room-buttons">
-              <div>{roomItems}</div>
-            </div>
-         
+        )
+        :
+        (
+          <div>
+          <Row className="listing-detials">
+                  <div className="room-img-div">
+                    <img
+                      className="room-img"
+                      src={photo}
+                      alt="accommodation-img"
+                    ></img>
+                    <div>
+                      {isLoggedIn() && getAuthType() === "Student" ? (
+                        isFavorite ? (
+                          <RiHeart3Fill onClick={handleFavorite} className="heart-icon heart-button" />
+                        ) : (
+                          <RiHeart3Line onClick={handleFavorite} className="heart-icon heart-button" />
+                        )
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </div>
+                  <Col>
+                    <div className="name-location-div">
+                      <div className="name-location-section">
+                        <h1 className="headings">{accommName}</h1>
+                        <h7 className="headings">
+                          {address} - {location_place}
+                        </h7>
+                        <div class="star-separator-capacity-div">
+                          <p className="star-separator-capacity-text">
+                            <Rating
+                              className="rating-medium"
+                              defaultValue={rating}
+                              precision={0.5}
+                              readOnly={true}
+                              sx={{
+                                fontSize: "1rem",
+                                color: "#1C3103",
+                                mr: 1,
+                              }}
+                            />
+                            {separator}{" "}
+                          </p>
+                          <p className="star-separator-capacity">{capacity} Capacity</p>
+                        </div>
+                        <h2 className="headings-price">₱{max_price}</h2>
+                        <p></p>
+                        <p>{description}</p>
+                        <p>{amenities}</p>
+                      </div>
+                      {<ChatButton username={userName} room={accommName} socket={socket}/>}
+                      <div className="room-buttons">
+                        <div>{roomItems}</div>
+                      </div>
+                  
+                    </div>
+                  </Col>
+                  <Col className="heart-icon-col">
+                    {getAuthType() === "Student" ? (
+                      <Button
+                        className="report-button"
+                        onClick={() => setModalShow(true)}
+                      >
+                        <MdReportGmailerrorred className="icon report-icon" />
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                  </Col>
+                </Row>
+            <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
           </div>
-        </Col>
-        <Col className="heart-icon-col">
-          {getAuthType() === "Student" ? (
-            <Button
-              className="report-button"
-              onClick={() => setModalShow(true)}
-            >
-              <MdReportGmailerrorred className="icon report-icon" />
-            </Button>
-          ) : (
-            <></>
-          )}
-        </Col>
-        {/* <Col className="heart-icon-col">
-          <div style={{ fontSize: "50px" }}>
-            <RiHeart3Line />
-          </div>
-        </Col> */}
-      </Row>
-      <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
+        )
+      }
     </Container>
   );
 };
