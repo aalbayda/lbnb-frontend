@@ -59,6 +59,7 @@ const CardListing = (props) => {
         })
         .then((res) => {
           setIsFavorite(res.data.isFavorite);
+          console.log("isfavorite?")
           console.log(res.data.isFavorite);
           setLoading(false);
         })

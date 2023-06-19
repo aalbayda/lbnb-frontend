@@ -5,11 +5,13 @@ import { Button, Row, Col, Container } from "react-bootstrap";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
+import { RiHeart3Fill, RiHeart3Line } from "react-icons/ri";
 import axios from "axios";
 import io from 'socket.io-client';
 import ChatButton from "../../atoms/chatButton/chatButton";
 
 import {
+  isLoggedIn,
   getAuthUsername,
   getAuthType,
 } from "../../auth";
@@ -30,6 +32,58 @@ const ListingDetails = (props) => {
   const separator = "|";
   const [modalShow, setModalShow] = useState(false);
   const [rooms, setRooms] = useState([]);
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // load if favorite
+  useEffect(() => {
+    if (isLoggedIn() && getAuthType() === "Student") {
+      axios
+        .post(url + "/accommodation/is-favorite", {
+          username: getAuthUsername(),
+          accommodationName: accommName,
+        })
+        .then((res) => {
+          setIsFavorite(res.data.isFavorite);
+          console.log("isfavorite?")
+          console.log(res.data.isFavorite);
+          setLoading(false);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      console.log("Adding for", getAuthUsername());
+      axios
+        .post(url + "/accommodation/add-to-favorites", {
+          userName: getAuthUsername(),
+          accommName: accommName,
+        })
+        .then((res) => {
+          console.log("Added to favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      console.log("Removing from", getAuthUsername());
+      axios
+        .post(url + "/accommodation/remove-from-favorites", {
+          userName: getAuthUsername(),
+          accommName: accommName,
+        })
+        .then((res) => {
+          console.log("Removed from favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+    setIsFavorite(!isFavorite);
+  };
+
   useEffect(() => {
     axios
       .post(url + "/accommodation/get-rooms", {
@@ -45,7 +99,7 @@ const ListingDetails = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [props.props.accommName]);
+  }, [accommName]);
 
   //atrributes that change when the room button is clicked
   const [max_price, setPrice] = useState(props.props.max_price);
@@ -97,6 +151,17 @@ const ListingDetails = (props) => {
             src="https://www.ikea.com/ph/en/images/products/hauga-upholstered-bed-frame-lofallet-beige__1101403_pe866663_s5.jpg?f=s"
             alt="accommodation-img"
           ></img>
+          <div>
+            {isLoggedIn() && getAuthType() === "Student" ? (
+              isFavorite ? (
+                <RiHeart3Fill onClick={handleFavorite} className="heart-icon heart-button" />
+              ) : (
+                <RiHeart3Line onClick={handleFavorite} className="heart-icon heart-button" />
+              )
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <Col>
           <div className="name-location-div">
@@ -105,7 +170,7 @@ const ListingDetails = (props) => {
               <h7 className="headings">
                 {address} - {location_place}
               </h7>
-              <div class="star-separator-capacity-div">
+              <div className="star-separator-capacity-div">
                 <p className="star-separator-capacity-text">
                   <Rating
                     className="rating-medium"
@@ -151,7 +216,9 @@ const ListingDetails = (props) => {
             <RiHeart3Line />
           </div>
         </Col> */}
+        
       </Row>
+      
       <ReportModal show={modalShow} onHide={() => setModalShow(false)} />
     </Container>
   );
