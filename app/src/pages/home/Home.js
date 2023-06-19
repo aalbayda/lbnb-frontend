@@ -10,6 +10,8 @@ import {
   ApartmentCarousel,
   Multilayerfilter,
   CardListing,
+  DormCarousel,
+  HotelsCarousel,
 } from "../../organisms";
 import { Row, Button } from "react-bootstrap";
 import config from "../../config";
@@ -17,7 +19,7 @@ import { notFound, searching } from "../../assets/images";
 const url = config.apiUrl;
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [queries, setQueries] = useState(null);
   const [report, setReport] = useState("");
   const [searched, setSearched] = useState(false);
@@ -25,36 +27,68 @@ const Home = () => {
   const [topApartments, setTopApartments] = useState([]);
   const [topDorms, setTopDorms] = useState([]);
   const [topHotels, setTopHotels] = useState([]);
-
   useEffect(() => {
-    // Initially did three categories, but for beta testing we will use a general top five
-    // [""].map((type) => {
-    axios
-      .post(url + "/get-top-five-accommodations", { type: "" })
-      .then((res) => {
-        const topAccoms = res.data.accommodation;
-        setTopApartments(topAccoms);
-        // setLoading(false);
-        // if (topAccoms) {
-        //   const type = topAccoms[0].ACCOMMODATION_TYPE;
-        //   if (type === "Apartment") {
-        //     setTopApartments(topAccoms);
-        //   } else if (type === "Dorm") {
-        //     setTopDorms(topAccoms);
-        //   } else if (type === "Hotel") {
-        //     setTopHotels(topAccoms);
-        //   }
-        //   setLoading(false);
-        // }
-      })
-      .catch((err) => {
-        console.log(
-          `Attempted to query ${url + "/get-top-five-accommodations"}`
-        );
-        console.error(err);
-      });
-    // });
+    setLoading(true);
+    const fetchData = async (type) => {
+      try {
+        const response = await axios.post(url + "/get-top-five-accommodations", { type });
+        console.log(`-${type}-`);
+        console.log(response.data);
+        return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    };
+  
+    Promise.all([
+      fetchData('Dorm'),
+      fetchData('Apartment'),
+      fetchData('Hotel')
+    ]).then(([dorms, apartments, hotels]) => {
+      // console.log("Dorms", dorms[0]);
+      // console.log("Hotels", hotels);
+      setTopDorms(dorms);
+      setTopApartments(apartments);
+      setTopHotels(hotels);
+      console.log("Apartments", topApartments);
+      console.log("Dorms", topDorms);
+      console.log("Hotels", topHotels);
+      setLoading(false);
+    });
   }, []);
+  // useEffect(() => {
+  //   // Initially did three categories, but for beta testing we will use a general top five
+  //   // [""].map((type) => {
+  //   setLoading(true);
+  //   axios
+  //     .post(url + "/get-top-five-accommodations", { type: "" })
+  //     .then((res) => {
+  //       const topAccoms = res.data.accommodation;
+  //       setTopApartments(topAccoms);
+  //       setLoading(false);
+
+
+  //       // if (topAccoms) {
+  //       //   const type = topAccoms[0].ACCOMMODATION_TYPE;
+  //       //   if (type === "Apartment") {
+  //       //     setTopApartments(topAccoms);
+  //       //   } else if (type === "Dorm") {
+  //       //     setTopDorms(topAccoms);
+  //       //   } else if (type === "Hotel") {
+  //       //     setTopHotels(topAccoms);
+  //       //   }
+  //       //   setLoading(false);
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       console.log(
+  //         `Attempted to query ${url + "/get-top-five-accommodations"}`
+  //       );
+  //       console.error(err);
+  //     });
+  //   // });
+  // }, []);
 
   const generateReports = () => {
     const blob = new Blob([report], { type: "application/pdf" });
@@ -89,27 +123,27 @@ const Home = () => {
   return (
     <div className="home-container">
       <NavBar />
-      <Banner />
-      <Multilayerfilter
-        toggleSearched={toggleSearched}
-        handleQuery={handleQuery}
-      />
-      {queries ? (
-        <div className="reports-btn">
-          <Button className="carousel-btn" onClick={generateReports}>
-            {" "}
-            Download 📥{" "}
-          </Button>
-        </div>
-      ) : (
-        <></>
-      )}
       {loading ? (
         <div className="centeredSpinner">
           <LoadingScreenPage size={80} color={"#4f4a47"} loading={loading} />
         </div>
       ) : (
         <div>
+          <Banner />
+          <Multilayerfilter
+            toggleSearched={toggleSearched}
+            handleQuery={handleQuery}
+          />
+          {queries ? (
+            <div className="reports-btn">
+              <Button className="carousel-btn" onClick={generateReports}>
+                {" "}
+                Download 📥{" "}
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
           {searched ? (
             <div
               className="searched-list"
@@ -153,6 +187,8 @@ const Home = () => {
           ) : (
             <div className="home-carousel-list">
               <ApartmentCarousel topApartments={topApartments} />
+              <DormCarousel topDorms={topDorms} />
+              <HotelsCarousel topHotels={topHotels} />
               {/* <DormCarousel topDorms={topDorms} />
               <HotelsCarousel topHotels={topHotels} /> */}
             </div>
