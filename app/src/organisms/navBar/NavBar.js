@@ -15,7 +15,6 @@ const url = config.apiUrl;
 
 const NavBar = () => {
 	const [modalShow, setModalShow] = useState(false);
-	const [ownerDetails, setOwnerDetails] = useState("");
 
 	const logout = () => {
 		document.cookie =
