@@ -201,6 +201,7 @@ function Login(props) {
               <p className="italic">Don't have an account?</p>
               <Button
                 className="small-bold createButton"
+                testID="toggleSignup"
                 onClick={() => toggleTab(2)}
               >
                 CREATE AN ACCOUNT
@@ -211,6 +212,7 @@ function Login(props) {
               className="tiny"
               placeholder="Email Address"
               type="text"
+              testID = "loginEmail"
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
@@ -218,6 +220,7 @@ function Login(props) {
               className="tiny"
               placeholder="Password"
               type="password"
+              testID = "loginPassword"
               onChange={(e) => setPassword(e.target.value)}
             />
 
@@ -226,7 +229,7 @@ function Login(props) {
                 loading
               </Button>
             ) : (
-              <Button className="login-btn" onClick={handleLogin}>
+              <Button className="login-btn" testID="loginButton" onClick={handleLogin}>
                 SIGN IN
               </Button>
             )}
@@ -269,6 +272,7 @@ function Login(props) {
                 className="tiny"
                 placeholder="First Name"
                 type="text"
+                testID="fname"
                 onChange={(e) => setFname(e.target.value)}
               />
               <input
@@ -276,6 +280,7 @@ function Login(props) {
                 className="tiny"
                 placeholder="Surname"
                 type="text"
+                testID="lname"
                 onChange={(e) => setLname(e.target.value)}
               />
             </div>
@@ -284,6 +289,7 @@ function Login(props) {
               className="tiny"
               placeholder="Email Address"
               type="text"
+              testID="signupEmail"
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
@@ -291,6 +297,7 @@ function Login(props) {
               className="tiny"
               placeholder="Password"
               type="password"
+              testID="signupPassword"
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
@@ -298,6 +305,7 @@ function Login(props) {
               className="tiny"
               placeholder="Retype Password"
               type="password"
+              testID="signupRepassword"
               onChange={(e) => setRePassword(e.target.value)}
             />
             {/* <input required className="tiny" placeholder='Retype Password' type="password"/> */}
@@ -312,6 +320,7 @@ function Login(props) {
                     name="group1"
                     type={type}
                     id={`inline-${type}-1`}
+                    testID="personal"
                     onClick={(e) => {
                       setIsBusinessAccount(false);
                       setRadioClicked(true);
@@ -324,6 +333,7 @@ function Login(props) {
                     name="group1"
                     type={type}
                     id={`inline-${type}-2`}
+                    testID="business"
                     onChange={(e) => setIsBusinessAccount(true)}
                     onClick={(e) => setRadioClicked(true)}
                   />
@@ -336,6 +346,7 @@ function Login(props) {
                       id="exampleCheckbox"
                       label="I agree to the terms and conditions"
                       checked={checked}
+                      testID="terms"
                       onChange={handleCheckboxChange}
                     />
                   </div>
@@ -350,7 +361,7 @@ function Login(props) {
                 loading
               </Button>
             ) : (
-              <Button className="login-btn" onClick={handleSignUp}>
+              <Button className="login-btn" testID="signupButton" onClick={handleSignUp}>
                 SIGN UP
               </Button>
             )}
@@ -386,6 +397,7 @@ function Login(props) {
             )} */}
             <Button
               className="tiny italic signinButton"
+              testID="toggleLogin"
               onClick={() => toggleTab(1)}
             >
               Already have an account?

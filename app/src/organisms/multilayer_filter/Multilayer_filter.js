@@ -54,9 +54,10 @@ const Multilayer_filter = (props) => {
           className="small mlf_search"
           placeholder="Search"
           type="text"
+          testID="searchField"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button onClick={handleSearched} className="searchButton">
+        <Button testID="searchButton" onClick={handleSearched} className="searchButton">
           <BiSearch className="icon" />
         </Button>
         {/* <BiSearch className="icon searchIcon" /> */}
@@ -90,25 +91,26 @@ const Multilayer_filter = (props) => {
           <AiFillFilter className="mlf_icon"/>
           <Dropdown>
           <Dropdown.Toggle
+            testID="accomTypeDropdownToggle"
             id="dropdown-basic"
             className="small filter-dropdown"
           >
             {filterType ? filterType : "Type"}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Dorm")}>
+            <Dropdown.Item className="dropdownItem" testID="accomTypeDorm" onClick={() => setFilterType("Dorm")}>
               Dorm
             </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Hotel")}>
+            <Dropdown.Item className="dropdownItem" testID="accomTypeHotel" onClick={() => setFilterType("Hotel")}>
               Hotel
             </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Apartment")}>
+            <Dropdown.Item className="dropdownItem" testID="accomTypeApartment" onClick={() => setFilterType("Apartment")}>
               Apartment
             </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("Bedspace")}>
+            <Dropdown.Item className="dropdownItem" testID="accomTypeBedspace" onClick={() => setFilterType("Bedspace")}>
               Bedspace
             </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" onClick={() => setFilterType("")}>
+            <Dropdown.Item className="dropdownItem" testID="accomTypeNoPref" onClick={() => setFilterType("")}>
               No Preference
             </Dropdown.Item>
           </Dropdown.Menu>
@@ -120,6 +122,7 @@ const Multilayer_filter = (props) => {
               className="small mlf_price"
               placeholder="Max Price"
               type="number"
+              testID="accommFilterPrice"
               min="0"
               max="100000"
               onKeyDown={(e) => {
@@ -136,6 +139,7 @@ const Multilayer_filter = (props) => {
               className="small mlf_capacity"
               placeholder="Capacity"
               type="number"
+              testID="accommFilterCapacity"
               min="0"
               max="10"
               onKeyDown={(e) => {
@@ -151,19 +155,20 @@ const Multilayer_filter = (props) => {
             <MdOutlinePlace className="mlf_icon"/>
             <Dropdown>
               <Dropdown.Toggle
+                testID = "accommLocDropdownToggle"
                 id="dropdown-basic"
                 className="small filter-dropdown"
               >
               {location ? location : "Location"}
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("Within Campus")}>
+                <Dropdown.Item className="dropdownItem" testID = "accommLocWithin" onClick={() => setLocation("Within Campus")}>
                 Within Campus
                 </Dropdown.Item>
-                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("Outside Campus")}>
+                <Dropdown.Item className="dropdownItem" testID = "accommLocOutside" onClick={() => setLocation("Outside Campus")}>
                 Outside Campus
                 </Dropdown.Item>
-                <Dropdown.Item className="dropdownItem" onClick={() => setLocation("")}>
+                <Dropdown.Item className="dropdownItem" testID = "accommLocNoPref" onClick={() => setLocation("")}>
                 No Preference
                 </Dropdown.Item>
               </Dropdown.Menu>

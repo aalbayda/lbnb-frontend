@@ -71,7 +71,7 @@ const NavBar = () => {
 							</Button>
 						</div>
 					) : (
-						<Button className="login-btn" onClick={() => setModalShow(true)}>
+						<Button className="login-btn" testID="login" onClick={() => setModalShow(true)}>
 							Login
 						</Button>
 					)}
