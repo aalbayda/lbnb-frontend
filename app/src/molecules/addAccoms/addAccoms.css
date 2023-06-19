@@ -69,6 +69,16 @@ Container p.large-bold {
   border-radius: 25px;
 }
 
+.input-add-accoms.description {
+  border: 1px solid var(--color-light-accent-green);
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Set a minimum height for the textarea */
+  overflow: auto; /* Add scrollbars if needed */
+}
+
 p.small.light-green {
   color: var(--color-light-accent-green);
 }

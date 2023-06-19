@@ -222,7 +222,9 @@ function Login(props) {
             />
 
             {loading ? (
-              <p>Loading</p>
+              <Button className="login-btn" disabled onClick={handleLogin}>
+                loading
+              </Button>
             ) : (
               <Button className="login-btn" onClick={handleLogin}>
                 SIGN IN
@@ -344,9 +346,11 @@ function Login(props) {
             
 
             {loading ? (
-              <p>Loading</p>
+              <Button className="login-btn" disabled onClick={handleSignUp}>
+                loading
+              </Button>
             ) : (
-              <Button className="signup-btn" onClick={handleSignUp}>
+              <Button className="login-btn" onClick={handleSignUp}>
                 SIGN UP
               </Button>
             )}
