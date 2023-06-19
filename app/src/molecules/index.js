@@ -18,5 +18,5 @@ export { default as ReportModal } from "./reportModal/ReportModal";
 export { default as ReviewHeaders } from "./listing_details/review_headers";
 export { default as ReviewCommentCard } from "./listing_details/review_comment_card";
 export { default as RoomButtons } from "./listing_details/room_buttons";
-
 export { default as Unauthorized } from "./unauthorized/Unauthorized";
+export { default as Terms } from "./terms/Terms";

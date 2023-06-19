@@ -93,3 +93,7 @@ p.large-bold {
     background-color: var(--color-light-accent-green) !important;
     color: var(--color-background);
 }
+
+.terms-div {
+    margin-top: 5px;
+}
