@@ -7,6 +7,7 @@ import "./addAccoms.css";
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import { getAuthId } from "../../auth";
 import config from "../../config";
+import AlertModals from "../alertModals/AlertModals";
 const url = config.apiUrl;
 
 function AddAccoms(props) {
@@ -17,6 +18,7 @@ function AddAccoms(props) {
   const [newDescription, setNewDescription] = useState("");
   const [newAmenities, setNewAmenities] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -26,8 +28,9 @@ function AddAccoms(props) {
 
   const handleAdd = () => {
     console.log("Adding...");
-    if (!newName || !newType || !newAddress | !newDescription) {
-      window.alert("Missing fields!");
+    if (newName === "" || newType  === ""  || newAddress  === ""  || !newDescription  === "" ) {
+      // window.alert("Missing fields!");
+      setModalShow(true);
       return;
     }
 
@@ -46,7 +49,14 @@ function AddAccoms(props) {
       .then((res) => {
         console.log("Successfully added data");
         console.log(res.data);
-        window.location.reload();
+
+        axios
+        .post(url + "/accommodation/upload-accommodation-pic", newName, selectedImage)
+        .then((res)=>{
+          console.log("Successfully uploaded photo");
+          window.location.reload();
+        })
+        .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   };
@@ -225,6 +235,12 @@ function AddAccoms(props) {
             <Button onClick={handleAdd} className="add-accoms-btn">
               ADD ACCOMMODATION
             </Button>
+            <AlertModals 
+              show={modalShow} 
+              onHide={() => setModalShow(false)} 
+              alert={"Missing fields!"}
+              
+            />
           </Row>
         </Container>
       </Modal.Body>

@@ -113,7 +113,7 @@ const SubmitRatingReviewSect = (props) => {
             Submit{" "}
           </button>
           <AlertModals
-            alert = {"Log in as a registered tenant first!"}
+            alert = {alert}
             show={modalShow} 
             onHide={() => setModalShow(false)} 
           />

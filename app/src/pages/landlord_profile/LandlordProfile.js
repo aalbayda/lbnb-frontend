@@ -38,10 +38,6 @@ const LandlordProfile = () => {
   const [editing, setEditing] = useState(false);
   const [rating, setRating] = useState(4);
   const [owned, setOwned] = useState([]);
-  const [newname, setNewname] = useState("");
-  const [newnumber, setNewnumber] = useState("");
-  const [newemail, setNewemail] = useState("");
-  const [newpassword, setNewpassword] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [dp, setDP] = useState("");
@@ -54,41 +50,6 @@ const LandlordProfile = () => {
   const toggleTab = (index) => {
     setToggleState(index);
     console.log("toggle: ", toggleState)
-  };
-
-  const handleClick = () => {
-    if (editing && !newpassword) {
-      window.alert(
-        "Invalid password! If you want the same password, enter your current password."
-      );
-      return;
-    }
-
-    if (editing) {
-      axios
-        .post(url + "/edit-user", {
-          email: email,
-          newUsername: newemail ? newemail : email,
-          newFirstName: newname
-            ? newname.split(" ")[0]
-            : getAuthName().split(" ")[0],
-          newLastName: newname
-            ? newname.split(" ")[1]
-            : getAuthName().split(" ")[1],
-          newContactNum: newnumber ? newnumber : number,
-          newPassword: newpassword,
-        })
-        .then((res) => {
-          console.log(res.data);
-          console.log("Success edit");
-          document.cookie =
-            "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          window.location.href = "/";
-        })
-        .catch((err) => console.error(err));
-    }
-
-    setEditing(!editing);
   };
 
   useEffect(() => {
