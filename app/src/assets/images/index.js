@@ -29,3 +29,4 @@ export { default as image12 } from "./devs/image12.jpg";
 export { default as image13 } from "./devs/image13.jpg";
 export { default as noUnits } from "./SVG/noUnits.png";
 export { default as unauthorized } from "./SVG/unauthorized.png";
+export { default as searching } from "./SVG/searching.png";
