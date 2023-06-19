@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./submit_rating_review_sect.css";
 import { Row, Container } from "react-bootstrap";
@@ -13,21 +13,27 @@ import {
   getAuthEmail,
 } from "../../auth";
 import config from "../../config";
+import { AlertModals } from "../../molecules";
 const url = config.apiUrl;
 
 const SubmitRatingReviewSect = (props) => {
-  const [comment, setComment] = React.useState("");
-  const [rateVal, setRateVal] = React.useState(0);
+  const [comment, setComment] = useState("");
+  const [rateVal, setRateVal] = useState(0);
+  const [alert, setAlert] = useState("");
+  const [modalShow, setModalShow] = useState(false);
   const accommName = props.props.ACCOMMODATION_NAME;
 
   const handleSubmit = () => {
+    console.log("entered");
     if (!isLoggedIn() || !(getAuthType() === "Student")) {
-      window.alert("Log in as a registered tenant first!");
+      setModalShow(true)
+      setAlert("Log in as a registered tenant first!");
       return;
     }
 
     if (!rateVal) {
-      window.alert("Add a rating first!");
+      setModalShow(true)
+      setAlert("Add a rating first!");
       return;
     }
 
@@ -91,6 +97,11 @@ const SubmitRatingReviewSect = (props) => {
             {" "}
             Submit{" "}
           </button>
+          <AlertModals
+            alert = {"Log in as a registered tenant first!"}
+            show={modalShow} 
+            onHide={() => setModalShow(false)} 
+          />
           {/* {isLoggedIn() && getAuthType() === "Student" ? (
           ) : (
             <button className="submit-button" disabled>

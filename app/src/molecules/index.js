@@ -14,6 +14,8 @@ export { default as AccomsTable } from "./accomsTable/AccomsTable";
 export { default as ReportsTable } from "./reportsTable/ReportsTable";
 
 export { default as ReportModal } from "./reportModal/ReportModal";
+export { default as AlertModals } from "./alertModals/AlertModals";
+
 
 export { default as ReviewHeaders } from "./listing_details/review_headers";
 export { default as ReviewCommentCard } from "./listing_details/review_comment_card";
