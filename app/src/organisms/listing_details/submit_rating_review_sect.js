@@ -81,10 +81,11 @@ const SubmitRatingReviewSect = (props) => {
             }
             value={rateVal}
           />
-          <TextField
-            sx={{
-              width: 950,
-            }}
+          <textarea
+            className="comment-textfield"
+            // sx={{
+            //   width: 950,
+            // }}
             id="fullWidth"
             label="Write Comment"
             multiline

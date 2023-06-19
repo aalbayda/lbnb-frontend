@@ -10,6 +10,11 @@
 }
 
 .star-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 5px;
@@ -45,4 +50,22 @@
 .submit:focus {
   background-color: var(--color-heading-dark);
   color: #ffffff;
+}
+
+
+.comment-textfield{
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  resize: vertical;
+  min-height: 50px; 
+  max-height: 300px; 
+  overflow: auto; 
+}
+
+.comment-textfield:active,
+.comment-textfield:hover,
+.comment-textfield:visited,
+.comment-textfield:focus{
+  border: 1px solid var(--color-light-accent-green);
 }
