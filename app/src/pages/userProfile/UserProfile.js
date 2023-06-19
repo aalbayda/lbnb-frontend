@@ -17,7 +17,7 @@ import {
   getAuthEmail,
 } from "../../auth";
 import config from "../../config";
-import { noUnits } from "../../assets/images";
+import { noUnits, loading } from "../../assets/images";
 const url = config.apiUrl;
 
 // const topDorms = {
@@ -31,6 +31,7 @@ const UserProfile = () => {
   const [dp, setDP] = useState("");
   const [toggleState, setToggleState] = useState(1);
   const [modalShow, setModalShow] = useState(false);
+  const [load, setLoad] = useState(true);
   const [number, setNumber] = useState(getAuthMobile());
 
   // function to toggle tabs
@@ -76,9 +77,13 @@ const UserProfile = () => {
   // };
 
   useEffect(() => {
+    setLoad(true);
     axios
       .post(url + "/user/get-all-favorites", { username: getAuthUsername() })
-      .then((res) => setFavorites(res.data.favorites))
+      .then((res) => {
+        setFavorites(res.data.favorites);
+        setLoad(false);
+      })
       .catch((err) => console.error(err));
 
     axios
@@ -124,35 +129,41 @@ const UserProfile = () => {
           <div className="userProfile_Container_right">
             <div className="userProfile_Container_right_carrousel">
             <p className="header4 addAccoms">Favorites</p>
-            <Row className="justify-content-md-center mt-4">
+            {load === true ? 
+              (
+                <div className="loadingContainer">
+                  <img className="loading" src={loading} alt="loading" />
+                  <p className="header4 noResultText">loading...</p>
+                </div>
+              )
+              :
+              (
+            <Row className="cardlist-list justify-content-md-center mt-4">
             {favorites.length === 0 ? (
               <div className="noUnits">
                  <img src={noUnits} alt="image" />
                 <p className="regular">No Favorites</p>
               </div>
             ) : (
-              <Carousel variant="dark" className="mt-4 mb-5">
-               {favorites.map((f, index) => (
-                 <Carousel.Item>
-                 <div className="ml-4">
-                     <CardListing
-                       key={index}
+              favorites.map((f, index) => (
+                <div className="cardlist-flex mb-5">
+                  <CardListing
+                      key={index}
                        unit={f}
                        name={f.ACCOMMODATION_NAME}
                        location={f.ACCOMMODATION_LOCATION}
                        description={f.ACCOMMODATION_DESCRIPTION}
                        amenities={f.ACCOMMODATION_AMENITIES}
-                      address={f.ACCOMMODATION_ADDRESS}
+                       address={f.ACCOMMODATION_ADDRESS}
                        max_price={f.max_price}
-                       owner={f.USER_FNAME + " " + f.USER_LNAME}
+                       owner={""}
                        rating={f.rating}
-                     />
-                   </div>
-                 </Carousel.Item>
-               ))}
-             </Carousel>
+                  />
+                </div>
+              ))
             )}
             </Row>
+            )}
             </div>
           </div>
         </div>
