@@ -28,12 +28,6 @@ function UserProfileModal(props) {
   const [editing, setEditing] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
-  };
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -62,16 +56,14 @@ function UserProfileModal(props) {
         .post(url + "/edit-user", {
             email: getAuthEmail(),
             newUsername: newemail ? newemail : getAuthEmail(),
-            newFirstName: newFname ? newFname : getAuthEmail().split(" ")[0],
-            newLastName: newLname ? newLname : getAuthEmail().split(" ")[1],
+            newFirstName: newFname ? newFname : getAuthName().split(" ")[0],
+            newLastName: newLname ? newLname : getAuthName().split(" ")[1],
             newContactNum: newnumber ? newnumber : getAuthMobile(),
-            newPassword: newpassword,
+            newPassword: newpassword ? newpassword : "",
         })
         .then((res) => {
             console.log(res.data);
             console.log("Success edit");
-            document.cookie =
-            "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             toggleTab(2);
             // window.location.href = "/";
         })
@@ -82,16 +74,14 @@ function UserProfileModal(props) {
             .post(url + "/edit-user", {
                 email: getAuthEmail(),
                 newUsername: newemail ? newemail : getAuthEmail(),
-                newFirstName: newFname ? newFname : getAuthEmail().split(" ")[0],
-                newLastName: newLname ? newLname : getAuthEmail().split(" ")[1],
+                newFirstName: newFname ? newFname : getAuthName().split(" ")[0],
+                newLastName: newLname ? newLname : getAuthName().split(" ")[1],
                 newContactNum: newnumber ? newnumber : getAuthMobile(),
-                newPassword: newpassword,
+                newPassword: newpassword ? newpassword : "",
             })
             .then((res) => {
                 console.log(res.data);
                 console.log("Success edit");
-                document.cookie =
-                "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 toggleTab(2);
                 // window.location.href = "/";
             })
@@ -183,16 +173,6 @@ function UserProfileModal(props) {
                 type="text"
                 onChange={(e) => setNewemail(e.target.value)}
               />
-            </div>
-            <div className="userProfileModal_detail changePhoto">
-              <input className="addPhotobtn" type="file" accept="image/*" onChange={handleImageUpload} />
-              {selectedImage && (
-                <div className="userProfileCenter">
-                  <div className="userProfile_Container_left_photomodal">
-                    <img className="userPhotoModal" src={selectedImage} alt="Uploaded" style={{ width: "200px" }} />
-                  </div>
-                </div>
-              )}
             </div>
             { isChecked === true ? 
                 (
