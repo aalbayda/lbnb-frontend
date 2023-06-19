@@ -23,6 +23,7 @@ import config from "../../config";
 const url = config.apiUrl;
 
 const ListingDetails = (props) => {
+  console.log(props.props);
   // const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
   const socket = props.socket;
   const userName = getAuthUsername();
@@ -36,10 +37,60 @@ const ListingDetails = (props) => {
   const separator = "|";
   const [modalShow, setModalShow] = useState(false);
   const [rooms, setRooms] = useState([]);
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // load if favorite
+  useEffect(() => {
+    if (isLoggedIn() && getAuthType() === "Student") {
+      axios
+        .post(url + "/accommodation/is-favorite", {
+          username: getAuthUsername(),
+          accommodationName: accommName,
+        })
+        .then((res) => {
+          setIsFavorite(res.data.isFavorite);
+          console.log("isfavorite?")
+          console.log(res.data.isFavorite);
+        })
+        .catch((err) => console.error(err));
+    } else {
+    }
+  }, []);
+
+  const handleFavorite = () => {
+    if (!isFavorite) {
+      console.log("Adding for", getAuthUsername());
+      axios
+        .post(url + "/accommodation/add-to-favorites", {
+          userName: getAuthUsername(),
+          accommName: accommName,
+        })
+        .then((res) => {
+          console.log("Added to favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      console.log("Removing from", getAuthUsername());
+      axios
+        .post(url + "/accommodation/remove-from-favorites", {
+          userName: getAuthUsername(),
+          accommName: accommName,
+        })
+        .then((res) => {
+          console.log("Removed from favorites of", getAuthUsername());
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    }
+    setIsFavorite(!isFavorite);
+  };
+
   useEffect(() => {
     axios
       .post(url + "/accommodation/get-rooms", {
-        accommodationName: props.props.accommName,
+        accommodationName: accommName,
       })
       .then(function (response) {
         // console.log("Searching for", accommName);
@@ -51,7 +102,7 @@ const ListingDetails = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [props.props.accommName]);
+  }, [accommName]);
 
   //atrributes that change when the room button is clicked
   const [max_price, setPrice] = useState(props.props.max_price);
@@ -103,6 +154,17 @@ const ListingDetails = (props) => {
             src="https://www.ikea.com/ph/en/images/products/hauga-upholstered-bed-frame-lofallet-beige__1101403_pe866663_s5.jpg?f=s"
             alt="accommodation-img"
           ></img>
+          <div>
+            {isLoggedIn() && getAuthType() === "Student" ? (
+              isFavorite ? (
+                <RiHeart3Fill onClick={handleFavorite} className="heart-icon heart-button" />
+              ) : (
+                <RiHeart3Line onClick={handleFavorite} className="heart-icon heart-button" />
+              )
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <Col>
           <div className="name-location-div">
