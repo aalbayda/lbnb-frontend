@@ -67,7 +67,10 @@ const CardListing = (props) => {
 				name: props.name,
 				isArchived: props.ACCOMMODATION_ISARCHIVED ? 0 : 1,
 			})
-			.then((res) => console.log(res.data))
+			.then((res) => {
+				window.location.reload();
+				console.log(res.data);
+			})
 			.catch((err) => console.error(err));
 	};
 
