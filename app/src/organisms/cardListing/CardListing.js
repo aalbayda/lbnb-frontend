@@ -62,6 +62,8 @@ const CardListing = (props) => {
 	}, []);
 
 	const handleArchive = () => {
+		if (props.ACCOMMODATION_ISARCHIVED) console.log("Unarchiving");
+		else console.log("Archiving");
 		axios
 			.post(url + "/archive-accommodation", {
 				name: props.name,
