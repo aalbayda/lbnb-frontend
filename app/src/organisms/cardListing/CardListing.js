@@ -185,7 +185,7 @@ const CardListing = (props) => {
               <AddRooms
                 show={modalShow}
                 accommodationName={name}
-                onHide={() => setModalShow(true)}
+                onHide={() => setModalShow(false)}
               />
             </div>
           ) : (

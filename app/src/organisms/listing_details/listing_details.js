@@ -93,6 +93,7 @@ const ListingDetails = (props) => {
 
   const handleFavorite = () => {
     if (!isFavorite) {
+      console.log(max_price);
       console.log("Adding for", getAuthUsername());
       axios
         .post(url + "/accommodation/add-to-favorites", {
