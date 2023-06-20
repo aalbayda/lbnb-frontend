@@ -19,7 +19,7 @@ const RatingReviewSection = (props) => {
 				setReviews(response.data.reviews);
 			})
 			.catch((err) => console.error(err));
-	}, [props.props.ACCOMMODATION_NAME]);
+	}, []);
 	return (
 		<Container className="review-section-div">
 			<ReviewHeaders />
