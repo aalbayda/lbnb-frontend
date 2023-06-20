@@ -7,7 +7,7 @@ import axios from "axios";
 const url = config.apiUrl;
 
 function AccomsTable(props) {
-	const [modalShow, setModalShow] = useState(false);
+	const [modalAlertShow, setModalAlertShow] = useState(false);
 	const [alert, setAlert] = useState("");
 	const [accomBackend, setAccomBackend] = useState([{}]);
 	const [selectedAccom, setSelectedAccom] = useState(null);
@@ -24,13 +24,13 @@ function AccomsTable(props) {
 			.then((res) => {
 				if (res.data.success) {
 					setAlert(`Successfully deleted ${accom.ACCOMMODATION_NAME}!`);
-					setModalShow(true);
+					setModalAlertShow(true);
 					setTimeout(() => window.location.reload(), 1000);
 				} else {
 					setAlert(
 						`Cannot delete ${accom.ACCOMMODATION_NAME}. Check your Internet connection or server connection.`
 					);
-					setModalShow(true);
+					setModalAlertShow(true);
 				}
 			})
 			.catch((err) => console.error(err));
