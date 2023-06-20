@@ -7,6 +7,7 @@ import { banner1 } from "../../assets/images";
 import { Rating } from "@mui/material";
 // import { StarRating } from "../../atoms";
 import axios from "axios";
+import { logo } from "../../assets/images";
 const url = config.apiUrl;
 
 const Apartment = ({ topApartments }) => {
