@@ -138,7 +138,7 @@ function UserProfileModal(props) {
 					})
 					.then((res) => {
 						console.log(res.data);
-						if (red.data.success === false) {
+						if (res.data.success === false) {
 							setError("Invalid Password");
 							setLoading(false);
 						} else {
