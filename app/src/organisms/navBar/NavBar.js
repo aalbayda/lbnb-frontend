@@ -65,12 +65,12 @@ const NavBar = () => {
 
 					{isLoggedIn() ? (
 						<div>
-							<Button className="login-btn" onClick={logout}>
+							<Button testID="logoutButton" className="login-btn" onClick={logout}>
 								Logout
 							</Button>
 						</div>
 					) : (
-						<Button className="login-btn" testID="login" onClick={() => setModalShow(true)}>
+						<Button className="login-btn" testID="loginButton" onClick={() => setModalShow(true)}>
 							Login
 						</Button>
 					)}

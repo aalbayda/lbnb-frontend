@@ -229,7 +229,7 @@ function Login(props) {
                 loading
               </Button>
             ) : (
-              <Button className="login-btn" testID="loginButton" onClick={handleLogin}>
+              <Button className="login-btn" testID="signinButton" onClick={handleLogin}>
                 SIGN IN
               </Button>
             )}
