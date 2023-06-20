@@ -65,7 +65,7 @@ const CardListing = (props) => {
 		axios
 			.post(url + "/archive-accommodation", {
 				name: props.name,
-				isArchived: 1,
+				isArchived: props.ACCOMMODATION_ISARCHIVED ? 0 : 1,
 			})
 			.then((res) => console.log(res.data))
 			.catch((err) => console.error(err));
