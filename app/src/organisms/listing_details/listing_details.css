@@ -28,6 +28,14 @@
     left: 3px;
 }
 
+p.rate-text.small{
+    width: 200px;
+}
+
+.room-buttons{
+    margin-top: 10px;
+}
+
 .name-location-div {
     display: flex;
     flex-direction: column;

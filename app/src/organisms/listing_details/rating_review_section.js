@@ -79,9 +79,9 @@ const RatingReviewSection =(props)=>{
         <Container className="review-section-div">
           <ReviewHeaders 
             handleToggle={handleToggle}/>
-				<div className="rev-comm-card-div">
-					{reviewItems}
-				</div>
+			<div className="rev-comm-card-div">
+				{reviewItems}
+			</div>
         </Container>
     )
 }
