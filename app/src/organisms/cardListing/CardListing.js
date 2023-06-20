@@ -62,12 +62,13 @@ const CardListing = (props) => {
 	}, []);
 
 	const handleArchive = () => {
-		if (props.ACCOMMODATION_ISARCHIVED) console.log("Unarchiving");
+		console.log(props);
+		if (props.isArchived === 1) console.log("Unarchiving");
 		else console.log("Archiving");
 		axios
 			.post(url + "/archive-accommodation", {
 				name: props.name,
-				isArchived: props.ACCOMMODATION_ISARCHIVED ? 0 : 1,
+				isArchived: props.isArchived ? 0 : 1,
 			})
 			.then((res) => {
 				window.location.reload();
