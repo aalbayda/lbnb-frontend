@@ -3829,10 +3829,22 @@
   "resolved" "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-2.0.0.tgz"
   "version" "2.0.0"
 
+<<<<<<< HEAD
 "css-blank-pseudo@^3.0.3":
   "integrity" "sha512-VS90XWtsHGqoM0t4KpH053c4ehxZ2E6HtGI7x68YFV0pTo/QmkV/YFA+NnlvK8guxZVNWGQhVNJGC39Q8XF4OQ=="
   "resolved" "https://registry.npmjs.org/css-blank-pseudo/-/css-blank-pseudo-3.0.3.tgz"
   "version" "3.0.3"
+=======
+crypto.js@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/crypto.js/-/crypto.js-3.1.1.tgz#866852bde684c6c2e3b669fe3302dabc647da165"
+  integrity sha512-6ov7n6mqNkhFoHvuxC9rRXm5px1WHA01/mK/KllC53Ql2JaYxWuT0vWnl+b8ZbjVTzbqg+QIqQXvZZWKzOAkbQ==
+
+css-blank-pseudo@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/css-blank-pseudo/-/css-blank-pseudo-3.0.3.tgz"
+  integrity sha512-VS90XWtsHGqoM0t4KpH053c4ehxZ2E6HtGI7x68YFV0pTo/QmkV/YFA+NnlvK8guxZVNWGQhVNJGC39Q8XF4OQ==
+>>>>>>> 9173eaacffb2e8141de9f15e689fcc808cc768d5
   dependencies:
     "postcss-selector-parser" "^6.0.9"
 

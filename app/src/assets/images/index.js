@@ -30,3 +30,4 @@ export { default as image13 } from "./devs/image13.jpg";
 export { default as noUnits } from "./SVG/noUnits.png";
 export { default as unauthorized } from "./SVG/unauthorized.png";
 export { default as searching } from "./SVG/searching.png";
+export { default as loading } from "./SVG/loading.png";

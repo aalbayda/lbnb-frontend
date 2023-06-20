@@ -7,22 +7,45 @@ import { banner1 } from "../../assets/images";
 import { Rating } from "@mui/material";
 // import { StarRating } from "../../atoms";
 import axios from "axios";
+import { logo } from "../../assets/images";
 const url = config.apiUrl;
 
 const Apartment = ({ topApartments }) => {
   const [photo, setPhoto] = useState(null);
   let navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchData = async (photo) => {
+      try {
+        const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
+        console.log(`-${photo}-`);
+        console.log(response.data);
+        // console.log("Success: ", response.data.success)
+        if (response.data.success === true){
+          setPhoto(response.data.imageUrl);
+        } else {
+          setPhoto(banner1);
+        }
+        // return response.data.accommodation;
+      } catch (error) {
+        console.error(error);
+        // return [];
+      }
+    };
+  
+    // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
+    fetchData(topApartments.ACCOMMODATION_NAME);
+  }, []);
   return (
     <div className="apartment-carousel-container">
       <div className="shine-div carousel-container">
         <div className="carousel-upper">
-          {/* <img
+          <img
             className="d-block w-100"
             src={photo}
             alt="First slide"
             loading="lazy"
-          /> */}
+          />
         </div>
         <div className="carousel-lower">
           <div className="carousel-lowerleft">
