@@ -1,103 +1,144 @@
 import React, { useEffect, useState } from "react";
 import "./accomsTable.css";
 import config from "../../config";
-import { Table } from "react-bootstrap";
-// import { AdminViewUser, AdminViewLandlord } from "../../molecules";
+import { Table, Button } from "react-bootstrap";
+import { AlertModals } from "../../molecules";
 import axios from "axios";
 const url = config.apiUrl;
 
 function AccomsTable(props) {
-  // const [modalShow, setModalShow] = useState(false);
-  const [accomBackend, setAccomBackend] = useState([{}]);
-  const [selectedAccom, setSelectedAccom] = useState(null);
+	const [modalShow, setModalShow] = useState(false);
+	const [alert, setAlert] = useState("");
+	const [accomBackend, setAccomBackend] = useState([{}]);
+	const [selectedAccom, setSelectedAccom] = useState(null);
 
-  const handleCloseModal = () => {
-    setSelectedAccom(null);
-  };
+	const handleCloseModal = () => {
+		setSelectedAccom(null);
+	};
 
-  // fetch all accoms
-  useEffect(() => {
-    axios
-      .post(url + "/filter-accommodation", {
-        filters: {
-          name: "",
-          address: "",
-          location: "",
-          type: "",
-          priceFrom: "",
-          priceTo: "",
-          capacity: "",
-          max_price: "",
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        setAccomBackend(response.data);
-      })
-      .catch(function (error) {
-        console.log("Error fetching accoms (accoms table)");
-        console.log(error);
-      });
-  }, []);
+	const handleDelete = (accom) => {
+		axios
+			.post(url + "/delete-accommodation", {
+				name: accom.ACCOMMODATION_NAME,
+			})
+			.then((res) => {
+				if (res.data.success) {
+					setAlert(`Successfully deleted ${accom.ACCOMMODATION_NAME}!`);
+					setModalShow(true);
+					setTimeout(() => window.location.reload(), 1000);
+				} else {
+					setAlert(
+						`Cannot delete ${accom.ACCOMMODATION_NAME}. Check your Internet connection or server connection.`
+					);
+					setModalShow(true);
+				}
+			})
+			.catch((err) => console.error(err));
+	};
 
-  return (
-    <div>
-      <Table striped hover>
-        {/* Header */}
-        <thead>
-          <tr>
-            <th>
-              <p className="small-bold">Name</p>
-            </th>
-            <th>
-              <p className="small-bold">Type</p>
-            </th>
-            <th>
-              <p className="small-bold">Description</p>
-            </th>
-            <th>
-              <p className="small-bold">Location</p>
-            </th>
-          </tr>
-        </thead>
+	// fetch all accoms
+	useEffect(() => {
+		axios
+			.post(url + "/filter-accommodation", {
+				filters: {
+					name: "",
+					address: "",
+					location: "",
+					type: "",
+					priceFrom: "",
+					priceTo: "",
+					capacity: "",
+					max_price: "",
+				},
+			})
+			.then(function (response) {
+				console.log(response.data);
+				setAccomBackend(response.data);
+			})
+			.catch(function (error) {
+				console.log("Error fetching accoms (accoms table)");
+				console.log(error);
+			});
+	}, []);
 
-        <tbody>
-          {typeof accomBackend.accommodations === "undefined" ? (
-            <p>Loading...</p>
-          ) : (
-            accomBackend.accommodations.map((accom) => {
-              const {
-                ACCOMMODATION_ID,
-                ACCOMMODATION_NAME,
-                ACCOMMODATION_TYPE,
-                ACCOMMODATION_DESCRIPTION,
-                ACCOMMODATION_LOCATION,
-              } = accom;
-              return (
-                <tr key={ACCOMMODATION_ID}>
-                  <td>
-                    <p>{ACCOMMODATION_NAME}</p>
-                  </td>
+	return (
+		<div>
+			<Table striped hover>
+				{/* Header */}
+				<thead>
+					<tr>
+						<th>
+							<p className="small-bold">Name</p>
+						</th>
+						<th>
+							<p className="small-bold">Type</p>
+						</th>
+						<th>
+							<p className="small-bold">Description</p>
+						</th>
+						<th>
+							<p className="small-bold">Location</p>
+						</th>
+						<th>
+							<p className="small-bold">Action</p>
+						</th>
+					</tr>
+				</thead>
 
-                  <td>
-                    <p>{ACCOMMODATION_TYPE}</p>
-                  </td>
+				<tbody>
+					{typeof accomBackend.accommodations === "undefined" ? (
+						<p>Loading...</p>
+					) : (
+						accomBackend.accommodations.map((accom) => {
+							const {
+								ACCOMMODATION_ID,
+								ACCOMMODATION_NAME,
+								ACCOMMODATION_TYPE,
+								ACCOMMODATION_DESCRIPTION,
+								ACCOMMODATION_LOCATION,
+							} = accom;
+							return (
+								<tr key={ACCOMMODATION_ID}>
+									<td>
+										<p>{ACCOMMODATION_NAME}</p>
+									</td>
 
-                  <td>
-                    <p>{ACCOMMODATION_DESCRIPTION}</p>
-                  </td>
+									<td>
+										<p>{ACCOMMODATION_TYPE}</p>
+									</td>
 
-                  <td>
-                    <p>{ACCOMMODATION_LOCATION}</p>
-                  </td>
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </Table>
+									<td>
+										<p>{ACCOMMODATION_DESCRIPTION}</p>
+									</td>
 
-      {/* ONLY RENDER IF THERE IS A SELECTED STUDENT
+									<td>
+										<p>{ACCOMMODATION_LOCATION}</p>
+									</td>
+
+									<td>
+										<Button
+											className="small admin-delete-btn"
+											onClick={() => {
+												handleDelete(accom);
+											}}
+										>
+											Delete
+										</Button>
+									</td>
+								</tr>
+							);
+						})
+					)}
+				</tbody>
+			</Table>
+
+			<AlertModals
+				alert={alert}
+				show={modalAlertShow}
+				onHide={() => setAlertModalShow(false)}
+			/>
+
+			{/* ONLY RENDER IF THERE IS A SELECTED STUDENT
         {selectedStudent && (
             <AdminViewUser
             studentInfo={selectedStudent}
@@ -105,8 +146,8 @@ function AccomsTable(props) {
             onHide={handleCloseModal}
             />
         )} */}
-    </div>
-  );
+		</div>
+	);
 }
 
 export default AccomsTable;
