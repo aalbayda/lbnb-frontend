@@ -23,10 +23,8 @@ function UserProfileModal(props) {
 	const [newnumber, setNewnumber] = useState("");
 	const [newemail, setNewemail] = useState("");
 	const [password, setpassword] = useState("");
-	// const [oldpassword, setOldPassword] = useState("");
 	const [newpassword, setNewpassword] = useState("");
 	const [retypepassword, setretypepassword] = useState("");
-	const [editing, setEditing] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -54,12 +52,6 @@ function UserProfileModal(props) {
 
 	const handleClick = () => {
 		setLoading(true);
-		// if (editing && !newpassword) {
-		//   window.alert(
-		//     "Invalid password! If you want the same password, enter your current password."
-		//   );
-		//   return;
-		// }
 
 		if (isChecked === false) {
 			console.log("Entered");
@@ -83,7 +75,7 @@ function UserProfileModal(props) {
 					newLastName: newLname ? newLname : getAuthName().split(" ")[1],
 					newContactNum: newnumber ? newnumber : getAuthMobile(),
 					newPassword: newpassword ? newpassword : "",
-					password: password
+					password: password,
 				})
 				.then((res) => {
 					console.log(res.data);
@@ -136,7 +128,7 @@ function UserProfileModal(props) {
 						newLastName: newLname ? newLname : getAuthName().split(" ")[1],
 						newContactNum: newnumber ? newnumber : getAuthMobile(),
 						newPassword: newpassword ? newpassword : "",
-						password: password
+						password: password,
 					})
 					.then((res) => {
 						console.log(res.data);
@@ -157,37 +149,6 @@ function UserProfileModal(props) {
 			}
 		}
 	};
-
-	//   const handleReport = () => {
-	//     console.log("handling");
-	//     if (report === "") {
-	//       setMissingReport(true);
-	//       return;
-	//     }
-	//     console.log("Not empty");
-	//     console.log(props.ACCOMMODATION_NAME);
-	//     axios
-	//       .post(url + "/add-report", {
-	//         report: report,
-	//         username: getAuthUsername(),
-	//         accommodationName: props.ACCOMMODATION_NAME
-	//           ? props.ACCOMMODATION_NAME
-	//           : "Parkside Residences",
-	//       })
-	//       .then(function (response) {
-	//         if (!response.data) {
-	//           setMissingReport(true);
-	//         } else {
-	//           console.log("Report successful");
-	//           console.log(response.data);
-	//         }
-	//       })
-	//       .catch(function (error) {
-	//         console.log("Error!!!");
-	//         console.log(error);
-	//       });
-	//     toggleTab(2);
-	//   };
 
 	return (
 		<Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>

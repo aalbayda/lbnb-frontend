@@ -66,7 +66,7 @@ const SubmitRatingReviewSect = (props) => {
 					if (response.success) {
 						setAlert("Review successfully submitted!");
 						setModalShow(true);
-						setTimeout(() => window.location.reload(), 30000);
+						setTimeout(() => window.location.reload(), 1000);
 					} else {
 						setAlert(
 							"Review unsuccessful. Check your internet or server connection."
