@@ -47,31 +47,31 @@ const ListingDetails = (props) => {
 	const image =
 		"https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
 
-	// useEffect(() => {
-	//   const fetchData = async (photo) => {
-	//     try {
-	//       const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
-	//       console.log("AAAAAAAAAAAAAAA", accommName);
-	//       console.log(`-${photo}-`);
-	//       console.log(response.data);
-	//       // console.log("Success: ", response.data.success)
-	//       if (response.data.success === true){
-	//         setPhoto(response.data.imageUrl);
-	//         setLoading(false);
-	//       } else {
-	//         setPhoto(image);
-	//         setLoading(false);
-	//       }
-	//       // return response.data.accommodation;
-	//     } catch (error) {
-	//       console.error(error);
-	//       setLoading(false);
-	//       // return [];
-	//     }
-	//   };
-	//   // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
-	//   fetchData(accommName);
-	// }, []);
+	useEffect(() => {
+	  const fetchData = async (photo) => {
+	    try {
+	      const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
+	      console.log("AAAAAAAAAAAAAAA", accommName);
+	      console.log(`-${photo}-`);
+	      console.log(response.data);
+	      // console.log("Success: ", response.data.success)
+	      if (response.data.success === true){
+	        setPhoto(response.data.imageUrl);
+	        setLoading(false);
+	      } else {
+	        setPhoto(image);
+	        setLoading(false);
+	      }
+	      // return response.data.accommodation;
+	    } catch (error) {
+	      console.error(error);
+	      setLoading(false);
+	      // return [];
+	    }
+	  };
+	  // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
+	  fetchData(accommName);
+	}, []);
 
 	// load if favorite
 	useEffect(() => {
@@ -168,7 +168,7 @@ const ListingDetails = (props) => {
 		return (
 			<button
 				key={room.ROOM_ID}
-				className="r-add-style"
+				className="roomsbtn r-add-style"
 				onClick={() => handleClick(room)}
 			>
 				{" "}
@@ -221,24 +221,34 @@ const ListingDetails = (props) => {
 									</h7>
 									<div class="star-separator-capacity-div">
 										<p className="star-separator-capacity-text">
-											<Rating
-												className="rating-medium"
-												defaultValue={rating}
-												precision={0.5}
-												readOnly={true}
-												sx={{
-													fontSize: "1rem",
-													color: "#1C3103",
-													mr: 1,
-												}}
-											/>
+											{!rating ? (
+												<p className="rate-text small">Not Rated</p>
+											) : (
+												<div>
+												<Rating
+													className="rating-medium"
+													defaultValue={rating}
+													precision={0.5}
+													readOnly={true}
+													sx={{
+														fontSize: "1rem",
+														color: "#1C3103",
+														mr: 1,
+													}}
+												/>
+												</div>
+											)}
 											{separator}{" "}
 										</p>
 										<p className="star-separator-capacity">
 											{capacity} Capacity
 										</p>
 									</div>
-									<h2 className="headings-price">₱{max_price}</h2>
+									{ !max_price ? (
+										<p></p>
+									):(
+										<h2 className="headings-price">₱{max_price}</h2>
+									)}
 									<p></p>
 									<p>{description}</p>
 									<p>{amenities}</p>
@@ -264,7 +274,7 @@ const ListingDetails = (props) => {
 									<MdReportGmailerrorred className="icon report-icon" />
 								</Button>
 							) : (
-								<></>
+								<p></p>
 							)}
 						</Col>
 					</Row>
