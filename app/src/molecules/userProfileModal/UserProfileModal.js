@@ -83,10 +83,11 @@ function UserProfileModal(props) {
 					newLastName: newLname ? newLname : getAuthName().split(" ")[1],
 					newContactNum: newnumber ? newnumber : getAuthMobile(),
 					newPassword: newpassword ? newpassword : "",
+					password: password
 				})
 				.then((res) => {
 					console.log(res.data);
-					if (red.data.success === false) {
+					if (res.data.success === false) {
 						setError("Invalid Password");
 						setLoading(false);
 					} else {
@@ -134,10 +135,11 @@ function UserProfileModal(props) {
 						newLastName: newLname ? newLname : getAuthName().split(" ")[1],
 						newContactNum: newnumber ? newnumber : getAuthMobile(),
 						newPassword: newpassword ? newpassword : "",
+						password: password
 					})
 					.then((res) => {
 						console.log(res.data);
-						if (red.data.success === false) {
+						if (res.data.success === false) {
 							setError("Invalid Password");
 							setLoading(false);
 						} else {
