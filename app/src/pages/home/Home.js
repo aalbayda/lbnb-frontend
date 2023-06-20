@@ -160,7 +160,7 @@ const Home = () => {
 							{/* </div> */}
 							{queries ? (
 								queries.map((query, index) =>
-									query.ACCOMMODATION_ISARCHIVED ? (
+									query.ACCOMMODATION_ISARCHIVED === 0 ? (
 										<CardListing
 											key={index}
 											unit={query}

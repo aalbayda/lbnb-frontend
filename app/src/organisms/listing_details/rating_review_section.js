@@ -12,7 +12,7 @@ const RatingReviewSection = (props) => {
 	useEffect(() => {
 		console.log(props.props.ACCOMMODATION_NAME);
 		axios
-			.post(url + "/acommodation/get-reviews", {
+			.post(url + "/acommodation/reviews", {
 				accommodationName: props.props.ACCOMMODATION_NAME,
 			})
 			.then((response) => {
