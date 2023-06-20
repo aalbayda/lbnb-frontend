@@ -17,7 +17,7 @@ const Dorm_carousel = ({topDorms}) =>  {
             aria-hidden="true"
             className="next-button"
           >
-            <GrFormNext className="icon"/>
+            <GrFormNext testID="dormNext" className="icon"/>
           </span>
         );
       };
@@ -28,7 +28,7 @@ const Dorm_carousel = ({topDorms}) =>  {
             aria-hidden="true"
             className="prev-button"
           >
-            <GrFormPrevious className="icon"/>
+            <GrFormPrevious testID="dormPrev" className="icon"/>
           </span>
         );
       };
@@ -41,6 +41,7 @@ const Dorm_carousel = ({topDorms}) =>  {
                     designed to cater the needs of budget-conscious students
                     <br/> seeking comfortable and conducive learning environment. </p>
             <Carousel 
+                testID="dormCarousel"
                 activeIndex={index}
                 onSelect={handleSelect}
                 interval={null}

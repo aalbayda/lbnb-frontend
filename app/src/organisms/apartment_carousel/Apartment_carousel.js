@@ -14,7 +14,7 @@ const Apartment_carousel = ({ topApartments }) => {
   const nextButton = () => {
     return (
       <span aria-hidden="true" className="next-button">
-        <GrFormNext className="icon" />
+        <GrFormNext testID= "apartmentNext" className="icon" />
       </span>
     );
   };
@@ -22,7 +22,7 @@ const Apartment_carousel = ({ topApartments }) => {
   const prevButton = () => {
     return (
       <span aria-hidden="true" className="prev-button">
-        <GrFormPrevious className="icon" />
+        <GrFormPrevious testID= "apartmentPrev" className="icon" />
       </span>
     );
   };
@@ -32,6 +32,7 @@ const Apartment_carousel = ({ topApartments }) => {
       <p className="header3 title">Elbi's Best</p>
       <p className="small subtitle">You deserve a home away from home. </p>
       <Carousel
+        testID="apartmentCarousel"
         activeIndex={index}
         onSelect={handleSelect}
         interval={null}

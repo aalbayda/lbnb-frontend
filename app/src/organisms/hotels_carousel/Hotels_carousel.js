@@ -12,7 +12,7 @@ const Hotels_carousel = ({topHotels}) =>  {
             aria-hidden="true"
             className="hotels-next-button"
           >
-            <GrFormNext className="icon"/>
+            <GrFormNext testID="hotelNext" className="icon"/>
           </span>
         );
       };
@@ -23,7 +23,7 @@ const Hotels_carousel = ({topHotels}) =>  {
             aria-hidden="true"
             className="hotels-prev-button"
           >
-            <GrFormPrevious className="icon"/>
+            <GrFormPrevious testID="hotelPrev" className="icon"/>
           </span>
         );
       };
@@ -36,6 +36,7 @@ const Hotels_carousel = ({topHotels}) =>  {
             <p className="header3 title">Hotels</p>
             <p className="small subtitle">Experience budget-friendly hotels that doesn't compromise on comfort. </p>
             <Carousel 
+                testID="hotelCarousel"
                 activeIndex={index}
                 onSelect={handleSelect}
                 interval={null}

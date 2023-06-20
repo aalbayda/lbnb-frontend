@@ -25,8 +25,6 @@ describe('User Login from Homepage Test', () => {
 
     // Wait for 3 seconds before logging out
     cy.wait(3000);
-    cy.scrollTo(0,800);
-    cy.wait(3000);
 
     // Click Logout Button
     cy.get('button[testID=logoutButton]')

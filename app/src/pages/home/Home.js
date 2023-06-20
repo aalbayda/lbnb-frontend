@@ -118,7 +118,7 @@ const Home = () => {
 	};
 
 	return (
-		<div className="home-container">
+		<div testID="homepage" className="home-container">
 			<NavBar />
 			{loading ? (
 				<div className="centeredSpinner">
