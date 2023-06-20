@@ -3598,6 +3598,11 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-2.0.0.tgz"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+crypto.js@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/crypto.js/-/crypto.js-3.1.1.tgz#866852bde684c6c2e3b669fe3302dabc647da165"
+  integrity sha512-6ov7n6mqNkhFoHvuxC9rRXm5px1WHA01/mK/KllC53Ql2JaYxWuT0vWnl+b8ZbjVTzbqg+QIqQXvZZWKzOAkbQ==
+
 css-blank-pseudo@^3.0.3:
   version "3.0.3"
   resolved "https://registry.npmjs.org/css-blank-pseudo/-/css-blank-pseudo-3.0.3.tgz"
