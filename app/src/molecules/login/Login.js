@@ -194,6 +194,7 @@ function Login(props) {
 						<div className="login-container-createAccount">
 							<p className="italic">Don't have an account?</p>
 							<Button
+                testID="toggleSignup"
 								className="small-bold createButton"
 								onClick={() => toggleTab(2)}
 							>
