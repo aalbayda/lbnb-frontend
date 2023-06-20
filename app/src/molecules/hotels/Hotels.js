@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Rating } from "@mui/material";
 import axios from "axios";
 import config from "../../config";
+import { logo } from "../../assets/images";
 const url = config.apiUrl;
 
 

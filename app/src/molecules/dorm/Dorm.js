@@ -6,11 +6,12 @@ import { banner1 } from "../../assets/images";
 // import { StarRating } from "../../atoms";
 import { Rating } from "@mui/material";
 import axios from "axios";
+import { logo } from "../../assets/images";
 import config from "../../config";
 const url = config.apiUrl;
 const Dorm = ({topDorms}) => {
   let navigate = useNavigate();
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(logo);
 
   useEffect(() => {
     const fetchData = async (photo) => {
@@ -31,7 +32,6 @@ const Dorm = ({topDorms}) => {
         // return [];
       }
     };
-  
     // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
     fetchData(topDorms.ACCOMMODATION_NAME);
   }, []);
