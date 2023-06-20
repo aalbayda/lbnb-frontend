@@ -34,6 +34,9 @@ function AddRooms(props) {
 
   return (
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+      <Modal.Header closeButton>
+        
+      </Modal.Header>
       <Modal.Body>
         <Container className="add-accoms-container">
           <Row className="input-item">

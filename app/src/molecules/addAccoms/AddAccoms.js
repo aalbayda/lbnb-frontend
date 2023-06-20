@@ -18,9 +18,9 @@ function AddAccoms(props) {
 	const [newAddress, setNewAddress] = useState("");
 	const [newDescription, setNewDescription] = useState("");
 	const [newAmenities, setNewAmenities] = useState("");
-	const [selectedImage, setSelectedImage] = useState(null);
 	const [fileStream, setFileStream] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
 	const handleImageUpload = (event) => {
 		const file = event.target.files[0];
@@ -81,6 +81,9 @@ function AddAccoms(props) {
 
 	return (
 		<Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+			<Modal.Header closeButton>
+
+			</Modal.Header>
 			<Modal.Body className="addAccomsModal">
 				<Container className="add-accoms-container">
 					<Row className="input-item">
