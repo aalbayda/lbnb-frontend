@@ -52,11 +52,9 @@ function AccomsTable(props) {
 				},
 			})
 			.then(function (response) {
-				console.log(response.data);
 				setAccomBackend(response.data);
 			})
 			.catch(function (error) {
-				console.log("Error fetching accoms (accoms table)");
 				console.log(error);
 			});
 	}, []);

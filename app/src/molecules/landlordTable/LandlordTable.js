@@ -35,7 +35,6 @@ function LandlordTable(props) {
 					);
 					setModalAlertShow(true);
 				}
-				console.log(res.data);
 			})
 			.catch((err) => console.error(err));
 	};
@@ -51,14 +50,11 @@ function LandlordTable(props) {
 			// handle success
 			.then(function (response) {
 				setOwnerBackend(response.data);
-				// console.log(response.data);
 			})
 			// handle error
 			.catch(function (error) {
 				console.log("There is an error fetching the owners (admin page)");
-				// console.log(error);
 			})
-			// always executed
 			.finally(function () {});
 	}, []);
 	return (

@@ -20,7 +20,7 @@ function AddAccoms(props) {
 	const [newAmenities, setNewAmenities] = useState("");
 	const [fileStream, setFileStream] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+	const [selectedImage, setSelectedImage] = useState(null);
 
 	const handleImageUpload = (event) => {
 		const file = event.target.files[0];
@@ -29,7 +29,6 @@ function AddAccoms(props) {
 	};
 
 	const handleAdd = () => {
-		console.log("Adding...");
 		if (
 			newName === "" ||
 			newType === "" ||
@@ -54,11 +53,9 @@ function AddAccoms(props) {
 		formData.append("accommodationName", newName);
 		formData.append("data", fileStream);
 
-		console.log("Passing in", newAccom);
 		axios
 			.post(url + "/add-accommodation", newAccom)
 			.then((res) => {
-				console.log("Successfully added data");
 				console.log(res.data);
 
 				axios
@@ -69,7 +66,6 @@ function AddAccoms(props) {
 						formData.forEach((v, k) => {
 							console.log(`${k}: ${v}`);
 						});
-						console.log("Successfully uploaded photo");
 
 						console.log(res.data);
 						// window.location.reload();
@@ -81,9 +77,7 @@ function AddAccoms(props) {
 
 	return (
 		<Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
-			<Modal.Header closeButton>
-
-			</Modal.Header>
+			<Modal.Header closeButton></Modal.Header>
 			<Modal.Body className="addAccomsModal">
 				<Container className="add-accoms-container">
 					<Row className="input-item">

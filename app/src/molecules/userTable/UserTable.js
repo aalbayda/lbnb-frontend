@@ -20,7 +20,6 @@ function UserTable(props) {
 				email: student.USER_EMAIL,
 			})
 			.then((res) => {
-				console.log(student.USER_EMAIL);
 				if (res.data.success) {
 					setAlert(
 						`Successfully deleted ${student.USER_FNAME} ${student.USER_LNAME}!`
@@ -49,11 +48,9 @@ function UserTable(props) {
 			// handle success
 			.then(function (response) {
 				setStudentBackend(response.data);
-				console.log(response.data);
 			})
 			// handle error
 			.catch(function (error) {
-				console.log("There is an error fetching the students (admin page)");
 				console.log(error);
 			})
 			// always executed

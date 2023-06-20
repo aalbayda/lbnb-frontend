@@ -35,8 +35,6 @@ const Home = () => {
 					url + "/get-top-five-accommodations",
 					{ type }
 				);
-				console.log(`-${type}-`);
-				console.log(response.data);
 				return response.data.accommodation;
 			} catch (error) {
 				console.error(error);
@@ -54,9 +52,6 @@ const Home = () => {
 			setTopDorms(dorms);
 			setTopApartments(apartments);
 			setTopHotels(hotels);
-			console.log("Apartments", topApartments);
-			console.log("Dorms", topDorms);
-			console.log("Hotels", topHotels);
 			setLoading(false);
 		});
 	}, []);

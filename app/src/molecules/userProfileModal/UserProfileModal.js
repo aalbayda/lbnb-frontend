@@ -39,7 +39,6 @@ function UserProfileModal(props) {
 
 	const handleCheckboxChange = () => {
 		setIsChecked(!isChecked);
-		console.log(isChecked);
 	};
 
 	const toggleTab = (index) => {
@@ -54,8 +53,6 @@ function UserProfileModal(props) {
 		setLoading(true);
 
 		if (isChecked === false) {
-			console.log("Entered");
-
 			if (password === "") {
 				setError("Password Field is Empty!");
 				console.log(error);
@@ -78,7 +75,6 @@ function UserProfileModal(props) {
 					password: password,
 				})
 				.then((res) => {
-					console.log(res.data);
 					if (res.data.success === false) {
 						setError("Invalid Password");
 						setLoading(false);
@@ -133,10 +129,8 @@ function UserProfileModal(props) {
 					.then((res) => {
 						console.log(res.data);
 						if (res.data.success === false) {
-							setError("Invalid Password");
 							setLoading(false);
 						} else {
-							console.log("Success edit");
 							setError("");
 							setLoading(false);
 							toggleTab(2);

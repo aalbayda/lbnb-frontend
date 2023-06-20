@@ -30,11 +30,9 @@ function ReportsTable(props) {
 		axios
 			.get(url + "/view-all-reports")
 			.then(function (response) {
-				console.log(response.data);
 				setReports(response.data.results);
 			})
 			.catch(function (error) {
-				console.log("Error fetching reports (reports table)");
 				console.log(error);
 			});
 	}, []);
@@ -65,7 +63,6 @@ function ReportsTable(props) {
 						<p>Loading...</p>
 					) : (
 						reports.map((report) => {
-							console.log(report);
 							const {
 								REPORT_DATE,
 								ACCOMMODATION_NAME,

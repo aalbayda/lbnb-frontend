@@ -32,10 +32,7 @@ const SubmitRatingReviewSect = (props) => {
 	const accommName = props.props.ACCOMMODATION_NAME;
 
 	const handleSubmit = () => {
-		console.log(getAuthType());
 		if (!isLoggedIn() || getAuthType() !== "Student") {
-			console.log("unregistered");
-			setAlert("Log in as a registered tenant first!");
 			setModalShow(true);
 			return;
 		}
@@ -47,11 +44,10 @@ const SubmitRatingReviewSect = (props) => {
 			return;
 		}
 
-		console.log("adding");
 		const timestamp = new Date(
 			new Date().toString().split("GMT")[0] + " UTC"
 		).toISOString();
-		console.log(getAuthUsername(), timestamp, accommName, comment, rateVal);
+
 		if (rateVal != 0) {
 			axios
 				.post(url + "/accommodation/add-review", {
@@ -75,7 +71,6 @@ const SubmitRatingReviewSect = (props) => {
 					}
 				})
 				.catch(function (error) {
-					console.log("Error");
 					console.log(error);
 				});
 		}

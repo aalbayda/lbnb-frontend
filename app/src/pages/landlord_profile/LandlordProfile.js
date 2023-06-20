@@ -47,7 +47,6 @@ const LandlordProfile = () => {
 	// function to toggle tabs
 	const toggleTab = (index) => {
 		setToggleState(index);
-		console.log("toggle: ", toggleState);
 	};
 
 	useEffect(() => {
@@ -60,7 +59,6 @@ const LandlordProfile = () => {
 				isStudent: false,
 			})
 			.then((res) => {
-				console.log("Found owner", location.state.username);
 				console.log(res.data);
 				setNumber(res.data.users[0].USER_CONTACTNUM);
 				setEmail(res.data.users[0].USER_EMAIL);
