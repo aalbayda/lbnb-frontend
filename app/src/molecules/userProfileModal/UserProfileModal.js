@@ -100,7 +100,8 @@ function UserProfileModal(props) {
 							.post(url + "/user/upload-user-pic", formData, {
 								headers: { "Content-Type": "multipart/form-data" },
 							})
-							.then(window.location.reload());
+							.then(window.location.reload())
+							.catch((err) => console.error(err));
 					}
 				})
 				.catch((err) => console.error(err));
