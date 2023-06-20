@@ -8,60 +8,59 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { ImPriceTags } from "react-icons/im";
 import Button from "react-bootstrap/Button";
 import { MdOutlinePlace, MdGroups } from "react-icons/md";
-import Form from "react-bootstrap/Form";
 const url = config.apiUrl;
 
 const Multilayer_filter = (props) => {
-  const [search, setSearch] = useState("");
-  const [priceTo, setPriceTo] = useState(null);
-  const [capacity, setCapacity] = useState(null);
-  const [location, setLocation] = useState("");
-  const [filterType, setFilterType] = useState("");
+	const [search, setSearch] = useState("");
+	const [priceTo, setPriceTo] = useState(null);
+	const [capacity, setCapacity] = useState(null);
+	const [location, setLocation] = useState("");
+	const [filterType, setFilterType] = useState("");
 
-  const handleSearched = () => {
-    axios
-      .post(url + "/filter-accommodation", {
-        filters: {
-          name: search,
-          location: location,
-          type: filterType,
-          maxPrice: priceTo,
-          capacity: capacity,
-        },
-      })
-      .then(function (response) {
-        const query = response.data.accommodations;
-        const filters = {
-          name: search,
-          location: location,
-          type: filterType,
-          maxPrice: priceTo,
-          capacity: capacity,
-        };
-        props.handleQuery(query, filters);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+	const handleSearched = () => {
+		axios
+			.post(url + "/filter-accommodation", {
+				filters: {
+					name: search,
+					location: location,
+					type: filterType,
+					maxPrice: priceTo,
+					capacity: capacity,
+				},
+			})
+			.then(function (response) {
+				const query = response.data.accommodations;
+				const filters = {
+					name: search,
+					location: location,
+					type: filterType,
+					maxPrice: priceTo,
+					capacity: capacity,
+				};
+				props.handleQuery(query, filters);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 
-    props.toggleSearched();
-  };
+		props.toggleSearched();
+	};
 
-  return (
-    <div className="mlf-container">
-      <div className="mlf-upper">
-        <input
-          className="small mlf_search"
-          placeholder="Search"
-          type="text"
-          testID="searchField"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <Button testID="searchButton" onClick={handleSearched} className="searchButton">
-          <BiSearch className="icon" />
-        </Button>
-        {/* <BiSearch className="icon searchIcon" /> */}
-        {/* <Dropdown>
+	return (
+		<div className="mlf-container">
+			<div className="mlf-upper">
+				<input
+					className="small mlf_search"
+					placeholder="Search"
+					testID="searchField"
+					type="text"
+					onChange={(e) => setSearch(e.target.value)}
+				/>
+				<Button onClick={handleSearched} testID="searchButton" className="searchButton">
+					<BiSearch className="icon" />
+				</Button>
+				{/* <BiSearch className="icon searchIcon" /> */}
+				{/* <Dropdown>
           <Dropdown.Toggle
             id="dropdown-basic"
             className="small filter-dropdown"
@@ -84,96 +83,128 @@ const Multilayer_filter = (props) => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown> */}
-      </div>
-      <div className="mlf-lower">
-        <div className="divTable">
-          <div className="divTableCell">
-          <AiFillFilter className="mlf_icon"/>
-          <Dropdown>
-          <Dropdown.Toggle
-            testID="accomTypeDropdownToggle"
-            id="dropdown-basic"
-            className="small filter-dropdown"
-          >
-            {filterType ? filterType : "Type"}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item className="dropdownItem" testID="accomTypeDorm" onClick={() => setFilterType("Dorm")}>
-              Dorm
-            </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" testID="accomTypeHotel" onClick={() => setFilterType("Hotel")}>
-              Hotel
-            </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" testID="accomTypeApartment" onClick={() => setFilterType("Apartment")}>
-              Apartment
-            </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" testID="accomTypeBedspace" onClick={() => setFilterType("Bedspace")}>
-              Bedspace
-            </Dropdown.Item>
-            <Dropdown.Item className="dropdownItem" testID="accomTypeNoPref" onClick={() => setFilterType("")}>
-              No Preference
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-          </div>
-          <div className="divTableCell">
-            <ImPriceTags className="mlf_icon"  />
-            <input
-              className="small mlf_price"
-              placeholder="Max Price"
-              type="number"
-              testID="accommFilterPrice"
-              min="0"
-              max="100000"
-              onKeyDown={(e) => {
-                if (e.key !== "Backspace" && isNaN(e.key)) {
-                  e.preventDefault();
-                }
-              }}
-              onChange={(e) => setPriceTo(e.target.value)}
-            />
-          </div>
-          <div className="divTableCell">
-            <MdGroups className="mlf_icon" />
-            <input
-              className="small mlf_capacity"
-              placeholder="Capacity"
-              type="number"
-              testID="accommFilterCapacity"
-              min="0"
-              max="10"
-              onKeyDown={(e) => {
-                if (e.key !== "Backspace" && isNaN(e.key)) {
-                  e.preventDefault();
-                }
-              }}
-              onChange={(e) => setCapacity(e.target.value)}
-            />
-          </div>
-          <div className="divTableCell">
-            {/* <div className="InElbi-Right"> */}
-            <MdOutlinePlace className="mlf_icon"/>
-            <Dropdown>
-              <Dropdown.Toggle
-                testID = "accommLocDropdownToggle"
-                id="dropdown-basic"
-                className="small filter-dropdown"
-              >
-              {location ? location : "Location"}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item className="dropdownItem" testID = "accommLocWithin" onClick={() => setLocation("Within Campus")}>
-                Within Campus
-                </Dropdown.Item>
-                <Dropdown.Item className="dropdownItem" testID = "accommLocOutside" onClick={() => setLocation("Outside Campus")}>
-                Outside Campus
-                </Dropdown.Item>
-                <Dropdown.Item className="dropdownItem" testID = "accommLocNoPref" onClick={() => setLocation("")}>
-                No Preference
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-              {/* <Form>
+			</div>
+			<div className="mlf-lower">
+				<div className="divTable">
+					<div className="divTableCell">
+						<AiFillFilter className="mlf_icon" />
+						<Dropdown>
+							<Dropdown.Toggle
+								testID="accomTypeDropdownToggle"
+								id="dropdown-basic"
+								className="small filter-dropdown"
+							>
+								{filterType ? filterType : "Type"}
+							</Dropdown.Toggle>
+							<Dropdown.Menu>
+								<Dropdown.Item
+									className="dropdownItem"
+									testID="accomTypeDorm"
+									onClick={() => setFilterType("Dorm")}
+								>
+									Dorm
+								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdownItem"
+									testID="accomTypeHotel"
+									onClick={() => setFilterType("Hotel")}
+								>
+									Hotel
+								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdownItem"
+									testID="accomTypeApartment"
+									onClick={() => setFilterType("Apartment")}
+								>
+									Apartment
+								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdownItem"
+									testID="accomTypeBedspace"
+									onClick={() => setFilterType("Bedspace")}
+								>
+									Bedspace
+								</Dropdown.Item>
+								<Dropdown.Item
+									className="dropdownItem"
+									testID="accomTypeNoPref"
+									onClick={() => setFilterType("")}
+								>
+									No Preference
+								</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+					</div>
+					<div className="divTableCell">
+						<ImPriceTags className="mlf_icon" />
+						<input
+							className="small mlf_price"
+							placeholder="Max Price"
+							type="number"
+							testID="accommFilterPrice"
+							min="0"
+							max="100000"
+							onKeyDown={(e) => {
+								if (e.key !== "Backspace" && isNaN(e.key)) {
+									e.preventDefault();
+								}
+							}}
+							onChange={(e) => setPriceTo(e.target.value)}
+						/>
+					</div>
+					<div className="divTableCell">
+						<MdGroups className="mlf_icon" />
+						<input
+							className="small mlf_capacity"
+							placeholder="Capacity"
+							type="number"
+							testID="accommFilterCapacity"
+							min="0"
+							max="10"
+							onKeyDown={(e) => {
+								if (e.key !== "Backspace" && isNaN(e.key)) {
+									e.preventDefault();
+								}
+							}}
+							onChange={(e) => setCapacity(e.target.value)}
+						/>
+					</div>
+					<div className="divTableCell">
+						{/* <div className="InElbi-Right"> */}
+						<MdOutlinePlace className="mlf_icon" />
+						<Dropdown>
+							<Dropdown.Toggle
+								testID = "accommLocDropdownToggle"
+								id="dropdown-basic"
+								className="small filter-dropdown"
+							>
+								{location ? location : "Location"}
+							</Dropdown.Toggle>
+							<Dropdown.Menu>
+								<Dropdown.Item
+									testID = "accommLocWithin"
+									className="dropdownItem"
+									onClick={() => setLocation("Within Campus")}
+								>
+									Within Campus
+								</Dropdown.Item>
+								<Dropdown.Item
+									testID = "accommLocOutside"
+									className="dropdownItem"
+									onClick={() => setLocation("Outside Campus")}
+								>
+									Outside Campus
+								</Dropdown.Item>
+								<Dropdown.Item
+									testID = "accommLocNoPref"
+									className="dropdownItem"
+									onClick={() => setLocation("")}
+								>
+									No Preference
+								</Dropdown.Item>
+							</Dropdown.Menu>
+						</Dropdown>
+						{/* <Form>
                 {["radio"].map((type) => (
                   <div key={`inline-${type}`} className="mb-3">
                     <Form.Check
@@ -207,18 +238,18 @@ const Multilayer_filter = (props) => {
                   </div>
                 ))}
               </Form> */}
-            {/* </div> */}
-          </div>
-          {/* <div className="divTableCell search"> */}
-            {/* <Button onClick={handleSearched} className="small carousel-btn">
+						{/* </div> */}
+					</div>
+					{/* <div className="divTableCell search"> */}
+					{/* <Button onClick={handleSearched} className="small carousel-btn">
               {" "}
               Search{" "}
             </Button> */}
-          {/* </div> */}
-        </div>
-      </div>
-    </div>
-  );
+					{/* </div> */}
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Multilayer_filter;

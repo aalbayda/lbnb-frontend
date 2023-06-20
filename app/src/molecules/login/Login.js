@@ -11,239 +11,235 @@ import config from "../../config";
 const url = config.apiUrl;
 
 function Login(props) {
-  const [toggleState, setToggleState] = useState(1);
-  const [loading, setLoading] = useState(false);
+	const [toggleState, setToggleState] = useState(1);
+	const [loading, setLoading] = useState(false);
 
-  const [missingLogin, setMissingLogin] = useState(false);
-  const [wrongLogin, setWrongLogin] = useState(false);
+	const [missingLogin, setMissingLogin] = useState(false);
+	const [wrongLogin, setWrongLogin] = useState(false);
 
-  const [loginErrorMessage, setLoginErrorMessage] = useState("");
-  const [signupErrorMessage, setSignupErrorMessage] = useState("");
-  const [radioClicked, setRadioClicked] = useState(false);
+	const [loginErrorMessage, setLoginErrorMessage] = useState("");
+	const [signupErrorMessage, setSignupErrorMessage] = useState("");
+	const [radioClicked, setRadioClicked] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repassword, setRePassword] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [isBusinessAccount, setIsBusinessAccount] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [repassword, setRePassword] = useState("");
+	const [fname, setFname] = useState("");
+	const [lname, setLname] = useState("");
+	const [isBusinessAccount, setIsBusinessAccount] = useState(false);
 
-  const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(false);
 
-  const toggleTab = (index) => {
-    setToggleState(index);
-    setLoginErrorMessage("");
-    setSignupErrorMessage("");
-  };
+	const toggleTab = (index) => {
+		setToggleState(index);
+		setLoginErrorMessage("");
+		setSignupErrorMessage("");
+	};
 
-  useEffect(() => {
-    toggleTab(1);
-  }, []);
+	useEffect(() => {
+		toggleTab(1);
+	}, []);
 
-  const handleCheckboxChange = () => {
-    setChecked(!checked);
-  };
+	const handleCheckboxChange = () => {
+		setChecked(!checked);
+	};
 
-  const handleSignUp = () => {
-    setLoading(true);
+	const handleSignUp = () => {
+		setLoading(true);
 
-    if (email === "" || password === "" || repassword === "" || fname === "" || lname === "") {
-      setSignupErrorMessage("At least one field is missing or invalid!");
-      setLoading(false);
-      return;
-    }
+		if (
+			email === "" ||
+			password === "" ||
+			repassword === "" ||
+			fname === "" ||
+			lname === ""
+		) {
+			setSignupErrorMessage("At least one field is missing or invalid!");
+			setLoading(false);
+			return;
+		}
 
-    const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
-    const emailMatch = regexPattern.test(email);
+		const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
+		const emailMatch = regexPattern.test(email);
 
-    if (!emailMatch) {
-      setSignupErrorMessage("Invalid email!");
-      setLoading(false);
-      return;
-    }
+		if (!emailMatch) {
+			setSignupErrorMessage("Invalid email!");
+			setLoading(false);
+			return;
+		}
 
-    // TODO: check if email exists
+		// TODO: check if email exists
 
-    const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
-    const passwordMatch = passwordPattern.test(password);
+		const passwordPattern = /^[a-zA-Z0-9]{8,}$/;
+		const passwordMatch = passwordPattern.test(password);
 
-    if (password !== repassword){
-      setSignupErrorMessage(
-        "Password do not match!"
-      );
-      setLoading(false);
-      return;
-    }
+		if (password !== repassword) {
+			setSignupErrorMessage("Password do not match!");
+			setLoading(false);
+			return;
+		}
 
-    if (!passwordMatch) {
-      setSignupErrorMessage(
-        "Password must contain at least 8 alphanumeric characters"
-      );
-      setLoading(false);
-      return;
-    }
+		if (!passwordMatch) {
+			setSignupErrorMessage(
+				"Password must contain at least 8 alphanumeric characters"
+			);
+			setLoading(false);
+			return;
+		}
 
-    if (!radioClicked) {
-      setSignupErrorMessage("Click one type of account!");
-      setLoading(false);
-      return;
-    }
+		if (!radioClicked) {
+			setSignupErrorMessage("Click one type of account!");
+			setLoading(false);
+			return;
+		}
 
-    if (!checked) {
-      setSignupErrorMessage("Please read the terms and conditions");
-      setLoading(false);
-      return;
-    }
+		if (!checked) {
+			setSignupErrorMessage("Please read the terms and conditions");
+			setLoading(false);
+			return;
+		}
 
+		axios
+			.post(url + "/signUp", {
+				email: email,
+				password: password,
+				username: email,
+				firstName: fname,
+				lastName: lname,
+				contactNum: 0,
+				isBusinessAccount: isBusinessAccount,
+				isPersonalAccount: !isBusinessAccount,
+			})
+			.then(function (response) {
+				if (response.data.message === "Email is already registered.") {
+					setSignupErrorMessage("Email is already registered.");
+					setLoading(false);
+					return;
+				}
 
-    axios
-      .post(url + "/signUp", {
-        email: email,
-        password: password,
-        username: email,
-        firstName: fname,
-        lastName: lname,
-        contactNum: 0,
-        isBusinessAccount: isBusinessAccount,
-        isPersonalAccount: !isBusinessAccount,
-      })
-      .then(function (response) {
-        if (response.data.message === "Email is already registered.") {
-          setSignupErrorMessage("Email is already registered.");
-          setLoading(false);
-          return;
-        }
+				handleLogin();
 
-        handleLogin()
+				setSignupErrorMessage("");
+				setRadioClicked(false);
+				console.log(response.data);
+				success = true;
+				console.log("user signed up");
+				window.location.reload();
+				setLoading(false);
+			})
+			.catch(function (error) {
+				console.log("Error!!!");
+				console.log(error);
+				setLoading(false);
+			});
+	};
 
-        setSignupErrorMessage("");
-        setRadioClicked(false);
-        console.log(response.data);
-        success = true;
-        console.log("user signed up");
-        window.location.reload();
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log("Error!!!");
-        console.log(error);
-        setLoading(false);
-      });
-      
-      
-  };
+	const handleLogin = () => {
+		setLoading(true);
 
-  const handleLogin = () => {
-    setLoading(true);
+		if (email === "" || password === "") {
+			// setMissingLogin(true);
+			setLoginErrorMessage("At least one field is missing or invalid!");
+			setLoading(false);
+			return;
+		}
 
-    if (email === "" || password === "") {
-      // setMissingLogin(true);
-      setLoginErrorMessage("At least one field is missing or invalid!");
-      setLoading(false);
-      return;
-    }
+		const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
+		const emailMatch = regexPattern.test(email);
 
-    const regexPattern = /^[\w\d_\.]+@[\w\d]+\.[\w\d.]*[\w\d]+$/;
-    const emailMatch = regexPattern.test(email);
+		if (!emailMatch) {
+			setLoginErrorMessage("Invalid email!");
+			setLoading(false);
+			return;
+		}
 
-    if (!emailMatch) {
-      setLoginErrorMessage("Invalid email!");
-      setLoading(false);
-      return;
-    }
+		axios
+			.post(url + "/login", {
+				email: email,
+				password: password,
+			})
+			.then(function (response) {
+				if (!response.data) {
+					setMissingLogin(true);
+					setLoading(false);
+				} else if (response.data.success) {
+					setLoginErrorMessage("");
 
-    axios
-      .post(url + "/login", {
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        if (!response.data) {
-          setMissingLogin(true);
-          setLoading(false);
-        } else if (response.data.success) {
-          setLoginErrorMessage("");
+					let date = new Date();
+					date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+					document.cookie = `authCookie=${encryptToken(
+						response.data
+					)}; path=/; expires=${date.toUTCString()}`;
+					window.location.reload();
+					setLoading(false);
+				} else if (!response.data.success) {
+					setLoginErrorMessage("Wrong credentials!");
+					setLoading(false);
+				} else {
+					setLoading(false);
+				}
+			})
+			.catch(function (error) {
+				setLoading(false);
+			});
+	};
 
-          // console.log(response.data);
-          console.log(response.data);
-          let date = new Date();
-          date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
-          document.cookie = `authCookie=${encryptToken(
-            response.data
-          )}; path=/; expires=${date.toUTCString()}`;
-          window.location.reload();
-          setLoading(false);
-        } else if (!response.data.success) {
-          console.log("not a success");
-          console.log(response.data);
-          setLoginErrorMessage("Wrong credentials!");
-          setLoading(false);
-        } else {
-          console.log(response.data);
-          setLoading(false);
-        }
-      })
-      .catch(function (error) {
-        console.log("Error!!!");
-        console.log(error);
-        setLoading(false);
-      });
-  };
+	return (
+		<Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
+			<Modal.Body>
+				{/* Log-in */}
+				<div className={toggleState === 1 ? "content" : "inactive-content"}>
+					<div className="login-container">
+						<p className="large-bold">User Login</p>
+						<div className="login-container-createAccount">
+							<p className="italic">Don't have an account?</p>
+							<Button
+								className="small-bold createButton"
+								onClick={() => toggleTab(2)}
+							>
+								CREATE AN ACCOUNT
+							</Button>
+						</div>
+						<input
+							required
+							className="tiny"
+							placeholder="Email Address"
+							type="text"
+              testID="loginEmail"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<input
+							required
+							className="tiny"
+							placeholder="Password"
+							type="password"
+              testID="loginPassword"
+							onChange={(e) => setPassword(e.target.value)}
+						/>
 
-  return (
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
-      <Modal.Body>
-        {/* Log-in */}
-        <div className={toggleState === 1 ? "content" : "inactive-content"}>
-          <div className="login-container">
-            <p className="large-bold">User Login</p>
-            <div className="login-container-createAccount">
-              <p className="italic">Don't have an account?</p>
-              <Button
-                className="small-bold createButton"
-                testID="toggleSignup"
-                onClick={() => toggleTab(2)}
-              >
-                CREATE AN ACCOUNT
-              </Button>
-            </div>
-            <input
-              required
-              className="tiny"
-              placeholder="Email Address"
-              type="text"
-              testID = "loginEmail"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              required
-              className="tiny"
-              placeholder="Password"
-              type="password"
-              testID = "loginPassword"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+						{loading ? (
+							<Button className="login-btn" disabled onClick={handleLogin}>
+								loading
+							</Button>
+						) : (
+							<Button 
+              testID = "signinButton"
+              className="login-btn"
+              onClick={handleLogin}>
+								SIGN IN
+							</Button>
+						)}
 
-            {loading ? (
-              <Button className="login-btn" disabled onClick={handleLogin}>
-                loading
-              </Button>
-            ) : (
-              <Button className="login-btn" testID="signinButton" onClick={handleLogin}>
-                SIGN IN
-              </Button>
-            )}
+						{loginErrorMessage !== "" && (
+							<div
+								className="tiny text-center"
+								style={{ fontStyle: "italic", color: "red" }}
+							>
+								{loginErrorMessage}
+							</div>
+						)}
 
-            {loginErrorMessage !== "" && (
-              <div
-                className="tiny text-center"
-                style={{ fontStyle: "italic", color: "red" }}
-              >
-                {loginErrorMessage}
-              </div>
-            )}
-
-            {/* {missingLogin ? (
+						{/* {missingLogin ? (
               <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
@@ -255,127 +251,128 @@ function Login(props) {
             )}
 
             {/* Check if invalid email */}
-            {/* {invalidEmail && <div
+						{/* {invalidEmail && <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
               >
                 Invalid email!
               </div>} */}
-          </div>
-        </div>
-        <div className={toggleState === 2 ? "content" : "inactive-content"}>
-          <div className="signup-container">
-            <p className="large-bold center">CREATE ACCOUNT</p>
-            <div className="fullname-container">
-              <input
-                required
-                className="tiny"
-                placeholder="First Name"
-                type="text"
+					</div>
+				</div>
+				<div className={toggleState === 2 ? "content" : "inactive-content"}>
+					<div className="signup-container">
+						<p className="large-bold center">CREATE ACCOUNT</p>
+						<div className="fullname-container">
+							<input
+								required
+								className="tiny"
+								placeholder="First Name"
+								type="text"
                 testID="fname"
-                onChange={(e) => setFname(e.target.value)}
-              />
-              <input
-                required
-                className="tiny"
-                placeholder="Surname"
-                type="text"
+								onChange={(e) => setFname(e.target.value)}
+							/>
+							<input
+								required
+								className="tiny"
+								placeholder="Surname"
+								type="text"
                 testID="lname"
-                onChange={(e) => setLname(e.target.value)}
-              />
-            </div>
-            <input
-              required
-              className="tiny"
-              placeholder="Email Address"
-              type="text"
+								onChange={(e) => setLname(e.target.value)}
+							/>
+						</div>
+						<input
+							required
+							className="tiny"
+							placeholder="Email Address"
+							type="text"
               testID="signupEmail"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              required
-              className="tiny"
-              placeholder="Password"
-              type="password"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<input
+							required
+							className="tiny"
+							placeholder="Password"
+							type="password"
               testID="signupPassword"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              required
-              className="tiny"
-              placeholder="Retype Password"
-              type="password"
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<input
+							required
+							className="tiny"
+							placeholder="Retype Password"
+							type="password"
               testID="signupRepassword"
-              onChange={(e) => setRePassword(e.target.value)}
-            />
-            {/* <input required className="tiny" placeholder='Retype Password' type="password"/> */}
+							onChange={(e) => setRePassword(e.target.value)}
+						/>
+						{/* <input required className="tiny" placeholder='Retype Password' type="password"/> */}
 
-            <Form>
-              {["radio"].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                  <Form.Check
-                    className="tiny"
-                    inline
-                    label="Personal Account"
-                    name="group1"
-                    type={type}
-                    id={`inline-${type}-1`}
+						<Form>
+							{["radio"].map((type) => (
+								<div key={`inline-${type}`} className="mb-3">
+									<Form.Check
+										className="tiny"
+										inline
+										label="Personal Account"
+										name="group1"
                     testID="personal"
-                    onClick={(e) => {
-                      setIsBusinessAccount(false);
-                      setRadioClicked(true);
-                    }}
-                  />
-                  <Form.Check
-                    className="tiny"
-                    inline
-                    label="Business Account"
-                    name="group1"
-                    type={type}
-                    id={`inline-${type}-2`}
+										type={type}
+										id={`inline-${type}-1`}
+										onClick={(e) => {
+											setIsBusinessAccount(false);
+											setRadioClicked(true);
+										}}
+									/>
+									<Form.Check
+										className="tiny"
+										inline
+										label="Business Account"
+										name="group1"
                     testID="business"
-                    onChange={(e) => setIsBusinessAccount(true)}
-                    onClick={(e) => setRadioClicked(true)}
-                  />
+										type={type}
+										id={`inline-${type}-2`}
+										onChange={(e) => setIsBusinessAccount(true)}
+										onClick={(e) => setRadioClicked(true)}
+									/>
 
-                  <div className="terms-div">
-                    <Terms/>
-                    <Form.Check
-                    className="tiny"
-                      type="checkbox"
-                      id="exampleCheckbox"
-                      label="I agree to the terms and conditions"
-                      checked={checked}
+									<div className="terms-div">
+										<Terms />
+										<Form.Check
+											className="tiny"
                       testID="terms"
-                      onChange={handleCheckboxChange}
-                    />
-                  </div>
-                </div>
-              ))}
-            </Form>
+											type="checkbox"
+											id="exampleCheckbox"
+											label="I agree to the terms and conditions"
+											checked={checked}
+											onChange={handleCheckboxChange}
+										/>
+									</div>
+								</div>
+							))}
+						</Form>
 
-            
+						{loading ? (
+							<Button className="login-btn" disabled onClick={handleSignUp}>
+								loading
+							</Button>
+						) : (
+							<Button 
+              testID="signupButton"
+              className="login-btn" 
+              onClick={handleSignUp}>
+								SIGN UP
+							</Button>
+						)}
 
-            {loading ? (
-              <Button className="login-btn" disabled onClick={handleSignUp}>
-                loading
-              </Button>
-            ) : (
-              <Button className="login-btn" testID="signupButton" onClick={handleSignUp}>
-                SIGN UP
-              </Button>
-            )}
+						{signupErrorMessage !== "" && (
+							<div
+								className="tiny text-center"
+								style={{ fontStyle: "italic", color: "red" }}
+							>
+								{signupErrorMessage}
+							</div>
+						)}
 
-            {signupErrorMessage !== "" && (
-              <div
-                className="tiny text-center"
-                style={{ fontStyle: "italic", color: "red" }}
-              >
-                {signupErrorMessage}
-              </div>
-            )}
-
-            {/* {missingLogin ? (
+						{/* {missingLogin ? (
               <div
                 className="tiny text-center"
                 style={{ fontStyle: "italic", color: "red" }}
@@ -395,18 +392,18 @@ function Login(props) {
             ) : (
               <div></div>
             )} */}
-            <Button
-              className="tiny italic signinButton"
+						<Button
               testID="toggleLogin"
-              onClick={() => toggleTab(1)}
-            >
-              Already have an account?
-            </Button>
-          </div>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
+							className="tiny italic signinButton"
+							onClick={() => toggleTab(1)}
+						>
+							Already have an account?
+						</Button>
+					</div>
+				</div>
+			</Modal.Body>
+		</Modal>
+	);
 }
 
 export default Login;

@@ -25,8 +25,6 @@ const url = config.apiUrl;
 import { logo } from "../../assets/images";
 
 const ListingDetails = (props) => {
-	console.log(props.props);
-	// const image = props.image ? props.image : "https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
 	const socket = props.socket;
 	const userName = getAuthUsername();
 	const ownerName = props.props.USER_FNAME + " " + props.props.USER_LNAME;
@@ -48,29 +46,28 @@ const ListingDetails = (props) => {
 		"https://www.drivenbydecor.com/wp-content/uploads/2019/08/dorm-room-before.jpg";
 
 	useEffect(() => {
-	  const fetchData = async (photo) => {
-	    try {
-	      const response = await axios.post(url + "/accommodation/get-accommodation-pic", { accommodationName: photo });
-	      console.log("AAAAAAAAAAAAAAA", accommName);
-	      console.log(`-${photo}-`);
-	      console.log(response.data);
-	      // console.log("Success: ", response.data.success)
-	      if (response.data.success === true){
-	        setPhoto(response.data.imageUrl);
-	        setLoading(false);
-	      } else {
-	        setPhoto(image);
-	        setLoading(false);
-	      }
-	      // return response.data.accommodation;
-	    } catch (error) {
-	      console.error(error);
-	      setLoading(false);
-	      // return [];
-	    }
-	  };
-	  // console.log("Name: ", topApartments.ACCOMMODATION_NAME);
-	  fetchData(accommName);
+		const fetchData = async (photo) => {
+			try {
+				const response = await axios.post(
+					url + "/accommodation/get-accommodation-pic",
+					{ accommodationName: photo }
+				);
+				if (response.data.success === true) {
+					setPhoto(response.data.imageUrl);
+					setLoading(false);
+				} else {
+					setPhoto(image);
+					setLoading(false);
+				}
+				// return response.data.accommodation;
+			} catch (error) {
+				console.error(error);
+				setLoading(false);
+				// return [];
+			}
+		};
+		// console.log("Name: ", topApartments.ACCOMMODATION_NAME);
+		fetchData(accommName);
 	}, []);
 
 	// load if favorite
@@ -83,8 +80,6 @@ const ListingDetails = (props) => {
 				})
 				.then((res) => {
 					setIsFavorite(res.data.isFavorite);
-					console.log("isfavorite?");
-					console.log(res.data.isFavorite);
 				})
 				.catch((err) => console.error(err));
 		} else {
@@ -93,8 +88,6 @@ const ListingDetails = (props) => {
 
 	const handleFavorite = () => {
 		if (!isFavorite) {
-			console.log(max_price);
-			console.log("Adding for", getAuthUsername());
 			axios
 				.post(url + "/accommodation/add-to-favorites", {
 					userName: getAuthUsername(),
@@ -106,7 +99,6 @@ const ListingDetails = (props) => {
 				})
 				.catch((err) => console.error(err));
 		} else {
-			console.log("Removing from", getAuthUsername());
 			axios
 				.post(url + "/accommodation/remove-from-favorites", {
 					userName: getAuthUsername(),
@@ -127,7 +119,6 @@ const ListingDetails = (props) => {
 				accommodationName: accommName,
 			})
 			.then(function (response) {
-				// console.log("Searching for", accommName);
 				if (response.data.success) {
 					setRooms(response.data.rooms);
 				}
@@ -138,10 +129,8 @@ const ListingDetails = (props) => {
 			});
 	}, [accommName]);
 
-	//atrributes that change when the room button is clicked
 	const [max_price, setPrice] = useState(props.props.max_price);
 	const [capacity, setCapacity] = useState(props.props.max_capacity);
-	// const [image, setRoomPIc] = useState(props.image);
 
 	const handleClick = (room) => {
 		setPrice(room.ROOM_PRICE);
@@ -225,17 +214,17 @@ const ListingDetails = (props) => {
 												<p className="rate-text small">Not Rated</p>
 											) : (
 												<div>
-												<Rating
-													className="rating-medium"
-													defaultValue={rating}
-													precision={0.5}
-													readOnly={true}
-													sx={{
-														fontSize: "1rem",
-														color: "#1C3103",
-														mr: 1,
-													}}
-												/>
+													<Rating
+														className="rating-medium"
+														defaultValue={rating}
+														precision={0.5}
+														readOnly={true}
+														sx={{
+															fontSize: "1rem",
+															color: "#1C3103",
+															mr: 1,
+														}}
+													/>
 												</div>
 											)}
 											{separator}{" "}
@@ -244,9 +233,9 @@ const ListingDetails = (props) => {
 											{capacity} Capacity
 										</p>
 									</div>
-									{ !max_price ? (
+									{!max_price ? (
 										<p></p>
-									):(
+									) : (
 										<h2 className="headings-price">₱{max_price}</h2>
 									)}
 									<p></p>

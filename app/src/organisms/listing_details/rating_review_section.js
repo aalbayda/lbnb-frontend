@@ -48,7 +48,6 @@ const RatingReviewSection = (props) => {
 						setReviews(review_data);
 					} else {
 						const filterRevs = review_data.filter((data) => {
-							console.log(Math.floor(data.REVIEW_RATING));
 							if (Math.floor(data.REVIEW_RATING) === parseInt(rating)) {
 								return data;
 							}
@@ -58,8 +57,6 @@ const RatingReviewSection = (props) => {
 				} else {
 					setLoading(true);
 				}
-				console.log(rating);
-				console.log(response);
 			})
 			.catch(function (error) {
 				console.log(error);

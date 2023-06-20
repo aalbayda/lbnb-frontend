@@ -42,9 +42,6 @@ const CardListing = (props) => {
 					{ accommodationName: photo }
 				);
 
-				console.log(`-${photo}-`);
-				console.log(response.data);
-				// console.log("Success: ", response.data.success)
 				if (response.data.success === true) {
 					setPhoto(response.data.imageUrl);
 				} else {
@@ -54,31 +51,25 @@ const CardListing = (props) => {
 			} catch (error) {
 				console.error(error);
 				setPhoto(image);
-				// return [];
 			}
 		};
-		// console.log("Name: ", topApartments.ACCOMMODATION_NAME);
 		fetchData(props.name);
 	}, []);
 
 	const handleArchive = () => {
-		if (props.ACCOMMODATION_ISARCHIVED) console.log("Unarchiving");
-		else console.log("Archiving");
 		axios
 			.post(url + "/archive-accommodation", {
 				name: props.name,
-				isArchived: props.ACCOMMODATION_ISARCHIVED ? 0 : 1,
+				isArchived: props.isArchived ? 0 : 1,
 			})
 			.then((res) => {
 				window.location.reload();
-				console.log(res.data);
 			})
 			.catch((err) => console.error(err));
 	};
 
 	const handleFavorite = () => {
 		if (!isFavorite && props.name) {
-			console.log("Adding for", getAuthUsername());
 			axios
 				.post(url + "/accommodation/add-to-favorites", {
 					userName: getAuthUsername(),
@@ -86,7 +77,6 @@ const CardListing = (props) => {
 				})
 				.then((res) => {
 					console.log("Added to favorites of", getAuthUsername());
-					console.log(res.data);
 				})
 				.catch((err) => console.error(err));
 		} else if (props.name) {
@@ -98,7 +88,6 @@ const CardListing = (props) => {
 				})
 				.then((res) => {
 					console.log("Removed from favorites of", getAuthUsername());
-					console.log(res.data);
 				})
 				.catch((err) => console.error(err));
 		}
@@ -114,8 +103,6 @@ const CardListing = (props) => {
 				})
 				.then((res) => {
 					setIsFavorite(res.data.isFavorite);
-					console.log("isfavorite?");
-					console.log(res.data.isFavorite);
 					setLoading(false);
 				})
 				.catch((err) => console.error(err));

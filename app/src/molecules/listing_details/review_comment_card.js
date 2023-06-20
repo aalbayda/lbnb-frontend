@@ -13,22 +13,6 @@ const ReviewCommentCard = (props) => {
 	const user_name = props.userName ? props.userName : "student2";
 	const rating = props.rating ? props.rating : 3;
 
-	// const [user_img, setImg] = useState("https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-	// useEffect(() => {
-	//   axios
-	//     .post(url + "/user/get-user-pic", {
-	//       userName: user_name,
-	//     })
-	//     .then(function (response) {
-	//       if (response.data.success) {
-	//         setImg(response.data.imageUrl);
-	//       }
-	//       console.log(response);
-	//     })
-	//     .catch(function (error) {
-	//       console.log(error);
-	//     });
-	// }, []);
 	return (
 		<Container className="review-comment-card">
 			<Row>
