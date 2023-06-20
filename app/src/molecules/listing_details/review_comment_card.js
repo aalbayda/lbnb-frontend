@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./review_comment_card.css";
 import { Row, Col, Container } from "react-bootstrap";
 import { Rating } from "@mui/material";
-const url = "https://mockup-backend-128.herokuapp.com";
+const url = "https://elbnb-server.herokuapp.com";
 
 //TODO: fetch user image, implement toggle of stars
 
