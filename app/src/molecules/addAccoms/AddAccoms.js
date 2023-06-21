@@ -82,7 +82,7 @@ function AddAccoms(props) {
 				<Container className="add-accoms-container">
 					<Row className="input-item">
 						<Col>
-							<p className="large-bold">Add Acccommodation</p>
+							<p className="large-bold">Add Accommodation</p>
 						</Col>
 					</Row>
 					<Row className="input-item">
@@ -195,6 +195,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Inside Campus"
+								testID="addAccommInsideCampus"
 								name="group2"
 								type="radio"
 								checked={newLocation === "Within Campus"}
@@ -207,6 +208,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Outside Campus"
+								testID="addAccommOutsideCampus"
 								name="group2"
 								type="radio"
 								checked={newLocation === "Outside Campus"}
