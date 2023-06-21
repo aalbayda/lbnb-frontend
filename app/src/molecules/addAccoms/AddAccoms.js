@@ -103,6 +103,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommName"
 								type="text"
 								onChange={(e) => setNewName(e.target.value)}
 							/>
@@ -175,6 +176,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommAddress"
 								type="text"
 								onChange={(e) => setNewAddress(e.target.value)}
 							/>
@@ -219,6 +221,7 @@ function AddAccoms(props) {
 							{" "}
 							<textarea
 								className="tiny input-add-accoms description"
+								testID="addAccommDescription"
 								onChange={(e) => setNewDescription(e.target.value)}
 							/>
 						</Col>
@@ -231,6 +234,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommAmenities"
 								type="text"
 								onChange={(e) => setNewAmenities(e.target.value)}
 							/>
@@ -257,7 +261,10 @@ function AddAccoms(props) {
 						)}
 					</div>
 					<Row className="input-item">
-						<Button onClick={handleAdd} className="add-accoms-btn">
+						<Button
+							onClick={handleAdd} 
+							testID="addAccommButton"
+							className="add-accoms-btn">
 							ADD ACCOMMODATION
 						</Button>
 						<AlertModals
