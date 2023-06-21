@@ -1,6 +1,6 @@
 import { convertLength } from "@mui/material/styles/cssUtils";
 
-describe('Favorite Accommodation Test', () => {
+describe('Report Accommodation Test', () => {
     it('Verify that a registered user can report an accommodation and provide additional details.', () => {
   // Visit Website
   cy.visit('http://localhost:3000');
