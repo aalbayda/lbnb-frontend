@@ -111,6 +111,7 @@ const SubmitRatingReviewSect = (props) => {
 						</TableRow>
 					</Table>
 					<textarea
+						testID="commentField"
 						className="comment-textfield"
 						// sx={{
 						//   width: 950,
