@@ -9,17 +9,9 @@ import { MdReportGmailerrorred } from "react-icons/md";
 import { Rating } from "@mui/material";
 import { ReportModal } from "../../molecules";
 import axios from "axios";
-import io from "socket.io-client";
 import ChatButton from "../../atoms/chatButton/chatButton";
 
-import {
-	isLoggedIn,
-	getAuthUsername,
-	getAuthType,
-	getAuthName,
-	getAuthMobile,
-	getAuthEmail,
-} from "../../auth";
+import { isLoggedIn, getAuthUsername, getAuthType } from "../../auth";
 import config from "../../config";
 const url = config.apiUrl;
 import { logo } from "../../assets/images";
@@ -242,13 +234,15 @@ const ListingDetails = (props) => {
 									<p>{description}</p>
 									<p>{amenities}</p>
 								</div>
-								{
+								{isLoggedIn() && getAuthType() === "Student" ? (
 									<ChatButton
 										username={userName}
 										room={accommName}
 										socket={socket}
 									/>
-								}
+								) : (
+									<></>
+								)}
 								<div className="room-buttons">
 									<div>{roomItems}</div>
 								</div>

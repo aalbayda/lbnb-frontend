@@ -1,21 +1,8 @@
-// import logo from './logo.svg';
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 import "./App.css";
 import io from "socket.io-client";
-/*
-import {
-  AccomsPage,
-  AdminPage,
-  Home,
-  LandlordHome,
-  LandlordProfile,
-  Listing,
-  UserProfile,
-  Details,
-} from "./pages";
-*/
 
 import { getAuthUsername } from "./auth";
 
