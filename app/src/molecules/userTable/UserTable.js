@@ -105,6 +105,7 @@ function UserTable(props) {
 										<div className="admin-btns">
 											{/* Button to show modal conditionally */}
 											<Button
+												testID="viewuserButton"
 												className="small admin-view-btn"
 												onClick={() => {
 													setSelectedStudent(student);
@@ -113,6 +114,7 @@ function UserTable(props) {
 												View
 											</Button>
 											<Button
+												testID="deleteuserButton"
 												className="small admin-delete-btn"
 												onClick={() => {
 													handleDelete(student);
