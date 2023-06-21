@@ -234,7 +234,11 @@ const ListingDetails = (props) => {
 									<p>{description}</p>
 									<p>{amenities}</p>
 								</div>
-								{isLoggedIn() && getAuthType() === "Student" ? (
+								<div className="room-buttons">
+									<div>{roomItems}</div>
+								</div>
+								{isLoggedIn() &&
+								(getAuthType() === "Student" || getAuthType() === "Owner") ? (
 									<ChatButton
 										username={userName}
 										room={accommName}
@@ -243,9 +247,6 @@ const ListingDetails = (props) => {
 								) : (
 									<></>
 								)}
-								<div className="room-buttons">
-									<div>{roomItems}</div>
-								</div>
 							</div>
 						</Col>
 						<Col className="heart-icon-col">

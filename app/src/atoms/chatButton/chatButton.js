@@ -16,7 +16,7 @@ const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
 
 	return (
 		<button className="chat-button" onClick={joinRoom}>
-			Chat Owner 💬
+			Chatroom 💬
 		</button>
 	);
 };
