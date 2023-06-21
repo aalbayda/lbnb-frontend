@@ -118,6 +118,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Dorm"
+								testID="addAccommDorm"
 								name="group1"
 								type="radio"
 								checked={newType === "Dorm"}
@@ -130,6 +131,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Apartment"
+								testID="addAccommApartment"
 								name="group1"
 								type="radio"
 								checked={newType === "Apartment"}
@@ -144,6 +146,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Hotel"
+								testID="addAccommHotel"
 								name="group1"
 								type="radio"
 								checked={newType === "Hotel"}
@@ -158,6 +161,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Bedspace"
+								testID="addAccommBedspace"
 								name="group1"
 								type="radio"
 								checked={newType === "Bedspace"}
