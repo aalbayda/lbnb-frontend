@@ -124,6 +124,7 @@ const LandlordProfile = () => {
 							<Button
 								className="userProfile_editButton"
 								onClick={() => setModalShow1(true)}
+								testID="editUser"
 							>
 								Edit User Information
 							</Button>
