@@ -29,11 +29,25 @@ describe('Owner Add Room Test', () => {
         .should('be.visible')
         .click();
 
-      cy.wait(30000);
+      cy.wait(50000);
 
       cy.get('[testID=addRoom]')
         .should('be.visible')
         .first()
         .click({force: true});
-    })
-  })
+
+      // Input Room Details then Add
+      cy.get('input[testID=addroomName]')
+        .should('be.visible')
+        .type("Example Dorm Test")
+        .get('input[testID=addroomCapacity]')
+        .should('be.visible')
+        .type("6")
+        .get('input[testID=addroomPrice]')
+        .should('be.visible')
+        .type("2000")
+        .get('button[testID=addroomButton')
+        .should('be.visible')
+        .click();
+    })  
+})
