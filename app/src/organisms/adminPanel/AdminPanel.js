@@ -78,6 +78,7 @@ const AdminPanel = () => {
 
 						{/* Reports Tab */}
 						<div
+							testID="reportsTab"
 							className={
 								toggleState === 4
 									? "tabs small-bold active-tabs"
