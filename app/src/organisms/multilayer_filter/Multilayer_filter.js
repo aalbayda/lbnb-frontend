@@ -47,7 +47,7 @@ const Multilayer_filter = (props) => {
 	};
 
 	return (
-		<div className="mlf-container">
+		<div testID="mlfContainer" className="mlf-container">
 			<div className="mlf-upper">
 				<input
 					className="small mlf_search"

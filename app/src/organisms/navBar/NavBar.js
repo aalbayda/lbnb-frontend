@@ -29,7 +29,7 @@ const NavBar = () => {
 				<div className="navbar-left">
 					<p className="small">
 						<a href="/">
-							<img className="logo" src={logo} alt="logo" />
+							<img testID="appLogo" className="logo" src={logo} alt="logo" />
 						</a>
 					</p>
 				</div>
