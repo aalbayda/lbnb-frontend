@@ -21,7 +21,7 @@ function AlertModals(props) {
       </Modal.Header>
       <Modal.Body>
         <div className="content">
-          <div className="report-container">
+          <div className="report-container" testID="alertModal">
            <p className="report large-bold">Alert!</p>
            <p className="small">{props.alert}</p>
           </div>
