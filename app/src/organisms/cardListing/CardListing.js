@@ -125,7 +125,7 @@ const CardListing = (props) => {
 						src={photo}
 						alt="accommodation-img"
 					></img>
-					<div className="heart-button">
+					<div testID="favoriteButton" className="heart-button">
 						{isLoggedIn() && getAuthType() === "Student" ? (
 							isFavorite ? (
 								<RiHeart3Fill onClick={handleFavorite} className="heart-icon" />

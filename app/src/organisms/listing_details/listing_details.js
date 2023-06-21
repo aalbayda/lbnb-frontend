@@ -257,6 +257,8 @@ const ListingDetails = (props) => {
 						<Col className="heart-icon-col">
 							{getAuthType() === "Student" ? (
 								<Button
+
+									testID="reportButton"
 									className="report-button"
 									onClick={() => setModalShow(true)}
 								>
