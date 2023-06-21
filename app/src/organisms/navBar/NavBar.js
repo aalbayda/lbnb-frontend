@@ -56,7 +56,7 @@ const NavBar = () => {
 					)}
 
 					{isLoggedIn && getAuthType() === "Admin" ? (
-						<p className="small">
+						<p testID="adminPanel" className="small">
 							<a href="/adminpage">Admin</a>
 						</p>
 					) : (

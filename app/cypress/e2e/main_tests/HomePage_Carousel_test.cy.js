@@ -1,4 +1,3 @@
-import { convertLength } from "@mui/material/styles/cssUtils";
 
 describe('Homepage Carousel Exists Test', () => {
     it('Should scroll the homepage and display the carousels as well as check if they exist', () => {
