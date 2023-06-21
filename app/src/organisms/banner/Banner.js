@@ -4,7 +4,7 @@ import { banner1, banner2, banner3 } from "../../assets/images";
 
 function Banner() {
   return (
-    <div className="carousel-body">
+    <div testID="heroBanner" className="carousel-body">
       <Carousel fade={true} controls={false}>
         <Carousel.Item>
           <img className="d-block w-100" src={banner1} alt="First slide" />

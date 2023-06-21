@@ -123,7 +123,7 @@ const SubmitRatingReviewSect = (props) => {
 						onChange={(newValue) => setComment(newValue.target.value)}
 						value={comment}
 					/>
-					<button className="submit-button" onClick={handleSubmit}>
+					<button testID="submitReview" className="submit-button" onClick={handleSubmit}>
 						{" "}
 						Submit{" "}
 					</button>

@@ -82,7 +82,7 @@ function AddAccoms(props) {
 				<Container className="add-accoms-container">
 					<Row className="input-item">
 						<Col>
-							<p className="large-bold">Add Acccommodation</p>
+							<p className="large-bold">Add Accommodation</p>
 						</Col>
 					</Row>
 					<Row className="input-item">
@@ -103,6 +103,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommName"
 								type="text"
 								onChange={(e) => setNewName(e.target.value)}
 							/>
@@ -117,6 +118,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Dorm"
+								testID="addAccommDorm"
 								name="group1"
 								type="radio"
 								checked={newType === "Dorm"}
@@ -129,6 +131,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Apartment"
+								testID="addAccommApartment"
 								name="group1"
 								type="radio"
 								checked={newType === "Apartment"}
@@ -143,6 +146,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Hotel"
+								testID="addAccommHotel"
 								name="group1"
 								type="radio"
 								checked={newType === "Hotel"}
@@ -157,6 +161,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Bedspace"
+								testID="addAccommBedspace"
 								name="group1"
 								type="radio"
 								checked={newType === "Bedspace"}
@@ -175,6 +180,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommAddress"
 								type="text"
 								onChange={(e) => setNewAddress(e.target.value)}
 							/>
@@ -189,6 +195,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Inside Campus"
+								testID="addAccommInsideCampus"
 								name="group2"
 								type="radio"
 								checked={newLocation === "Within Campus"}
@@ -201,6 +208,7 @@ function AddAccoms(props) {
 								className="custom-radio tiny"
 								inline
 								label="Outside Campus"
+								testID="addAccommOutsideCampus"
 								name="group2"
 								type="radio"
 								checked={newLocation === "Outside Campus"}
@@ -219,6 +227,7 @@ function AddAccoms(props) {
 							{" "}
 							<textarea
 								className="tiny input-add-accoms description"
+								testID="addAccommDescription"
 								onChange={(e) => setNewDescription(e.target.value)}
 							/>
 						</Col>
@@ -231,6 +240,7 @@ function AddAccoms(props) {
 							{" "}
 							<input
 								className="tiny input-add-accoms"
+								testID="addAccommAmenities"
 								type="text"
 								onChange={(e) => setNewAmenities(e.target.value)}
 							/>
@@ -257,7 +267,10 @@ function AddAccoms(props) {
 						)}
 					</div>
 					<Row className="input-item">
-						<Button onClick={handleAdd} className="add-accoms-btn">
+						<Button
+							onClick={handleAdd} 
+							testID="addAccommButton"
+							className="add-accoms-btn">
 							ADD ACCOMMODATION
 						</Button>
 						<AlertModals
