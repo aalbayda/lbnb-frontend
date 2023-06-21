@@ -53,6 +53,7 @@ describe('Homepage Carousel Buttons Exist', () => {
 
     cy.wait(2000);  
 
+    // Check if Dorm Carousel Containers Exist and if Buttons exist
     cy.get('[testID="dormCarousel"]')
         .should('be.visible')
         .get('[testID="dormNext"')
@@ -67,6 +68,7 @@ describe('Homepage Carousel Buttons Exist', () => {
 
     cy.wait(2000);   
 
+    // Check if Hotel Carousel Containers Exist and if Buttons exist
     cy.get('[testID="hotelCarousel"]')
         .should('be.visible')
         .get('[testID="hotelNext"')

@@ -186,6 +186,7 @@ const CardListing = (props) => {
 					{getAuthUsername() === props.owner_username ? (
 						<div>
 							<Button
+								testID="addRoom"
 								className="small-bold carousel-btn"
 								onClick={(e) => setModalShow(true)}
 							>
