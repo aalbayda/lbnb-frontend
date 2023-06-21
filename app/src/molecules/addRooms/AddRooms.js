@@ -50,6 +50,7 @@ function AddRooms(props) {
 							<input
 								className="tiny input-add-accoms"
 								type="text"
+								testID="addroomName"
 								onChange={(e) => setNewName(e.target.value)}
 							/>
 						</Col>
@@ -64,6 +65,7 @@ function AddRooms(props) {
 								min={1}
 								className="tiny input-add-accoms"
 								type="Number"
+								testID="addroomCapacity"
 								onChange={(e) => setNewCapacity(e.target.value)}
 							/>
 						</Col>
@@ -78,12 +80,13 @@ function AddRooms(props) {
 								min={1}
 								className="tiny input-add-accoms"
 								type="Number"
+								testID="addroomPrice"
 								onChange={(e) => setNewPrice(e.target.value)}
 							/>
 						</Col>
 					</Row>
 					<Row className="input-item">
-						<Button onClick={handleAdd} className="add-accoms-btn">
+						<Button testID="addroomButton" onClick={handleAdd} className="add-accoms-btn">
 							ADD ROOMS
 						</Button>
 					</Row>
