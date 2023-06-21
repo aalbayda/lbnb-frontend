@@ -45,7 +45,7 @@ function Admin_viewUser(props) {
               <p className="regular-bold">Name:</p>
 
               {editUser ? (
-                <input placeholder={USER_FNAME + " " + USER_LNAME}></input>
+                <input testID="edituserName" placeholder={USER_FNAME + " " + USER_LNAME}></input>
               ) : (
                 <p className="regular">
                   {USER_FNAME} {USER_LNAME}
@@ -58,7 +58,7 @@ function Admin_viewUser(props) {
               <p className="regular-bold">Email:</p>
 
               {editUser ? (
-                <input placeholder={USER_EMAIL}></input>
+                <input testID="edituserEmail" placeholder={USER_EMAIL}></input>
               ) : (
                 <p className="regular">{USER_EMAIL}</p>
               )}
@@ -69,7 +69,7 @@ function Admin_viewUser(props) {
               <p className="regular-bold">Password:</p>
 
               {editUser ? (
-                <input placeholder="************"></input>
+                <input testID="edituserPassword" placeholder="************"></input>
               ) : (
                 <p className="regular">************</p>
               )}
@@ -79,7 +79,7 @@ function Admin_viewUser(props) {
           {editUser ? (
             <Row>
               <Col>
-                <Button onClick={disableEdit} className="adminedituser">
+                <Button testID="editSave" onClick={disableEdit} className="adminedituser">
                   Save
                 </Button>
               </Col>
@@ -95,7 +95,7 @@ function Admin_viewUser(props) {
               </Col>
             </Row>
           ) : (
-            <Button onClick={editUserClicked} className="adminedituser">
+            <Button testID="editUser" onClick={editUserClicked} className="adminedituser">
               Edit
             </Button>
           )}

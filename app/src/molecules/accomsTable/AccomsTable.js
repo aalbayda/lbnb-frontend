@@ -115,6 +115,7 @@ function AccomsTable(props) {
 
 									<td>
 										<Button
+											testID="deleteAccom"
 											className="small admin-delete-btn"
 											onClick={() => {
 												handleDelete(accom);

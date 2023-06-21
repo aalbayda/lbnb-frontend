@@ -161,7 +161,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Accomodation Name:</p>
                 {editAccomsRoom ? (
-                  <input placeholder="White House"></input>
+                  <input testID="accomName" placeholder="White House"></input>
                 ) : (
                   <p className="small">White House</p>
                 )}
@@ -200,7 +200,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Description</p>
                 {editAccomsRoom ? (
-                  <input placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris."></input>
+                  <input testID="accomDesc" laceholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non tempor mauris."></input>
                 ) : (
                   <p className="small">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -213,7 +213,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Location:</p>
                 {editAccomsRoom ? (
-                  <input placeholder="Somewhere in Elbi"></input>
+                  <input testID="accomLoc" placeholder="Somewhere in Elbi"></input>
                 ) : (
                   <p className="small">Somewhere in Elbi</p>
                 )}
@@ -223,7 +223,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Amenities:</p>
                 {editAccomsRoom ? (
-                  <input placeholder="Something Something"></input>
+                  <input testID="accomAmen" placeholder="Something Something"></input>
                 ) : (
                   <p className="small">Something Something</p>
                 )}
@@ -262,7 +262,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Room Name</p>
                 {editAccomsRoom ? (
-                  <input placeholder="Room 1"></input>
+                  <input testID="roomName" placeholder="Room 1"></input>
                 ) : (
                   <p className="small">Room 1</p>
                 )}
@@ -272,7 +272,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-item">
                 <p className="small-bold">Capacity:</p>
                 {editAccomsRoom ? (
-                  <input type="number" min="0" placeholder="1"></input>
+                  <input testID="roomCap" type="number" min="0" placeholder="1"></input>
                 ) : (
                   <p className="small">1</p>
                 )}
@@ -283,7 +283,7 @@ function Admin_viewlandlord(props) {
                 <p className="small-bold">Price</p>
 
                 {editAccomsRoom ? (
-                  <input type="number" min="0" placeholder="5000"></input>
+                  <input testID="roomPrice" type="number" min="0" placeholder="5000"></input>
                 ) : (
                   <p className="small">5000</p>
                 )}
@@ -293,6 +293,7 @@ function Admin_viewlandlord(props) {
               <div className="adminviewlandlord-btns">
                 {editAccomsRoom ? (
                   <Button
+                    testID="saveAccomRoom"
                     className="adminsavelandlord"
                     onClick={disableEditAccomsRoom}
                   >
@@ -300,6 +301,7 @@ function Admin_viewlandlord(props) {
                   </Button>
                 ) : (
                   <Button
+                    testID="editAccomRoom"
                     className="admineditlandlord"
                     onClick={editAccomsRoomClicked}
                   >

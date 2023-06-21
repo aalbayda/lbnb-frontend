@@ -100,6 +100,7 @@ function LandlordTable(props) {
 										<div className="admin-btns">
 											{/* Button to show modal conditionally */}
 											<Button
+												testID="viewlandlordButton"
 												className="small admin-view-btn"
 												onClick={() => {
 													setSelectedOwner(owner);

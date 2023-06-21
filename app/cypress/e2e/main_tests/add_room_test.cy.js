@@ -39,7 +39,7 @@ describe('Owner Add Room Test', () => {
       // Input Room Details then Add
       cy.get('input[testID=addroomName]')
         .should('be.visible')
-        .type("Example Dorm Test")
+        .type("Example Dorm Test 2")
         .get('input[testID=addroomCapacity]')
         .should('be.visible')
         .type("6")
