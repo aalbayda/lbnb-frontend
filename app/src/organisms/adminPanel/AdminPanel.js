@@ -52,6 +52,7 @@ const AdminPanel = () => {
 
 						{/* Owner Tab */}
 						<div
+							testID="ownerTab"
 							className={
 								toggleState === 2
 									? "tabs small-bold active-tabs"
@@ -64,6 +65,7 @@ const AdminPanel = () => {
 
 						{/* Accoms Tab */}
 						<div
+							testID="accommsTab"	
 							className={
 								toggleState === 3
 									? "tabs small-bold active-tabs"
