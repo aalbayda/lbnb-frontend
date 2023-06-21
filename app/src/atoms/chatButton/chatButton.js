@@ -24,7 +24,7 @@ const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
   };
  
   return (
-       <button className='chat-button' onClick={joinRoom}>Chat Here!</button>
+       <button testID="chatButton" className='chat-button' onClick={joinRoom}>Chat Here!</button>
       
   );
 };

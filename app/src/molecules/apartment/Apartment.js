@@ -61,6 +61,7 @@ const Apartment = ({ topApartments }) => {
 					</div>
 					<div className="carousel-lowerright">
 						<Button
+							testID="apartmentView"
 							className="small-bold carousel-btn"
 							// onClick={(
 							//   props = {topApartments}
