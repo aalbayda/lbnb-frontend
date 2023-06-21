@@ -2,16 +2,10 @@ import { useNavigate } from "react-router-dom"; // Add this
 import React from "react";
 
 import "./chatButton.css";
-import { isLoggedIn } from "../../auth";
 
 const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
 	const navigate = useNavigate(); // Add this
-	// Add this
 	const joinRoom = () => {
-		if (!isLoggedIn()) {
-			window.alert("Log in as a registered tenant first!");
-			return;
-		}
 		if (room !== "" && username !== "") {
 			console.log(`Joining room ${room} with username ${username}`);
 			socket.emit("join_room", { username, room });
@@ -22,7 +16,7 @@ const ChatButton = ({ username, setUsername, room, setRoom, socket }) => {
 
 	return (
 		<button className="chat-button" onClick={joinRoom}>
-			Chat Here!
+			Chat Owner 💬
 		</button>
 	);
 };
