@@ -1,5 +1,5 @@
 describe('User Login from Homepage Test', () => {
-  it('Should login an existing user account unsuccessfully due to an invalid password', () => {
+  it('Verify that a user cannot login with invalid credentials', () => {
     // Visit Website
     cy.visit('http://localhost:3000');
 

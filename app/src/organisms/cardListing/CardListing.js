@@ -214,6 +214,7 @@ const CardListing = (props) => {
 						<></>
 					)}
 					<Button
+						testID="viewMore"
 						className="small-bold carousel-btn"
 						onClick={() =>
 							navigate("/details", { state: { props: props.unit } })

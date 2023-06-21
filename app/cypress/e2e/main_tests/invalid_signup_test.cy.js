@@ -1,5 +1,5 @@
 describe('User Signup from Homepage Test', () => {
-  it('Should sign up a new user and create a new account unsuccessfuly', () => {
+  it('Verify that a user cannot signup with invalid credentials', () => {
     // Visit Website
     cy.visit('http://localhost:3000');
 
